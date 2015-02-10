@@ -1,0 +1,37 @@
+*~
+.DS_Store
+*.swp
+*.bak
+*.log
+logs/
+*.svn*
+.svn/
+
+# --- Java --- 
+*.class
+*.war
+classes/
+build/
+target
+out
+.ivy/
+.grails/
+
+# --- IDE ---
+*.iml
+*.eml
+*.ipr
+.idea
+.settings/
+.classpath
+.project
+*.classpath~
+*.properties~
+atlassian-ide-plugin.xml
+
+# --- Vagrant ---
+.vagrant/
+
+# --- Python ---
+*.pyc
+
