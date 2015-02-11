@@ -1,6 +1,6 @@
 set nocompatible               " choose no compatibility with legacy vi
 set encoding=utf-8             " open file with encoding
-set fileencoding=utf-8         " save file with encoding 
+set fileencoding=utf-8         " save file with encoding
 set fileformats=unix,dos,mac   " use Unix as the standard file type
 set nowrap                     " don't wrap lines
 set number                     " display line numbers on the left
@@ -10,17 +10,17 @@ set autoread                   " when a file is changed from the outside
 set history=1000               " how many lines of history VIM has to remember
 
 filetype on
-filetype plugin on             " load file type plugins 
+filetype plugin on             " load file type plugins
 filetype indent on             "   + indentation
 
 syntax enable                  " enable syntax highlighting
 
-set tabstop=2 
-set softtabstop=2 
-set shiftwidth=2 
-set expandtab 
-set smarttab 
-set autoindent 
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set autoindent
 set smartindent
 
 set backspace=indent,eol,start " configure backspace so it acts as it should act
@@ -45,14 +45,26 @@ let mapleader = ","
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
+set laststatus=2
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
+
 "
 " GUI/Terminal specific settings
 "
 if has("gui_running")          " GUI is running or is about to start
   set guioptions-=T            " add/removes toolbar from gvim
   set lines=45 columns=140     " maximize gvim window
-  set guifont=Menlo:h14        " favorite GUI font  
-  set background=dark
+  set guifont=Menlo:h14        " favorite GUI font
+  set background=light
   colorscheme solarized
   call togglebg#map("<F5>")    " toggle background (light/dark)
 else                           " this is console Vim
@@ -65,10 +77,10 @@ else                           " this is console Vim
   endif
 endif
 
-set winwidth=84
-set winheight=5
-set winminheight=5
-set winheight=999
+"set winwidth=84
+"set winheight=5
+"set winminheight=5
+"set winheight=999
 
 "
 " No annoying sound on errors
@@ -77,40 +89,3 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-
-"
-" Status line {
-"
-hi User1 ctermbg=white    ctermfg=black   guibg=#89A1A1 guifg=#002B36
-hi User2 ctermbg=red      ctermfg=white   guibg=#aa0000 guifg=#89a1a1
-
-function! GetCWD()
-  return expand(":pwd")
-endfunction
-
-function! IsHelp()
-  return &buftype=='help'?' (help) ':''
-endfunction
-
-function! GetName()
-  return expand("%:t")==''?'<none>':expand("%:t")
-endfunction
-
-set statusline=%1*[%{GetName()}]\ 
-set statusline+=%<pwd:%{getcwd()}\ 
-set statusline+=%2*%{&modified?'\[+]':''}%*
-set statusline+=%{IsHelp()}
-set statusline+=%{&readonly?'\ (ro)\ ':''}
-set statusline+=[
-set statusline+=%{strlen(&fenc)?&fenc:'none'}\|
-set statusline+=%{&ff}\|
-set statusline+=%{strlen(&ft)?&ft:'<none>'}
-set statusline+=]\ 
-set statusline+=%=
-set statusline+=c%c
-set statusline+=,l%l
-set statusline+=/%L\ 
-
-set laststatus=2
-
-" }
