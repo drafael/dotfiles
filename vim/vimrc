@@ -2,32 +2,49 @@ set nocompatible               " choose no compatibility with legacy vi
 set encoding=utf-8             " open file with encoding
 set fileencoding=utf-8         " save file with encoding
 set fileformats=unix,dos,mac   " use Unix as the standard file type
+set nobackup                   " do not keep backup files
+set noswapfile                 " do not write intermediate swap files
 set nowrap                     " don't wrap lines
 set number                     " display line numbers on the left
 set cursorline                 " highlight current line
-set noswapfile
 set autoread                   " when a file is changed from the outside
+set lazyredraw                 " don't redraw while executing macros
 set history=1000               " how many lines of history VIM has to remember
+set title                      " change the terminal's title
+set visualbell                 " don't beep
+set noerrorbells               " don't beep
+set ruler                      " always show current position
+set mouse=a                    " enable using the mouse if terminal emulator supports it
+set showcmd                    " display incomplete commands
+set wildmenu                   " make tab completion for files/buffers act like bash
+set wildmode=list:full         " show a list when pressing tab and complete first full match
+set wildignore=*.swp,*.bak,*.pyc,*.class
 
-filetype on
-filetype plugin on             " load file type plugins
-filetype indent on             "   + indentation
-
+"
+" Use pathogen to easily modify the runtime path to include all plugins under the ~/.vim/bundle directory
+"
+filetype off                   " force reloading after pathogen loaded
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+call pathogen#helptags()
+filetype plugin indent on      " enable file type detection, plugins and indentation
 syntax enable                  " enable syntax highlighting
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set smarttab
-set autoindent
+"
+"  Whitespace settings
+"
+set tabstop=2                  " spaces per tab
+set softtabstop=2              " when hitting <BS>, pretend like a tab is removed, even if spaces
+set shiftwidth=2               " number of spaces to use for autoindenting
+set shiftround                 " use multiple of shiftwidth when indenting with '<' and '>'
+set expandtab                  " spaces instead of tabs
+set smarttab                   " use shiftwidth to enter tabs
+set autoindent                 " automatically indent to match adjacent lines
 set smartindent
-
 set backspace=indent,eol,start " configure backspace so it acts as it should act
 
 set showmatch                  " show matching brackets when text indicator is over them
-set mat=2                      "   how many tenths of a second to blink when matching brackets
-
+set matchtime=2                " tens of a second to show matching parentheses
 set hlsearch                   " highlight matches
 set incsearch                  " incremental searching
 set ignorecase                 " searches are case insensitive
@@ -35,17 +52,9 @@ set smartcase                  "   unless they contain at least one capital lett
 set magic                      " for regular expressions turn magic on
 set gdefault                   " global search by default: :%s/pattern/replacement/g
 
-set showcmd                    " display incomplete commands
-set ruler                      " always show current position
-
-set lazyredraw                 " don't redraw while executing macros (good performance config)
-
 let mapleader = ","
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
-set laststatus=2
+set laststatus=2               " show status line
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -58,10 +67,15 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
 "
-" GUI/Terminal specific settings
+"  GUI/Terminal specific settings
 "
 if has("gui_running")          " GUI is running or is about to start
-  set guioptions-=T            " add/removes toolbar from gvim
+  set guioptions-=T            " remove toolbar from gvim
+  set guioptions-=l            " remove left scrollbar
+  set guioptions-=L            "   when there is a vertically	split window
+  set guioptions-=r            " remove right scrollbar
+  set guioptions-=R            "   when there is a vertically	split window
+
   set lines=45 columns=140     " maximize gvim window
   set guifont=Menlo:h14        " favorite GUI font
   set background=light
@@ -81,11 +95,3 @@ endif
 "set winheight=5
 "set winminheight=5
 "set winheight=999
-
-"
-" No annoying sound on errors
-"
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
