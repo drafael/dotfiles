@@ -18,9 +18,13 @@ set mouse=a                    " enable using the mouse if terminal emulator sup
 set virtualedit=all            " moving beyond the end of a line
 set showcmd                    " display incomplete commands
 set laststatus=2               " show status line
+
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing tab and complete first full match
 set wildignore=*.swp,*.bak,*.pyc,*.class
+
+set splitbelow                 " splitting a window will put the new window below the current one
+set splitright                 " splitting a window will put the new window right of the current one
 
 "
 " Use pathogen to easily modify the runtime path to include all plugins under the ~/.vim/bundle directory
