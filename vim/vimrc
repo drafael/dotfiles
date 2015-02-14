@@ -87,7 +87,6 @@ if has("gui_running")          " GUI is running or is about to start
   set guifont=Menlo:h14        " favorite GUI font
   set background=light
   colorscheme solarized        " GUI color scheme
-  call togglebg#map("<F5>")    " toggle background (light/dark)
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
