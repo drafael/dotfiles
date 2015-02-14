@@ -74,21 +74,6 @@ if has('clipboard')            " OS clipboard integration
 endif
 
 "
-" Status line
-"
-"set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-
-"
 "  GUI/Terminal specific settings
 "
 if has("gui_running")          " GUI is running or is about to start
@@ -116,7 +101,18 @@ else                           " this is console Vim
   endif
 endif
 
-"set winwidth=84
-"set winheight=5
-"set winminheight=5
-"set winheight=999
+"
+" Status line
+"
+if !exists('g:airline_symbols')
+  let g:airline_symbols={}
+endif
+let g:airline_left_sep=''
+let g:airline_left_alt_sep=''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep=''
+let g:airline_symbols.linenr='LN'
+let g:airline_symbols.branch='BR'
+let g:airline_symbols.readonly='RO'
+
+" EOF
