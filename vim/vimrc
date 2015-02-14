@@ -63,7 +63,7 @@ set smartcase                  "   unless they contain at least one capital lett
 set magic                      " for regular expressions turn magic on
 set gdefault                   " global search by default: :%s/pattern/replacement/g
 
-let mapleader=","
+let mapleader=','
 
 if has('clipboard')            " OS clipboard integration
     if has('unnamedplus')      " when possible use + register for copy-paste
@@ -102,17 +102,24 @@ else                           " this is console Vim
 endif
 
 "
+" Full path fuzzy file finder
+"
+let g:ctrlp_map = '<c-p>'            " default mapping
+let g:ctrlp_cmd = 'CtrlP'            " default command
+let g:ctrlp_working_path_mode = 'ra' " set local working directory
+
+"
 " Status line
 "
 if !exists('g:airline_symbols')
-  let g:airline_symbols={}
+  let g:airline_symbols = {}
 endif
-let g:airline_left_sep=''
-let g:airline_left_alt_sep=''
-let g:airline_right_sep=''
-let g:airline_right_alt_sep=''
-let g:airline_symbols.linenr='LN'
-let g:airline_symbols.branch='BR'
-let g:airline_symbols.readonly='RO'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.linenr = 'LN'
+let g:airline_symbols.branch = 'BR'
+let g:airline_symbols.readonly = 'RO'
 
 " EOF
