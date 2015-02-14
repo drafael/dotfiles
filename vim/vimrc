@@ -35,14 +35,18 @@ syntax enable                  " enable syntax highlighting
 "
 "  Whitespace settings
 "
-set tabstop=2                  " spaces per tab
-set softtabstop=2              " when hitting <BS>, pretend like a tab is removed, even if spaces
-set shiftwidth=2               " number of spaces to use for autoindenting
+set tabstop=4                  " spaces per tab
+set softtabstop=4              " when hitting <BS>, pretend like a tab is removed, even if spaces
+set shiftwidth=4               " number of spaces to use for autoindenting
 set shiftround                 " use multiple of shiftwidth when indenting with '<' and '>'
 set expandtab                  " spaces instead of tabs
 set smarttab                   " use shiftwidth to enter tabs
 set autoindent                 " automatically indent to match adjacent lines
 set smartindent
+set nolist                     " hide whitespace characters
+set listchars=tab:▸\ ,trail:•,eol:¬  " how to show 'invisible' characters
+set linebreak
+let &showbreak='↪ '            " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start " configure backspace so it acts as it should act
 
 set showmatch                  " show matching brackets when text indicator is over them
@@ -54,7 +58,7 @@ set smartcase                  "   unless they contain at least one capital lett
 set magic                      " for regular expressions turn magic on
 set gdefault                   " global search by default: :%s/pattern/replacement/g
 
-let mapleader = ","
+let mapleader=","
 
 "
 " Status line
