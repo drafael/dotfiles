@@ -1,0 +1,14 @@
+*~
+.DS_Store
+*.log
+*.svn*
+.svn/
+*.class
+bin/
+build/
+deploy/
+.settings/
+.idea/
+*.iml
+.classpath
+.project

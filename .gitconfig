@@ -1,0 +1,21 @@
+[user]
+    name = Den Rafael
+    email = den.rafael@icloud.com
+[core]
+	editor = vim
+    autocrlf = input
+    excludesfile = ~/.gitignore
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+[alias]
+    st = status -s
+    aa = add --all
+    ci = commit --verbose
+    co = checkout
+    br = branch
+    di = diff
+    dc = diff --cached
+    amend = commit --amend
