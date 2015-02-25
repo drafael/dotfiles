@@ -74,14 +74,28 @@ if has('clipboard')            " OS clipboard integration
 endif
 
 "
+" Status line
+"
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.linenr = 'LN'
+let g:airline_symbols.branch = 'BR'
+let g:airline_symbols.readonly = 'RO'
+
+"
 "  GUI/Terminal specific settings
 "
 if has("gui_running")          " GUI is running or is about to start
   set guioptions-=T            " remove toolbar from gvim
   set guioptions-=l            " remove left scrollbar
-  set guioptions-=L            "   when there is a vertically	split window
+  set guioptions-=L            "   when there is a vertically split window
   set guioptions-=r            " remove right scrollbar
-  set guioptions-=R            "   when there is a vertically	split window
+  set guioptions-=R            "   when there is a vertically split window
 
   set lines=45 columns=140     " maximize gvim window
   set guifont=Menlo:h14        " favorite GUI font
@@ -90,7 +104,8 @@ if has("gui_running")          " GUI is running or is about to start
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
-  colorscheme grb256           " terminal color scheme
+  colorscheme xoria256         " terminal color scheme
+  let g:airline_theme='dark'   " status line color theme
 
   if exists("+lines")
     set lines=42
@@ -106,19 +121,5 @@ endif
 let g:ctrlp_map = '<c-p>'            " default mapping
 let g:ctrlp_cmd = 'CtrlP'            " default command
 let g:ctrlp_working_path_mode = 'ra' " set local working directory
-
-"
-" Status line
-"
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.linenr = 'LN'
-let g:airline_symbols.branch = 'BR'
-let g:airline_symbols.readonly = 'RO'
 
 " EOF
