@@ -58,17 +58,14 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 
-" Snippets like textmate
+" TextMate like snippets
 Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
 call vundle#end()               " end of plugin listing
-
 if pluginsInstalled == 0
-    echo "Installing plugins..."
-    echo ""
     :PluginInstall
 endif
 
@@ -92,6 +89,9 @@ set linebreak
 let &showbreak='↪ '            " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start " configure backspace so it acts as it should act
 
+"
+"  Search
+"
 set showmatch                  " show matching brackets when text indicator is over them
 set matchtime=2                " tens of a second to show matching parentheses
 set hlsearch                   " highlight matches
@@ -101,7 +101,6 @@ set smartcase                  "   unless they contain at least one capital lett
 set magic                      " for regular expressions turn magic on
 set gdefault                   " global search by default: :%s/pattern/replacement/g
 
-let mapleader=','
 
 if has('clipboard')            " OS clipboard integration
     if has('unnamedplus')      " when possible use + register for copy-paste
@@ -159,5 +158,19 @@ endif
 let g:ctrlp_map = '<c-p>'            " default mapping
 let g:ctrlp_cmd = 'CtrlP'            " default command
 let g:ctrlp_working_path_mode = 'ra' " set local working directory
+
+"
+"  Mappings
+"
+let mapleader=','
+
+nnoremap // :TComment<CR>
+vnoremap // :TComment<CR>
+
+" when indenting with < and >, make it easy to repeat
+xnoremap < <gv
+xnoremap > >gv
+
+
 
 " EOF
