@@ -6,6 +6,7 @@
 logs/
 *.svn*
 .svn/
+vim/bundle/**
 
 # --- Java --- 
 *.class

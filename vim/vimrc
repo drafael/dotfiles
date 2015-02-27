@@ -28,12 +28,50 @@ set splitbelow                 " splitting a window will put the new window belo
 set splitright                 " splitting a window will put the new window right of the current one
 
 "
-" Use pathogen to easily modify the runtime path to include all plugins under the ~/.vim/bundle directory
+" Setting up Vundle (vim plugin manager)
 "
-filetype off                   " force reloading after pathogen loaded
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+filetype off                   " required to init Vandle
+let readme=expand('~/.vim/bundle/vundle/README.md')
+let pluginsInstalled=1
+if !filereadable(readme)
+    echo "Installing Vundle (vim plugin manager)..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let pluginsInstalled=0
+endif
+
+set rtp+=~/.vim/bundle/vundle/  " include vundle
+call vundle#begin()             " init vundle
+
+Plugin 'gmarik/vundle'          " let Vundle manage Vundle, required
+
+Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-endwise'
+
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tmhedberg/matchit'
+Plugin 'ervandew/supertab'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+
+" Snippets like textmate
+Plugin 'tomtom/tlib_vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+call vundle#end()               " end of plugin listing
+
+if pluginsInstalled == 0
+    echo "Installing plugins..."
+    echo ""
+    :PluginInstall
+endif
+
 filetype plugin indent on      " enable file type detection, plugins and indentation
 syntax enable                  " enable syntax highlighting
 
