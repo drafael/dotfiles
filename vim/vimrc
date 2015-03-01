@@ -1,4 +1,38 @@
-set nocompatible               " choose no compatibility with legacy vi
+set nocompatible                " choose no compatibility with legacy vi
+filetype off                    " required to init Vandle
+set rtp+=~/.vim/bundle/vundle/  " setting up Vundle (vim plugin manager)
+call vundle#begin()             " init vundle
+Plugin 'gmarik/vundle'          " let Vundle manage Vundle, required
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-endwise'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tmhedberg/matchit'
+Plugin 'ervandew/supertab'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'regedarek/ZoomWin'
+Plugin 'sickill/vim-pasta'
+
+" TextMate like snippets
+Plugin 'tomtom/tlib_vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+" color schemes
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-scripts/xoria256.vim'
+Plugin 'cocopon/iceberg.vim'
+Plugin 'stulzer/heroku-colorscheme'
+Plugin 'cseelus/vim-colors-clearance'
+Plugin 'nanotech/jellybeans.vim'
+
+call vundle#end()              " end of plugin listing
+filetype plugin indent on      " enable file type detection, plugins and indentation
+syntax enable                  " enable syntax highlighting
+
 set encoding=utf-8             " open file with encoding
 set fileencoding=utf-8         " save file with encoding
 set fileformats=unix,dos,mac   " use Unix as the standard file type
@@ -26,51 +60,6 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 
 set splitbelow                 " splitting a window will put the new window below the current one
 set splitright                 " splitting a window will put the new window right of the current one
-
-"
-" Setting up Vundle (vim plugin manager)
-"
-filetype off                   " required to init Vandle
-let readme=expand('~/.vim/bundle/vundle/README.md')
-let pluginsInstalled=1
-if !filereadable(readme)
-    echo "Installing Vundle (vim plugin manager)..."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    let pluginsInstalled=0
-endif
-
-set rtp+=~/.vim/bundle/vundle/  " include vundle
-call vundle#begin()             " init vundle
-
-Plugin 'gmarik/vundle'          " let Vundle manage Vundle, required
-
-Plugin 'altercation/vim-colors-solarized'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-endwise'
-
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tmhedberg/matchit'
-Plugin 'ervandew/supertab'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-
-" TextMate like snippets
-Plugin 'tomtom/tlib_vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-
-call vundle#end()               " end of plugin listing
-if pluginsInstalled == 0
-    :PluginInstall
-endif
-
-filetype plugin indent on      " enable file type detection, plugins and indentation
-syntax enable                  " enable syntax highlighting
 
 "
 "  Whitespace settings
