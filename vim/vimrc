@@ -1,4 +1,5 @@
 set nocompatible                " choose no compatibility with legacy vi
+filetype on                     " work around stupid osx bug
 filetype off                    " required to init Vandle
 set rtp+=~/.vim/bundle/vundle/  " setting up Vundle (vim plugin manager)
 call vundle#begin()             " init vundle
@@ -21,11 +22,16 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
-" color schemes
+" Color schemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-scripts/xoria256.vim'
 Plugin 'cocopon/iceberg.vim'
 Plugin 'stulzer/heroku-colorscheme'
+Plugin 'wesgibbs/vim-irblack'
+Plugin 'quanganhdo/grb256'
+Plugin 'jgdavey/vim-railscasts'
+Plugin 'sickill/vim-sunburst'
+Plugin '29decibel/codeschool-vim-theme'
 Plugin 'cseelus/vim-colors-clearance'
 Plugin 'nanotech/jellybeans.vim'
 
@@ -47,6 +53,7 @@ set history=1000               " how many lines of history VIM has to remember
 set title                      " change the terminal's title
 set visualbell                 " don't beep
 set noerrorbells               " don't beep
+set t_vb=                      "   and don't flash the screen either
 set ruler                      " always show current position
 set mouse=a                    " enable using the mouse if terminal emulator supports it
 set mousehide                  " hide the mouse cursor while typing
