@@ -131,9 +131,17 @@ if has("gui_running")          " GUI is running or is about to start
   set guioptions-=R            "   when there is a vertically split window
 
   set lines=45 columns=140     " maximize gvim window
-  set guifont=Menlo:h14        " favorite GUI font
-  set background=light
-  colorscheme solarized        " GUI color scheme
+
+  if has('win32') || has('win64')
+    set guioptions-=m          " remove menu bar
+    set guifont=Menlo:h11      " favorite GUI font
+    set background=dark
+    colorscheme codeschool     " GUI color scheme
+  else
+    set guifont=Menlo:h14        " favorite GUI font
+    set background=light
+    colorscheme solarized        " GUI color scheme
+  endif
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
