@@ -181,6 +181,9 @@ vnoremap // :TComment<CR>
 xnoremap < <gv
 xnoremap > >gv
 
+" Ctrl+S to save the current file
+nnoremap <c-s> :w<CR>
+inoremap <c-s> <Esc>:w<CR>
 
 
 " EOF
