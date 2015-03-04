@@ -1,10 +1,37 @@
-set nocompatible                " choose no compatibility with legacy vi
-filetype on                     " work around stupid osx bug
-filetype off                    " required to init Vandle
+set nocompatible               " choose no compatibility with legacy vi
+
+filetype on                    " work around stupid osx bug
+filetype off                   " required
+
+set encoding=utf-8             " open file with encoding
+set fileencoding=utf-8         " save file with encoding
+set fileformats=unix,dos,mac   " use Unix as the standard file type
+set nobackup                   " do not keep backup files
+set noswapfile                 " do not write intermediate swap files
+set nowrap                     " don't wrap lines
+set number                     " display line numbers on the left
+set cursorline                 " highlight current line
+set autoread                   " when a file is changed from the outside
+set lazyredraw                 " don't redraw while executing macros
+set history=1000               " how many lines of history VIM has to remember
+set title                      " change the terminal's title
+set noerrorbells               " don't beep
+set visualbell                 " don't beep
+set t_vb=                      "   and don't flash the screen either
+set ruler                      " always show current position
+set mouse=a                    " enable using the mouse if terminal emulator supports it
+set mousehide                  " hide the mouse cursor while typing
+set virtualedit=all            " moving beyond the end of a line
+set showcmd                    " display incomplete commands
+set laststatus=2               " show status line
+set noshowmode                 " hide mode line (status line already has mode)
+set splitbelow                 " splitting a window will put the new window below the current one
+set splitright                 " splitting a window will put the new window right of the current one
+
 set rtp+=~/.vim/bundle/vundle/  " setting up Vundle (vim plugin manager)
 call vundle#begin()             " init vundle
-Plugin 'gmarik/vundle'          " let Vundle manage Vundle, required
 
+Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise'
 Plugin 'jiangmiao/auto-pairs'
@@ -37,36 +64,6 @@ call vundle#end()              " end of plugin listing
 filetype plugin indent on      " enable file type detection, plugins and indentation
 syntax enable                  " enable syntax highlighting
 
-set encoding=utf-8             " open file with encoding
-set fileencoding=utf-8         " save file with encoding
-set fileformats=unix,dos,mac   " use Unix as the standard file type
-set nobackup                   " do not keep backup files
-set noswapfile                 " do not write intermediate swap files
-set nowrap                     " don't wrap lines
-set number                     " display line numbers on the left
-set cursorline                 " highlight current line
-set autoread                   " when a file is changed from the outside
-set lazyredraw                 " don't redraw while executing macros
-set history=1000               " how many lines of history VIM has to remember
-set title                      " change the terminal's title
-set visualbell                 " don't beep
-set noerrorbells               " don't beep
-set t_vb=                      "   and don't flash the screen either
-set ruler                      " always show current position
-set mouse=a                    " enable using the mouse if terminal emulator supports it
-set mousehide                  " hide the mouse cursor while typing
-set virtualedit=all            " moving beyond the end of a line
-set showcmd                    " display incomplete commands
-set laststatus=2               " show status line
-set noshowmode                 " hide mode line (status line already has mode)
-
-set wildmenu                   " make tab completion for files/buffers act like bash
-set wildmode=list:full         " show a list when pressing tab and complete first full match
-set wildignore=*.swp,*.bak,*.pyc,*.class
-
-set splitbelow                 " splitting a window will put the new window below the current one
-set splitright                 " splitting a window will put the new window right of the current one
-
 "
 "  Whitespace settings
 "
@@ -93,8 +90,10 @@ set hlsearch                   " highlight matches
 set incsearch                  " incremental searching
 set ignorecase                 " searches are case insensitive
 set smartcase                  "   unless they contain at least one capital letter
-set magic                      " for regular expressions turn magic on
 set gdefault                   " global search by default: :%s/pattern/replacement/g
+set wildmenu                   " make tab completion for files/buffers act like bash
+set wildmode=list:full         " show a list when pressing tab and complete first full match
+set wildignore=*.swp,*.bak,*.pyc,*.class
 
 "
 "  OS clipboard integration
