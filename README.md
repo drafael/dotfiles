@@ -14,7 +14,7 @@ $ ln -s ~/.dotfiles/vim/vimrc ~/.gvimrc
 
 1.  Install [Homebrew](http://brew.sh).
 
-2.  Install MacVim:
+2.  Install [MacVim](https://code.google.com/p/macvim/):
 
     ```
     $ brew install macvim
@@ -33,6 +33,4 @@ $ ln -s ~/.dotfiles/vim/vimrc ~/.gvimrc
 
 Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
-or copy prefernces file:
-
-`cp ~/.dotfiles/iTerm2/com.googlecode.iterm2.plist ~/Library/Preferences`
+or copy prefernces file: `$ cp ~/.dotfiles/iTerm2/com.googlecode.iterm2.plist ~/Library/Preferences`
