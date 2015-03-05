@@ -27,6 +27,9 @@ set laststatus=2               " show status line
 set noshowmode                 " hide mode line (status line already has mode)
 set splitbelow                 " splitting a window will put the new window below the current one
 set splitright                 " splitting a window will put the new window right of the current one
+set scrolloff=3                " lines to keep visible before and after cursor
+set sidescrolloff=7            " columns to keep visible before and after cursor
+set sidescroll=1               " continuous horizontal scroll rather than jumpy
 
 call bootstrap#vundle()        " install and configure Vundle (vim plugin manager)
 
