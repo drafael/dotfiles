@@ -21,7 +21,7 @@ $ ln -s ~/.dotfiles/vim/vimrc ~/.gvimrc
     $ brew linkapps
     ```
 
-    Install [MacVim with file browser](https://github.com/joelcogen/homebrew-macvimsplitbrowser):
+    or [MacVim with file browser](https://github.com/joelcogen/homebrew-macvimsplitbrowser):
 
     ```
     $ brew tap joelcogen/macvimsplitbrowser
@@ -29,8 +29,14 @@ $ ln -s ~/.dotfiles/vim/vimrc ~/.gvimrc
     $ brew linkapps
     ```
 
+3.  [Use Caps Lock as Esc](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
+
+
 ## [iTerm2](http://iterm2.com)
 
 Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
-or copy prefernces file: `$ cp ~/.dotfiles/iTerm2/com.googlecode.iterm2.plist ~/Library/Preferences`
+or copy prefernces file:
+```
+$ cp ~/.dotfiles/iTerm2/com.googlecode.iterm2.plist ~/Library/Preferences
+```
