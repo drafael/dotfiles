@@ -24,12 +24,23 @@ set mousehide                  " hide the mouse cursor while typing
 set virtualedit=all            " moving beyond the end of a line
 set showcmd                    " display incomplete commands
 set laststatus=2               " show status line
-set noshowmode                 " hide mode line (status line already has mode)
+set noshowmode                 " hide mode line (airline.vim takes care of us)
 set splitbelow                 " splitting a window will put the new window below the current one
 set splitright                 " splitting a window will put the new window right of the current one
 set scrolloff=3                " lines to keep visible before and after cursor
 set sidescrolloff=7            " columns to keep visible before and after cursor
 set sidescroll=1               " continuous horizontal scroll rather than jumpy
+set showmatch                  " show matching brackets when text indicator is over them
+set matchtime=2                " tens of a second to show matching parentheses
+set hlsearch                   " highlight matches
+set incsearch                  " incremental searching
+set ignorecase                 " searches are case insensitive
+set smartcase                  "   unless they contain at least one capital letter
+set gdefault                   " global search by default :%s/pattern/replacement/g
+set wildmenu                   " make tab completion for files/buffers act like bash
+set wildmode=list:full         " show a list when pressing <tab> and complete first full match
+set wildignore+=.DS_Store
+set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 
 call bootstrap#vundle()        " install and configure Vundle (vim plugin manager)
 
@@ -85,20 +96,6 @@ let &showbreak='↪ '            " string to put at the start of lines that have
 set backspace=indent,eol,start " configure backspace so it acts as it should act
 
 "
-"  Search
-"
-set showmatch                  " show matching brackets when text indicator is over them
-set matchtime=2                " tens of a second to show matching parentheses
-set hlsearch                   " highlight matches
-set incsearch                  " incremental searching
-set ignorecase                 " searches are case insensitive
-set smartcase                  "   unless they contain at least one capital letter
-set gdefault                   " global search by default: :%s/pattern/replacement/g
-set wildmenu                   " make tab completion for files/buffers act like bash
-set wildmode=list:full         " show a list when pressing tab and complete first full match
-set wildignore=*.swp,*.bak,*.pyc,*.class
-
-"
 "  OS clipboard integration
 "
 "  when possible use + register for copy-paste
@@ -147,7 +144,7 @@ if has("gui_running")          " GUI is running or is about to start
     set guifont=Menlo:h14      " favorite GUI font
     set background=light
     colorscheme solarized      " GUI color scheme
-  endif
+endif
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
@@ -165,9 +162,10 @@ endif
 "
 " Full path fuzzy file finder
 "
-let g:ctrlp_map = '<c-p>'            " default mapping
-let g:ctrlp_cmd = 'CtrlP'            " default command
-let g:ctrlp_working_path_mode = 'ra' " set local working directory
+let g:ctrlp_map = '<c-p>'              " default mapping
+let g:ctrlp_cmd = 'CtrlP'              " default command
+let g:ctrlp_working_path_mode = 'ra'   " set local working directory
+let g:ctrlp_show_hidden = 1
 
 "
 "  Mappings
@@ -178,8 +176,8 @@ nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
 
 " when indenting with < and >, make it easy to repeat
-xnoremap < <gv
-xnoremap > >gv
+vnoremap < <gv
+vnoremap > >gv
 
 " Ctrl+S to save the current file
 nnoremap <c-s> :w<CR>
