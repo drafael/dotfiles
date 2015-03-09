@@ -38,7 +38,7 @@ set ignorecase                 " searches are case insensitive
 set smartcase                  "   unless they contain at least one capital letter
 set gdefault                   " global search by default :%s/pattern/replacement/g
 set wildmenu                   " make tab completion for files/buffers act like bash
-set wildmode=list:full         " show a list when pressing <tab> and complete first full match
+set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 set wildignore+=.DS_Store
 set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 
@@ -95,6 +95,12 @@ set linebreak
 let &showbreak='↪ '            " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start " configure backspace so it acts as it should act
 
+augroup syntax_settings
+    autocmd!
+    autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile setlocal filetype=ruby syntax=ruby
+    autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+augroup END
+
 "
 "  OS clipboard integration
 "
@@ -144,7 +150,7 @@ if has("gui_running")          " GUI is running or is about to start
     set guifont=Menlo:h14      " favorite GUI font
     set background=light
     colorscheme solarized      " GUI color scheme
-endif
+  endif
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
