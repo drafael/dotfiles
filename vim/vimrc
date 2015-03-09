@@ -42,6 +42,7 @@ set wildmode=list:full         " show a list when pressing <Tab> and complete fi
 set wildignore+=.DS_Store
 set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 
+call bootstrap#runtime()       " on Windows, also use '.vim' instead of 'vimfiles'
 call bootstrap#vundle()        " install and configure Vundle (vim plugin manager)
 
 Plugin 'gmarik/vundle'

@@ -2,6 +2,12 @@
 " http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
 "
 
+function! bootstrap#runtime()
+    if has('win32') || has('win64')
+        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    endif
+endfunction
+
 function! bootstrap#vundle()
     let readme=expand('~/.vim/bundle/vundle/README.md')
     if !filereadable(readme)
