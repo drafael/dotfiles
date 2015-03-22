@@ -1,6 +1,7 @@
 *~
 .DS_Store
 *.swp
+.netrwhist
 *.bak
 *.log
 logs/
@@ -8,7 +9,7 @@ logs/
 .svn/
 vim/bundle/**
 
-# --- Java --- 
+# --- Java ---
 *.class
 *.war
 classes/
