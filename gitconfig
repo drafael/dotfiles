@@ -24,6 +24,11 @@
     di = diff
     dc = diff --cached
     tags = tag -l
+    pro = pull --rebase origin
+    prod = pull --rebase origin develop
+    prom = pull --rebase origin master
+    pod = push origin develop
+    pom = push origin master
 
   # View a pretty git log with branch tree
     lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
