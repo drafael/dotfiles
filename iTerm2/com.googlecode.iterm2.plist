@@ -717,8 +717,6 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
-	<key>NSFontPanelAttributes</key>
-	<string>1, 7</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/dotfiles/iTerm2</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -727,42 +725,12 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
-	<key>NSTableView Columns KeyBingingTable</key>
-	<array>
-		<data>
-		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
-		hAErATCG
-		</data>
-		<string>198</string>
-		<data>
-		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
-		hAErATGG
-		</data>
-		<string>302</string>
-	</array>
-	<key>NSTableView Hidden Columns KeyBingingTable</key>
-	<array/>
-	<key>NSTableView Sort Ordering KeyBingingTable</key>
-	<array/>
-	<key>NSToolbar Configuration Terminal Toolbar</key>
-	<dict>
-		<key>TB Display Mode</key>
-		<integer>1</integer>
-		<key>TB Icon Size Mode</key>
-		<integer>1</integer>
-		<key>TB Is Shown</key>
-		<integer>0</integer>
-		<key>TB Size Mode</key>
-		<integer>1</integer>
-	</dict>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>903 101 445 270 0 0 1440 878 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>258 281 924 485 0 0 1440 878 </string>
+	<string>331 305 924 485 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>98 94 1130 740 0 0 1440 878 </string>
+	<string>237 116 1450 910 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>178 103 1130 666 0 0 1440 878 </string>
+	<string>180 76 1450 961 0 0 1920 1058 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -957,7 +925,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>140</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -1331,7 +1299,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>42</integer>
+			<integer>55</integer>
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
@@ -1689,7 +1657,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>140</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -2063,7 +2031,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>42</integer>
+			<integer>55</integer>
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
@@ -2421,7 +2389,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>140</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -2795,7 +2763,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>42</integer>
+			<integer>55</integer>
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
@@ -3153,7 +3121,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>140</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -3527,7 +3495,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>42</integer>
+			<integer>55</integer>
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
@@ -3897,7 +3865,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>140</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -4271,7 +4239,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>42</integer>
+			<integer>55</integer>
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
@@ -4504,7 +4472,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-03-30T20:30:35Z</date>
+	<date>2015-04-07T14:17:15Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
