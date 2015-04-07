@@ -36,7 +36,3 @@ $ ln -s ~/.dotfiles/vim/vimrc ~/.gvimrc
 
 Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
-or copy prefernces file:
-```
-$ cp ~/.dotfiles/iTerm2/com.googlecode.iterm2.plist ~/Library/Preferences
-```

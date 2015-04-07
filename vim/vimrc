@@ -42,7 +42,25 @@ set wildmode=list:full         " show a list when pressing <Tab> and complete fi
 set wildignore+=.DS_Store
 set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 
-call bootstrap#vundle()        " install and configure Vundle (vim plugin manager)
+"
+" http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
+"
+let readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(readme)
+    echo "======================================================"
+    echo "    Installing Vundle (vim plugin manager)..."
+    echo "======================================================"
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    let s:install_plugins=1
+else
+    let s:install_plugins=0
+endif
+
+set rtp+=~/.vim/bundle/vundle/
+
+call vundle#begin()            " start plugin listing
 
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-fugitive'
@@ -73,7 +91,11 @@ Plugin '29decibel/codeschool-vim-theme'
 Plugin 'cseelus/vim-colors-clearance'
 Plugin 'nanotech/jellybeans.vim'
 
-call bootstrap#plugins()       " end of plugin listing
+call vundle#end()              " end of plugin listing
+
+if s:install_plugins == 1
+    :PluginInstall
+endif
 
 filetype plugin indent on      " enable file type detection, plugins and indentation
 syntax enable                  " enable syntax highlighting
