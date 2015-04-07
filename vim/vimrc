@@ -161,7 +161,7 @@ if has("gui_running")          " GUI is running or is about to start
   set guioptions-=L            "   when there is a vertically split window
   set guioptions-=r            " remove right scrollbar
   set guioptions-=R            "   when there is a vertically split window
-  set lines=45 columns=140     " maximize gvim window
+  set lines=55 columns=180     " maximize gvim window
   set guifont=Menlo:h14        " favorite GUI font
   set background=light
   colorscheme solarized        " GUI color scheme
@@ -171,10 +171,10 @@ else                           " this is console Vim
   colorscheme xoria256         " terminal color scheme
   let g:airline_theme='dark'   " status line color theme
   if exists("+lines")
-    set lines=42
+    set lines=55
   endif
   if exists("+columns")
-    set columns=140
+    set columns=180
   endif
 endif
 
