@@ -74,6 +74,9 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
 
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+
 " TextMate like snippets
 Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
