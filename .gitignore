@@ -9,7 +9,6 @@ logs/
 .svn/
 vim/bundle/**
 
-# --- Java ---
 *.class
 *.war
 classes/
@@ -19,7 +18,6 @@ out
 .ivy/
 .grails/
 
-# --- IDE ---
 *.iml
 *.eml
 *.ipr
@@ -29,11 +27,8 @@ out
 .project
 *.classpath~
 *.properties~
-atlassian-ide-plugin.xml
 
-# --- Vagrant ---
 .vagrant/
 
-# --- Python ---
 *.pyc
 

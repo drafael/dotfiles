@@ -5,8 +5,8 @@
 ## Vim
 
 ```
-$ ln -s ~/.dotfiles/vimrc ~/.vimrc
-$ ln -s ~/.dotfiles/vimrc ~/.gvimrc
+$ ln -s ~/.dotfiles/.vimrc ~/.vimrc
+$ ln -s ~/.dotfiles/.vimrc ~/.gvimrc
 ```
 
 ## [MacVim](https://code.google.com/p/macvim/)
