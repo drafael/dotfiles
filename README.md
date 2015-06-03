@@ -1,19 +1,20 @@
 ## Installation
 
-`$ git clone git://github.com/drafael/dotfiles.git ~/.dotfiles`
+`$ git clone git://github.com/drafael/dotfiles.git ~/dotfiles`
 
 ## Vim
 
 ```
-$ ln -s ~/.dotfiles/.vimrc ~/.vimrc
-$ ln -s ~/.dotfiles/.vimrc ~/.gvimrc
+$ cd ~
+$ ln -s ~/dotfiles/.vimrc
+$ ln -s ~/dotfiles/.vimrc ~/.gvimrc
 ```
 
-## [MacVim](https://code.google.com/p/macvim/)
+## [MacVim](https://github.com/macvim-dev/macvim)
 
 1.  Install [Homebrew](http://brew.sh).
 
-2.  Install [MacVim](https://code.google.com/p/macvim/):
+2.  Install [MacVim](https://github.com/macvim-dev/macvim):
 
     ```
     $ brew install macvim
@@ -33,5 +34,5 @@ $ ln -s ~/.dotfiles/.vimrc ~/.gvimrc
 
 ## [iTerm2](http://iterm2.com)
 
-Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
+Point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
