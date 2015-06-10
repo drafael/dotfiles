@@ -81,6 +81,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
 
 " TextMate like snippets
 Plugin 'tomtom/tlib_vim'
