@@ -80,6 +80,7 @@ Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
+Plugin 'majutsushi/tagbar'
 
 " TextMate like snippets
 Plugin 'tomtom/tlib_vim'
@@ -200,6 +201,8 @@ let mapleader=','
 
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
+
+nmap <F8> :TagbarToggle<CR>
 
 " when indenting with < and >, make it easy to repeat
 vnoremap < <gv
