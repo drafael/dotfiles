@@ -63,7 +63,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()            " start plugin listing
 
 Plugin 'gmarik/vundle'
-Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tmhedberg/matchit'
@@ -73,7 +72,10 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
+Plugin 'derekwyatt/vim-scala'
 
+" command-line tools integration
+Plugin 'tpope/vim-fugitive'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
@@ -171,7 +173,7 @@ if has("gui_running")          " GUI is running or is about to start
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
-  colorscheme xoria256         " terminal color scheme
+  colorscheme heroku-terminal  " terminal color scheme
   let g:airline_theme='dark'   " status line color theme
   if exists("+lines")
     set lines=46
