@@ -99,6 +99,7 @@ Plugin 'sickill/vim-sunburst'
 Plugin '29decibel/codeschool-vim-theme'
 Plugin 'cseelus/vim-colors-clearance'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'fatih/molokai'
 
 call vundle#end()              " end of plugin listing
 
