@@ -72,7 +72,9 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
+
 Plugin 'derekwyatt/vim-scala'
+Plugin 'fatih/vim-go'
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'
