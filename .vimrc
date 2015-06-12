@@ -178,8 +178,7 @@ if has("gui_running")          " GUI is running or is about to start
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
-  colorscheme heroku-terminal  " terminal color scheme
-  let g:airline_theme='dark'   " status line color theme
+  colorscheme jellybeans       " terminal color scheme
   if exists("+lines")
     set lines=46
   endif
