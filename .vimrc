@@ -39,7 +39,9 @@ set smartcase                  "   unless they contain at least one capital lett
 set gdefault                   " global search by default :%s/pattern/replacement/g
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
+
 set wildignore+=.DS_Store
+set wildignore+=*/target/*
 set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 
 "
