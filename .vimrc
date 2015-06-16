@@ -131,6 +131,7 @@ set backspace=indent,eol,start " configure backspace so it acts as it should act
 
 augroup syntax_settings
     autocmd!
+    autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
     autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile setlocal filetype=ruby syntax=ruby
     autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
