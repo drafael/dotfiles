@@ -91,17 +91,19 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
-" Color schemes
-Plugin 'altercation/vim-colors-solarized'
+" color schemes (here's screenshots http://vimcolors.com)
+Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
 Plugin 'vim-scripts/xoria256.vim'
-Plugin 'cocopon/iceberg.vim'
-Plugin 'stulzer/heroku-colorscheme'
+Plugin 'vim-scripts/cascadia.vim'           " http://vimcolors.com/175/cascadia/light
+Plugin 'nanotech/jellybeans.vim'            " http://vimcolors.com/1/jellybeans/dark
+Plugin 'cocopon/iceberg.vim'                " http://cocopon.me/app/vim-iceberg/
+Plugin 'stulzer/heroku-colorscheme'         " http://vimcolors.com/201/heroku/dark
+Plugin 'uu59/vim-herokudoc-theme'           " http://vimcolors.com/95/herokudoc-gvim/dark
 Plugin 'quanganhdo/grb256'
-Plugin 'sickill/vim-sunburst'
-Plugin '29decibel/codeschool-vim-theme'
-Plugin 'cseelus/vim-colors-clearance'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'fatih/molokai'
+Plugin 'sickill/vim-sunburst'               " http://vimcolors.com/177/Sunburst/dark
+Plugin '29decibel/codeschool-vim-theme'     " http://vimcolors.com/33/codeschool/dark
+Plugin 'cseelus/vim-colors-clearance'       " http://vimcolors.com/147/clearance/dark
+Plugin 'fatih/molokai'                      " http://vimcolors.com/168/molokai/dark
 
 call vundle#end()              " end of plugin listing
 
