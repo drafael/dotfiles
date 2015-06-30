@@ -91,19 +91,19 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
-" color schemes (here's screenshots http://vimcolors.com)
+" color schemes (here's the gallery/screenshots http://vimcolors.com)
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
-Plugin 'vim-scripts/xoria256.vim'
-Plugin 'vim-scripts/cascadia.vim'           " http://vimcolors.com/175/cascadia/light
+Plugin 'vim-scripts/xoria256.vim'           " http://vimcolors.com/262/xoria256/dark
 Plugin 'nanotech/jellybeans.vim'            " http://vimcolors.com/1/jellybeans/dark
 Plugin 'cocopon/iceberg.vim'                " http://cocopon.me/app/vim-iceberg/
 Plugin 'stulzer/heroku-colorscheme'         " http://vimcolors.com/201/heroku/dark
 Plugin 'uu59/vim-herokudoc-theme'           " http://vimcolors.com/95/herokudoc-gvim/dark
-Plugin 'quanganhdo/grb256'
 Plugin 'sickill/vim-sunburst'               " http://vimcolors.com/177/Sunburst/dark
 Plugin '29decibel/codeschool-vim-theme'     " http://vimcolors.com/33/codeschool/dark
 Plugin 'cseelus/vim-colors-clearance'       " http://vimcolors.com/147/clearance/dark
 Plugin 'fatih/molokai'                      " http://vimcolors.com/168/molokai/dark
+Plugin 'znake/znake-vim'                    " http://vimcolors.com/240/znake/dark
+Plugin 'croaker/mustang-vim'                " http://vimcolors.com/248/mustang/dark
 
 call vundle#end()              " end of plugin listing
 
