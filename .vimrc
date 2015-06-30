@@ -49,15 +49,15 @@ set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 "
 let readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(readme)
-    echo "======================================================"
-    echo "    Installing Vundle (vim plugin manager)..."
-    echo "======================================================"
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-    let s:install_plugins=1
+  echo "======================================================"
+  echo "    Installing Vundle (vim plugin manager)..."
+  echo "======================================================"
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  let s:install_plugins=1
 else
-    let s:install_plugins=0
+  let s:install_plugins=0
 endif
 
 set rtp+=~/.vim/bundle/vundle/
@@ -108,7 +108,7 @@ Plugin 'fatih/molokai'                      " http://vimcolors.com/168/molokai/d
 call vundle#end()              " end of plugin listing
 
 if s:install_plugins == 1
-    :PluginInstall
+  :PluginInstall
 endif
 
 filetype plugin indent on      " enable file type detection, plugins and indentation
@@ -132,10 +132,10 @@ let &showbreak='↪ '            " string to put at the start of lines that have
 set backspace=indent,eol,start " configure backspace so it acts as it should act
 
 augroup syntax_settings
-    autocmd!
-    autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
-    autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile setlocal filetype=ruby syntax=ruby
-    autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd!
+  autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
+  autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile setlocal filetype=ruby syntax=ruby
+  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber,vim setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
 
 "
@@ -145,11 +145,11 @@ augroup END
 "  on Mac and Windows, use * register for copy-paste
 "
 if has('clipboard')
-    if has('unnamedplus')
-        set clipboard=unnamed,unnamedplus
-    else
-        set clipboard=unnamed
-    endif
+  if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+  else
+    set clipboard=unnamed
+  endif
 endif
 
 "
@@ -158,13 +158,25 @@ endif
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols.linenr = 'LN'
-let g:airline_symbols.branch = 'BR'
-let g:airline_symbols.readonly = 'RO'
+
+if has('macunix') || system('uname')=~'Darwin'
+  let g:airline_symbols.linenr = '␤'
+  " let g:airline_symbols.linenr = '¶'
+  " let g:airline_symbols.linenr = '␊'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.readonly = '🔒'
+  " let g:airline_symbols.whitespace = 'Ξ'
+  " let g:airline_symbols.paste = 'ρ'
+else
+  let g:airline_symbols.linenr = 'LN'
+  let g:airline_symbols.branch = 'BR'
+  let g:airline_symbols.readonly = 'RO'
+endif
 
 "
 "  GUI/Terminal specific settings
