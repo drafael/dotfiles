@@ -74,6 +74,7 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
+Plugin 'scrooloose/nerdtree'
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
@@ -205,6 +206,12 @@ else                           " this is console Vim
 endif
 
 "
+" File/source code navigation
+"
+map <F2> :NERDTreeToggle<CR>
+map <F8> :TagbarToggle<CR>
+
+"
 " Full path fuzzy file finder
 "
 let g:ctrlp_map = '<c-p>'              " default mapping
@@ -220,8 +227,6 @@ let mapleader=','
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
 
-nmap <F8> :TagbarToggle<CR>
-
 " when indenting with < and >, make it easy to repeat
 vnoremap < <gv
 vnoremap > >gv
@@ -229,6 +234,5 @@ vnoremap > >gv
 " Ctrl+S to save the current file
 nnoremap <c-s> :w<CR>
 inoremap <c-s> <Esc>:w<CR>
-
 
 " EOF
