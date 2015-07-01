@@ -164,19 +164,18 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+let g:airline_symbols.readonly = '[RO]'
 
 if has('macunix') || system('uname')=~'Darwin'
   let g:airline_symbols.linenr = '␤'
   " let g:airline_symbols.linenr = '¶'
   " let g:airline_symbols.linenr = '␊'
   let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.readonly = '🔒'
   " let g:airline_symbols.whitespace = 'Ξ'
   " let g:airline_symbols.paste = 'ρ'
 else
   let g:airline_symbols.linenr = 'LN'
   let g:airline_symbols.branch = 'BR'
-  let g:airline_symbols.readonly = 'RO'
 endif
 
 "
