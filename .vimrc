@@ -209,6 +209,8 @@ endif
 " File/source code navigation
 "
 map <F2> :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden=1
+
 map <F8> :TagbarToggle<CR>
 
 "
