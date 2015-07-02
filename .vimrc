@@ -105,6 +105,8 @@ Plugin 'cseelus/vim-colors-clearance'       " http://vimcolors.com/147/clearance
 Plugin 'fatih/molokai'                      " http://vimcolors.com/168/molokai/dark
 Plugin 'znake/znake-vim'                    " http://vimcolors.com/240/znake/dark
 Plugin 'croaker/mustang-vim'                " http://vimcolors.com/248/mustang/dark
+Plugin 'fent/vim-frozen'                    " http://vimcolors.com/272/frozen/dark
+Plugin 'MPiccinato/wombat256'               " http://vimcolors.com/278/wombat256/dark
 
 call vundle#end()              " end of plugin listing
 
