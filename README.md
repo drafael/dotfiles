@@ -6,7 +6,12 @@
 
 ```
 $ ln -s ~/dotfiles/.vimrc ~/.vimrc
-$ vim +PluginInstall
+```
+
+## Vim plugin installation managed by [Vundle](https://github.com/VundleVim/Vundle.vim)
+
+```
+$ vim +PluginInstall +qall
 ```
 
 ## [VimR](https://github.com/qvacua/vimr)
@@ -15,14 +20,6 @@ $ vim +PluginInstall
 
     ```
     $ brew install macvim
-    $ brew linkapps
-    ```
-
-    or [MacVim with file browser](https://github.com/joelcogen/homebrew-macvimsplitbrowser):
-
-    ```
-    $ brew tap joelcogen/macvimsplitbrowser
-    $ brew install macvim-split-browser
     $ brew linkapps
     ```
 
