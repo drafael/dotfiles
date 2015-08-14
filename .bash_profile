@@ -16,5 +16,5 @@ export PS1="\033[32m\]\u@\h \[\033[33m\w\$(parse_git_branch)\033[0m\]\n\$ "
 export EDITOR=vim
 
 # PATH modifications
-export PATH="/usr/local/bin:$PATH"
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$PATH:$HOME/bin

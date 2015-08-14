@@ -5,16 +5,13 @@
 ## Vim
 
 ```
-$ cd ~
-$ ln -s ~/dotfiles/.vimrc
-$ ln -s ~/dotfiles/.vimrc ~/.gvimrc
+$ ln -s ~/dotfiles/.vimrc ~/.vimrc
+$ vim +PluginInstall
 ```
 
-## [MacVim](https://github.com/macvim-dev/macvim)
+## [VimR](https://github.com/qvacua/vimr)
 
-1.  Install [Homebrew](http://brew.sh).
-
-2.  Install [MacVim](https://github.com/macvim-dev/macvim):
+## [MacVim](https://github.com/macvim-dev/macvim) via [Homebrew](http://brew.sh):
 
     ```
     $ brew install macvim
@@ -29,8 +26,7 @@ $ ln -s ~/dotfiles/.vimrc ~/.gvimrc
     $ brew linkapps
     ```
 
-3.  [Use Caps Lock as Esc](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
-
+## [Using Caps Lock as Esc in Mac OS X](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
 
 ## [iTerm2](http://iterm2.com)
 
