@@ -18,10 +18,10 @@ $ vim +PluginInstall +qall
 
 ## [MacVim](https://github.com/macvim-dev/macvim) via [Homebrew](http://brew.sh):
 
-    ```
-    $ brew install macvim
-    $ brew linkapps
-    ```
+```
+$ brew install macvim
+$ brew linkapps
+```
 
 ## [Using Caps Lock as Esc in Mac OS X](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
 
