@@ -12,10 +12,10 @@ cask 'vlc'
 cask 'iterm2'
 cask 'macvim'
 cask 'vimr'
-
 cask 'sequel-pro'
 cask 'pgadmin3'
 cask 'postgres'
+cask 'free-ruler'
 
 cask 'virtualbox'
 cask 'vagrant'
