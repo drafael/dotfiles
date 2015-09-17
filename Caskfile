@@ -1,0 +1,21 @@
+
+cask 'appcleaner'
+cask 'firefox'
+cask 'google-chrome'
+cask 'skype'
+cask 'viber'
+cask 'mucommander'
+cask 'dropbox'
+cask 'transmission'
+cask 'vlc'
+
+cask 'iterm2'
+cask 'macvim'
+cask 'vimr'
+
+cask 'sequel-pro'
+cask 'pgadmin3'
+cask 'postgres'
+
+cask 'virtualbox'
+cask 'vagrant'
