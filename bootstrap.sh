@@ -6,10 +6,10 @@
 # Install command-line tools
 brew tap Homebrew/bundle
 brew bundle Brewfile
+brew linkapps
+brew cleanup
 
 # Install OSX apps
 brew install caskroom/cask/brew-cask
 brew bundle Caskfile
-
-brew cleanup
 brew cask cleanup

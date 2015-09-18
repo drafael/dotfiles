@@ -13,10 +13,15 @@ brew 'the_silver_searcher'
 brew 'tig', args: ['with-docs']
 brew 'nmap'
 
+#brew 'macvim'
+#brew 'emacs', args: ['with-cocoa']
+
 brew 'ant'
 brew 'maven'
 
 brew 'sbt'
 brew 'scala'
+
+brew 'node'
 
 brew 'go', args: ['with-cc-common']
