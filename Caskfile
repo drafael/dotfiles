@@ -23,3 +23,6 @@ cask 'vagrant'
 
 cask 'free-ruler'
 cask 'seil'
+
+tap 'caskroom/fonts'
+cask 'font-inconsolata'
