@@ -18,6 +18,7 @@ brew 'nmap'
 
 brew 'ant'
 brew 'maven'
+brew 'gradle'
 
 brew 'sbt'
 brew 'scala'

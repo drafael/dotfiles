@@ -1,18 +1,32 @@
 
+tap 'caskroom/versions'
+
 cask 'appcleaner'
 cask 'firefox'
 cask 'google-chrome'
 cask 'skype'
+#cask 'slack'
+#cask 'adium'
 cask 'viber'
-cask 'mucommander'
 cask 'dropbox'
 cask 'transmission'
 cask 'vlc'
+cask 'air-video-server-hd'
+cask 'carbon-copy-cloner'
+cask 'uninstallpkg'
 
 cask 'iterm2'
 cask 'macvim'
 cask 'vimr'
+cask 'java'
 cask 'intellij-idea-ce'
+cask 'jd-gui'
+#cask 'heroku-toolbelt'
+cask 'mucommander'
+#cask 'sourcetree'
+
+tap 'caskroom/fonts'
+cask 'font-inconsolata'
 
 cask 'sequel-pro'
 cask 'pgadmin3'
@@ -20,9 +34,10 @@ cask 'postgres'
 
 cask 'virtualbox'
 cask 'vagrant'
+#cask 'vagrant-manager'
+#cask 'dockertoolbox'
+#cask 'packer'
 
 cask 'free-ruler'
-cask 'seil'
-
-tap 'caskroom/fonts'
-cask 'font-inconsolata'
+#cask 'seil'
+#cask 'little-snitch'
