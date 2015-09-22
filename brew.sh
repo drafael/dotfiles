@@ -2,7 +2,6 @@
 
 if test ! $(which brew); then
   echo "Installing homebrew..."
-  sudo -v
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
@@ -23,5 +22,6 @@ brew linkapps
 brew cleanup
 
 # Install OSX apps
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 brew bundle Caskfile
 brew cask cleanup
