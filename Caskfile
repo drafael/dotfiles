@@ -1,6 +1,4 @@
 
-tap 'caskroom/versions'
-
 cask 'appcleaner'
 cask 'firefox'
 cask 'google-chrome'
@@ -19,9 +17,8 @@ cask 'uninstallpkg'
 cask 'iterm2'
 cask 'macvim'
 cask 'vimr'
-cask 'java'
 cask 'intellij-idea-ce'
-cask 'jd-gui'
+#cask 'jd-gui'
 #cask 'heroku-toolbelt'
 cask 'mucommander'
 #cask 'sourcetree'

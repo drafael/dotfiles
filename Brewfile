@@ -1,7 +1,4 @@
 
-tap 'homebrew/bundle'
-tap 'homebrew/versions'
-
 brew 'wget'
 brew 'tree'
 brew 'midnight-commander'
@@ -15,6 +12,9 @@ brew 'nmap'
 
 #brew 'macvim'
 #brew 'emacs', args: ['with-cocoa']
+
+cask 'java7'
+cask 'java'
 
 brew 'ant'
 brew 'maven'
