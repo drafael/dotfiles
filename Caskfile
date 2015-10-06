@@ -45,3 +45,5 @@ cask 'free-ruler'
 #cask 'handbrake'
 #cask 'gopro-studio'
 #cask 'google-earth'
+
+cask 'rstudio'

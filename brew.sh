@@ -10,6 +10,7 @@ brew update
 # init homebrew
 brew tap homebrew/bundle
 brew tap homebrew/versions
+brew tap homebrew/science
 
 # init cask
 brew tap caskroom/cask
