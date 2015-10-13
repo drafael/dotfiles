@@ -1,4 +1,5 @@
 
+brew 'tmux'
 brew 'wget'
 brew 'tree'
 brew 'midnight-commander'
@@ -9,7 +10,7 @@ brew 'ack'
 brew 'the_silver_searcher'
 brew 'tig', args: ['with-docs']
 brew 'nmap'
-#brew 'thefuck'
+brew 'vifm'
 
 #brew 'macvim'
 #brew 'emacs', args: ['with-cocoa']
