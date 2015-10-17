@@ -32,7 +32,6 @@ cask 'postgres'
 cask 'virtualbox'
 cask 'vagrant'
 #cask 'vagrant-manager'
-#cask 'dockertoolbox'
 #cask 'packer'
 #cask 'chefdk'
 

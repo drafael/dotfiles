@@ -29,4 +29,10 @@ brew 'node'
 
 brew 'go', args: ['with-cc-common']
 
+brew 'docker'
+brew 'docker-machine'
+brew 'docker-compose'
+
 brew 'r'
+
+# EOF
