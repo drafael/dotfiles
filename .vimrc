@@ -81,6 +81,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 Plugin 'motus/pig.vim'
 Plugin 'rverk/snipmate-pig'
+Plugin 'ekalinin/Dockerfile.vim'
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'
