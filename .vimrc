@@ -136,7 +136,7 @@ set linebreak
 let &showbreak='↪ '            " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start " configure backspace so it acts as it should act
 
-augroup syntax_settings
+augroup vimrcEx
   autocmd!
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig syntax=pig
@@ -221,7 +221,7 @@ map <F8> :TagbarToggle<CR>
 "
 " Full path fuzzy file finder
 "
-let g:ctrlp_map = '<c-p>'              " default mapping
+let g:ctrlp_map = '<C-p>'              " default mapping
 let g:ctrlp_cmd = 'CtrlP'              " default command
 let g:ctrlp_working_path_mode = 'ra'   " set local working directory
 let g:ctrlp_show_hidden = 1
@@ -231,6 +231,8 @@ let g:ctrlp_show_hidden = 1
 "
 let mapleader=','
 
+call togglebg#map("<F5>")              " Solarized color scheme: toggle background
+
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
 
@@ -239,7 +241,22 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Ctrl+S to save the current file
-nnoremap <c-s> :w<CR>
-inoremap <c-s> <Esc>:w<CR>
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+
+"
+"  Change Vim cursor shape in different modes
+"
+if exists('$TMUX')
+  " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+elseif exists('$TERM_PROGRAM') && $TERM_PROGRAM =~ "iTerm.app"
+  " let &t_SI="\<Esc>]50;CursorShape=1\x7"
+  " let &t_EI="\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\e[5 q"
+  let &t_EI = "\e[2 q"
+endif
 
 " EOF
