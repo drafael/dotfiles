@@ -11,6 +11,7 @@ set noswapfile                 " do not write intermediate swap files
 set nowrap                     " don't wrap lines
 set number                     " display line numbers on the left
 set cursorline                 " highlight current line
+set guicursor=n:blinkon0       " turn off the blinking cursor in normal mode
 set autoread                   " when a file is changed from the outside
 set lazyredraw                 " don't redraw while executing macros
 set history=1000               " how many lines of history VIM has to remember
