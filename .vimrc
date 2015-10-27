@@ -47,22 +47,22 @@ set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 "
 " http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
 "
-let readme=expand('~/.vim/bundle/vundle/README.md')
+let readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(readme)
   echo "======================================================"
   echo "    Installing Vundle (vim plugin manager)..."
   echo "======================================================"
   echo ""
   silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   let s:install_plugins=1
 else
   let s:install_plugins=0
 endif
 
-set rtp+=~/.vim/bundle/vundle/ " set the runtime path to include Vundle and initialize
-call vundle#begin()            " start plugin listing
-Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle, required
+set rtp+=~/.vim/bundle/Vundle.vim/ " set the runtime path to include Vundle and initialize
+call vundle#begin()                " start plugin listing
+Plugin 'VundleVim/Vundle.vim'      " let Vundle manage Vundle, required
 
 Plugin 'tpope/vim-endwise'
 Plugin 'jiangmiao/auto-pairs'
@@ -70,7 +70,7 @@ Plugin 'tmhedberg/matchit'
 Plugin 'ervandew/supertab'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
 Plugin 'scrooloose/nerdtree'
