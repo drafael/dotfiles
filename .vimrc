@@ -54,17 +54,16 @@ if !filereadable(readme)
   echo "======================================================"
   echo ""
   silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
   let s:install_plugins=1
 else
   let s:install_plugins=0
 endif
 
-set rtp+=~/.vim/bundle/vundle/
-
+set rtp+=~/.vim/bundle/vundle/ " set the runtime path to include Vundle and initialize
 call vundle#begin()            " start plugin listing
+Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle, required
 
-Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-endwise'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tmhedberg/matchit'
@@ -113,8 +112,7 @@ Plugin 'fent/vim-frozen'                    " http://vimcolors.com/272/frozen/da
 Plugin 'MPiccinato/wombat256'               " http://vimcolors.com/278/wombat256/dark
 
 call vundle#end()              " end of plugin listing
-
-if s:install_plugins == 1
+if s:install_plugins == 1      " auto installing plugins
   :PluginInstall
 endif
 
