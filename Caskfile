@@ -19,7 +19,7 @@ cask 'iterm2'
 cask 'macvim'
 cask 'vimr'
 cask 'intellij-idea-ce'
-cask 'gitup'
+cask 'sourcetree'
 cask 'mucommander'
 
 tap 'caskroom/fonts'
