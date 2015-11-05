@@ -142,7 +142,7 @@ augroup vimrcEx
   autocmd!
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig syntax=pig
-  autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile setlocal filetype=ruby syntax=ruby
+  autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile,Caskfile setlocal filetype=ruby syntax=ruby
   autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber,vim setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
 
