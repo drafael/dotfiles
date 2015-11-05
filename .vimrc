@@ -77,6 +77,7 @@ Plugin 'sickill/vim-pasta'
 Plugin 'scrooloose/nerdtree'
 
 " syntax and filetype
+Plugin 'tmux-plugins/vim-tmux'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 Plugin 'motus/pig.vim'
