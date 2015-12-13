@@ -9,6 +9,7 @@ set fileformats=unix,dos,mac   " use Unix as the standard file type
 set nobackup                   " do not keep backup files
 set noswapfile                 " do not write intermediate swap files
 set nowrap                     " don't wrap lines
+set colorcolumn=120            " show the line to wrap the long line by myself
 set number                     " display line numbers on the left
 set cursorline                 " highlight current line
 set guicursor=n:blinkon0       " turn off the blinking cursor in normal mode
