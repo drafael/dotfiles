@@ -14,7 +14,6 @@ brew tap homebrew/science
 
 # init cask
 brew tap caskroom/cask
-brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 
 # Install command-line tools
