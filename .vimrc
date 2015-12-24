@@ -84,6 +84,7 @@ Plugin 'fatih/vim-go'
 Plugin 'motus/pig.vim'
 Plugin 'rverk/snipmate-pig'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'burnettk/vim-angular'
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'
@@ -97,6 +98,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'matthewsimo/angular-vim-snippets'
 
 " color schemes (here's the gallery/screenshots http://vimcolors.com)
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
@@ -220,6 +222,9 @@ map <F2> :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 
 map <F8> :TagbarToggle<CR>
+
+" ignore angular directive lint errors with Vim and syntastic
+let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
 
 "
 " Full path fuzzy file finder
