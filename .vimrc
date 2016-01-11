@@ -233,6 +233,7 @@ let g:ctrlp_map = '<C-p>'              " default mapping
 let g:ctrlp_cmd = 'CtrlP'              " default command
 let g:ctrlp_working_path_mode = 'ra'   " set local working directory
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_match_window_reversed = 0  " show the results from top to bottom
 
 "
 "  Mappings
