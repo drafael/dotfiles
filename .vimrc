@@ -125,27 +125,31 @@ filetype plugin indent on      " enable file type detection, plugins and indenta
 syntax enable                  " enable syntax highlighting
 
 "
-"  Whitespace settings
+"  Default whitespace settings
 "
-set tabstop=4                  " spaces per tab
-set softtabstop=4              " when hitting <BS>, pretend like a tab is removed, even if spaces
-set shiftwidth=4               " number of spaces to use for autoindenting
-set shiftround                 " use multiple of shiftwidth when indenting with '<' and '>'
-set expandtab                  " spaces instead of tabs
-set smarttab                   " use shiftwidth to enter tabs
-set autoindent                 " automatically indent to match adjacent lines
+set tabstop=4                        " spaces per tab
+set softtabstop=4                    " when hitting <BS>, pretend like a tab is removed, even if spaces
+set shiftwidth=4                     " number of spaces to use for autoindenting
+set shiftround                       " use multiple of shiftwidth when indenting with '<' and '>'
+set expandtab                        " spaces instead of tabs
+set smarttab                         " use shiftwidth to enter tabs
+set autoindent                       " automatically indent to match adjacent lines
 set smartindent
-set nolist                     " hide whitespace characters
+set nolist                           " hide whitespace characters
 set listchars=tab:▸\ ,trail:•,eol:¬  " how to show 'invisible' characters
 set linebreak
-let &showbreak='↪ '            " string to put at the start of lines that have been wrapped
-set backspace=indent,eol,start " configure backspace so it acts as it should act
+let &showbreak='↪ '                  " string to put at the start of lines that have been wrapped
+set backspace=indent,eol,start       " configure backspace so it acts as it should act
 
 augroup vimrcEx
   autocmd!
+
+  " Override file type
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig syntax=pig
   autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile,Caskfile setlocal filetype=ruby syntax=ruby
+
+  " Override whitespace settings
   autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber,vim setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
 
@@ -178,11 +182,7 @@ let g:airline_symbols.readonly = '[RO]'
 
 if has('macunix') || system('uname')=~'Darwin'
   let g:airline_symbols.linenr = '␤'
-  " let g:airline_symbols.linenr = '¶'
-  " let g:airline_symbols.linenr = '␊'
   let g:airline_symbols.branch = '⎇'
-  " let g:airline_symbols.whitespace = 'Ξ'
-  " let g:airline_symbols.paste = 'ρ'
 else
   let g:airline_symbols.linenr = 'LN'
   let g:airline_symbols.branch = 'BR'
@@ -200,7 +200,7 @@ if has("gui_running")          " GUI is running or is about to start
   set guioptions-=R            "   when there is a vertically split window
   set lines=48 columns=160     " maximize gvim window
   set guifont=Menlo:h14        " favorite GUI font
-  " set guifont=Monaco:h14       " favorite GUI font
+  " set guifont=Monaco:h14
   set background=light
   colorscheme solarized        " GUI color scheme
 else                           " this is console Vim
@@ -257,13 +257,9 @@ inoremap <C-s> <Esc>:w<CR>
 "  Change Vim cursor shape in different modes
 "
 if exists('$TMUX')
-  " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
   let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
 elseif exists('$TERM_PROGRAM') && $TERM_PROGRAM =~ "iTerm.app"
-  " let &t_SI="\<Esc>]50;CursorShape=1\x7"
-  " let &t_EI="\<Esc>]50;CursorShape=0\x7"
   let &t_SI = "\e[5 q"
   let &t_EI = "\e[2 q"
 endif
