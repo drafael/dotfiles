@@ -216,6 +216,30 @@ else                           " this is console Vim
 endif
 
 "
+"  Mappings
+"
+let mapleader=' '
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+map <leader>w :bd<CR>
+
+call togglebg#map("<F5>")              " Solarized color scheme: toggle background
+
+nnoremap // :TComment<CR>
+vnoremap // :TComment<CR>
+
+" when indenting with < and >, make it easy to repeat
+vnoremap < <gv
+vnoremap > >gv
+
+" Ctrl+S to save the current file
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+
+"
 " File/source code navigation
 "
 map <F2> :NERDTreeToggle<CR>
@@ -235,23 +259,9 @@ let g:ctrlp_working_path_mode = 'ra'   " set local working directory
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window_reversed = 0  " show the results from top to bottom
 
-"
-"  Mappings
-"
-let mapleader=','
-
-call togglebg#map("<F5>")              " Solarized color scheme: toggle background
-
-nnoremap // :TComment<CR>
-vnoremap // :TComment<CR>
-
-" when indenting with < and >, make it easy to repeat
-vnoremap < <gv
-vnoremap > >gv
-
-" Ctrl+S to save the current file
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <Esc>:w<CR>
+map <leader>p :CtrlP<CR>
+map <leader>e :CtrlPMRU<CR>
+map <leader>b :CtrlPBuffer<CR>
 
 "
 "  Change Vim cursor shape in different modes
