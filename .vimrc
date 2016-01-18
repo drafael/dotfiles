@@ -102,19 +102,11 @@ Plugin 'matthewsimo/angular-vim-snippets'
 
 " color schemes (here's the gallery/screenshots http://vimcolors.com)
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
-Plugin 'vim-scripts/xoria256.vim'           " http://vimcolors.com/262/xoria256/dark
 Plugin 'nanotech/jellybeans.vim'            " http://vimcolors.com/1/jellybeans/dark
 Plugin 'cocopon/iceberg.vim'                " http://cocopon.me/app/vim-iceberg/
 Plugin 'stulzer/heroku-colorscheme'         " http://vimcolors.com/201/heroku/dark
-Plugin 'uu59/vim-herokudoc-theme'           " http://vimcolors.com/95/herokudoc-gvim/dark
-Plugin 'sickill/vim-sunburst'               " http://vimcolors.com/177/Sunburst/dark
 Plugin '29decibel/codeschool-vim-theme'     " http://vimcolors.com/33/codeschool/dark
-Plugin 'cseelus/vim-colors-clearance'       " http://vimcolors.com/147/clearance/dark
-Plugin 'fatih/molokai'                      " http://vimcolors.com/168/molokai/dark
-Plugin 'znake/znake-vim'                    " http://vimcolors.com/240/znake/dark
-Plugin 'croaker/mustang-vim'                " http://vimcolors.com/248/mustang/dark
-Plugin 'fent/vim-frozen'                    " http://vimcolors.com/272/frozen/dark
-Plugin 'MPiccinato/wombat256'               " http://vimcolors.com/278/wombat256/dark
+
 
 call vundle#end()              " end of plugin listing
 if s:install_plugins == 1      " auto installing plugins
