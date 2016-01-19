@@ -191,8 +191,8 @@ if has("gui_running")          " GUI is running or is about to start
   set guioptions-=r            " remove right scrollbar
   set guioptions-=R            "   when there is a vertically split window
   set lines=48 columns=160     " maximize gvim window
-  set guifont=Menlo:h14        " favorite GUI font
-  " set guifont=Monaco:h14
+  " set guifont=Menlo:h14        " favorite GUI font
+  set guifont=Monaco:h14
   set background=light
   colorscheme solarized        " GUI color scheme
 else                           " this is console Vim
