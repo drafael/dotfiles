@@ -231,6 +231,14 @@ vnoremap > >gv
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>
 
+" typical selection
+nnoremap <S-Down> vgj
+nnoremap <S-Up> vgk
+vnoremap <S-Down> gj
+vnoremap <S-Up> gk
+inoremap <S-up> <C-o>vgk
+inoremap <S-down> <C-o>vgj
+
 "
 " File/source code navigation
 "
