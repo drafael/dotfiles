@@ -151,13 +151,13 @@ augroup END
 "  when possible use + register for copy-paste
 "  on Mac and Windows, use * register for copy-paste
 "
-if has('clipboard')
-  if has('unnamedplus')
-    set clipboard=unnamed,unnamedplus
-  else
-    set clipboard=unnamed
-  endif
-endif
+" if has('clipboard')
+"   if has('unnamedplus')
+"     set clipboard=unnamed,unnamedplus
+"   else
+"     set clipboard=unnamed
+"   endif
+" endif
 
 "
 " Status line
