@@ -43,7 +43,7 @@ set wildmenu                   " make tab completion for files/buffers act like 
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 
 set wildignore+=.DS_Store
-set wildignore+=*/target/*
+set wildignore+=target/*
 set wildignore+=,*.swp,*~,*.zip,*.pyc,*.class,*.jar,*.so,*.dll,*.exe
 
 "
@@ -259,9 +259,15 @@ let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
 let g:ctrlp_map = '<C-p>'               " default mapping
 let g:ctrlp_cmd = 'CtrlP'               " default command
 let g:ctrlp_working_path_mode = 'ra'    " set local working directory
+let g:ctrlp_root_markers = ['pom.xml', 'build.xml']
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_by_filename = 0             " searching by filename (as opposed to full path)
 let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:15'
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/](\.(git|idea|hg|svn))|(target|dist|bower_components|node_modules)$',
+      \ 'file': '\v\.(jpeg|jpg|png|gif|class|jar|war|ear|zip|exe|so|dll|pdf)$',
+      \ }
 
 map <leader>t :CtrlP<CR>
 map <leader>e :CtrlPMRU<CR>
