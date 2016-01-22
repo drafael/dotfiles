@@ -76,6 +76,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
 Plugin 'scrooloose/nerdtree'
+Plugin 'airblade/vim-rooter'
 
 " syntax and filetype
 Plugin 'tmux-plugins/vim-tmux'
@@ -135,6 +136,8 @@ set backspace=indent,eol,start       " configure backspace so it acts as it shou
 
 augroup vimrcEx
   autocmd!
+  " Changes Vim working directory to project root
+  autocmd BufEnter * :Rooter
 
   " Override file type
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
