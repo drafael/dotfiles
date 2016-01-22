@@ -78,6 +78,12 @@ Plugin 'sickill/vim-pasta'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-rooter'
 
+" TextMate like snippets
+Plugin 'tomtom/tlib_vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
 " syntax and filetype
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'derekwyatt/vim-scala'
@@ -86,6 +92,7 @@ Plugin 'motus/pig.vim'
 Plugin 'rverk/snipmate-pig'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'burnettk/vim-angular'
+Plugin 'matthewsimo/angular-vim-snippets'
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'
@@ -93,13 +100,6 @@ Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
-
-" TextMate like snippets
-Plugin 'tomtom/tlib_vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-Plugin 'matthewsimo/angular-vim-snippets'
 
 " color schemes (here's the gallery/screenshots http://vimcolors.com)
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
@@ -145,7 +145,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile,Caskfile setlocal filetype=ruby syntax=ruby
 
   " Override whitespace settings
-  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber,vim setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber,vim set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
 
 "
@@ -213,7 +213,7 @@ endif
 "
 "  Mappings
 "
-let mapleader=' '
+let mapleader = "\<Space>"
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -242,6 +242,9 @@ vnoremap <S-Up> gk
 inoremap <S-up> <C-o>vgk
 inoremap <S-down> <C-o>vgj
 
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
+
 "
 " File/source code navigation
 "
@@ -256,19 +259,30 @@ let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
 "
 " Full path fuzzy file finder
 "
-let g:ctrlp_map = '<C-p>'              " default mapping
-let g:ctrlp_cmd = 'CtrlP'              " default command
-let g:ctrlp_working_path_mode = 'ra'   " set local working directory
+let g:ctrlp_map = '<C-p>'               " default mapping
+let g:ctrlp_cmd = 'CtrlP'               " default command
+let g:ctrlp_working_path_mode = 'ra'    " set local working directory
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_match_window_reversed = 0  " show the results from top to bottom
+let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
+
+if executable('ag')                                               " the Silver Searcher
+  let g:ag_working_path_mode = 'r'                                " start searching from project root instead of the cwd
+  set grepprg=ag\ --nogroup\ --nocolor                            " use ag over grep
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'  " Use ag in CtrlP for listing files
+  let g:ctrlp_use_caching = 0                                     " ag is fast enough that CtrlP doesn't need to cache
+elseif executable('ack')
+  let g:ctrlp_user_command = 'ack -k --nocolor -g "" %s'          " Use Ack in CtrlP for listing files
+endif
 
 map <leader>p :CtrlP<CR>
 map <leader>e :CtrlPMRU<CR>
 map <leader>b :CtrlPBuffer<CR>
 
-"
+" For (sort of) modern standards in :TOhtml output
+let g:html_use_css   = 1
+let g:html_use_xhtml = 0
+
 "  Change Vim cursor shape in different modes
-"
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
