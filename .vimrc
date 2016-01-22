@@ -266,7 +266,7 @@ let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:15'
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.(git|idea|hg|svn))|(target|dist|bower_components|node_modules)$',
-      \ 'file': '\v\.(jpeg|jpg|png|gif|class|jar|war|ear|zip|exe|so|dll|pdf)$',
+      \ 'file': '\v\.(iml|project|classpath|class|jar|war|ear|zip|jpeg|jpg|png|gif|exe|so|dll|pdf)$',
       \ }
 
 map <leader>t :CtrlP<CR>
