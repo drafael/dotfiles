@@ -264,17 +264,20 @@ let g:ctrlp_cmd = 'CtrlP'               " default command
 let g:ctrlp_working_path_mode = 'ra'    " set local working directory
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 
-if executable('ag')                                               " the Silver Searcher
-  let g:ag_working_path_mode = 'r'                                " start searching from project root instead of the cwd
-  set grepprg=ag\ --nogroup\ --nocolor                            " use ag over grep
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'  " Use ag in CtrlP for listing files
-  let g:ctrlp_use_caching = 0                                     " ag is fast enough that CtrlP doesn't need to cache
-elseif executable('ack')
-  let g:ctrlp_user_command = 'ack -k --nocolor -g "" %s'          " Use Ack in CtrlP for listing files
+if executable('ag')                     " use Ag in CtrlP for listing files
+  let g:ag_working_path_mode = 'r'      " start searching from project root instead of the cwd
+  set grepprg=ag\ --nogroup\ --nocolor  " use Ag over grep
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_use_caching = 0           " Ag is fast enough that CtrlP doesn't need to cache
+elseif executable('ack')                " use Ack in CtrlP for listing files
+  let g:ctrlp_user_command = 'ack -k --nocolor -g "" %s'
+else                                    " fall back to using git ls-files
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 endif
 
-map <leader>p :CtrlP<CR>
+map <leader>t :CtrlP<CR>
 map <leader>e :CtrlPMRU<CR>
 map <leader>b :CtrlPBuffer<CR>
 
