@@ -43,11 +43,14 @@ set wildmenu                   " make tab completion for files/buffers act like 
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 
 set wildignore+=.DS_Store,Thumbs.db
-set wildignore+=.git/*,.idea/*,.settings/*,.hg/*,.svn/*,.vagrant/*
-set wildignore+=*.iml,*.project,*.classpath,*.class,*.jar,*.war,*.ear
+set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*
+set wildignore+=.idea/*,*.iml,*.eml,*.ipr
+set wildignore+=.project,.classpath,.settings/*
+set wildignore+=*.class,*.jar,*.war,*.ear
 set wildignore+=target/*,classes/*,out/*,dist/*
 set wildignore+=node_modules/*,bower_components/*
-set wildignore+=*.bak,*.swp,*~,*.zip,*.tgz,*.gz,*.pdf,*.so,*.dll,*.exe,*.pyc
+set wildignore+=*.pyc,*.o,*.obj
+set wildignore+=*.bak,*.swp,*~,*.zip,*.tgz,*.gz,*.pdf,*.so,*.dll,*.exe
 set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.ico,*.mp3,*.mp4,*.m4v,*.m4a
 
 "
