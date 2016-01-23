@@ -74,6 +74,9 @@ call vundle#begin()                " start plugin listing
 Plugin 'VundleVim/Vundle.vim'      " let Vundle manage Vundle, required
 
 Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-vinegar'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tmhedberg/matchit'
 Plugin 'ervandew/supertab'
@@ -82,7 +85,6 @@ Plugin 'bling/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
-Plugin 'tpope/vim-vinegar'
 Plugin 'airblade/vim-rooter'
 
 " TextMate like snippets
@@ -90,17 +92,17 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'bonsaiben/bootstrap-snippets'
 
 " syntax and filetype
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'fatih/vim-go'
 Plugin 'motus/pig.vim'
 Plugin 'rverk/snipmate-pig'
+Plugin 'derekwyatt/vim-scala'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'burnettk/vim-angular'
 Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'bonsaiben/bootstrap-snippets'
+Plugin 'tmux-plugins/vim-tmux'
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'
