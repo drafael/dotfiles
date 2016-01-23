@@ -87,6 +87,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'bonsaiben/bootstrap-snippets'
 
 " syntax and filetype
 Plugin 'tmux-plugins/vim-tmux'
@@ -146,6 +147,7 @@ augroup vimrcEx
   " Override file type
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig syntax=pig
+  autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
   autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile,Caskfile setlocal filetype=ruby syntax=ruby
 
   " Override whitespace settings
@@ -153,18 +155,10 @@ augroup vimrcEx
 augroup END
 
 "
-"  OS clipboard integration
+" Autocomplete (Insert mode CTRL+N/CTRL+P)
 "
-"  when possible use + register for copy-paste
-"  on Mac and Windows, use * register for copy-paste
-"
-" if has('clipboard')
-"   if has('unnamedplus')
-"     set clipboard=unnamed,unnamedplus
-"   else
-"     set clipboard=unnamed
-"   endif
-" endif
+set dictionary+=~/.vim/bundle/bootstrap-snippets/dictionary
+set complete+=k
 
 "
 " Status line
@@ -234,17 +228,13 @@ vnoremap // :TComment<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" Ctrl+S to save the current file
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <Esc>:w<CR>
-
 " typical selection
 nnoremap <S-Down> vgj
 nnoremap <S-Up> vgk
 vnoremap <S-Down> gj
 vnoremap <S-Up> gk
-inoremap <S-up> <C-o>vgk
-inoremap <S-down> <C-o>vgj
+inoremap <S-Up> <C-o>vgk
+inoremap <S-Down> <C-o>vgj
 
 "
 " File/source code navigation
