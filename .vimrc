@@ -75,7 +75,7 @@ Plugin 'bling/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'sickill/vim-pasta'
-Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-vinegar'
 Plugin 'airblade/vim-rooter'
 
 " TextMate like snippets
@@ -245,9 +245,6 @@ inoremap <S-down> <C-o>vgj
 "
 " File/source code navigation
 "
-map <F2> :NERDTreeToggle<CR>
-let g:NERDTreeShowHidden=0
-
 map <F8> :TagbarToggle<CR>
 
 " ignore angular directive lint errors with Vim and syntastic
