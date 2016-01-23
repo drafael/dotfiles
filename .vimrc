@@ -164,9 +164,8 @@ augroup END
 "
 set dictionary+=~/.vim/bundle/bootstrap-snippets/dictionary
 set complete+=k
-" navigate the completion menu from top to bottom
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabContextDefaultCompletionType = '<C-n>'
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = '<C-n>'    " navigate the completion menu from top to bottom
 
 "
 " Status line
@@ -245,7 +244,7 @@ inoremap <S-Up> <C-o>vgk
 inoremap <S-Down> <C-o>vgj
 
 " IDE like autocompletion
-inoremap <C-Space> <C-n>
+imap <C-Space> <Plug>snipMateTrigger
 
 "
 " File/source code navigation
