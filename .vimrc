@@ -162,6 +162,9 @@ augroup END
 "
 set dictionary+=~/.vim/bundle/bootstrap-snippets/dictionary
 set complete+=k
+" navigate the completion menu from top to bottom
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabContextDefaultCompletionType = '<C-n>'
 
 "
 " Status line
@@ -214,7 +217,7 @@ endif
 "
 "  Mappings
 "
-let mapleader = "\<Space>"
+let mapleader = " "
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -238,6 +241,9 @@ vnoremap <S-Down> gj
 vnoremap <S-Up> gk
 inoremap <S-Up> <C-o>vgk
 inoremap <S-Down> <C-o>vgj
+
+" IDE like autocompletion
+inoremap <C-Space> <C-n>
 
 "
 " File/source code navigation
