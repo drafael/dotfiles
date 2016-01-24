@@ -238,10 +238,14 @@ vnoremap > >gv
 " typical selection
 nnoremap <S-Down> vgj
 nnoremap <S-Up> vgk
+nnoremap <S-Left> vh
+nnoremap <S-Right> vl
 vnoremap <S-Down> gj
 vnoremap <S-Up> gk
 inoremap <S-Up> <C-o>vgk
 inoremap <S-Down> <C-o>vgj
+inoremap <S-Left> <C-o>h<C-o>v
+inoremap <S-Right> <C-o>v
 
 " IDE like autocompletion
 imap <C-Space> <Plug>snipMateTrigger
