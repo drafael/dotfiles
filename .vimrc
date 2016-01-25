@@ -207,12 +207,6 @@ else                           " this is console Vim
   set t_Co=256                 " 256 colors
   set background=dark
   colorscheme solarized        " terminal color scheme
-  if exists("+lines")
-    set lines=46
-  endif
-  if exists("+columns")
-    set columns=160
-  endif
 endif
 
 "
@@ -251,14 +245,6 @@ inoremap <S-Right> <C-o>v
 imap <C-Space> <Plug>snipMateTrigger
 
 "
-" File/source code navigation
-"
-map <F8> :TagbarToggle<CR>
-
-" ignore angular directive lint errors with Vim and syntastic
-let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
-
-"
 " Full path fuzzy file finder
 "
 let g:ctrlp_map = '<C-p>'               " default mapping
@@ -266,17 +252,31 @@ let g:ctrlp_cmd = 'CtrlP'               " default command
 let g:ctrlp_working_path_mode = 'ra'    " set local working directory
 let g:ctrlp_root_markers = ['pom.xml', 'build.xml']
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_by_filename = 0             " searching by filename (as opposed to full path)
+let g:ctrlp_by_filename = 1             " searching by filename (as opposed to full path)
 let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:15'
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.(git|idea|hg|svn))|(target|dist|bower_components|node_modules)$',
-      \ 'file': '\v\.(iml|project|classpath|class|jar|war|ear|zip|jpeg|jpg|png|gif|exe|so|dll|pdf)$',
+      \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings))|(target|classes|dist|bower_components|node_modules)$',
+      \ 'file': '\v\.(iml|eml|ipr|project|classpath|class|jar|war|ear|zip|jpeg|jpg|png|gif|exe|so|dll|pdf)$',
       \ }
 
 map <leader>t :CtrlP<CR>
 map <leader>e :CtrlPMRU<CR>
 map <leader>b :CtrlPBuffer<CR>
+
+" Copy & paste to system clipboard with <Space>p and <Space>y
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+" File/source code navigation
+map <F8> :TagbarToggle<CR>
+
+" ignore angular directive lint errors with Vim and syntastic
+let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
 
 " For (sort of) modern standards in :TOhtml output
 let g:html_use_css   = 1
