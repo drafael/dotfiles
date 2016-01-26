@@ -69,47 +69,47 @@ else
   let s:install_plugins=0
 endif
 
-set rtp+=~/.vim/bundle/Vundle.vim/ " set the runtime path to include Vundle and initialize
-call vundle#begin()                " start plugin listing
-Plugin 'VundleVim/Vundle.vim'      " let Vundle manage Vundle, required
+set rtp+=~/.vim/bundle/Vundle.vim/          " set the runtime path to include Vundle and initialize
+call vundle#begin()                         " start plugin listing
+Plugin 'VundleVim/Vundle.vim'               " let Vundle manage Vundle (required)
 
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-vinegar'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tmhedberg/matchit'
-Plugin 'ervandew/supertab'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'bling/vim-airline'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'regedarek/ZoomWin'
-Plugin 'sickill/vim-pasta'
-Plugin 'airblade/vim-rooter'
+Plugin 'tpope/vim-endwise'                  " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
+Plugin 'tpope/vim-surround'                 " quoting/parenthesizing made simple
+Plugin 'tpope/vim-repeat'                   " enable repeating supported plugin maps with '.'
+Plugin 'tpope/vim-vinegar'                  " enhances netrw (built in directory browser)
+Plugin 'jiangmiao/auto-pairs'               " Insert or delete brackets, parens, quotes in pair
+Plugin 'tmhedberg/matchit'                  " extended % matching for HTML and many other languages
+Plugin 'ervandew/supertab'                  " Perform all insert mode completions with Tab
+Plugin 'tomtom/tcomment_vim'                " provides easy to use, file-type sensible comments for Vim
+Plugin 'bling/vim-airline'                  " Status line
+Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation adjusted to destination context
+Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
 
 " TextMate like snippets
-Plugin 'tomtom/tlib_vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+Plugin 'tomtom/tlib_vim'                    " Some utility functions for VIM (required)
+Plugin 'MarcWeber/vim-addon-mw-utils'       " interpret a file by function and cache file automatically (required)
+Plugin 'garbas/vim-snipmate'                " implements some of TextMate's snippets features in Vim
+Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (Previously snipmate-snippets)
 
 " syntax and filetype
-Plugin 'fatih/vim-go'
-Plugin 'motus/pig.vim'
-Plugin 'rverk/snipmate-pig'
+Plugin 'fatih/vim-go'                       " Go development plugin for Vim
+Plugin 'motus/pig.vim'                      " Pig syntax highlighting for vim
+Plugin 'rverk/snipmate-pig'                 " PigLating snippets for vim snipmate
 Plugin 'derekwyatt/vim-scala'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'burnettk/vim-angular'
+Plugin 'ekalinin/Dockerfile.vim'            " Vim syntax file and snippets for Dockerfile
+Plugin 'chase/vim-ansible-yaml'             " Add additional support for Ansible in VIM
+Plugin 'burnettk/vim-angular'               " AngularJS with Vim
 Plugin 'matthewsimo/angular-vim-snippets'
-Plugin 'bonsaiben/bootstrap-snippets'
-Plugin 'tmux-plugins/vim-tmux'
+Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
+Plugin 'tmux-plugins/vim-tmux'              " vim plugin for .tmux.conf
 
 " command-line tools integration
-Plugin 'tpope/vim-fugitive'
-Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
+Plugin 'tpope/vim-fugitive'                 " Git wrapper so awesome, it should be illegal
+Plugin 'mileszs/ack.vim'                    " Vim frontend for the Perl module App::Ack
+Plugin 'rking/ag.vim'                       " Vim frontend for the Ag, aka the_silver_searcher
 Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'               " Syntax checking hacks for vim
 
 " color schemes (here's the gallery/screenshots http://vimcolors.com)
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
