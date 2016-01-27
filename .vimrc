@@ -85,6 +85,7 @@ Plugin 'bling/vim-airline'                  " Status line
 Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
 Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation adjusted to destination context
 Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
+Plugin 'ntpeters/vim-better-whitespace'     " Strip trailing whitespace
 
 " TextMate like snippets
 Plugin 'tomtom/tlib_vim'                    " Some utility functions for VIM (required)
@@ -148,6 +149,9 @@ augroup vimrcEx
   autocmd!
   " Changes Vim working directory to project root
   autocmd BufEnter * :Rooter
+
+  " strip all trailing whitespace everytime you save the file
+  autocmd BufWritePre * StripWhitespace
 
   " Override file type
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
