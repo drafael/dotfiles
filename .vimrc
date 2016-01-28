@@ -222,7 +222,9 @@ let mapleader = " "
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-map <leader>w :bd<CR>
+" clearing highlighted search
+nmap <silent> <Leader>/ :nohlsearch<CR>
+nmap <silent> <Leader><Space> :nohlsearch<CR>
 
 call togglebg#map("<F5>")              " Solarized color scheme: toggle background
 
