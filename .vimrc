@@ -100,6 +100,8 @@ Plugin 'rverk/snipmate-pig'                 " PigLating snippets for vim snipmat
 Plugin 'derekwyatt/vim-scala'
 Plugin 'ekalinin/Dockerfile.vim'            " Vim syntax file and snippets for Dockerfile
 Plugin 'chase/vim-ansible-yaml'             " Add additional support for Ansible in VIM
+Plugin 'pangloss/vim-javascript'            " Vastly improved Javascript indentation and syntax support
+Plugin 'mxw/vim-jsx'                        " React JSX syntax highlighting and indenting for vim
 Plugin 'burnettk/vim-angular'               " AngularJS with Vim
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
@@ -280,6 +282,9 @@ vmap <Leader>P "+P
 
 " File/source code navigation
 map <F8> :TagbarToggle<CR>
+
+" Allow JSX in normal JS files
+let g:jsx_ext_required = 0
 
 " ignore angular directive lint errors with Vim and syntastic
 let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
