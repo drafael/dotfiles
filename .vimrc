@@ -82,6 +82,7 @@ Plugin 'tmhedberg/matchit'                  " extended % matching for HTML and m
 Plugin 'ervandew/supertab'                  " Perform all insert mode completions with Tab
 Plugin 'tomtom/tcomment_vim'                " provides easy to use, file-type sensible comments for Vim
 Plugin 'bling/vim-airline'                  " Status line
+Plugin 'vim-airline/vim-airline-themes'     " A collection of themes for vim-airline
 Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
 Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation adjusted to destination context
 Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
