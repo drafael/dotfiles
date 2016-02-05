@@ -19,6 +19,7 @@ cask 'uninstallpkg'
 
 cask 'iterm2'
 cask 'macvim'
+cask 'sublime-text'
 cask 'vimr'
 cask 'intellij-idea-ce'
 cask 'sourcetree'
