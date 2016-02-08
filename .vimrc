@@ -107,6 +107,7 @@ Plugin 'burnettk/vim-angular'               " AngularJS with Vim
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
 Plugin 'tmux-plugins/vim-tmux'              " vim plugin for .tmux.conf
+Plugin 'Glench/Vim-Jinja2-Syntax'           " An up-to-date jinja2 syntax file
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'                 " Git wrapper so awesome, it should be illegal
