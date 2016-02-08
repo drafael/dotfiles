@@ -95,6 +95,7 @@ Plugin 'garbas/vim-snipmate'                " implements some of TextMate's snip
 Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (Previously snipmate-snippets)
 
 " syntax and filetype
+Plugin 'gisphm/vim-gitignore'               " Gitignore plugin for Vim
 Plugin 'fatih/vim-go'                       " Go development plugin for Vim
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting for vim
 Plugin 'rverk/snipmate-pig'                 " PigLating snippets for vim snipmate
