@@ -1,13 +1,13 @@
 
+brew 'mc'
 brew 'tmux'
 brew 'wget'
 brew 'tree'
-brew 'midnight-commander'
 brew 'ssh-copy-id'
 brew 'htop-osx'
 brew 'ctags'
+brew 'ag'
 brew 'ack'
-brew 'the_silver_searcher'
 brew 'tig', args: ['with-docs']
 brew 'nmap'
 brew 'vifm'
@@ -27,11 +27,13 @@ brew 'scala'
 
 brew 'node'
 
-brew 'go', args: ['with-cc-common']
+brew 'ansible'
 
 brew 'docker'
 brew 'docker-machine'
 brew 'docker-compose'
+
+brew 'go', args: ['with-cc-common']
 
 brew 'r'
 
