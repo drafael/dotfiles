@@ -24,6 +24,7 @@ cask 'vimr'
 cask 'intellij-idea-ce'
 cask 'sourcetree'
 cask 'mucommander'
+cask 'karabiner'
 
 tap 'caskroom/fonts'
 cask 'font-inconsolata'
@@ -46,7 +47,6 @@ cask 'rstudio'
 #cask 'scilab'
 
 cask 'free-ruler'
-#cask 'seil'
 
 #cask 'seashore'
 #cask 'handbrake'
