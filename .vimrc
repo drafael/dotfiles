@@ -87,6 +87,7 @@ Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru,
 Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation adjusted to destination context
 Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
 Plugin 'ntpeters/vim-better-whitespace'     " Strip trailing whitespace
+Plugin 'Yggdroot/indentLine'                " display the indention levels with thin vertical lines
 
 " TextMate like snippets
 Plugin 'tomtom/tlib_vim'                    " Some utility functions for VIM (required)
@@ -136,19 +137,21 @@ syntax enable                  " enable syntax highlighting
 "
 "  Default whitespace settings
 "
-set tabstop=4                        " spaces per tab
-set softtabstop=4                    " when hitting <BS>, pretend like a tab is removed, even if spaces
-set shiftwidth=4                     " number of spaces to use for autoindenting
-set shiftround                       " use multiple of shiftwidth when indenting with '<' and '>'
-set expandtab                        " spaces instead of tabs
-set smarttab                         " use shiftwidth to enter tabs
-set autoindent                       " automatically indent to match adjacent lines
+set tabstop=4                               " spaces per tab
+set softtabstop=4                           " when hitting <BS>, pretend like a tab is removed, even if spaces
+set shiftwidth=4                            " number of spaces to use for autoindenting
+set shiftround                              " use multiple of shiftwidth when indenting with '<' and '>'
+set expandtab                               " spaces instead of tabs
+set smarttab                                " use shiftwidth to enter tabs
+set autoindent                              " automatically indent to match adjacent lines
 set smartindent
-set nolist                           " hide whitespace characters
-set listchars=tab:▸\ ,trail:•,eol:¬  " how to show 'invisible' characters
+set nolist                                  " hide whitespace characters
+set listchars=tab:▸\ ,trail:•,eol:¬         " how to show 'invisible' characters
 set linebreak
-let &showbreak='↪ '                  " string to put at the start of lines that have been wrapped
-set backspace=indent,eol,start       " configure backspace so it acts as it should act
+let &showbreak='↪ '                         " string to put at the start of lines that have been wrapped
+set backspace=indent,eol,start              " configure backspace so it acts as it should act
+let g:indentLine_enabled = 0                " Plugin 'Yggdroot/indentLine'
+
 
 augroup vimrcEx
   autocmd!
@@ -231,6 +234,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " clearing highlighted search
 nmap <silent> <Leader>/ :nohlsearch<CR>
 nmap <silent> <Leader><Space> :nohlsearch<CR>
+
+" show identation
+map <F2> :IndentLinesToggle<CR>
 
 call togglebg#map("<F5>")              " Solarized color scheme: toggle background
 
