@@ -22,9 +22,11 @@ export PATH=$PATH:$HOME/bin
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=$JAVA_HOME/bin:$PATH
 
-export HADOOP_HOME=/usr/local/Cellar/hadoop/2.7.2
-export HADOOP_CONF_DIR=$HADOOP_HOME/libexec/etc/hadoop
-export HIVE_HOME=/usr/local/Cellar/hive/1.2.1/libexec
-export HCAT_HOME=/usr/local/Cellar/hive/1.2.1/libexec/hcatalog
+export HADOOP_HOME=/usr/local/opt/hadoop/libexec
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HADOOP_PREFIX=$HADOOP_HOME
+export PIG_HOME=/usr/local/opt/pig/libexec
+export HIVE_HOME=/usr/local/opt/hive/libexec
+export HCAT_HOME=/usr/local/opt/hive/libexec/hcatalog
 
 # eval "$(chef shell-init bash)"
