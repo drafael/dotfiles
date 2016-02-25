@@ -165,6 +165,8 @@ augroup vimrcEx
   " Override file type
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig syntax=pig
+  autocmd BufNewFile,BufRead *.hql set filetype=hive expandtab
+  autocmd BufNewFile,BufRead *.q set filetype=hive expandtab
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
   autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile,Caskfile setlocal filetype=ruby syntax=ruby
 
