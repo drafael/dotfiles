@@ -100,8 +100,9 @@ Plugin 'gisphm/vim-gitignore'               " Gitignore plugin for Vim
 Plugin 'fatih/vim-go'                       " Go development plugin for Vim
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting for vim
 Plugin 'rverk/snipmate-pig'                 " PigLating snippets for vim snipmate
+Plugin 'autowitch/hive.vim'                 " Syntax highlighting for Hive
 Plugin 'derekwyatt/vim-scala'
-Plugin 'ekalinin/Dockerfile.vim'            " Vim syntax file and snippets for Dockerfile
+Plugin 'ekalinin/Dockerfile.vim'            " Syntax file and snippets for Dockerfile
 Plugin 'chase/vim-ansible-yaml'             " Add additional support for Ansible in VIM
 Plugin 'pangloss/vim-javascript'            " Vastly improved Javascript indentation and syntax support
 Plugin 'mxw/vim-jsx'                        " React JSX syntax highlighting and indenting for vim
