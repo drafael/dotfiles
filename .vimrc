@@ -42,15 +42,15 @@ set gdefault                   " global search by default :%s/pattern/replacemen
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 
-set wildignore+=.DS_Store,Thumbs.db
+set wildignore+=.DS_Store,*.db
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*
 set wildignore+=.idea/*,*.iml,*.eml,*.ipr
 set wildignore+=.project,.classpath,.settings/*
 set wildignore+=*.class,*.jar,*.war,*.ear
 set wildignore+=target/*,classes/*,out/*,dist/*
-set wildignore+=node_modules/*,bower_components/*
-set wildignore+=*.pyc,*.o,*.obj
-set wildignore+=*.bak,*.swp,*~,*.zip,*.tgz,*.gz,*.pdf,*.so,*.dll,*.exe
+set wildignore+=*.min.js,node_modules/*,bower_components/*,.sass-cache/*
+set wildignore+=*.pyc,*.pyo,*.o,*.a,*.obj
+set wildignore+=*.bak,*.swp,*~,*.zip,*.tgz,*.gz,*.pdf,*.dylib,*.so,*.dll,*.exe
 set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.ico,*.mp3,*.mp4,*.m4v,*.m4a
 
 "
@@ -80,7 +80,7 @@ Plugin 'tpope/vim-vinegar'                  " enhances netrw (built in directory
 Plugin 'jiangmiao/auto-pairs'               " Insert or delete brackets, parens, quotes in pair
 Plugin 'tmhedberg/matchit'                  " extended % matching for HTML and many other languages
 Plugin 'ervandew/supertab'                  " Perform all insert mode completions with Tab
-Plugin 'tomtom/tcomment_vim'                " provides easy to use, file-type sensible comments for Vim
+Plugin 'tomtom/tcomment_vim'                " provides easy to use, file-type sensible comments
 Plugin 'bling/vim-airline'                  " Status line
 Plugin 'vim-airline/vim-airline-themes'     " A collection of themes for vim-airline
 Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
@@ -98,14 +98,14 @@ Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (Pre
 " syntax and filetype
 Plugin 'gisphm/vim-gitignore'               " Gitignore plugin for Vim
 Plugin 'fatih/vim-go'                       " Go development plugin for Vim
-Plugin 'motus/pig.vim'                      " Pig syntax highlighting for vim
-Plugin 'rverk/snipmate-pig'                 " PigLating snippets for vim snipmate
+Plugin 'motus/pig.vim'                      " Pig syntax highlighting
+Plugin 'rverk/snipmate-pig'                 " PigLating snippets for snipmate
 Plugin 'autowitch/hive.vim'                 " Syntax highlighting for Hive
 Plugin 'derekwyatt/vim-scala'
 Plugin 'ekalinin/Dockerfile.vim'            " Syntax file and snippets for Dockerfile
-Plugin 'chase/vim-ansible-yaml'             " Add additional support for Ansible in VIM
+Plugin 'chase/vim-ansible-yaml'             " Add additional support for Ansible
 Plugin 'pangloss/vim-javascript'            " Vastly improved Javascript indentation and syntax support
-Plugin 'mxw/vim-jsx'                        " React JSX syntax highlighting and indenting for vim
+Plugin 'mxw/vim-jsx'                        " React JSX syntax highlighting and indenting
 Plugin 'burnettk/vim-angular'               " AngularJS with Vim
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
@@ -127,13 +127,13 @@ Plugin 'stulzer/heroku-colorscheme'         " http://vimcolors.com/201/heroku/da
 Plugin '29decibel/codeschool-vim-theme'     " http://vimcolors.com/33/codeschool/dark
 
 
-call vundle#end()              " end of plugin listing
-if s:install_plugins == 1      " auto installing plugins
+call vundle#end()                           " end of plugin listing
+if s:install_plugins == 1                   " auto installing plugins
   :PluginInstall
 endif
 
-filetype plugin indent on      " enable file type detection, plugins and indentation
-syntax enable                  " enable syntax highlighting
+filetype plugin indent on                   " enable file type detection, plugins and indentation
+syntax enable                               " enable syntax highlighting
 
 "
 "  Default whitespace settings
@@ -278,7 +278,7 @@ let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:15'
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings))|(target|classes|dist|bower_components|node_modules)$',
-      \ 'file': '\v\.(iml|eml|ipr|project|classpath|class|jar|war|ear|zip|jpeg|jpg|png|gif|exe|so|dll|pdf)$',
+      \ 'file': '\v\.(iml|eml|ipr|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
       \ }
 
 map <leader>t :CtrlP<CR>
