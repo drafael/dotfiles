@@ -1,0 +1,17 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Ansible",
+		"ApplySyntax",
+		"Dockerfile Syntax Highlighting",
+		"INI",
+		"Jinja2",
+		"Package Control",
+		"Theme - Soda",
+		"Theme - Sodarized"
+	]
+}
