@@ -37,4 +37,6 @@ brew 'go', args: ['with-cc-common']
 
 brew 'r'
 
+brew 'youtube-dl'
+
 # EOF
