@@ -163,15 +163,27 @@ augroup vimrcEx
   autocmd BufWritePre * StripWhitespace
 
   " Override file type
-  autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy syntax=groovy
-  autocmd BufRead,BufNewFile *.pig setlocal filetype=pig syntax=pig
-  autocmd BufNewFile,BufRead *.hql set filetype=hive expandtab
-  autocmd BufNewFile,BufRead *.q set filetype=hive expandtab
+  autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
+  autocmd BufRead,BufNewFile playbook.yml,site.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */tasks/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */roles/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */vars/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */handler/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile Brewfile,Caskfile setlocal filetype=ruby
+  autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
-  autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile,Caskfile setlocal filetype=ruby syntax=ruby
+  autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy
+  autocmd BufRead,BufNewFile *.pig setlocal filetype=pig
+  autocmd BufNewFile,BufRead *.hql setlocal filetype=hive
+  autocmd BufNewFile,BufRead *.q setlocal filetype=hive
 
   " Override whitespace settings
-  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber,vim set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType vim set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType yaml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType html set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType hive set expandtab
+  autocmd FileType ruby,haml,eruby,sass set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType cucumber set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
 
 "
