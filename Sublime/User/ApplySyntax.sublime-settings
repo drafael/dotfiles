@@ -16,6 +16,7 @@
 	          {"file_name": ".*/(site|playbook|setup|main).yml$"},
               {"file_name": ".*/(vars|host_vars|group_vars)/.*$"},
               {"file_name": ".*/(tasks|roles|handlers)/.*\\.yml$"},
+              {"file_name": ".*/hosts$"},
 	          {"file_name": ".*/.*ansible.*/.*\\.yml$"}
 	        ]
 		}
