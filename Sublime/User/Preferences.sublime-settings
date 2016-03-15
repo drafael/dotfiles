@@ -9,5 +9,8 @@
 	],
 	"soda_folder_icons": true,
 	"theme": "Sodarized Dark.sublime-theme",
-	"trim_trailing_white_space_on_save": true
+	"trim_trailing_white_space_on_save": true,
+	"folder_exclude_patterns": [".idea",".vagrant", ".gradle", ".svn", ".git", ".hg", "CVS"],
+    "file_exclude_patterns": ["*.iml", "*.ipr", "*.iws", "*.eml", "*.pyc", "*.pyo", "*.exe", "*.dll", "*.obj","*.o", "*.a", "*.lib", "*.so", "*.dylib", "*.ncb", "*.sdf", "*.suo", "*.pdb", "*.idb", ".DS_Store", "*.class", "*.psd", "*.db"]
+
 }

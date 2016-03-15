@@ -42,12 +42,12 @@ set gdefault                   " global search by default :%s/pattern/replacemen
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 
-set wildignore+=.DS_Store,*.db
-set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*
-set wildignore+=.idea/*,*.iml,*.eml,*.ipr
+set wildignore+=.DS_Store,._*,Thumbs.db
+set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
+set wildignore+=.idea/*,*.iml,*.eml,*.ipr,*.iws
 set wildignore+=.project,.classpath,.settings/*
 set wildignore+=*.class,*.jar,*.war,*.ear
-set wildignore+=target/*,classes/*,out/*,dist/*
+set wildignore+=target/*,classes/*,build/*,out/*,dist/*
 set wildignore+=*.min.js,node_modules/*,bower_components/*,.sass-cache/*
 set wildignore+=*.pyc,*.pyo,*.o,*.a,*.obj
 set wildignore+=*.bak,*.swp,*~,*.zip,*.tgz,*.gz,*.pdf,*.dylib,*.so,*.dll,*.exe
@@ -288,8 +288,8 @@ let g:ctrlp_by_filename = 1             " searching by filename (as opposed to f
 let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:15'
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings))|(target|classes|dist|bower_components|node_modules)$',
-      \ 'file': '\v\.(iml|eml|ipr|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
+      \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings|gradle))|(target|classes|build|dist|bower_components|node_modules)$',
+      \ 'file': '\v\.(iml|eml|ipr|iws|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
       \ }
 
 map <leader>t :CtrlP<CR>
