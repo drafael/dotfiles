@@ -13,12 +13,9 @@
     	{
     		"name": "Ansible/Ansible",
 	        "rules": [
-	          {"file_name": ".*/site.yml$"},
-              {"file_name": ".*/playbook.yml$"},
-              {"file_name": ".*/tasks/.*\\.yml$"},
-	          {"file_name": ".*/handler/.*\\.yml$"},
-	          {"file_name": ".*/vars/.*\\.yml$"},
-	          {"file_name": ".*/roles/.*\\.yml$"},
+	          {"file_name": ".*/(site|playbook|setup|main).yml$"},
+              {"file_name": ".*/(vars|host_vars|group_vars)/.*$"},
+              {"file_name": ".*/(tasks|roles|handlers)/.*\\.yml$"},
 	          {"file_name": ".*/.*ansible.*/.*\\.yml$"}
 	        ]
 		}

@@ -103,7 +103,7 @@ Plugin 'rverk/snipmate-pig'                 " PigLating snippets for snipmate
 Plugin 'autowitch/hive.vim'                 " Syntax highlighting for Hive
 Plugin 'derekwyatt/vim-scala'
 Plugin 'ekalinin/Dockerfile.vim'            " Syntax file and snippets for Dockerfile
-Plugin 'chase/vim-ansible-yaml'             " Add additional support for Ansible
+Plugin 'pearofducks/ansible-vim'            " Add additional support for Ansible
 Plugin 'pangloss/vim-javascript'            " Vastly improved Javascript indentation and syntax support
 Plugin 'mxw/vim-jsx'                        " React JSX syntax highlighting and indenting
 Plugin 'burnettk/vim-angular'               " AngularJS with Vim
@@ -164,11 +164,9 @@ augroup vimrcEx
 
   " Override file type
   autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
-  autocmd BufRead,BufNewFile playbook.yml,site.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */tasks/*.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */roles/*.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */vars/*.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */handler/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */tasks/*.yml,*/roles/*.yml,*/handlers/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */vars/*.yml,*/host_vars/*.yml,*/goup_vars/*.yml setlocal filetype=ansible
   autocmd BufRead,BufNewFile Brewfile,Caskfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
@@ -180,6 +178,7 @@ augroup vimrcEx
   " Override whitespace settings
   autocmd FileType vim set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType yaml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType ansible set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType html set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType hive set expandtab
   autocmd FileType ruby,haml,eruby,sass set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
