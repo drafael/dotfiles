@@ -166,7 +166,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
   autocmd BufRead,BufNewFile */tasks/*.yml,*/roles/*.yml,*/handlers/*.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */vars/*.yml,*/host_vars/*.yml,*/goup_vars/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */vars/*,*/host_vars/*,*/group_vars/* setlocal filetype=ansible
   autocmd BufRead,BufNewFile Brewfile,Caskfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
