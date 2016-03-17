@@ -3,6 +3,7 @@ set nocompatible               " choose no compatibility with legacy vi
 filetype on                    " work around stupid osx bug
 filetype off                   " required
 
+scriptencoding utf-8
 set encoding=utf-8             " open file with encoding
 set fileencoding=utf-8         " save file with encoding
 set fileformats=unix,dos,mac   " use Unix as the standard file type
@@ -147,10 +148,7 @@ set smarttab                                " use shiftwidth to enter tabs
 set autoindent                              " automatically indent to match adjacent lines
 set smartindent
 set nolist                                  " hide whitespace characters
-set listchars+=tab:--                       " Two characters to be used to show a tab.
-set listchars+=space:·                      " Character to show for a space.
-set listchars+=trail:·                      " Character to show for trailing spaces.
-set listchars+=eol:¬                        " Character to show at the end of each line.
+let &listchars='tab:--,space:·,trail:·,eol:¬'
 set linebreak
 let &showbreak='↪ '                         " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start              " configure backspace so it acts as it should act
@@ -253,7 +251,11 @@ nmap <silent> <Leader>/ :nohlsearch<CR>
 nmap <silent> <Leader><Space> :nohlsearch<CR>
 
 " show identation
-map <F2> :set list!<CR>:IndentLinesToggle<CR>
+if has("gui_running")
+  map <F2> :set list!<CR>:IndentLinesToggle<CR>
+else
+  map <F2> :set list!<CR>
+endif
 
 call togglebg#map("<F5>")              " Solarized color scheme: toggle background
 
