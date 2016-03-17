@@ -138,21 +138,24 @@ syntax enable                               " enable syntax highlighting
 "
 "  Default whitespace settings
 "
-set tabstop=4                               " spaces per tab
+set tabstop=4                               " (ts) width (in spaces) that a <tab> is displayed as
 set softtabstop=4                           " when hitting <BS>, pretend like a tab is removed, even if spaces
-set shiftwidth=4                            " number of spaces to use for autoindenting
+set shiftwidth=4                            " (sw) width (in spaces) used in each step of autoindent (aswell as << and >>)
 set shiftround                              " use multiple of shiftwidth when indenting with '<' and '>'
-set expandtab                               " spaces instead of tabs
+set expandtab                               " (et) expand tabs to spaces (use :retab to redo entire file)
 set smarttab                                " use shiftwidth to enter tabs
 set autoindent                              " automatically indent to match adjacent lines
 set smartindent
 set nolist                                  " hide whitespace characters
-set listchars=tab:▸\ ,trail:•,eol:¬         " how to show 'invisible' characters
+set listchars+=tab:--                       " Two characters to be used to show a tab.
+set listchars+=space:·                      " Character to show for a space.
+set listchars+=trail:·                      " Character to show for trailing spaces.
+set listchars+=eol:¬                        " Character to show at the end of each line.
 set linebreak
 let &showbreak='↪ '                         " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start              " configure backspace so it acts as it should act
 let g:indentLine_enabled = 0                " Plugin 'Yggdroot/indentLine'
-
+let g:indentLine_char = '·'                 " Character to be used as indent line.
 
 augroup vimrcEx
   autocmd!
@@ -250,7 +253,7 @@ nmap <silent> <Leader>/ :nohlsearch<CR>
 nmap <silent> <Leader><Space> :nohlsearch<CR>
 
 " show identation
-map <F2> :IndentLinesToggle<CR>
+map <F2> :set list!<CR>:IndentLinesToggle<CR>
 
 call togglebg#map("<F5>")              " Solarized color scheme: toggle background
 
