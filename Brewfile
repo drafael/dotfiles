@@ -22,6 +22,9 @@ brew 'ant'
 brew 'maven'
 brew 'gradle'
 
+tap  'pivotal/tap'
+brew 'springboot'
+
 brew 'sbt'
 brew 'scala'
 
