@@ -15,7 +15,6 @@ brew 'vifm'
 #brew 'macvim'
 #brew 'emacs', args: ['with-cocoa']
 
-cask 'java7'
 cask 'java'
 
 brew 'ant'
@@ -24,6 +23,9 @@ brew 'gradle'
 
 tap  'pivotal/tap'
 brew 'springboot'
+
+brew 'mongodb'
+brew 'redis'
 
 brew 'sbt'
 brew 'scala'
