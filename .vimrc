@@ -127,7 +127,6 @@ Plugin 'cocopon/iceberg.vim'                " http://cocopon.me/app/vim-iceberg/
 Plugin 'stulzer/heroku-colorscheme'         " http://vimcolors.com/201/heroku/dark
 Plugin '29decibel/codeschool-vim-theme'     " http://vimcolors.com/33/codeschool/dark
 
-
 call vundle#end()                           " end of plugin listing
 if s:install_plugins == 1                   " auto installing plugins
   :PluginInstall
@@ -157,13 +156,19 @@ let g:indentLine_char = '·'                 " Character to be used as indent li
 
 augroup vimrcEx
   autocmd!
-  " Changes Vim working directory to project root
+  " change working directory to project root
   autocmd BufEnter * :Rooter
-
   " strip all trailing whitespace everytime you save the file
   autocmd BufWritePre * StripWhitespace
 
-  " Override file type
+  " replace tabs with spaces
+  autocmd FileType yaml,ansible,vim autocmd BufWritePre * :retab
+  autocmd FileType java,groovy,scala autocmd BufWritePre * :retab
+  autocmd FileType xml,xslt autocmd BufWritePre * :retab
+  autocmd FileType html,css,javascript,json autocmd BufWritePre * :retab
+  autocmd FileType ruby,haml,eruby,sass,cucumber autocmd BufWritePre * :retab
+
+  " override file type
   autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
   autocmd BufRead,BufNewFile */tasks/*.yml,*/roles/*.yml,*/handlers/*.yml setlocal filetype=ansible
@@ -173,17 +178,16 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig
-  autocmd BufNewFile,BufRead *.hql setlocal filetype=hive
-  autocmd BufNewFile,BufRead *.q setlocal filetype=hive
+  autocmd BufRead,BufNewFile *.hql setlocal filetype=hive
+  autocmd BufRead,BufNewFile *.q setlocal filetype=hive
 
-  " Override whitespace settings
+  " override whitespace settings
   autocmd FileType vim set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType yaml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType ansible set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType html set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType hive set expandtab
-  autocmd FileType ruby,haml,eruby,sass set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-  autocmd FileType cucumber set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType ruby,haml,eruby,sass,cucumber set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
 
 "
