@@ -28,5 +28,4 @@ export HADOOP_PREFIX=$HADOOP_HOME
 export PIG_HOME=/usr/local/opt/pig/libexec
 export HIVE_HOME=/usr/local/opt/hive/libexec
 export HCAT_HOME=/usr/local/opt/hive/libexec/hcatalog
-
-# eval "$(chef shell-init bash)"
+export SPARK_HOME=/usr/local/opt/apache-spark/libexec
