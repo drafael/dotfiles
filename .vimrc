@@ -147,7 +147,7 @@ set smarttab                                " use shiftwidth to enter tabs
 set autoindent                              " automatically indent to match adjacent lines
 set smartindent
 set nolist                                  " hide whitespace characters
-let &listchars='tab:--,space:·,trail:·,eol:¬'
+let &listchars='tab:▸ ,space:·,nbsp:_,trail:·,eol:¬'
 set linebreak
 let &showbreak='↪ '                         " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start              " configure backspace so it acts as it should act
@@ -160,13 +160,8 @@ augroup vimrcEx
   autocmd BufEnter * :Rooter
   " strip all trailing whitespace everytime you save the file
   autocmd BufWritePre * StripWhitespace
-
   " replace tabs with spaces
-  autocmd FileType yaml,ansible,vim autocmd BufWritePre * :retab
-  autocmd FileType java,groovy,scala autocmd BufWritePre * :retab
-  autocmd FileType xml,xslt autocmd BufWritePre * :retab
-  autocmd FileType html,css,javascript,json autocmd BufWritePre * :retab
-  autocmd FileType ruby,haml,eruby,sass,cucumber autocmd BufWritePre * :retab
+  autocmd BufWritePre * :retab
 
   " override file type
   autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
