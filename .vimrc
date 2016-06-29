@@ -112,6 +112,8 @@ Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
 Plugin 'tmux-plugins/vim-tmux'              " vim plugin for .tmux.conf
 Plugin 'Glench/Vim-Jinja2-Syntax'           " An up-to-date jinja2 syntax file
+Plugin 'othree/html5.vim'                   " HTML5 omnicomplete and syntax
+"Plugin 'sheerun/vim-polyglot'               " A solid language pack for Vim
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'                 " Git wrapper so awesome, it should be illegal
@@ -315,7 +317,8 @@ map <F8> :TagbarToggle<CR>
 let g:jsx_ext_required = 0
 
 " ignore angular directive lint errors with Vim and syntastic
-let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
+let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-']
+let g:syntastic_disabled_filetypes = ['html']
 
 " For (sort of) modern standards in :TOhtml output
 let g:html_use_css   = 1
