@@ -4,7 +4,7 @@
 
 ## Install and init [Homebrew](http://brew.sh)
 
-`$ ~/dotfiles/brew.sh`
+`$ ~/dotfiles/osx-bootstrap.sh`
 
 ## Vim
 
