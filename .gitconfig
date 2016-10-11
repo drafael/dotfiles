@@ -21,59 +21,64 @@
     branch = auto
     diff = auto
     status = auto
-
 [alias]
     s = status -s
     st = status -s
     sb = status -sb
     aa = add --all
     ci = commit --verbose
+    cim = commit --verbose -m
+    ca = commit --amend
     co = checkout
-    br = branch -av
-    bd = branch -D
-    di = diff
-    dc = diff --cached
-    tags = tag -l
+    rbi = rebase -i
+    rbo = rebase --onto
     pro = pull --rebase origin
     prod = pull --rebase origin develop
     prom = pull --rebase origin master
     poh = push origin HEAD
     pod = push origin develop
     pom = push origin master
+    br = branch -av
+    bd = branch -D
+    di = diff
+    dc = diff --cached
+    tags = tag -l
 
-  # View a pretty git log with branch tree
+    # Push to Gerrit
+    review = !bash -c \"git push --force origin HEAD:refs/for/$1\" -
+
+    # View a pretty git log with branch tree
     lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-  # View the log and diff for a commit (previous if no SHA1 provided)
+    # View the log and diff for a commit (previous if no SHA1 provided)
     details = log -n1 -p --format=fuller
 
-  # Unstage changes from the index
+    # Unstage changes from the index
     unstage = reset HEAD --
 
-  # Remove deleted files
+    # Remove deleted files
     r = !git ls-files -z --deleted | xargs -0 git rm
 
-  # For when you made that commit a bit too early, amend
+    # For when you made that commit a bit too early, amend
     amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
 
-  # Show all of my configured aliases
+    # Show all of my configured aliases
     aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
 
-  # Show the current branch name (usefull for shell prompts)
+    # Show the current branch name (usefull for shell prompts)
     brname = !git branch | grep "^*" | awk '{ print $2 }'
 
-  # Return the repository's root directory (usefull for shell prompts)
+    # Return the repository's root directory (usefull for shell prompts)
     root = rev-parse --show-toplevel
 
-  # Update all submodules
+    # Update all submodules
     subup = submodule update --init
 
-  # Start a new local repository and perform initial commit
-    this = !git init && git add . && git commmit -m \"Initial commit.\"
+    # Start a new local repository and perform initial commit
+    this = !git init && git add . && git commit -m \"Initial commit.\"
 
-  # Thin out older metadata within the repository, reduceses filesystem footprint
+    # Thin out older metadata within the repository, reduceses filesystem footprint
     trim = !git reflog expire --expire=now --all && git gc --prune=now
-
 
 [url "https://github.com/"]
     insteadOf = gh:
