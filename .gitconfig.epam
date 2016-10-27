@@ -21,6 +21,7 @@
     branch = auto
     diff = auto
     status = auto
+
 [alias]
     s = status -s
     st = status -s
@@ -30,8 +31,14 @@
     cim = commit --verbose -m
     ca = commit --amend
     co = checkout
+    com = checkout master
+    cod = checkout develop
+    cob = checkout -b
     rbi = rebase -i
     rbo = rebase --onto
+    rbc = rebase --continue
+    rbs = rebase --skip
+    rba = rebase --abort
     pro = pull --rebase origin
     prod = pull --rebase origin develop
     prom = pull --rebase origin master
