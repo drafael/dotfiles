@@ -5,7 +5,16 @@
 	],
 	"installed_packages":
 	[
+		"Ansible",
+		"ApplySyntax",
+		"Dockerfile Syntax Highlighting",
+		"INI",
+		"Jinja2",
 		"Package Control",
-		"Theme - Soda"
+		"Solarized Color Scheme",
+		"Theme - Soda",
+		"Theme - Soda SolarizedDark",
+		"XSL",
+		"XSLT Snippets"
 	]
 }

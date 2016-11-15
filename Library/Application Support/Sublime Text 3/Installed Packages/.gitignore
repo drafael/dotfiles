@@ -1,0 +1,2 @@
+*.sublime-package
+!Package Control.sublime-package
