@@ -39,3 +39,11 @@ ln -s ~/dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 
 * [GitHub does dotfiles](https://dotfiles.github.io/)
 * [Awesome Awesomeness](https://github.com/bayandin/awesome-awesomeness)
+  - [Dotfiles](https://github.com/webpro/awesome-dotfiles)
+  - [Shell](https://github.com/alebcay/awesome-shell)
+  - [Dev Env](https://github.com/jondot/awesome-devenv)
+  - Vim
+    - [by @akrawchyk](https://github.com/akrawchyk/awesome-vim)
+    - [by @matteocrippa](https://github.com/matteocrippa/awesome-vim)
+  - [Sublime Text](https://github.com/dreikanter/sublime-bookmarks)
+  - [Java](https://github.com/akullpp/awesome-java)
