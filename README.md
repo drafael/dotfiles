@@ -37,7 +37,7 @@ ln -s ~/dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 
 ## [Automated Workstation Setup](https://github.com/drafael/osx-bootstrap)
 
-`~/dotfiles/osx-bootstrap.sh`
+`~/dotfiles/bin/bootstrap.sh`
 
 ## See Also
 
