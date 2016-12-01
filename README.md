@@ -6,9 +6,9 @@
 
 Point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
-## Vim
+## Vim or [MacVim](http://macvim-dev.github.io/macvim)
 
-* [Awesome Vim Plugins](http://vimawesome.com/): 
+* [Awesome Vim Plugins](http://vimawesome.com/):
   - [x] [Vundle](https://github.com/VundleVim/Vundle.vim) — Plugin manager
   - [x] [Airline](https://github.com/vim-airline/vim-airline) — Status bar
   - [x] [Solarized](https://github.com/altercation/vim-colors-solarized) — Colorscheme
