@@ -1,7 +1,12 @@
+#
+#  Put this stuff in ~/.gitconfig.local
+#
+#  [user]
+#    name = Denys Rafael
+#    email = denys.rafael@icloud.com
 
-[user]
-    name = Denys Rafael
-    email = denys.rafael@icloud.com
+[include]
+    path = ~/.gitconfig.local
 
 [core]
     editor = vim
@@ -23,39 +28,68 @@
     status = auto
 
 [alias]
-    s = status -s
+    aa = add --all
+
+    # status
+    s  = status -s
     st = status -s
     sb = status -sb
-    aa = add --all
-    ci = commit --verbose
-    cim = commit --verbose -m
-    ca = commit --amend
-    co = checkout
+
+    # commit
+    ci    = commit --verbose
+    cim   = commit --verbose -m
+    ca    = commit --amend
+    amend = commit --amend
+
+    # checkout
+    co  = checkout
     com = checkout master
     cod = checkout develop
     cob = checkout -b
-    rbi = rebase -i
-    rbo = rebase --onto
-    rbc = rebase --continue
-    rbs = rebase --skip
-    rba = rebase --abort
-    pro = pull --rebase origin
+
+    # rebase
+    rbi     = rebase -i
+    rbo     = rebase --onto
+    rbom    = rebase --onto master
+    rbomm   = rebase --onto master master
+    rbomd   = rebase --onto master develop
+    rbod    = rebase --onto develop
+    rbodd   = rebase --onto develop develop
+    rbc     = rebase --continue
+    rbs     = rebase --skip
+    rba     = rebase --abort
+
+    # pull
+    pro  = pull --rebase origin
     prod = pull --rebase origin develop
     prom = pull --rebase origin master
+
+    # push
     poh = push origin HEAD
     pod = push origin develop
     pom = push origin master
+
+    # branch
+    b  = branch -av
     br = branch -av
     bd = branch -D
+
+    # diff
+    d  = diff
     di = diff
     dc = diff --cached
+
+    # tag
     tags = tag -l
 
     # Push to Gerrit
     review = !bash -c \"git push --force origin HEAD:refs/for/$1\" -
 
     # View a pretty git log with branch tree
-    lg = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    l   = !git log -10 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    ll  = !git log -20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lll = !git log -30 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lg  = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
     # View the log and diff for a commit (previous if no SHA1 provided)
     details = log -n1 -p --format=fuller
@@ -66,17 +100,8 @@
     # Remove deleted files
     r = !git ls-files -z --deleted | xargs -0 git rm
 
-    # For when you made that commit a bit too early, amend
-    amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
-
     # Show all of my configured aliases
     aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
-
-    # Show the current branch name (usefull for shell prompts)
-    brname = !git branch | grep "^*" | awk '{ print $2 }'
-
-    # Return the repository's root directory (usefull for shell prompts)
-    root = rev-parse --show-toplevel
 
     # Update all submodules
     subup = submodule update --init
