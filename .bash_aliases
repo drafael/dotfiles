@@ -5,7 +5,8 @@ alias ...="cd ../.."
 
 alias g="git "
 alias gt="git "
-alias gti="git"
+alias gti="git "
+alias got="git "
 alias j="jobs"
 alias h="history"
 
