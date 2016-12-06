@@ -283,6 +283,11 @@ inoremap <S-Right> <C-o>v
 " IDE like autocompletion
 imap <C-Space> <Plug>snipMateTrigger
 
+" Escape key alternatives
+inoremap jj <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
+
 "
 " Full path fuzzy file finder
 "
