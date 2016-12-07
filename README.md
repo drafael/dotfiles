@@ -8,10 +8,10 @@
 ln -s ~/dotfiles/.bashrc ~/.bashrc
 ln -s ~/dotfiles/.bash_profile ~/.bash_profile
 ```
-I use a [custom bash prompt](https://github.com/necolas/dotfiles#custom-bash-prompt) (with colors, Git statuses, and Git branches)
-created by @necolas and based on the [Solarized](http://ethanschoonover.com/solarized) color palette. For best results, you should install
+I use a custom bash prompt (with colors, Git statuses, and Git branches)
+created by [@necolas](https://github.com/necolas) and based on the [Solarized](http://ethanschoonover.com/solarized) color palette. For best results, you should install
 [iTerm2](http://iterm2.com) and import [Solarized Dark colors](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized)
-or just use my preferences file (see bellow).
+or just use [my preferences file](https://github.com/drafael/dotfiles#iterm2).
 
 ![Screenshot:](https://github.com/drafael/dotfiles/raw/master/share/custom-bash-prompt.png)
 
@@ -53,8 +53,12 @@ Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/subl
 
 `~/dotfiles/bin/bootstrap.sh`
 
-## See Also
+## Acknowledgements
 
+Inspiration and code was taken (stolen) from many sources, including:
+* [@mathiasbynens](https://github.com/mathiasbynens) (Mathias Bynens) [dotfiles](https://github.com/mathiasbynens/dotfiles)
+* [@garybernhardt](https://github.com/garybernhardt) (Gary Bernhardt) [dotfiles](https://github.com/garybernhardt/dotfiles)
+* [@necolas](https://github.com/necolas) (Nicolas Gallagher) [dotfiles](https://github.com/necolas/dotfiles)
 * [GitHub does dotfiles](https://dotfiles.github.io/)
 * [Awesome Awesomeness](https://github.com/bayandin/awesome-awesomeness)
   - [Dotfiles](https://github.com/webpro/awesome-dotfiles)
@@ -65,3 +69,4 @@ Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/subl
   - [cmder](http://cmder.net/)
   - [ConEmu](https://conemu.github.io/)
   - [mintty](http://mintty.github.io/)
+
