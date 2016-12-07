@@ -13,6 +13,8 @@ created by @necolas and based on the [Solarized](http://ethanschoonover.com/sola
 [iTerm2](http://iterm2.com) and import [Solarized Dark colors](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized)
 or just use my preferences file (see bellow).
 
+![Screenshot:](https://github.com/drafael/dotfiles/raw/master/share/custom-bash-prompt.png)
+
 ## [iTerm2](http://iterm2.com)
 
 Point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
