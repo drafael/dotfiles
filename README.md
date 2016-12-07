@@ -19,32 +19,33 @@ Point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
 ## Vim or [MacVim](http://macvim-dev.github.io/macvim)
 
-* [Awesome Vim Plugins](http://vimawesome.com/):
-  - [x] [Vundle](https://github.com/VundleVim/Vundle.vim) — Plugin manager
-  - [x] [Airline](https://github.com/vim-airline/vim-airline) — Status bar
-  - [x] [Solarized](https://github.com/altercation/vim-colors-solarized) — Colorscheme
-  - [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim) — Fuzzy file finder
-  - [x] [Snipmate](https://github.com/garbas/vim-snipmate) — [Snippet](https://github.com/honza/vim-snippets) manager for vim
-  - [x] [Syntastic](https://github.com/vim-syntastic/syntastic) — Syntax checking hacks for vim
-  - [ ] [vim-polyglot](https://github.com/sheerun/vim-polyglot) — Meta-plugin for syntaxes
-* Sync settings and plugins:
 ```bash
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall
 ```
+[Awesome Vim Plugins](http://vimawesome.com/) and [Colors](http://vimcolors.com/):
+  - [x] [Vundle](https://github.com/VundleVim/Vundle.vim) — plugin manager
+  - [x] [Airline](https://github.com/vim-airline/vim-airline) — status bar
+  - [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)
+  - [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim) — fuzzy file finder, buffer switcher, MRU
+  - [x] [Snipmate](https://github.com/garbas/vim-snipmate) — [Snippet](https://github.com/honza/vim-snippets) manager for vim
+  - [x] [Syntastic](https://github.com/vim-syntastic/syntastic) — syntax checking hacks for vim
+  - [ ] [vim-polyglot](https://github.com/sheerun/vim-polyglot) — meta-plugin for syntaxes
+  - [x] [vim-rooter](https://github.com/airblade/vim-rooter) — changes working directory to project root
+  - [x] [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace) — better whitespace highlighting
+  - [x] [indentLine](https://github.com/Yggdroot/indentLine) — display the indention levels with thin vertical lines
 
 ## [Sublime Text](https://www.sublimetext.com/)
 
-* [Package Control](https://packagecontrol.io/) — the first thing to do after the ST installation is to setup the package manager
+[Package Control](https://packagecontrol.io/) — the first thing to do after the ST installation is to setup the package manager
   - [Installation](https://packagecontrol.io/installation)
   - [Syncing](https://packagecontrol.io/docs/syncing)
-* Sync settings and packages:
 ```bash
 cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
 rm -r User
 ln -s ~/dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 ```
-* Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks)
+Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks)
 
 ## [Automated Workstation Setup](https://github.com/drafael/osx-bootstrap)
 
