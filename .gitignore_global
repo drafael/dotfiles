@@ -1,0 +1,51 @@
+# vim: set filetype=gitignore :
+
+.DS_Store
+._*
+*~
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+logs/
+*.log
+*.log.*
+
+### VIM ###
+*~
+*.swp
+.netrwhist
+
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### etc ###
+.vagrant/
+*.svn*
+.svn/
+*.pyc
+*.pyo
+*.o

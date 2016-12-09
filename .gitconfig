@@ -119,12 +119,6 @@
     pushInsteadOf = "https://github.com/"
     pushInsteadOf = "gh:"
 
-[url "git@github.com:drafael/"]
-    pushInsteadOf = "my:"
-
-[url "https://github.com/drafael/"]
-    insteadOf = "my:"
-
 [url "https://gist.github.com/"]
     insteadOf = gist:
 

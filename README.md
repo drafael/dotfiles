@@ -24,6 +24,20 @@ or simply [use my preferences](https://github.com/drafael/dotfiles#iterm2).
 ## [iTerm2](http://iterm2.com)
 Install `brew cask install iterm2` and point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
+## Git
+Put this stuff in `~/.gitconfig.local`
+```
+[user]
+    name = FirstName LastName
+    email = username@example.com
+```
+and then
+```bash
+ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/dotfiles/.gitignore_global ~/.gitignore
+```
+In order to view all of my configured aliases enter `git aliases`
+
 ## Vim
 Installation `brew install vim --with-override-system-vi`
 

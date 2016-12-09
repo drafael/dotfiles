@@ -36,6 +36,9 @@ alias path='echo -e ${PATH//:/\\n}'
 if [ -f ~/.secrets ]; then
     source ~/.secrets
 fi
+if [ -f ~/.bashrc.local ]; then
+   source ~/.bashrc.local
+fi
 
 #
 # bash_prompt
