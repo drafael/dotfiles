@@ -14,7 +14,7 @@ ln -s ~/dotfiles/.bashrc ~/.bashrc
 ln -s ~/dotfiles/.bash_profile ~/.bash_profile
 source ~/.bashrc
 ```
-I use a custom bash prompt (with colors, Git statuses, and Git branches)
+I use a custom bash prompt (with Git statuses)
 created by [@necolas](https://github.com/necolas) and based on the [Solarized](http://ethanschoonover.com/solarized) color palette. For best results, you should install
 [iTerm2](http://iterm2.com) and import [Solarized Dark colors](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized)
 or simply [use my preferences](https://github.com/drafael/dotfiles#iterm2).
@@ -25,7 +25,7 @@ or simply [use my preferences](https://github.com/drafael/dotfiles#iterm2).
 Install `brew cask install iterm2` and point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
 ## Git
-Use `~/.gitconfig.local` to store sensitive information such as the `git` user credentials, e.g.:
+Put in `~/.gitconfig.local` sensitive information such as the `git` user credentials, e.g.:
 ```
 [user]
     name = Denys Rafael
@@ -39,7 +39,7 @@ ln -s ~/dotfiles/.gitignore_global ~/.gitignore
 In order to view all of my configured aliases enter `git aliases`
 
 ## Vim
-[Plugins that I like and/or use regularly](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#vim-plugins-that-i-like-andor-use-regularly)
+Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc) and [plugins](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#vim-plugins-that-i-like-andor-use-regularly)
 ```bash
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall

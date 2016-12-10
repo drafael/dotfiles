@@ -21,7 +21,6 @@ brew install vim --with-override-system-vi
 ```bash
 brew cask install macvim
 ```
-![macvim](https://github.com/drafael/dotfiles/raw/master/share/macvim.png)
 * Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc)
 ```bash
 ln -s ~/dotfiles/.vimrc ~/.vimrc
@@ -38,6 +37,8 @@ vim +PluginInstall +qall
 - [x] [vim-rooter](https://github.com/airblade/vim-rooter#rooter) - changes working directory to project root
 - [x] [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace#vim-better-whitespace-plugin) - better whitespace highlighting
 - [x] [indentLine](https://github.com/Yggdroot/indentLine#indentline) - display the indention levels with thin vertical lines
+
+![macvim](https://github.com/drafael/dotfiles/raw/master/share/macvim.png)
 
 #### Also
 - [Vim Awesome](http://vimawesome.com/)
