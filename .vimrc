@@ -97,25 +97,16 @@ Plugin 'garbas/vim-snipmate'                " implements some of TextMate's snip
 Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (Previously snipmate-snippets)
 
 " syntax and filetype
+Plugin 'sheerun/vim-polyglot'               " A solid language pack for Vim
 Plugin 'gisphm/vim-gitignore'               " Gitignore plugin for Vim
-Plugin 'fatih/vim-go'                       " Go development plugin for Vim
+Plugin 'Glench/Vim-Jinja2-Syntax'           " An up-to-date jinja2 syntax file
+Plugin 'vim-scripts/Vim-R-plugin'
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting
 Plugin 'rverk/snipmate-pig'                 " PigLating snippets for snipmate
 Plugin 'autowitch/hive.vim'                 " Syntax highlighting for Hive
-Plugin 'derekwyatt/vim-scala'
-Plugin 'ekalinin/Dockerfile.vim'            " Syntax file and snippets for Dockerfile
-Plugin 'pearofducks/ansible-vim'            " Add additional support for Ansible
-Plugin 'pangloss/vim-javascript'            " Vastly improved Javascript indentation and syntax support
-Plugin 'mxw/vim-jsx'                        " React JSX syntax highlighting and indenting
 Plugin 'burnettk/vim-angular'               " AngularJS with Vim
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
-Plugin 'tmux-plugins/vim-tmux'              " vim plugin for .tmux.conf
-Plugin 'Glench/Vim-Jinja2-Syntax'           " An up-to-date jinja2 syntax file
-Plugin 'othree/html5.vim'                   " HTML5 omnicomplete and syntax
-Plugin 'vim-scripts/Vim-R-plugin'
-Plugin 'ethereum/vim-solidity'              " Vim syntax file for solidity
-"Plugin 'sheerun/vim-polyglot'               " A solid language pack for Vim
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'                 " Git wrapper so awesome, it should be illegal
