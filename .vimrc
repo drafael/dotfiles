@@ -114,6 +114,7 @@ Plugin 'tmux-plugins/vim-tmux'              " vim plugin for .tmux.conf
 Plugin 'Glench/Vim-Jinja2-Syntax'           " An up-to-date jinja2 syntax file
 Plugin 'othree/html5.vim'                   " HTML5 omnicomplete and syntax
 Plugin 'vim-scripts/Vim-R-plugin'
+Plugin 'ethereum/vim-solidity'              " Vim syntax file for solidity
 "Plugin 'sheerun/vim-polyglot'               " A solid language pack for Vim
 
 " command-line tools integration
