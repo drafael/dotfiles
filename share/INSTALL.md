@@ -12,6 +12,37 @@
 * [homebrew-cask](https://github.com/caskroom/homebrew-cask#homebrew-cask) `brew tap caskroom/cask`
 * [homebrew-cask-versions](https://github.com/caskroom/homebrew-versions#homebrew-cask-versions) `brew tap caskroom/versions`
 
+## Vim
+* Upgrading
+```bash
+brew install vim --with-override-system-vi
+```
+* [MacVim](http://macvim-dev.github.io/macvim) installation
+```bash
+brew cask install macvim
+```
+![macvim](https://github.com/drafael/dotfiles/raw/master/share/macvim.png)
+* Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc)
+```bash
+ln -s ~/dotfiles/.vimrc ~/.vimrc
+vim +PluginInstall +qall
+```
+#### Vim plugins that I like and/or use regularly
+- [x] [Vundle](https://github.com/VundleVim/Vundle.vim#about) - plugin manager
+- [x] [Airline](https://github.com/vim-airline/vim-airline#vim-airline-) - status bar
+- [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots)
+- [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim#ctrlpvim) - fuzzy file finder, buffer switcher, MRU
+- [x] [Snipmate](https://github.com/garbas/vim-snipmate#snipmate) - [Snippet](https://github.com/honza/vim-snippets#snipmate--ultisnip-snippets) manager for vim
+- [x] [Syntastic](https://github.com/vim-syntastic/syntastic) - syntax checking hacks for vim
+- [ ] [vim-polyglot](https://github.com/sheerun/vim-polyglot#vim-polyglot--) - meta-plugin for syntaxes
+- [x] [vim-rooter](https://github.com/airblade/vim-rooter#rooter) - changes working directory to project root
+- [x] [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace#vim-better-whitespace-plugin) - better whitespace highlighting
+- [x] [indentLine](https://github.com/Yggdroot/indentLine#indentline) - display the indention levels with thin vertical lines
+
+#### Also
+- [Vim Awesome](http://vimawesome.com/)
+- [Vim Colors](http://vimcolors.com/)
+
 ## Command-Line Tools
 ```bash
 brew install ack ag peco tree tig tmux

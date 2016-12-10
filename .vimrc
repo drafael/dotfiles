@@ -222,16 +222,17 @@ endif
 "
 if has("gui_running")          " GUI is running or is about to start
   set guioptions-=m            " remove menu bar
-  set guioptions-=T            " remove toolbar
+  " set guioptions-=T            " remove toolbar
+  set guioptions+=T            " add toolbar
   set guioptions-=l            " remove left scrollbar
   set guioptions-=L            "   when there is a vertically split window
   set guioptions-=r            " remove right scrollbar
   set guioptions-=R            "   when there is a vertically split window
-  set lines=48 columns=160     " maximize gvim window
+  set lines=40 columns=140     " window size
   " set guifont=Menlo:h14
   set guifont=Monaco:h14
-  " set background=light
-  set background=dark
+  set background=light
+  " set background=dark
   colorscheme solarized        " GUI color scheme
 else                           " this is console Vim
   set t_Co=256                 " 256 colors

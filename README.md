@@ -25,11 +25,11 @@ or simply [use my preferences](https://github.com/drafael/dotfiles#iterm2).
 Install `brew cask install iterm2` and point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
 ## Git
-Put this stuff in `~/.gitconfig.local`
+Use `~/.gitconfig.local` to store sensitive information such as the `git` user credentials, e.g.:
 ```
 [user]
-    name = FirstName LastName
-    email = username@example.com
+    name = Denys Rafael
+    email = den@example.com
 ```
 and then
 ```bash
@@ -39,26 +39,11 @@ ln -s ~/dotfiles/.gitignore_global ~/.gitignore
 In order to view all of my configured aliases enter `git aliases`
 
 ## Vim
-Installation `brew install vim --with-override-system-vi`
-
-## [MacVim](http://macvim-dev.github.io/macvim)
-Installation `brew cask install macvim`
-
-## Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc), [plugins](http://vimawesome.com/) and [colors](http://vimcolors.com/):
+[Plugins that I like and/or use regularly](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#vim-plugins-that-i-like-andor-use-regularly)
 ```bash
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall
 ```
-  - [x] [Vundle](https://github.com/VundleVim/Vundle.vim#about) - plugin manager
-  - [x] [Airline](https://github.com/vim-airline/vim-airline#vim-airline-) - status bar
-  - [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots)
-  - [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim#ctrlpvim) - fuzzy file finder, buffer switcher, MRU
-  - [x] [Snipmate](https://github.com/garbas/vim-snipmate#snipmate) - [Snippet](https://github.com/honza/vim-snippets#snipmate--ultisnip-snippets) manager for vim
-  - [x] [Syntastic](https://github.com/vim-syntastic/syntastic) - syntax checking hacks for vim
-  - [ ] [vim-polyglot](https://github.com/sheerun/vim-polyglot#vim-polyglot--) - meta-plugin for syntaxes
-  - [x] [vim-rooter](https://github.com/airblade/vim-rooter#rooter) - changes working directory to project root
-  - [x] [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace#vim-better-whitespace-plugin) - better whitespace highlighting
-  - [x] [indentLine](https://github.com/Yggdroot/indentLine#indentline) - display the indention levels with thin vertical lines
 
 ## [Sublime Text](https://www.sublimetext.com/)
 Installation `brew cask install sublime-text`
@@ -79,6 +64,7 @@ ln -s ~/dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks)
 
 ## Workstation Setup
+* [Vim](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#vim)
 * [Command-Line Tools](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#command-line-tools)
 * [Java Dev Env](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#java-dev-env)
 * [Automated Setup](https://github.com/drafael/osx-bootstrap) `~/dotfiles/bin/bootstrap.sh`
@@ -86,10 +72,10 @@ Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/subl
 ## Acknowledgements
 
 Inspiration and code was taken (stolen) from many sources, including:
+* [GitHub does dotfiles](https://dotfiles.github.io/)
 * [@mathiasbynens](https://github.com/mathiasbynens) (Mathias Bynens) [dotfiles](https://github.com/mathiasbynens/dotfiles)
 * [@garybernhardt](https://github.com/garybernhardt) (Gary Bernhardt) [dotfiles](https://github.com/garybernhardt/dotfiles)
 * [@necolas](https://github.com/necolas) (Nicolas Gallagher) [dotfiles](https://github.com/necolas/dotfiles)
-* [GitHub does dotfiles](https://dotfiles.github.io/)
 * [Awesome Awesomeness](https://github.com/bayandin/awesome-awesomeness): [Dotfiles](https://github.com/webpro/awesome-dotfiles), [Shell](https://github.com/alebcay/awesome-shell), [Dev Env](https://github.com/jondot/awesome-devenv), [Java](https://github.com/akullpp/awesome-java)
 * Good looking console emulators for Windows: [cmder](http://cmder.net/), [ConEmu](https://conemu.github.io/), [mintty](http://mintty.github.io/)
 
