@@ -16,15 +16,23 @@ export HISTSIZE=10000
 shopt -s histappend
 
 alias ..="cd .."
+alias cd..="cd .."
 alias ...="cd ../.."
 
 alias g="git "
 alias gt="git "
 alias gti="git "
 alias got="git "
+#alias push="git push"
+# Undo a `git push`
+#alias undopush="git push -f origin HEAD^:master"
 
+alias v="mvim "
 alias j="jobs"
 alias h="history"
+
+alias brwe=brew
+alias cask='brew cask'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
