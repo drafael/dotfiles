@@ -29,7 +29,7 @@ Put in `~/.gitconfig.local` sensitive information such as the `git` user credent
 ```
 [user]
     name = Denys Rafael
-    email = den@example.com
+    email = denys@example.com
 ```
 and then
 ```bash
@@ -67,7 +67,8 @@ Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/subl
 * [Vim](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#vim)
 * [Command-Line Tools](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#command-line-tools)
 * [Java Dev Env](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#java-dev-env)
-* [Automated Setup](https://github.com/drafael/osx-bootstrap) `~/dotfiles/bin/bootstrap.sh`
+* DRY or [Automated Setup](https://github.com/drafael/osx-bootstrap) `~/dotfiles/bin/bootstrap.sh`
+* [Productivity Tips](https://github.com/drafael/dotfiles/blob/master/share/PRODUCTIVITY.md)
 
 ## Acknowledgements
 
