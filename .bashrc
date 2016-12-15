@@ -2,6 +2,9 @@
 
 export EDITOR=vim
 
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$PATH:$HOME/bin
 
@@ -23,9 +26,6 @@ alias g="git "
 alias gt="git "
 alias gti="git "
 alias got="git "
-#alias push="git push"
-# Undo a `git push`
-#alias undopush="git push -f origin HEAD^:master"
 
 alias v="mvim "
 alias j="jobs"
