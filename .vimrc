@@ -228,8 +228,28 @@ if has("gui_running")          " GUI is running or is about to start
   colorscheme solarized        " GUI color scheme
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
-  set background=dark
-  colorscheme solarized        " terminal color scheme
+  if exists('$ITERM_PROFILE')  " iTerm.app
+    if $ITERM_PROFILE =~ "Solarized"
+      if $ITERM_PROFILE =~ "Light"
+        set background=light
+      else
+        set background=dark
+      endif
+      colorscheme solarized
+    elseif $ITERM_PROFILE =~ "jellybeans"
+      set background=dark
+      colorscheme jellybeans
+    elseif $ITERM_PROFILE =~ "heroku"
+      set background=dark
+      colorscheme heroku-terminal
+    elseif $ITERM_PROFILE =~ "iceberg"
+      set background=dark
+      colorscheme iceberg
+    endif
+  else                         " Terminal.app
+    set background=dark
+    colorscheme solarized
+  endif
 endif
 
 "
