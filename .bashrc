@@ -18,16 +18,30 @@ export HISTSIZE=10000
 # Append to the history file when exiting instead of overwriting it
 shopt -s histappend
 
+# use colorized output when listing files
+if [[ "$OSTYPE" =~ darwin ]]; then
+  alias ls='ls -G'
+  alias lsf='ls -FG'
+  alias lsl='ls -lAG'
+  alias lsa='ls -AG'
+else
+  alias ls='ls --color=auto'
+  alias lsl='ls --color=auto -l'
+  alias lsa='ls --color=auto -a'
+fi
+
 alias ..="cd .."
 alias cd..="cd .."
 alias ...="cd ../.."
 
-alias g="git "
-alias gt="git "
-alias gti="git "
-alias got="git "
+# always use vim instead of vi
+alias vi=vim
 
-alias v="mvim "
+alias g=git
+alias gt=git
+alias gti=git
+alias got=git
+
 alias j="jobs"
 alias h="history"
 

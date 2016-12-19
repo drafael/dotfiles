@@ -38,7 +38,7 @@
     # commit
     ci    = commit --verbose
     cim   = commit --verbose -m
-    ca    = commit --amend
+    cia   = commit --amend
     amend = commit --amend
 
     # checkout
