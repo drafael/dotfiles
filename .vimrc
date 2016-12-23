@@ -121,6 +121,7 @@ Plugin 'nanotech/jellybeans.vim'            " http://vimcolors.com/1/jellybeans/
 Plugin 'cocopon/iceberg.vim'                " http://cocopon.me/app/vim-iceberg/
 Plugin 'stulzer/heroku-colorscheme'         " http://vimcolors.com/201/heroku/dark
 Plugin '29decibel/codeschool-vim-theme'     " http://vimcolors.com/33/codeschool/dark
+Plugin 'nlknguyen/papercolor-theme'         " Inspired by Google's Material Design
 
 call vundle#end()                           " end of plugin listing
 if s:install_plugins == 1                   " auto installing plugins
@@ -154,7 +155,7 @@ augroup vimrcEx
   " change working directory to project root
   autocmd BufEnter * :Rooter
   " strip all trailing whitespace everytime you save the file
-  autocmd BufWritePre * StripWhitespace
+  autocmd BufWritePre * :StripWhitespace
   " replace tabs with spaces
   autocmd BufWritePre * :retab
 
@@ -225,17 +226,25 @@ if has("gui_running")          " GUI is running or is about to start
   set guifont=Monaco:h14
   set background=light
   " set background=dark
-  colorscheme solarized        " GUI color scheme
+  "colorscheme solarized
+  colorscheme PaperColor
+  let g:airline_theme = 'papercolor'
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   if exists('$ITERM_PROFILE')  " iTerm.app
+
+    if $ITERM_PROFILE =~ "Light"
+      set background=light
+    else
+      set background=dark
+    endif
+
     if $ITERM_PROFILE =~ "Solarized"
-      if $ITERM_PROFILE =~ "Light"
-        set background=light
-      else
-        set background=dark
-      endif
       colorscheme solarized
+    elseif $ITERM_PROFILE =~ "PaperColor"
+      colorscheme PaperColor
+      let g:airline_theme = 'papercolor'
+      let g:lightline = { 'colorscheme': 'PaperColor' }
     elseif $ITERM_PROFILE =~ "jellybeans"
       set background=dark
       colorscheme jellybeans
