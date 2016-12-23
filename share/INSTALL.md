@@ -29,8 +29,9 @@ vim +PluginInstall +qall
 #### Vim plugins that I like and/or use regularly
 - [x] [Vundle](https://github.com/VundleVim/Vundle.vim#about) - plugin manager
 - [x] [Airline](https://github.com/vim-airline/vim-airline#vim-airline-) - status bar
-- [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots)
+- [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots), [PaperColor Theme](https://github.com/nlknguyen/papercolor-theme#screenshots)
 - [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim#ctrlpvim) - fuzzy file finder, buffer switcher, MRU
+- [x] [Auto Pairs](https://github.com/jiangmiao/auto-pairs#auto-pairs) - insert or delete brackets, parens, quotes in pair
 - [x] [Snipmate](https://github.com/garbas/vim-snipmate#snipmate) - [Snippet](https://github.com/honza/vim-snippets#snipmate--ultisnip-snippets) manager for vim
 - [x] [Syntastic](https://github.com/vim-syntastic/syntastic) - syntax checking hacks for vim
 - [x] [vim-polyglot](https://github.com/sheerun/vim-polyglot#vim-polyglot--) - meta-plugin for syntaxes
