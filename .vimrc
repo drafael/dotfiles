@@ -244,17 +244,14 @@ else                           " this is console Vim
     elseif $ITERM_PROFILE =~ "PaperColor"
       colorscheme PaperColor
       let g:airline_theme = 'papercolor'
-      let g:lightline = { 'colorscheme': 'PaperColor' }
     elseif $ITERM_PROFILE =~ "jellybeans"
-      set background=dark
       colorscheme jellybeans
     elseif $ITERM_PROFILE =~ "heroku"
-      set background=dark
       colorscheme heroku-terminal
     elseif $ITERM_PROFILE =~ "iceberg"
-      set background=dark
       colorscheme iceberg
     endif
+
   else                         " Terminal.app
     set background=dark
     colorscheme solarized
@@ -348,10 +345,6 @@ let g:jsx_ext_required = 0
 let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-']
 let g:syntastic_disabled_filetypes = ['html']
 
-" For (sort of) modern standards in :TOhtml output
-let g:html_use_css   = 1
-let g:html_use_xhtml = 0
-
 "  Change Vim cursor shape in different modes
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
@@ -360,5 +353,9 @@ elseif exists('$TERM_PROGRAM') && $TERM_PROGRAM =~ "iTerm.app"
   let &t_SI = "\e[5 q"
   let &t_EI = "\e[2 q"
 endif
+
+" For (sort of) modern standards in :TOhtml output
+let g:html_use_css   = 1
+let g:html_use_xhtml = 0
 
 " EOF
