@@ -114,6 +114,7 @@ Plugin 'mileszs/ack.vim'                    " Vim frontend for the Perl module A
 Plugin 'rking/ag.vim'                       " Vim frontend for the Ag, aka the_silver_searcher
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'               " Syntax checking hacks for vim
+Plugin 'lambdalisue/vim-gita'               " An awesome git handling plugin
 
 " color schemes (here's the gallery/screenshots http://vimcolors.com)
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
