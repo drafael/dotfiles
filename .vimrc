@@ -158,7 +158,7 @@ augroup vimrcEx
   " strip all trailing whitespace everytime you save the file
   autocmd BufWritePre * :StripWhitespace
   " replace tabs with spaces
-  autocmd BufWritePre * :retab
+  autocmd BufWritePre * if &filetype != 'go' | :retab | endif
 
   " override file type
   autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
@@ -174,6 +174,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.q setlocal filetype=hive
 
   " override whitespace settings
+  autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
   autocmd FileType vim set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType yaml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType ansible set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
