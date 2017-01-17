@@ -333,8 +333,16 @@ inoremap jj <Esc>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
+" Copy & paste to system clipboard with <Space>p and <Space>y
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 "
-" Full path fuzzy file finder
+" CtrlP: Full path fuzzy file finder
 "
 let g:ctrlp_map = '<C-p>'               " default mapping
 let g:ctrlp_cmd = 'CtrlP'               " default command
@@ -353,16 +361,22 @@ map <leader>t :CtrlP<CR>
 map <leader>e :CtrlPMRU<CR>
 map <leader>b :CtrlPBuffer<CR>
 
-" Copy & paste to system clipboard with <Space>p and <Space>y
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
-
-" File/source code navigation
+"
+" Tagbar: source code navigation
+"
 map <F8> :TagbarToggle<CR>
+
+let g:tagbar_type_ansible = { 'ctagstype' : 'ansible', 'kinds' : [ 't:tasks' ], 'sort' : 0 }
+let g:tagbar_type_markdown = { 'ctagstype' : 'markdown', 'kinds' : [ 'h:Heading_L1', 'i:Heading_L2', 'k:Heading_L3' ] }
+let g:tagbar_type_puppet = { 'ctagstype': 'puppet', 'kinds': ['c:class','s:site','n:node','d:definition']}
+let g:tagbar_type_r = { 'ctagstype' : 'r', 'kinds' : [ 'f:Functions', 'g:GlobalVariables', 'v:FunctionVariables', ] }
+let g:tagbar_type_ruby = { 'kinds' : [ 'm:modules', 'c:classes', 'd:describes', 'C:contexts', 'f:methods', 'F:singleton methods' ] }
+let g:tagbar_type_typescript = { 'ctagstype': 'typescript', 'kinds': [ 'c:classes', 'n:modules', 'f:functions', 'v:variables', 'v:varlambdas', 'm:members', 'i:interfaces', 'e:enums', ] }
+let g:tagbar_type_xml = { 'ctagstype' : 'WSDL', 'kinds' : [ 'n:namespaces', 'm:messages', 'p:portType', 'o:operations', 'b:bindings', 's:service' ] }
+let g:tagbar_type_xquery = { 'ctagstype' : 'xquery', 'kinds' : [ 'f:function', 'v:variable', 'm:module', ] }
+let g:tagbar_type_xsd = { 'ctagstype' : 'XSD', 'kinds' : [ 'e:elements', 'c:complexTypes', 's:simpleTypes' ] }
+let g:tagbar_type_xslt = { 'ctagstype' : 'xslt', 'kinds' : [ 'v:variables', 't:templates' ]}
+
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -373,6 +387,7 @@ let g:tagbar_type_go = {
     \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
     \ 'ctagsbin'  : 'gotags', 'ctagsargs' : '-sort -silent'
 \ }
+
 
 "  Change Vim cursor shape in different modes
 if exists('$TMUX')

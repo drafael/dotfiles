@@ -30,6 +30,7 @@ vim +PluginInstall +qall
 * [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) dependencies installation
 ```bash
 brew install ctags gotags
+ln -s ~/dotfiles/.ctags ~/.ctags
 ```
 
 #### Vim plugins that I like and/or use regularly
