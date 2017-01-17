@@ -99,6 +99,7 @@ Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (Pre
 " syntax and filetype
 Plugin 'sheerun/vim-polyglot'               " A solid language pack for Vim
 Plugin 'gisphm/vim-gitignore'               " Gitignore plugin for Vim
+Plugin 'fatih/vim-go'                       " Go development plugin for Vim
 Plugin 'Glench/Vim-Jinja2-Syntax'           " An up-to-date jinja2 syntax file
 Plugin 'vim-scripts/Vim-R-plugin'
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting
@@ -112,11 +113,11 @@ Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for 
 Plugin 'tpope/vim-fugitive'                 " Git wrapper so awesome, it should be illegal
 Plugin 'mileszs/ack.vim'                    " Vim frontend for the Perl module App::Ack
 Plugin 'rking/ag.vim'                       " Vim frontend for the Ag, aka the_silver_searcher
-Plugin 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'                  " plugin that displays tags in a window, ordered by scope
 Plugin 'scrooloose/syntastic'               " Syntax checking hacks for vim
 Plugin 'lambdalisue/vim-gita'               " An awesome git handling plugin
 
-" color schemes (here's the gallery/screenshots http://vimcolors.com)
+" color schemes
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
 Plugin 'nanotech/jellybeans.vim'            " http://vimcolors.com/1/jellybeans/dark
 Plugin 'cocopon/iceberg.vim'                " http://cocopon.me/app/vim-iceberg/
@@ -129,11 +130,34 @@ if s:install_plugins == 1                   " auto installing plugins
   :PluginInstall
 endif
 
+"
+"  Syntax & FileType
+"
 filetype plugin indent on                   " enable file type detection, plugins and indentation
 syntax enable                               " enable syntax highlighting
+let g:polyglot_disabled = ['go']            " in order to get full support for Golng I use vim-go plugin directly
+
+" By default syntax-highlighting for Functions, Methods and Structs is disabled
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+" Sometimes when using both vim-go and syntastic Vim will start lagging while saving and opening files. The following fixes this:
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+" ignore angular directive lint errors with Vim and syntastic
+let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-']
+let g:syntastic_disabled_filetypes = ['html']
+
+" Allow JSX in normal JS files
+let g:jsx_ext_required = 0
 
 "
-"  Default whitespace settings
+"  Default Whitespace
 "
 set tabstop=4                               " (ts) width (in spaces) that a <tab> is displayed as
 set softtabstop=4                           " when hitting <BS>, pretend like a tab is removed, even if spaces
@@ -192,7 +216,7 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = '<C-n>'    " navigate the completion menu from top to bottom
 
 "
-" Status line
+" Status Line
 "
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -213,7 +237,7 @@ else
 endif
 
 "
-"  GUI/Terminal specific settings
+"  GUI/Terminal
 "
 if has("gui_running")          " GUI is running or is about to start
   set guioptions-=m            " remove menu bar
@@ -349,13 +373,6 @@ let g:tagbar_type_go = {
     \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
     \ 'ctagsbin'  : 'gotags', 'ctagsargs' : '-sort -silent'
 \ }
-
-" Allow JSX in normal JS files
-let g:jsx_ext_required = 0
-
-" ignore angular directive lint errors with Vim and syntastic
-let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-']
-let g:syntastic_disabled_filetypes = ['html']
 
 "  Change Vim cursor shape in different modes
 if exists('$TMUX')
