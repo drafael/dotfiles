@@ -39,7 +39,7 @@ ln -s ~/dotfiles/.gitignore_global ~/.gitignore
 In order to view all of my configured aliases enter `git aliases`
 
 ## Vim
-Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc) and [plugins](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#vim-plugins-that-i-like-andor-use-regularly)
+Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc) and [plugins](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#my-favorite-vim-plugins)
 ```bash
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall
