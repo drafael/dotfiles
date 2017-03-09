@@ -13,6 +13,12 @@
     autocrlf = input
     excludesfile = ~/.gitignore
 
+[pull]
+    rebase = true
+
+[branch "master"]
+    rebase = true
+
 [push]
     # push should only push current branch, not all branches
     default = current
