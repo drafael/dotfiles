@@ -252,9 +252,9 @@ if has("gui_running")          " GUI is running or is about to start
   set guifont=Monaco:h14
   set background=light
   " set background=dark
-  "colorscheme solarized
-  colorscheme PaperColor
-  let g:airline_theme = 'papercolor'
+  colorscheme solarized
+  " colorscheme PaperColor
+  " let g:airline_theme = 'papercolor'
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
   if exists('$ITERM_PROFILE')  " iTerm.app
