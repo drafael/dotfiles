@@ -53,7 +53,7 @@ ln -s ~/dotfiles/.ctags ~/.ctags
 
 ## Command-Line Tools
 ```bash
-brew install ack ag ansible htop mc nmap peco tree tig tmux tree vifm
+brew install ack ag ansible htop mc nmap peco ranger tree tig tmux tree vifm
 ```
 * [ack](http://beyondgrep.com) - a code-searching tool like `grep`, optimized for programmers
 * [ag](https://github.com/ggreer/the_silver_searcher) - a code searching tool similar to `ack`, with a focus on speed
@@ -62,6 +62,7 @@ brew install ack ag ansible htop mc nmap peco tree tig tmux tree vifm
 * [mc](https://midnight-commander.org/) - terminal-based visual file manager
 * [nmap](https://nmap.org/) - port scanning utility for large networks
 * [peco](https://github.com/peco/peco) - simplistic interactive filtering tool
+* [ranger](http://ranger.nongnu.org/) - a console file manager with `vi` key bindings
 * [tree](http://mama.indstate.edu/users/ice/tree/) - recursive directory listing command that produces a depth indented listing of files
 * [tig](http://jonas.nitro.dk/tig/) - ncurses-based text-mode interface for `git`
 * [tmux](http://tmux.github.io) - a terminal multiplexer
