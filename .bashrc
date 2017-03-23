@@ -47,9 +47,12 @@ alias h="history"
 
 alias brwe=brew
 alias cask='brew cask'
+alias systemctl='brew services'
+alias services='brew services'
+alias service='brew services'
 
 # Enable aliases to be sudo’ed
-alias sudo='sudo '
+# alias sudo='sudo '
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
