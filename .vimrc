@@ -376,7 +376,6 @@ let g:tagbar_type_xml = { 'ctagstype' : 'WSDL', 'kinds' : [ 'n:namespaces', 'm:m
 let g:tagbar_type_xquery = { 'ctagstype' : 'xquery', 'kinds' : [ 'f:function', 'v:variable', 'm:module', ] }
 let g:tagbar_type_xsd = { 'ctagstype' : 'XSD', 'kinds' : [ 'e:elements', 'c:complexTypes', 's:simpleTypes' ] }
 let g:tagbar_type_xslt = { 'ctagstype' : 'xslt', 'kinds' : [ 'v:variables', 't:templates' ]}
-
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -388,6 +387,20 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags', 'ctagsargs' : '-sort -silent'
 \ }
 
+"
+"  Toolbar
+"
+function! ToggleToolbar()
+  if &guioptions=~'T'
+    exec('set guioptions-=T')
+  else
+    exec('set guioptions+=T')
+  endif
+endfunction
+
+if has("gui_running")
+  map <F9> <Esc>:call ToggleToolbar()<CR>
+endif
 
 "  Change Vim cursor shape in different modes
 if exists('$TMUX')
