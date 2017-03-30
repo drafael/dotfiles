@@ -241,17 +241,17 @@ endif
 "
 if has("gui_running")          " GUI is running or is about to start
   set guioptions-=m            " remove menu bar
-  " set guioptions-=T            " remove toolbar
-  set guioptions+=T            " add toolbar
+  set guioptions-=T            " remove toolbar
+  " set guioptions+=T            " add toolbar
   set guioptions-=l            " remove left scrollbar
   set guioptions-=L            "   when there is a vertically split window
   set guioptions-=r            " remove right scrollbar
   set guioptions-=R            "   when there is a vertically split window
-  set lines=40 columns=140     " window size
+  set lines=41 columns=145     " window size
   " set guifont=Menlo:h14
   set guifont=Monaco:h14
-  set background=light
-  " set background=dark
+  " set background=light
+  set background=dark
   colorscheme solarized
   " colorscheme PaperColor
   " let g:airline_theme = 'papercolor'
@@ -298,13 +298,10 @@ nmap <silent> <Leader>/ :nohlsearch<CR>
 nmap <silent> <Leader><Space> :nohlsearch<CR>
 
 " show identation
-if has("gui_running")
-  map <F2> :set list!<CR>:IndentLinesToggle<CR>
-else
-  map <F2> :set list!<CR>
-endif
+map <F2> :set list!<CR>:IndentLinesToggle<CR>
 
-call togglebg#map("<F5>")              " Solarized color scheme: toggle background
+" Solarized color scheme: toggle background
+call togglebg#map("<F5>")
 
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
@@ -398,9 +395,7 @@ function! ToggleToolbar()
   endif
 endfunction
 
-if has("gui_running")
-  map <F9> <Esc>:call ToggleToolbar()<CR>
-endif
+map <F9> <Esc>:call ToggleToolbar()<CR>
 
 "  Change Vim cursor shape in different modes
 if exists('$TMUX')
