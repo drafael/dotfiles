@@ -236,6 +236,11 @@ else
   let g:airline_symbols.branch = 'BR'
 endif
 
+" Enable the list of buffers
+" let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+" let g:airline#extensions#tabline#fnamemod = ':t'
+
 "
 "  GUI/Terminal
 "
