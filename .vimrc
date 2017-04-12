@@ -42,6 +42,7 @@ set smartcase                  "   unless they contain at least one capital lett
 set gdefault                   " global search by default :%s/pattern/replacement/g
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
+set shortmess=a                " disable annoying messages "Press Enter or type command to continue"
 
 set wildignore+=.DS_Store,._*,Thumbs.db
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
