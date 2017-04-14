@@ -13,6 +13,7 @@ set nowrap                     " don't wrap lines
 set colorcolumn=120            " show the line to wrap the long line by myself
 set number                     " display line numbers on the left
 set cursorline                 " highlight current line
+" set cursorcolumn               " highlight current column
 set guicursor=n:blinkon0       " turn off the blinking cursor in normal mode
 set autoread                   " when a file is changed from the outside
 set lazyredraw                 " don't redraw while executing macros
@@ -200,12 +201,12 @@ augroup vimrcEx
 
   " override whitespace settings
   autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
-  autocmd FileType vim set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-  autocmd FileType yaml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-  autocmd FileType ansible set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-  autocmd FileType html set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-  autocmd FileType hive set expandtab
-  autocmd FileType ruby,haml,eruby,sass,cucumber set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType vim setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType ansible setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType hive setlocal expandtab
+  autocmd FileType ruby,haml,eruby,sass,cucumber setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
 
 "
