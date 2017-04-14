@@ -91,6 +91,7 @@ Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation ad
 Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
 Plugin 'ntpeters/vim-better-whitespace'     " Strip trailing whitespace
 Plugin 'Yggdroot/indentLine'                " display the indention levels with thin vertical lines
+Plugin 'editorconfig/editorconfig-vim'      " EditorConfig plugin for Vim http://editorconfig.org
 
 " TextMate like snippets
 Plugin 'tomtom/tlib_vim'                    " Some utility functions for VIM (required)
@@ -176,6 +177,10 @@ let &showbreak='↪ '                         " string to put at the start of li
 set backspace=indent,eol,start              " configure backspace so it acts as it should act
 let g:indentLine_enabled = 0                " Plugin 'Yggdroot/indentLine'
 let g:indentLine_char = '·'                 " Character to be used as indent line.
+
+" To ensure that plugin works well with Tim Pope's fugitive
+" and to avoid loading EditorConfig for any remote files over ssh
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 augroup vimrcEx
   autocmd!

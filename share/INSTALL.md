@@ -58,6 +58,7 @@ brew install ack ag ansible htop mc nmap peco ranger tree tig tmux tree vifm
 * [ack](http://beyondgrep.com) - a code-searching tool like `grep`, optimized for programmers
 * [ag](https://github.com/ggreer/the_silver_searcher) - a code searching tool similar to `ack`, with a focus on speed
 * [ansible](https://www.ansible.com/) - "Automate All the Things!" (c)
+* [editorconfig](EditorConfig) - helps define and maintain consistent coding styles between different editors and IDEs
 * [htop](https://hisham.hm/htop/) - improved top (interactive process viewer)
 * [mc](https://midnight-commander.org/) - terminal-based visual file manager
 * [nmap](https://nmap.org/) - port scanning utility for large networks
