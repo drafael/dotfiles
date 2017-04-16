@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
+		"A File Icon",
 		"Ansible",
 		"ApplySyntax",
 		"Dockerfile Syntax Highlighting",
