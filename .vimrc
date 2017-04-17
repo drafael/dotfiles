@@ -44,6 +44,7 @@ set gdefault                   " global search by default :%s/pattern/replacemen
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 set shortmess=a                " disable annoying messages "Press Enter or type command to continue"
+set hidden
 
 set wildignore+=.DS_Store,._*,Thumbs.db
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
@@ -87,6 +88,7 @@ Plugin 'tomtom/tcomment_vim'                " provides easy to use, file-type se
 Plugin 'bling/vim-airline'                  " Status line
 Plugin 'vim-airline/vim-airline-themes'     " A collection of themes for vim-airline
 Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation adjusted to destination context
 Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
 Plugin 'ntpeters/vim-better-whitespace'     " Strip trailing whitespace
@@ -348,9 +350,6 @@ inoremap <S-Down> <C-o>vgj
 inoremap <S-Left> <C-o>h<C-o>v
 inoremap <S-Right> <C-o>v
 
-" IDE like autocompletion
-imap <C-Space> <Plug>snipMateTrigger
-
 " Escape key alternatives
 inoremap jj <Esc>
 inoremap jk <Esc>
@@ -364,13 +363,24 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+" IDE like autocompletion
+imap <C-Space> <Plug>snipMateTrigger
+
+"
+" CtrlSpace: tabs / buffers / files management
+"
+let g:CtrlSpaceUseUnicode = 0
+let g:CtrlSpaceCacheDir = $HOME.'/.vim/cache/ctrlspace'
+" let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+" let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+" let g:CtrlSpaceSaveWorkspaceOnExit = 1
+
 "
 " CtrlP: Full path fuzzy file finder
 "
 let g:ctrlp_map = '<C-p>'               " default mapping
 let g:ctrlp_cmd = 'CtrlP'               " default command
 let g:ctrlp_working_path_mode = 'ra'    " set local working directory
-let g:ctrlp_root_markers = ['pom.xml', 'build.xml']
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_by_filename = 1             " searching by filename (as opposed to full path)
 let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
@@ -379,6 +389,7 @@ let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings|gradle))|(target|classes|build|dist|bower_components|node_modules)$',
       \ 'file': '\v\.(iml|eml|ipr|iws|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
       \ }
+let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
 
 map <leader>t :CtrlP<CR>
 map <leader>e :CtrlPMRU<CR>
