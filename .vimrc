@@ -277,15 +277,20 @@ if has("gui_running")          " GUI is running or is about to start
   set lines=41 columns=145     " window size
   " set guifont=Menlo:h14
   set guifont=Monaco:h14
-  " set background=light
 
-  set background=dark
   colorscheme solarized
   " colorscheme PaperColor
 
   if g:colors_name =~ 'solarized'
+    let hour = strftime("%H")
+    if 6 <= hour && hour < 18
+      set background=light
+    else
+      set background=dark
+    endif
     call togglebg#map("<F5>")
   elseif g:colors_name =~ 'PaperColor'
+    set background=light
     let g:airline_theme = 'papercolor'
   endif
 else                           " this is console Vim
