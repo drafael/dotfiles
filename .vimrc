@@ -380,6 +380,10 @@ let g:CtrlSpaceCacheDir = $HOME.'/.vim/cache/ctrlspace'
 "
 " CtrlP: Full path fuzzy file finder
 "
+map <leader>t :CtrlP<CR>
+map <leader>e :CtrlPMRU<CR>
+map <leader>b :CtrlPBuffer<CR>
+
 let g:ctrlp_map = '<C-p>'               " default mapping
 let g:ctrlp_cmd = 'CtrlP'               " default command
 let g:ctrlp_working_path_mode = 'ra'    " set local working directory
@@ -393,9 +397,14 @@ let g:ctrlp_custom_ignore = {
       \ }
 let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
 
-map <leader>t :CtrlP<CR>
-map <leader>e :CtrlPMRU<CR>
-map <leader>b :CtrlPBuffer<CR>
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag -l --nocolor -g "" %s'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 "
 " vim-session: extended session management for Vim (:mksession on steroids) http://peterodding.com/code/vim/session/
