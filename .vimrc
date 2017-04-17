@@ -94,6 +94,8 @@ Plugin 'airblade/vim-rooter'                " Changes Vim working directory to p
 Plugin 'ntpeters/vim-better-whitespace'     " Strip trailing whitespace
 Plugin 'Yggdroot/indentLine'                " display the indention levels with thin vertical lines
 Plugin 'editorconfig/editorconfig-vim'      " EditorConfig plugin for Vim http://editorconfig.org
+Plugin 'xolox/vim-session'                  " Extended session management for Vim (:mksession on steroids)
+Plugin 'xolox/vim-misc'                     "   the vim-session plug-in requires the vim-misc plug-in
 
 " TextMate like snippets
 Plugin 'tomtom/tlib_vim'                    " Some utility functions for VIM (required)
@@ -394,6 +396,20 @@ let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
 map <leader>t :CtrlP<CR>
 map <leader>e :CtrlPMRU<CR>
 map <leader>b :CtrlPBuffer<CR>
+
+"
+" vim-session: extended session management for Vim (:mksession on steroids) http://peterodding.com/code/vim/session/
+"
+if has("gui_running")
+  let g:session_autosave = 'yes'
+  let g:session_autoload = 'yes'
+else
+  let g:session_autosave = 'no'
+  let g:session_autoload = 'no'
+endif
+let g:session_command_aliases = 1
+let g:session_lock_enabled = 0
+let g:session_default_overwrite = 1
 
 "
 " Tagbar: source code navigation
