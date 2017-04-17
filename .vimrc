@@ -259,24 +259,42 @@ if has("gui_running")          " GUI is running or is about to start
   set guioptions-=L            "   when there is a vertically split window
   set guioptions-=r            " remove right scrollbar
   set guioptions-=R            "   when there is a vertically split window
+
+  function! ToggleToolbar()
+    if &guioptions =~ 'T'
+      exec('set guioptions-=T')
+    else
+      exec('set guioptions+=T')
+    endif
+  endfunction
+
+  map <F9> <Esc>:call ToggleToolbar()<CR>
+
   set lines=41 columns=145     " window size
   " set guifont=Menlo:h14
   set guifont=Monaco:h14
   " set background=light
+
   set background=dark
   colorscheme solarized
   " colorscheme PaperColor
-  " let g:airline_theme = 'papercolor'
+
+  if g:colors_name =~ 'solarized'
+    call togglebg#map("<F5>")
+  elseif g:colors_name =~ 'PaperColor'
+    let g:airline_theme = 'papercolor'
+  endif
 else                           " this is console Vim
   set t_Co=256                 " 256 colors
-  if exists('$ITERM_PROFILE')  " iTerm.app
 
+  if exists('$ITERM_PROFILE')  " sync Vim and iTerm colors
+    " sync background
     if $ITERM_PROFILE =~ "Light"
       set background=light
     else
       set background=dark
     endif
-
+    " sync colorscheme
     if $ITERM_PROFILE =~ "Solarized"
       colorscheme solarized
     elseif $ITERM_PROFILE =~ "PaperColor"
@@ -289,7 +307,6 @@ else                           " this is console Vim
     elseif $ITERM_PROFILE =~ "iceberg"
       colorscheme iceberg
     endif
-
   else                         " Terminal.app
     set background=dark
     colorscheme solarized
@@ -311,9 +328,6 @@ nmap <silent> <Leader><Space> :nohlsearch<CR>
 
 " show identation
 map <F2> :set list!<CR>:IndentLinesToggle<CR>
-
-" Solarized color scheme: toggle background
-call togglebg#map("<F5>")
 
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
@@ -395,19 +409,6 @@ let g:tagbar_type_go = {
     \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
     \ 'ctagsbin'  : 'gotags', 'ctagsargs' : '-sort -silent'
 \ }
-
-"
-"  Toolbar
-"
-function! ToggleToolbar()
-  if &guioptions=~'T'
-    exec('set guioptions-=T')
-  else
-    exec('set guioptions+=T')
-  endif
-endfunction
-
-map <F9> <Esc>:call ToggleToolbar()<CR>
 
 "  Change Vim cursor shape in different modes
 if exists('$TMUX')
