@@ -45,6 +45,7 @@ set wildmenu                   " make tab completion for files/buffers act like 
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 set shortmess=a                " disable annoying messages "Press Enter or type command to continue"
 set hidden
+set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
 
 set wildignore+=.DS_Store,._*,Thumbs.db
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
@@ -142,7 +143,23 @@ endif
 "
 filetype plugin indent on                   " enable file type detection, plugins and indentation
 syntax enable                               " enable syntax highlighting
-let g:polyglot_disabled = ['go']            " in order to get full support for Golng I use vim-go plugin directly
+
+augroup OverrideFileType
+  autocmd!
+  autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
+  autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */tasks/*.yml,*/roles/*.yml,*/handlers/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */vars/*,*/host_vars/*,*/group_vars/* setlocal filetype=ansible
+  autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile setlocal filetype=ruby
+  autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
+  autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy
+  autocmd BufRead,BufNewFile *.pig setlocal filetype=pig
+  autocmd BufRead,BufNewFile *.hql setlocal filetype=hive
+  autocmd BufRead,BufNewFile *.q setlocal filetype=hive
+augroup END
+
+" in order to get full support for Golng I use vim-go plugin directly
+let g:polyglot_disabled = ['go']
 
 " By default syntax-highlighting for Functions, Methods and Structs is disabled
 let g:go_highlight_functions = 1
@@ -160,9 +177,6 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-']
 let g:syntastic_disabled_filetypes = ['html']
 
-" Allow JSX in normal JS files
-let g:jsx_ext_required = 0
-
 "
 "  Default Whitespace
 "
@@ -175,18 +189,14 @@ set smarttab                                " use shiftwidth to enter tabs
 set autoindent                              " automatically indent to match adjacent lines
 set smartindent
 set nolist                                  " hide whitespace characters
-let &listchars='tab:▸ ,space:·,nbsp:_,trail:·,eol:¬'
 set linebreak
+let &listchars='tab:▸ ,space:·,nbsp:_,trail:·,eol:¬'
 let &showbreak='↪ '                         " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start              " configure backspace so it acts as it should act
 let g:indentLine_enabled = 0                " Plugin 'Yggdroot/indentLine'
 let g:indentLine_char = '·'                 " Character to be used as indent line.
 
-" To ensure that plugin works well with Tim Pope's fugitive
-" and to avoid loading EditorConfig for any remote files over ssh
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-
-augroup vimrcEx
+augroup OverrideWhitespaceSettings
   autocmd!
   " change working directory to project root
   autocmd BufEnter * :Rooter
@@ -194,19 +204,6 @@ augroup vimrcEx
   autocmd BufWritePre * :StripWhitespace
   " replace tabs with spaces
   autocmd BufWritePre * if &filetype != 'go' | :retab | endif
-
-  " override file type
-  autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
-  autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */tasks/*.yml,*/roles/*.yml,*/handlers/*.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */vars/*,*/host_vars/*,*/group_vars/* setlocal filetype=ansible
-  autocmd BufRead,BufNewFile Brewfile,Caskfile setlocal filetype=ruby
-  autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile setlocal filetype=ruby
-  autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
-  autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy
-  autocmd BufRead,BufNewFile *.pig setlocal filetype=pig
-  autocmd BufRead,BufNewFile *.hql setlocal filetype=hive
-  autocmd BufRead,BufNewFile *.q setlocal filetype=hive
 
   " override whitespace settings
   autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
@@ -217,6 +214,10 @@ augroup vimrcEx
   autocmd FileType hive setlocal expandtab
   autocmd FileType ruby,haml,eruby,sass,cucumber setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
+
+" To ensure that plugin works well with Tim Pope's fugitive
+" and to avoid loading EditorConfig for any remote files over ssh
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 "
 " Autocomplete (Insert mode CTRL+N/CTRL+P)
@@ -239,7 +240,7 @@ let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.readonly = '[RO]'
 
-if has('macunix') || system('uname')=~'Darwin'
+if has('macunix') || system('uname') =~ 'Darwin'
   let g:airline_symbols.linenr = '␤'
   let g:airline_symbols.branch = '⎇'
 else
@@ -248,7 +249,8 @@ else
 endif
 
 augroup StatusLine
-  autocmd! ColorScheme PaperColor :AirlineTheme papercolor
+  autocmd!
+  autocmd ColorScheme PaperColor :AirlineTheme papercolor
 augroup END
 
 " Enable the list of buffers
@@ -396,15 +398,9 @@ map <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_map = '<C-p>'               " default mapping
 let g:ctrlp_cmd = 'CtrlP'               " default command
 let g:ctrlp_working_path_mode = 'ra'    " set local working directory
-let g:ctrlp_show_hidden = 1
 let g:ctrlp_by_filename = 1             " searching by filename (as opposed to full path)
 let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:15'
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings|gradle))|(target|classes|build|dist|bower_components|node_modules)$',
-      \ 'file': '\v\.(iml|eml|ipr|iws|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
-      \ }
-let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
 
 if executable('ag')
   " Use Ag over Grep
@@ -413,14 +409,26 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag -l --nocolor -g "" %s'
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+else
+  let g:ctrlp_show_hidden = 1
+  let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
+  let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings|gradle))|(target|classes|build|dist|bower_components|node_modules)$',
+      \ 'file': '\v\.(iml|eml|ipr|iws|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
+      \ }
 endif
 
 "
-" vim-session: extended session management for Vim (:mksession on steroids) http://peterodding.com/code/vim/session/
+" vim-session: extended session management for Vim http://peterodding.com/code/vim/session/
 "
+set sessionoptions-=options         " Don't persist options and mappings because it can corrupt sessions.
+set sessionoptions-=buffers         " Don't save hidden and unloaded buffers in sessions.
+set sessionoptions-=help            " If you don't want help windows to be restored
+
 if has("gui_running")
   let g:session_autosave = 'yes'
   let g:session_autoload = 'yes'
+  " let g:session_autoload = 'prompt'
 else
   let g:session_autosave = 'no'
   let g:session_autoload = 'no'
