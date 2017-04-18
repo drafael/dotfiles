@@ -247,6 +247,10 @@ else
   let g:airline_symbols.branch = 'BR'
 endif
 
+augroup StatusLine
+  autocmd! ColorScheme PaperColor :AirlineTheme papercolor
+augroup END
+
 " Enable the list of buffers
 " let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
