@@ -47,16 +47,8 @@ set shortmess=a                " disable annoying messages "Press Enter or type 
 set hidden
 set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
 
-set wildignore+=.DS_Store,._*,Thumbs.db
+set wildignore+=.DS_Store,._*,Thumbs.db,.netrwhist
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
-set wildignore+=.idea/*,*.iml,*.eml,*.ipr,*.iws
-set wildignore+=.project,.classpath,.settings/*
-set wildignore+=*.class,*.jar,*.war,*.ear
-set wildignore+=target/*,classes/*,build/*,out/*,dist/*
-set wildignore+=*.min.js,node_modules/*,bower_components/*,.sass-cache/*
-set wildignore+=*.pyc,*.pyo,*.o,*.a,*.obj
-set wildignore+=*.bak,*.swp,*~,*.zip,*.tgz,*.gz,*.pdf,*.dylib,*.so,*.dll,*.exe
-set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.ico,*.mp3,*.mp4,*.m4v,*.m4a
 
 "
 " http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
@@ -89,7 +81,6 @@ Plugin 'tomtom/tcomment_vim'                " provides easy to use, file-type se
 Plugin 'bling/vim-airline'                  " Status line
 Plugin 'vim-airline/vim-airline-themes'     " A collection of themes for vim-airline
 Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation adjusted to destination context
 Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
 Plugin 'ntpeters/vim-better-whitespace'     " Strip trailing whitespace
@@ -248,16 +239,6 @@ else
   let g:airline_symbols.branch = 'BR'
 endif
 
-augroup StatusLine
-  autocmd!
-  autocmd ColorScheme PaperColor :AirlineTheme papercolor
-augroup END
-
-" Enable the list of buffers
-" let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-" let g:airline#extensions#tabline#fnamemod = ':t'
-
 "
 "  GUI/Terminal
 "
@@ -333,23 +314,14 @@ endif
 "
 let mapleader = " "
 
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+noremap <leader>q :q<CR>
+noremap <leader>w :bd<CR>
+nnoremap <leader>s :w<CR>
+inoremap <leader>s <C-c>:w<CR>
 
 " clearing highlighted search
 nmap <silent> <Leader>/ :nohlsearch<CR>
 nmap <silent> <Leader><Space> :nohlsearch<CR>
-
-" show identation
-map <F2> :set list!<CR>:IndentLinesToggle<CR>
-
-nnoremap // :TComment<CR>
-vnoremap // :TComment<CR>
-
-" when indenting with < and >, make it easy to repeat
-vnoremap < <gv
-vnoremap > >gv
 
 " typical selection
 nnoremap <S-Down> vgj
@@ -368,6 +340,10 @@ inoremap jj <Esc>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
+" when indenting with < and >, make it easy to repeat
+vnoremap < <gv
+vnoremap > >gv
+
 " Copy & paste to system clipboard with <Space>p and <Space>y
 vmap <Leader>y "+y
 vmap <Leader>d "+d
@@ -376,24 +352,26 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+" show identation
+noremap <F2> :set list!<CR>:IndentLinesToggle<CR>
+
+" comment
+nnoremap // :TComment<CR>
+vnoremap // :TComment<CR>
+
 " IDE like autocompletion
 imap <C-Space> <Plug>snipMateTrigger
 
-"
-" CtrlSpace: tabs / buffers / files management
-"
-let g:CtrlSpaceUseUnicode = 0
-let g:CtrlSpaceCacheDir = $HOME.'/.vim/cache/ctrlspace'
-" let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-" let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-" let g:CtrlSpaceSaveWorkspaceOnExit = 1
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 "
 " CtrlP: Full path fuzzy file finder
 "
-map <leader>t :CtrlP<CR>
-map <leader>e :CtrlPMRU<CR>
-map <leader>b :CtrlPBuffer<CR>
+noremap <leader>t :CtrlP<CR>
+noremap <leader>e :CtrlPMRU<CR>
+noremap <leader>b :CtrlPBuffer<CR>
 
 let g:ctrlp_map = '<C-p>'               " default mapping
 let g:ctrlp_cmd = 'CtrlP'               " default command
@@ -414,7 +392,7 @@ else
   let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
   let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.(git|idea|hg|svn|vagrant|settings|gradle))|(target|classes|build|dist|bower_components|node_modules)$',
-      \ 'file': '\v\.(iml|eml|ipr|iws|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
+      \ 'file': '\v\.(iml|ipr|iws|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
       \ }
 endif
 

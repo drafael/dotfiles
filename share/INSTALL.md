@@ -43,7 +43,6 @@ ln -s ~/dotfiles/.ctags ~/.ctags
   - [x] [vim-rooter](https://github.com/airblade/vim-rooter#rooter) - changes working directory to project root
   - [x] [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace#vim-better-whitespace-plugin) - better whitespace highlighting
   - [x] [indentLine](https://github.com/Yggdroot/indentLine#indentline) - display the indention levels with thin vertical lines
-  - [ ] [vim-ctrlspace](https://github.com/vim-ctrlspace/vim-ctrlspace) - TBD
   - [x] [vim-session](https://github.com/xolox/vim-session#extended-session-management-for-vim) - extended session management for Vim
 
 ![macvim](https://github.com/drafael/dotfiles/raw/master/share/macvim.png)
