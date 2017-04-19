@@ -421,14 +421,9 @@ endif
 "
 " vim-session: extended session management for Vim http://peterodding.com/code/vim/session/
 "
-set sessionoptions-=options         " Don't persist options and mappings because it can corrupt sessions.
-set sessionoptions-=buffers         " Don't save hidden and unloaded buffers in sessions.
-set sessionoptions-=help            " If you don't want help windows to be restored
-
 if has("gui_running")
   let g:session_autosave = 'yes'
   let g:session_autoload = 'yes'
-  " let g:session_autoload = 'prompt'
 else
   let g:session_autosave = 'no'
   let g:session_autoload = 'no'
