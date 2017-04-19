@@ -359,7 +359,7 @@ nnoremap <S-Right> vl
 vnoremap <S-Down> gj
 vnoremap <S-Up> gk
 inoremap <S-Up> <C-o>vgk
-inoremap <S-Down> <C-o>vgj
+inoremap <S-Down> <C-o>vj
 inoremap <S-Left> <C-o>h<C-o>v
 inoremap <S-Right> <C-o>v
 
