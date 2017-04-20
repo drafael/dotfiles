@@ -230,15 +230,36 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols.readonly = '[RO]'
 
 if has('macunix') || system('uname') =~ 'Darwin'
   let g:airline_symbols.linenr = '␤'
   let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.readonly = '🔒'
 else
   let g:airline_symbols.linenr = 'LN'
   let g:airline_symbols.branch = 'BR'
+  let g:airline_symbols.readonly = '[RO]'
 endif
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_min_count = 2
+" let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#tab_min_count = 2
+" let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#close_symbol = 'X'
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+
+augroup StatusLine
+  autocmd!
+  autocmd ColorScheme PaperColor let g:airline_theme = 'papercolor'
+augroup END
 
 "
 "  GUI/Terminal
