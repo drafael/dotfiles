@@ -46,6 +46,7 @@ set wildmode=list:full         " show a list when pressing <Tab> and complete fi
 set shortmess=a                " disable annoying messages "Press Enter or type command to continue"
 set hidden
 set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
+set shell=bash
 
 set wildignore+=.DS_Store,._*,Thumbs.db,.netrwhist
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
@@ -381,11 +382,8 @@ let g:ctrlp_match_window_reversed = 0   " show the results from top to bottom
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:15'
 
 if executable('ag')
-  " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag -l --nocolor --hidden -g "" %s'
-  " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 else
   let g:ctrlp_show_hidden = 1
@@ -401,11 +399,12 @@ endif
 "
 if has("gui_running")
   let g:session_autosave = 'yes'
-  let g:session_autoload = 'yes'
+  let g:session_autoload = 'no'
 else
   let g:session_autosave = 'no'
   let g:session_autoload = 'no'
 endif
+
 let g:session_command_aliases = 1
 let g:session_lock_enabled = 0
 let g:session_default_overwrite = 1
@@ -435,6 +434,11 @@ let g:tagbar_type_go = {
     \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
     \ 'ctagsbin'  : 'gotags', 'ctagsargs' : '-sort -silent'
 \ }
+
+" Support resizing in tmux
+if exists('$TMUX')
+  set ttymouse=xterm2
+endif
 
 "  Change Vim cursor shape in different modes
 if exists('$TMUX')
