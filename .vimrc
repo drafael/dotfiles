@@ -108,6 +108,7 @@ Plugin 'autowitch/hive.vim'                 " Syntax highlighting for Hive
 Plugin 'burnettk/vim-angular'               " AngularJS with Vim
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
+Plugin 'Omer/vim-sparql'                    " syntax file for SPARQL
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'                 " Git wrapper so awesome, it should be illegal
