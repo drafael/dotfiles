@@ -280,9 +280,14 @@ if has("gui_running")          " GUI is running or is about to start
 
   map <F9> <Esc>:call ToggleToolbar()<CR>
 
-  set lines=41 columns=145     " window size
   " set guifont=Menlo:h14
   set guifont=Monaco:h14
+
+  if &guifont =~ 'Monaco'
+    set lines=41 columns=145
+  else
+    set lines=48 columns=145
+  endif
 
   colorscheme solarized
   " colorscheme PaperColor
