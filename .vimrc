@@ -120,10 +120,6 @@ Plugin 'lambdalisue/vim-gita'               " An awesome git handling plugin
 
 " color schemes
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
-Plugin 'nanotech/jellybeans.vim'            " http://vimcolors.com/1/jellybeans/dark
-Plugin 'cocopon/iceberg.vim'                " http://cocopon.me/app/vim-iceberg/
-Plugin 'stulzer/heroku-colorscheme'         " http://vimcolors.com/201/heroku/dark
-Plugin '29decibel/codeschool-vim-theme'     " http://vimcolors.com/33/codeschool/dark
 Plugin 'nlknguyen/papercolor-theme'         " Inspired by Google's Material Design
 
 call vundle#end()                           " end of plugin listing
@@ -319,12 +315,6 @@ else                           " this is console Vim
     elseif $ITERM_PROFILE =~ "PaperColor"
       colorscheme PaperColor
       let g:airline_theme = 'papercolor'
-    elseif $ITERM_PROFILE =~ "jellybeans"
-      colorscheme jellybeans
-    elseif $ITERM_PROFILE =~ "heroku"
-      colorscheme heroku-terminal
-    elseif $ITERM_PROFILE =~ "iceberg"
-      colorscheme iceberg
     endif
   else                         " Terminal.app
     set background=dark
