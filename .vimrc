@@ -48,6 +48,9 @@ set hidden
 set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
 set shell=bash
 
+" Eliminating delays on ESC
+set timeout timeoutlen=1000 ttimeoutlen=0
+
 set wildignore+=.DS_Store,._*,Thumbs.db,.netrwhist
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
 
@@ -294,7 +297,7 @@ if has("gui_running")          " GUI is running or is about to start
 
   if g:colors_name =~ 'solarized'
     let hour = strftime("%H")
-    if 6 <= hour && hour < 18
+    if 6 <= hour && hour < 17
       set background=light
     else
       set background=dark
