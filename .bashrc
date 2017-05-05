@@ -45,12 +45,19 @@ alias got=git
 alias j="jobs"
 alias h="history"
 
-alias brwe=brew
-alias cask='brew cask'
-alias systemctl='brew services'
-alias services='brew services'
-alias service='brew services'
+if [[ "$OSTYPE" =~ darwin ]]; then
 
+    alias brwe=brew
+    alias cask='brew cask'
+    alias systemctl='brew services'
+    alias services='brew services'
+    alias service='brew services'
+
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        source $(brew --prefix)/etc/bash_completion
+    fi
+    # [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+fi
 # Enable aliases to be sudo’ed
 # alias sudo='sudo '
 
@@ -62,7 +69,7 @@ if [ -f ~/.secrets ]; then
     source ~/.secrets
 fi
 if [ -f ~/.bashrc.local ]; then
-   source ~/.bashrc.local
+    source ~/.bashrc.local
 fi
 
 #
