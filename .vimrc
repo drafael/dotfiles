@@ -43,7 +43,7 @@ set smartcase                  "   unless they contain at least one capital lett
 set gdefault                   " global search by default :%s/pattern/replacement/g
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
-set shortmess=at
+set shortmess=aoOtTlfmnr
 set hidden
 set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
 set shell=bash
