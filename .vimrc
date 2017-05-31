@@ -43,7 +43,7 @@ set smartcase                  "   unless they contain at least one capital lett
 set gdefault                   " global search by default :%s/pattern/replacement/g
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
-set shortmess=a                " disable annoying messages "Press Enter or type command to continue"
+set shortmess=at
 set hidden
 set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
 set shell=bash
@@ -241,16 +241,22 @@ else
   let g:airline_symbols.readonly = '[RO]'
 endif
 
+" augroup OpenInTab
+"   autocmd!
+"   autocmd BufAdd,BufNewFile * nested if &filetype != "help" | tab sball | endif
+" augroup END
+
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#close_symbol = '×'
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_min_count = 2
-" let g:airline#extensions#tabline#buffers_label = 'b'
 let g:airline#extensions#tabline#tab_min_count = 2
-" let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#close_symbol = 'X'
-let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
