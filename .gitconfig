@@ -71,6 +71,7 @@
     prom = pull --rebase origin master
 
     # push
+    po  = push origin
     poh = push origin HEAD
     pod = push origin develop
     pom = push origin master
