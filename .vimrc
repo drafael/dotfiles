@@ -108,8 +108,6 @@ Plugin 'vim-scripts/Vim-R-plugin'
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting
 Plugin 'rverk/snipmate-pig'                 " PigLating snippets for snipmate
 Plugin 'autowitch/hive.vim'                 " Syntax highlighting for Hive
-Plugin 'burnettk/vim-angular'               " AngularJS with Vim
-Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
 Plugin 'Omer/vim-sparql'                    " syntax file for SPARQL
 
@@ -138,16 +136,15 @@ syntax enable                               " enable syntax highlighting
 
 augroup OverrideFileType
   autocmd!
-  autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
   autocmd BufRead,BufNewFile */*ansible*/*.yml,*/playbooks/*.yml,*/tasks/*.yml,*/roles/*.yml,*/vars/*,*/*_vars/*,*/handler/*.yml,*/handlers/*.yml setlocal filetype=ansible
   autocmd BufRead,BufNewFile */defaults/*,*/inventory/* setlocal filetype=ansible
-  autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile setlocal filetype=ruby
+  autocmd BufRead,BufNewFile */nginx/*.conf,nginx.conf if &filetype == '' | setfiletype nginx | endif
+  autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig
-  autocmd BufRead,BufNewFile *.hql setlocal filetype=hive
-  autocmd BufRead,BufNewFile *.q setlocal filetype=hive
+  autocmd BufRead,BufNewFile *.hql,*.q setlocal filetype=hive
 augroup END
 
 " in order to get full support for Golng I use vim-go plugin directly
@@ -214,7 +211,6 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 "
 " Autocomplete (Insert mode CTRL+N/CTRL+P)
 "
-set dictionary+=~/.vim/bundle/bootstrap-snippets/dictionary
 set complete+=k
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = '<C-n>'    " navigate the completion menu from top to bottom
