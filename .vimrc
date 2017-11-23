@@ -140,8 +140,8 @@ augroup OverrideFileType
   autocmd!
   autocmd BufRead,BufNewFile Vagrantfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */tasks/*.yml,*/roles/*.yml,*/handlers/*.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */vars/*,*/host_vars/*,*/group_vars/* setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */*ansible*/*.yml,*/playbooks/*.yml,*/tasks/*.yml,*/roles/*.yml,*/vars/*,*/*_vars/*,*/handler/*.yml,*/handlers/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */defaults/*,*/inventory/* setlocal filetype=ansible
   autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy
