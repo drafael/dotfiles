@@ -88,6 +88,7 @@
 
     # tag
     tags = tag -l
+    rmtag = !bash -c \"git tag -d $1 && git push origin :refs/tags/$1\" -
 
     # Push to Gerrit
     review = !bash -c \"git push --force origin HEAD:refs/for/$1\" -
