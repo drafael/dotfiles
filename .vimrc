@@ -157,6 +157,7 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_version_warning = 0
 
 " Sometimes when using both vim-go and syntastic Vim will start lagging while saving and opening files. The following fixes this:
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
