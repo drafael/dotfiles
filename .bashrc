@@ -65,11 +65,24 @@ fi
 alias path='echo -e ${PATH//:/\\n}'
 
 # API tokens and private stuff
-if [ -f ~/.secrets ]; then
-    source ~/.secrets
+if [ -f $HOME/.secrets ]; then
+    source $HOME/.secrets
 fi
-if [ -f ~/.bashrc.local ]; then
-    source ~/.bashrc.local
+if [ -f $HOME/.bashrc.local ]; then
+    source $HOME/.bashrc.local
+fi
+
+# Solarized skin for Midnight Commander
+if [ -f $HOME/.config/mc/solarized.ini ]; then
+    export MC_SKIN=$HOME/.config/mc/solarized.ini
+else
+    if [ -f $HOME/dotfiles/mc_solarized.ini ]; then
+        export MC_SKIN=$HOME/dotfiles/mc_solarized.ini
+    else
+        if [ -f $HOME/.mc_solarized.ini ]; then
+            export MC_SKIN=$HOME/.mc_solarized.ini
+        fi    
+    fi
 fi
 
 #
