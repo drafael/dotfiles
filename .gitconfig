@@ -80,6 +80,7 @@
     b  = branch -av
     br = branch -av
     bd = branch -D
+    rmb = !bash -c \"git branch -D $1 && git push origin --delete $1\" -
 
     # diff
     d  = diff
@@ -88,7 +89,7 @@
 
     # tag
     tags = tag -l
-    rmtag = !bash -c \"git tag -d $1 && git push origin :refs/tags/$1\" -
+    rmt = !bash -c \"git tag -d $1 && git push origin :refs/tags/$1\" -
 
     # Push to Gerrit
     review = !bash -c \"git push --force origin HEAD:refs/for/$1\" -
