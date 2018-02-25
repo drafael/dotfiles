@@ -60,5 +60,7 @@
 	],
 	"theme": "Default.sublime-theme",
 	"translate_tabs_to_spaces": true,
+	"highlight_line": true,
+	"trim_trailing_white_space_on_save": true,
 	"use_tab_stops": true
 }

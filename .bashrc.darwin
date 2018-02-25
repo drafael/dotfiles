@@ -41,7 +41,7 @@ if [[ $ITERM_PROFILE =~ Solarized ]]; then
     elif [ -f $HOME/dotfiles/mc_solarized.ini ]; then
         export MC_SKIN=$HOME/dotfiles/mc_solarized.ini
     elif [ -f $HOME/.dotfiles/mc_solarized.ini ]; then
-        export MC_SKIN=$HOME/.dotfiles/mc_solarized.ini        
+        export MC_SKIN=$HOME/.dotfiles/mc_solarized.ini
     fi
 fi
 
