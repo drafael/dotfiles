@@ -299,12 +299,12 @@ if has("gui_running")          " GUI is running or is about to start
   " colorscheme PaperColor
 
   if g:colors_name =~ 'solarized'
-    let hour = strftime("%H")
-    if 6 <= hour && hour < 17
-      set background=light
-    else
+    " let hour = strftime("%H")
+    " if 6 <= hour && hour < 17
+      " set background=light
+    " else
       set background=dark
-    endif
+    " endif
     call togglebg#map("<F5>")
   elseif g:colors_name =~ 'PaperColor'
     set background=light

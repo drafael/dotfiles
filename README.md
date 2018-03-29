@@ -5,13 +5,13 @@
   - Installation `brew tap caskroom/cask`
 
 ## Installation
-Clone to `~/dotfiles`
+Clone to `~/.dotfiles`
 
 ## Bash
 
 ```bash
-ln -s ~/dotfiles/.bashrc ~/.bashrc
-ln -s ~/dotfiles/.bash_profile ~/.bash_profile
+ln -s ~/.dotfiles/.bashrc ~/.bashrc
+ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 source ~/.bashrc
 ```
 I use a custom bash prompt (with Git statuses)
@@ -22,7 +22,7 @@ or simply [use my preferences](https://github.com/drafael/dotfiles#iterm2).
 ![Screenshot:](https://github.com/drafael/dotfiles/raw/master/share/custom-bash-prompt.png)
 
 ## [iTerm2](http://iterm2.com)
-Install `brew cask install iterm2` and point your preferences to `~/dotfiles/iTerm2/com.googlecode.iterm2.plist`
+Install `brew cask install iterm2` and point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
 ## Git
 Put in `~/.gitconfig.local` sensitive information such as the `git` user credentials, e.g.:
@@ -33,15 +33,15 @@ Put in `~/.gitconfig.local` sensitive information such as the `git` user credent
 ```
 and then
 ```bash
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/dotfiles/.gitignore_global ~/.gitignore
+ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/.gitignore_global ~/.gitignore
 ```
 In order to view all of my configured aliases enter `git aliases`
 
 ## Vim
 Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc) and [plugins](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#my-favorite-vim-plugins)
 ```bash
-ln -s ~/dotfiles/.vimrc ~/.vimrc
+ln -s ~/.dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall
 ```
 
@@ -53,13 +53,13 @@ Installation `brew cask install sublime-text`
 ```bash
 cd ~/Library/Application\ Support/Sublime\ Text\ 3/
 rm -r Installed\ Packages/
-ln -s ~/dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
+ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
 ```
 * [Syncing](https://packagecontrol.io/docs/syncing)
 ```bash
 cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
 rm -r User
-ln -s ~/dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
+ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 ```
 Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks)
 
@@ -67,7 +67,7 @@ Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/subl
 * [Vim](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#vim)
 * [Command-Line Tools](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#command-line-tools)
 * [Java Dev Env](https://github.com/drafael/dotfiles/blob/master/share/INSTALL.md#java-dev-env)
-* DRY or [Automated Setup](https://github.com/drafael/osx-bootstrap) `~/dotfiles/bin/bootstrap.sh`
+* DRY or [Automated Setup](https://github.com/drafael/osx-bootstrap) `~/.dotfiles/bin/bootstrap.sh`
 * [Productivity Tips](https://github.com/drafael/dotfiles/blob/master/share/PRODUCTIVITY.md)
 
 ## Acknowledgements

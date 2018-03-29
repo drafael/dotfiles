@@ -2,8 +2,8 @@
 #  Put this stuff in ~/.gitconfig.local
 #
 #  [user]
-#    name = Denys Rafael
-#    email = denys.rafael@icloud.com
+#    name = D.R4F4EL
+#    email = d.r4f4el@gmail.com
 
 [include]
     path = ~/.gitconfig.local
@@ -133,4 +133,3 @@
 
 [url "https://bitbucket.org/"]
     insteadOf = bb:
-
