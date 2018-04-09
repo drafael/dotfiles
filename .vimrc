@@ -140,7 +140,7 @@ augroup OverrideFileType
   autocmd BufRead,BufNewFile */*ansible*/*.yml,*/playbooks/*.yml,*/tasks/*.yml,*/roles/*.yml,*/vars/*,*/*_vars/*,*/handler/*.yml,*/handlers/*.yml setlocal filetype=ansible
   autocmd BufRead,BufNewFile */defaults/*,*/inventory/* setlocal filetype=ansible
   autocmd BufRead,BufNewFile */nginx/*.conf,nginx.conf if &filetype == '' | setfiletype nginx | endif
-  autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile setlocal filetype=ruby
+  autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
   autocmd BufRead,BufNewFile *.gradle setlocal filetype=groovy
   autocmd BufRead,BufNewFile *.pig setlocal filetype=pig
@@ -199,6 +199,7 @@ augroup OverrideWhitespaceSettings
   autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
   autocmd FileType vim setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType sh setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType ansible setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
   autocmd FileType hive setlocal expandtab

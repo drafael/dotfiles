@@ -1,5 +1,6 @@
 {
-	"extensions":
+	"tab_size": 2,
+    "extensions":
 	[
 		"bash",
 		"zsh",
