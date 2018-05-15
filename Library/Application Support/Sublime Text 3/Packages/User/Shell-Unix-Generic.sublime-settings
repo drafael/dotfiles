@@ -1,9 +1,9 @@
 {
-	"tab_size": 2,
-    "extensions":
+	"extensions":
 	[
 		"bash",
 		"zsh",
 		"sh"
-	]
+	],
+	"tab_size": 2
 }
