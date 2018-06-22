@@ -11,8 +11,8 @@
 ```
 
 * [homebrew-services](https://github.com/Homebrew/homebrew-services#homebrew-services) `brew tap homebrew/services`
-* [homebrew-cask](https://github.com/caskroom/homebrew-cask#homebrew-cask) `brew tap caskroom/cask`
-* [homebrew-cask-versions](https://github.com/caskroom/homebrew-versions#homebrew-cask-versions) `brew tap caskroom/versions`
+* [homebrew-cask](https://github.com/caskroom/homebrew-cask#homebrew-cask) `brew tap homebrew/cask`
+* [homebrew-cask-versions](https://github.com/caskroom/homebrew-versions#homebrew-cask-versions) `brew tap homebrew/cask-versions`
 
 ## Vim
 

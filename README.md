@@ -2,7 +2,7 @@
 * macOS
 * [Homebrew](http://brew.sh) package manager
 * [Homebrew-Cask](https://github.com/caskroom/homebrew-cask#homebrew-cask) for Mac applications distributed as binaries
-  - Installation `brew tap caskroom/cask`
+  - Installation `brew tap homebrew/cask`
 
 ## Installation
 Clone to `~/.dotfiles`

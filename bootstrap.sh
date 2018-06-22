@@ -14,8 +14,8 @@ if [ ! -x "$(command -v brew)" ]; then
   brew tap homebrew/bundle
   brew tap homebrew/versions
   brew tap homebrew/services
-  brew tap caskroom/cask
-  brew tap caskroom/versions
+  brew tap homebrew/cask
+  brew tap homebrew/cask-versions
 
   echo "cli tools..."
   brew install ack ag bash-completion htop mc nmap peco ranger ssh-copy-id tree tig tmux tree wget

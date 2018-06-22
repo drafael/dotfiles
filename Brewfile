@@ -6,8 +6,8 @@ tap "homebrew/science"
 tap "homebrew/services"
 tap "homebrew/versions"
 
-tap "caskroom/cask"
-tap "caskroom/versions"
+tap "homebrew/cask"
+tap "homebrew/cask-versions"
 
 brew "wget"
 brew "htop"
