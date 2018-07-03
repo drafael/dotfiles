@@ -18,7 +18,7 @@ if [ ! -x "$(command -v brew)" ]; then
   brew tap homebrew/cask-versions
 
   echo "cli tools..."
-  brew install ack ag bash-completion htop mc nmap peco ranger ssh-copy-id tree tig tmux tree wget
+  brew install ack ag bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget
 else
   echo "brew...    OK"
 fi

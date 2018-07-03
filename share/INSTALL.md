@@ -69,7 +69,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 ## Command-Line Tools
 
 ```bash
-brew install ack ag ansible bash-completion editorconfig htop httpie mc nmap peco ranger tree tig tmux tree vifm
+brew install ack ag ansible bash-completion editorconfig htop httpie mc ncdu nmap peco ranger tree tig tmux tree vifm
 ```
 
 * [ack](http://beyondgrep.com) — a code-searching tool like `grep`, optimized for programmers
@@ -80,6 +80,7 @@ brew install ack ag ansible bash-completion editorconfig htop httpie mc nmap pec
 * [htop](https://hisham.hm/htop/) — improved top (interactive process viewer)
 * [httpie](https://httpie.org/) — is a command line HTTP client
 * [mc](https://midnight-commander.org/) — terminal-based visual file manager
+* [ncdu](https://dev.yorhel.nl/ncdu) — is a disk usage analyzer with an ncurses interface
 * [nmap](https://nmap.org/) — port scanning utility for large networks
 * [peco](https://github.com/peco/peco) — simplistic interactive filtering tool
 * [ranger](http://ranger.nongnu.org/) — a console file manager with `vi` key bindings
