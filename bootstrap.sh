@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
-dotfiles=$(dirname "$0")
+dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+echo "================================================="
+echo "  dotfiles dir: $dotfiles"
+echo "================================================="
+
+echo "Bash..."
+set -x
+ln -sfn "$dotfiles/.bash_prompt" "$HOME/.bash_prompt"
+ln -sfn "$dotfiles/.bash_profile" "$HOME/.bash_profile"
+ln -sfn "$dotfiles/.bashrc" "$HOME/.bashrc"
+set +x
+source "$HOME/.bashrc"
 
 # if [ ! -x "$(command -v git)" ]; then
 #   xcode-select --install
@@ -11,6 +23,7 @@ if [ ! -x "$(command -v brew)" ]; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
   echo "taps..."
+  set -x
   brew tap homebrew/bundle
   brew tap homebrew/versions
   brew tap homebrew/services
@@ -19,34 +32,52 @@ if [ ! -x "$(command -v brew)" ]; then
 
   echo "cli tools..."
   brew install ack ag bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget
+  set +x
 else
-  echo "brew...    OK"
+  echo "brew...      OK"
 fi
 
-if brew ls --versions vim > /dev/null; then
-  echo "vim...     OK"
+if brew cask ls --versions iterm2 &> /dev/null; then
+  echo "iTerm2...    OK"
+else
+  echo "iTerm2..."
+  # brew cask install iterm2
+  # open "$dotfiles/iTerm2/colors/Solarized Dark.itermcolors"
+  # open "$dotfiles/iTerm2/colors/Solarized Light.itermcolors"
+  # open "$dotfiles/iTerm2/colors/papercolor-light.itermcolors"
+fi
+
+if brew ls --versions vim &> /dev/null; then
+  echo "vim...       OK"
 else
   echo "vim..."
+  set -x
   brew install vim --with-override-system-vi
+  brew install ctags
+  ln -sfn "$dotfiles/.ctags" "$HOME/.ctags"
+  set +x
 fi
 
 if [ -d "$HOME/.vim" ]; then
-  echo ".vimrc...  OK"
+  echo ".vimrc...    OK"
 else
   echo ".vimrc..."
-  ln -s "$dotfiles/.vimrc" "$HOME/.vimrc"
+  set -x
+  ln -sfn "$dotfiles/.vimrc" "$HOME/.vimrc"
   vim +PluginInstall +qall
+  set +x
 fi
 
 if [ ! -x "$(command -v mvim)" ]; then
   echo "MacVim..."
   brew cask install macvim
 else
-  echo "MacVim...  OK"
+  echo "MacVim...    OK"
 fi
 
 if [ ! -x "$(command -v subl)" ]; then
   echo "Sublime..."
+  set -x
   brew cask install sublime-text
   # Package Control
   mkdir -p "$HOME/Library/Application Support/Sublime Text 3"
@@ -56,8 +87,46 @@ if [ ! -x "$(command -v subl)" ]; then
   mkdir -p "$HOME/Library/Application Support/Sublime Text 3/Packages"
   rm -r "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
   ln -s "$dotfiles/Library/Application Support/Sublime Text 3/Packages/User" "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
+  set +x
 else
-  echo "Sublime... OK"
+  echo "Sublime...   OK"
+fi
+
+if [ ! -x "$(command -v docker)" ]; then
+  echo "Docker..."
+  set -x
+  brew cask install docker
+  brew install docker-clean
+  set +x
+else
+  echo "Docker...    OK"
+fi
+
+if [ ! -x "$(command -v java)" ]; then
+  echo "Java..."
+  set -x
+  brew cask install java8
+  # brew cask install java
+  brew install ant maven gradle
+  set +x
+else
+  echo "Java...      OK"
+fi
+
+if brew cask ls --versions tunnelblick &> /dev/null; then
+  echo "OpenVPN...   OK"
+else
+  echo "OpenVPN..."
+  brew cask install tunnelblick
+fi
+
+
+
+if [ ! -x "$(command -v ansible)" ]; then
+  echo "Ansible..."
+  brew install ansible
+else
+  echo "Ansible...   OK"
 fi
 
 if [ ! -x "$(command -v mas)" ]; then
@@ -67,11 +136,6 @@ if [ ! -x "$(command -v mas)" ]; then
   echo "1Password..."
   mas install 443987910
 else
-  echo "mas...     OK"
+  echo "mas...       OK"
 fi
 
-if [ ! -x "$(command -v ansible)" ]; then
-  brew install ansible
-else
-  echo "ansible... OK"
-fi
