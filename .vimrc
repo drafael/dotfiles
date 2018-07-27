@@ -291,9 +291,11 @@ if has("gui_running")          " GUI is running or is about to start
   set guifont=Monaco:h14
 
   if &guifont =~ 'Monaco'
-    set lines=41 columns=145
+    " set lines=41 columns=145
+    set lines=50 columns=200
   else
-    set lines=48 columns=145
+    " set lines=48 columns=145
+    set lines=60 columns=200
   endif
 
   colorscheme solarized
