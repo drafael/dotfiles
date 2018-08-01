@@ -15,7 +15,7 @@
 		"*.jar",
 		"*.zip"
 	],
-	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).tmTheme",
+	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).sublime-color-scheme",
 	"file_exclude_patterns":
 	[
 		"*.iml",
