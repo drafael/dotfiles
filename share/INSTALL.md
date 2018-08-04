@@ -1,7 +1,7 @@
 ## Requirements
 
 * macOS
-* Command Line Tools (CLT) for Xcode: `xcode-select --install`, https://developer.apple.com/downloads or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
+* Command Line Tools (CLT) for Xcode: `xcode-select --install`, <https://developer.apple.com/downloads> or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
 * A Bourne-compatible shell for installation (e.g. bash or zsh)
 
 ## [Homebrew](http://brew.sh)
@@ -11,8 +11,8 @@
 ```
 
 * [homebrew-services](https://github.com/Homebrew/homebrew-services#homebrew-services) `brew tap homebrew/services`
-* [homebrew-cask](https://github.com/caskroom/homebrew-cask#homebrew-cask) `brew tap homebrew/cask`
-* [homebrew-cask-versions](https://github.com/caskroom/homebrew-versions#homebrew-cask-versions) `brew tap homebrew/cask-versions`
+* [homebrew-cask](https://github.com/Homebrew/homebrew-cask#homebrew-cask) `brew tap homebrew/cask`
+* [homebrew-cask-versions](https://github.com/Homebrew/homebrew-cask-versions#homebrew-cask-versions) `brew tap homebrew/cask-versions`
 
 ## Vim
 
@@ -92,10 +92,20 @@ brew install ack ag ansible bash-completion editorconfig htop httpie mc ncdu nma
 
 ## Java Dev Env
 
-* JDK `brew cask install java`
+* Required Homebrew taps:
+  ```bash
+  brew tap homebrew/cask
+  brew tap homebrew/cask-versions
+  ```
+* Install Java:
+  ```bash
+  brew cask install java8
+  brew cask install java9
+  # latest version
+  brew cask install java
+  ```
 * Build tools `brew install ant maven gradle`
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
   - Community `brew cask install intellij-idea-ce`
   - Ultimate `brew cask install intellij-idea`
   - EAP `brew cask install intellij-idea-eap`
-* [Spring Boot](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) `brew tap pivotal/tap; brew install springboot`
