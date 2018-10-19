@@ -32,6 +32,13 @@ brew "gradle"
 cask "intellij-idea"
 # cask "intellij-idea-ce"
 
+# Python
+brew "pipenv"
+brew "pyenv"
+brew "pyenv-virtualenv"
+cask "pycharm"
+# cask "pycharm-ce"
+
 # Editors
 brew "vim", args: ["with-override-system-vi"]
 cask "sublime-text"
