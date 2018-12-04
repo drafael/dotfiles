@@ -1,13 +1,16 @@
 {
+	"Bash":
+	[
+		"bash",
+		"sh",
+		"zsh"
+	],
 	"HTML (Rails)":
 	[
 		"html.erb"
 	],
 	"INI":
 	[
-		".gitattributes",
-		".gitconfig",
-		".gitignore",
 		".npmrc",
 		"ini.dist"
 	],

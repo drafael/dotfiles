@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 
+if [[ -z "$DOTFILES_DIR" ]]; then
+  if [[ -d "$HOME/.dotfiles" ]]; then
+    export DOTFILES_DIR="$HOME/.dotfiles"
+  elif [[ -d "$HOME/dotfiles" ]]; then
+    export DOTFILES_DIR="$HOME/dotfiles"
+  else
+    export DOTFILES_DIR="$HOME"
+    echo "====== Using dotfiles from home dir ======="
+  fi
+fi
+
+echo "DOTFILES_DIR=$DOTFILES_DIR"
+
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 # Bash prompt with Git status
-if [ -f $HOME/.bash_prompt ]; then
-  source $HOME/.bash_prompt
-elif [ -f $HOME/dotfiles/.bash_prompt ]; then
-  source $HOME/dotfiles/.bash_prompt
-elif [ -f $HOME/.dotfiles/.bash_prompt ]; then
-  source $HOME/.dotfiles/.bash_prompt
+if [ -f $DOTFILES_DIR/.bash_prompt ]; then
+  source $DOTFILES_DIR/.bash_prompt
 fi
 
 export EDITOR=vim
@@ -25,6 +34,8 @@ alias ....="cd ../../.."
 alias g=git
 alias gt=git
 alias gti=git
+
+alias mvnsbr='mvn spring-boot:run'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -60,16 +71,12 @@ export MANPAGER="less -X"
 
 # OS specific stuff
 if [[ $OSTYPE =~ darwin ]]; then
-  if [ -f $HOME/dotfiles/.bashrc.darwin ]; then
-    source $HOME/dotfiles/.bashrc.darwin
-  elif [ -f $HOME/.dotfiles/.bashrc.darwin ]; then
-    source $HOME/.dotfiles/.bashrc.darwin
+  if [ -f $DOTFILES_DIR/.bashrc.darwin ]; then
+    source $DOTFILES_DIR/.bashrc.darwin
   fi
 elif [[ $OSTYPE =~ linux ]]; then
-  if [ -f $HOME/dotfiles/.bashrc.linux ]; then
-    source $HOME/dotfiles/.bashrc.linux
-  elif [ -f $HOME/.dotfiles/.bashrc.linux ]; then
-    source $HOME/.dotfiles/.bashrc.linux
+  if [ -f $DOTFILES_DIR/.bashrc.linux ]; then
+    source $DOTFILES_DIR/.bashrc.linux
   fi
 fi
 

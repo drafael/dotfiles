@@ -31,14 +31,8 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # Solarized skin for Midnight Commander
 #
 if [[ $ITERM_PROFILE =~ Solarized ]]; then
-  if [ -f $HOME/.config/mc/solarized.ini ]; then
-    export MC_SKIN=$HOME/.config/mc/solarized.ini
-  elif [ -f $HOME/.mc_solarized.ini ]; then
-    export MC_SKIN=$HOME/.mc_solarized.ini
-  elif [ -f $HOME/dotfiles/mc_solarized.ini ]; then
-    export MC_SKIN=$HOME/dotfiles/mc_solarized.ini
-  elif [ -f $HOME/.dotfiles/mc_solarized.ini ]; then
-    export MC_SKIN=$HOME/.dotfiles/mc_solarized.ini
+  if [ -f $DOTFILES_DIR/mc_solarized.ini ]; then
+    export MC_SKIN=$DOTFILES_DIR/mc_solarized.ini
   fi
 fi
 
