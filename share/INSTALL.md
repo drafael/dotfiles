@@ -69,7 +69,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 ## Command-Line Tools
 
 ```bash
-brew install ack ag ansible bash-completion editorconfig htop httpie mc ncdu nmap peco ranger tree tig tmux tree vifm
+brew install ack ag ansible bash-completion editorconfig htop httpie mc ncdu nmap peco ranger tree tig tmux tree
 ```
 
 * [ack](http://beyondgrep.com) — a code-searching tool like `grep`, optimized for programmers
@@ -88,7 +88,6 @@ brew install ack ag ansible bash-completion editorconfig htop httpie mc ncdu nma
 * [tig](http://jonas.nitro.dk/tig/) — ncurses-based text-mode interface for `git`
 * [tmux](http://tmux.github.io) — a terminal multiplexer
 * [tree](http://mama.indstate.edu/users/ice/tree/) — display directories as trees
-* [vifm](https://github.com/vifm/vifm) — ncurses based file manager with `vi` like keybindings
 
 ## Java Dev Env
 

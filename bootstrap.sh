@@ -157,8 +157,8 @@ if [ ! -x "$(command -v mas)" ]; then
   echo "mas..."
   brew install mas
 
-  echo "1Password..."
-  mas install 443987910
+  # echo "1Password..."
+  # mas install 443987910
 else
   echo "mas...       OK"
 fi
