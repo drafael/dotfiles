@@ -31,10 +31,19 @@ alias cd..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+# Git
 alias g=git
 alias gt=git
 alias gti=git
 
+# Maven
+alias mvnt='mvn test'
+alias mvnc='mvn clean'
+alias mvnp='mvn package'
+alias mvni='mvn install'
+alias mvnd='mvn deploy'
+alias mvnci='mvn clean install'
+alias mvncd='mvn clean deploy'
 alias mvnsbr='mvn spring-boot:run'
 
 # Enable aliases to be sudo’ed
