@@ -66,9 +66,11 @@
     rba     = rebase --abort
 
     # pull
-    pro  = pull --rebase origin
-    prod = pull --rebase origin develop
-    prom = pull --rebase origin master
+    pro   = pull --rebase origin
+    prot  = pull --rebase --tags origin
+    prod  = pull --rebase origin develop
+    prom  = pull --rebase origin master
+    promt = pull --rebase --tags origin master
 
     # push
     po  = push origin
