@@ -11,8 +11,6 @@ if [[ -z "$DOTFILES_DIR" ]]; then
   fi
 fi
 
-echo "DOTFILES_DIR=$DOTFILES_DIR"
-
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
