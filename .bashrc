@@ -34,13 +34,18 @@ alias g=git
 alias gt=git
 alias gti=git
 
+# Docker
+alias d=docker
+
 # Maven
+alias m=mvn
 alias mvnt='mvn test'
 alias mvnc='mvn clean'
 alias mvnp='mvn package'
 alias mvni='mvn install'
 alias mvnd='mvn deploy'
 alias mvnci='mvn clean install'
+alias mvncp='mvn clean package'
 alias mvncd='mvn clean deploy'
 alias mvnsbr='mvn spring-boot:run'
 
