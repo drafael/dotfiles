@@ -74,13 +74,14 @@ cask "pencil"
 cask "postgres"
 # cask "postman"
 cask "robo-3t"
+cask "microsoft-office"
 cask "skype-for-business"
 cask "telegram"
 cask "torbrowser"
 cask "transmission"
 cask "tunnelblick"
-cask "vagrant"
-cask "virtualbox"
+# cask "vagrant"
+# cask "virtualbox"
 
 cask "paw"
 cask "postico"
@@ -94,17 +95,18 @@ mas "1Password", id: 443987910
 mas "Keka", id: 470158793
 mas "Lightshot Screenshot", id: 526298438
 mas "Adblock Plus", id: 1432731683
-
 mas "Murasaki", id: 430300762
 mas "DjVu Reader", id: 733144595
 mas "VSD Viewer", id: 580788158
 mas "Xee³", id: 639764244
+
 # mas "OneDrive", id: 823766827
 # mas "Microsoft Remote Desktop", id: 715768417
+
 mas "FullContact", id: 1094748271
 mas "WhatsApp", id: 1147396723
 
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+# mas "Keynote", id: 409183694
+# mas "Numbers", id: 409203825
+# mas "Pages", id: 409201541
 

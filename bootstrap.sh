@@ -43,7 +43,7 @@ else
   echo "brew...      OK"
 fi
 
-for pkg in ack ag bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
+for pkg in ack ag ansible bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
   if [ ! -x "$(command -v $pkg)" ]; then
     echo "$pkg..."
     brew install $pkg
@@ -56,10 +56,69 @@ if brew cask ls --versions iterm2 &> /dev/null; then
   echo "iTerm2...    OK"
 else
   echo "iTerm2..."
-  # brew cask install iterm2
+  brew cask install iterm2
   # open "$dotfiles/iTerm2/colors/Solarized Dark.itermcolors"
   # open "$dotfiles/iTerm2/colors/Solarized Light.itermcolors"
   # open "$dotfiles/iTerm2/colors/papercolor-light.itermcolors"
+fi
+
+if [ ! -x "$(command -v mas)" ]; then
+  echo "mas..."
+  brew install mas
+else
+  echo "mas...       OK"
+fi
+
+echo "1Password...";            mas install 443987910
+echo "Keka...";                 mas install 470158793
+echo "Lightshot Screenshot..."; mas install 526298438
+echo "Adblock Plus...";         mas install 1432731683
+echo "Murasaki...";             mas install 430300762
+echo "DjVu Reader...";          mas install 733144595
+echo "VSD Viewer...";           mas install 580788158
+echo "Xee³...";                 mas install 639764244
+
+if brew cask ls --versions appcleaner &> /dev/null; then
+  echo "AppCleaner...   OK"
+else
+  echo "AppCleaner..."
+  brew cask install appcleaner
+fi
+
+if brew cask ls --versions firefox &> /dev/null; then
+  echo "Firefox...   OK"
+else
+  echo "Firefox..."
+  brew cask install firefox
+fi
+
+if brew cask ls --versions google-chrome &> /dev/null; then
+  echo "Google Chrome...   OK"
+else
+  echo "Google Chrome..."
+  brew cask install google-chrome
+fi
+
+if brew cask ls --versions dropbox &> /dev/null; then
+  echo "Dropbox...   OK"
+else
+  echo "Dropbox..."
+  brew cask install dropbox
+fi
+
+if brew cask ls --versions tunnelblick &> /dev/null; then
+  echo "OpenVPN...   OK"
+else
+  echo "OpenVPN..."
+  brew cask install tunnelblick
+fi
+
+if [ ! -x "$(command -v docker)" ]; then
+  echo "Docker..."
+  brew cask install docker
+  brew install docker-clean
+else
+  echo "Docker...    OK"
 fi
 
 if brew ls --versions vim &> /dev/null; then
@@ -114,14 +173,6 @@ else
   echo "Sublime Merge...   OK"
 fi
 
-if [ ! -x "$(command -v docker)" ]; then
-  echo "Docker..."
-  brew cask install docker
-  brew install docker-clean
-else
-  echo "Docker...    OK"
-fi
-
 # if [ ! -x "$(command -v java)" ]; then
 #   echo "Java..."
 #   set -x
@@ -154,52 +205,27 @@ fi
 #   brew cask install datagrip
 # fi
 
-if brew cask ls --versions firefox &> /dev/null; then
-  echo "Firefox...   OK"
-else
-  echo "Firefox..."
-  brew cask install firefox
-fi
-
-if brew cask ls --versions google-chrome &> /dev/null; then
-  echo "Google Chrome...   OK"
-else
-  echo "Google Chrome..."
-  brew cask install google-chrome
-fi
-
-if brew cask ls --versions tunnelblick &> /dev/null; then
-  echo "OpenVPN...   OK"
-else
-  echo "OpenVPN..."
-  brew cask install tunnelblick
-fi
-
-# if [ ! -x "$(command -v ansible)" ]; then
-#   echo "Ansible..."
-#   brew install ansible
+# if brew cask ls --versions microsoft-office &> /dev/null; then
+#   echo "Microsoft Office...   OK"
 # else
-#   echo "Ansible...   OK"
+#   echo "Microsoft Office..."
+#   brew cask install microsoft-office
 # fi
 
-if [ ! -x "$(command -v mas)" ]; then
-  echo "mas..."
-  brew install mas
-else
-  echo "mas...       OK"
-fi
+# if brew cask ls --versions skype-for-business &> /dev/null; then
+#   echo "Skype for Business...   OK"
+# else
+#   echo "Skype for Business..."
+#   brew cask install skype-for-business
+# fi
 
-echo "1Password...";            mas install 443987910
-echo "Keka...";                 mas install 470158793
-echo "Lightshot Screenshot..."; mas install 526298438
-echo "Adblock Plus...";         mas install 1432731683
-echo "Murasaki...";             mas install 430300762
-echo "DjVu Reader...";          mas install 733144595
-echo "VSD Viewer...";           mas install 580788158
-echo "Xee³...";                 mas install 639764244
-echo "Keynote...";              mas install 409183694
-echo "Numbers...";              mas install 409203825
-echo "Pages...";                mas install 409201541
+# echo "FullContact...";  mas install 1094748271
+# echo "Cobook...";       mas install 525225808
+
+# echo "Keynote...";      mas install 409183694
+# echo "Numbers...";      mas install 409203825
+# echo "Pages...";        mas install 409201541
+# echo "Aperture...";     mas install 408981426
 
 brew cleanup
 # EOF
