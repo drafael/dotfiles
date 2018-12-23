@@ -102,7 +102,7 @@ Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (Pre
 " syntax and filetype
 Plugin 'sheerun/vim-polyglot'               " A solid language pack for Vim
 Plugin 'gisphm/vim-gitignore'               " Gitignore plugin for Vim
-Plugin 'fatih/vim-go'                       " Go development plugin for Vim
+" Plugin 'fatih/vim-go'                       " Go development plugin for Vim
 Plugin 'Glench/Vim-Jinja2-Syntax'           " An up-to-date jinja2 syntax file
 Plugin 'vim-scripts/Vim-R-plugin'
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting
@@ -148,7 +148,7 @@ augroup OverrideFileType
 augroup END
 
 " in order to get full support for Golng I use vim-go plugin directly
-let g:polyglot_disabled = ['go']
+" let g:polyglot_disabled = ['go']
 
 " By default syntax-highlighting for Functions, Methods and Structs is disabled
 let g:go_highlight_functions = 1
