@@ -2,14 +2,15 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+
 	],
 	"installed_packages":
 	[
-		"A File Icon",
 		"Ansible",
 		"ApplySyntax",
 		"Dockerfile Syntax Highlighting",
 		"EditorConfig",
+		"FileIcons",
 		"INI",
 		"Jinja2",
 		"JSON Key-Value",

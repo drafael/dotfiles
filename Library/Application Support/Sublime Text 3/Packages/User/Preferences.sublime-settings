@@ -57,6 +57,7 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
+		"A File Icon",
 		"Vintage"
 	],
 	"theme": "Default.sublime-theme",
