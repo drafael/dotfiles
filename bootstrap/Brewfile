@@ -31,6 +31,7 @@ brew "gradle"
 
 cask "intellij-idea"
 # cask "intellij-idea-ce"
+cask "webstorm"
 
 # Python
 brew "pipenv"
@@ -63,31 +64,44 @@ brew "nmap"
 brew "ssh-copy-id"
 brew "tig"
 brew "youtube-dl"
-
-cask "docker"
 cask "flume"
 cask "goofy"
-cask "grammarly"
+# cask "grammarly"
 cask "marta"
 cask "mpv"
 cask "pencil"
 cask "postgres"
+
+# use Paw instead of Postman
 # cask "postman"
+
 cask "robo-3t"
-cask "microsoft-office"
-cask "skype-for-business"
 cask "telegram"
 cask "torbrowser"
 cask "transmission"
 cask "tunnelblick"
+
+cask "docker"
 # cask "vagrant"
 # cask "virtualbox"
 
+# better alternative to Postman
 cask "paw"
+
+# PostgreSQL GUI client
 cask "postico"
+
+# now using Sublime Merge
 # cask "tower"
-cask "tower2"
+# cask "tower2"
+
 cask "transmit"
+
+cask "microsoft-office"
+cask "skype-for-business"
+
+# cask "kindle"
+# cask "send-to-kindle"
 
 brew "mas"
 
