@@ -1,11 +1,8 @@
 
 tap "homebrew/bundle"
-tap "homebrew/core"
-tap "homebrew/dupes"
-tap "homebrew/science"
+# tap "homebrew/dupes"
+# tap "homebrew/science"
 tap "homebrew/services"
-tap "homebrew/versions"
-
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
 

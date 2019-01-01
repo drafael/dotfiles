@@ -34,7 +34,6 @@ if [ ! -x "$(command -v brew)" ]; then
   echo "taps..."
   set -x
   brew tap homebrew/bundle
-  brew tap homebrew/versions
   brew tap homebrew/services
   brew tap homebrew/cask
   brew tap homebrew/cask-versions
@@ -43,7 +42,7 @@ else
   echo "brew...      OK"
 fi
 
-for pkg in ack ag ansible bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
+for pkg in ack ag bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
   if [ ! -x "$(command -v $pkg)" ]; then
     echo "$pkg..."
     brew install $pkg
@@ -173,23 +172,24 @@ else
   echo "Sublime Merge...   OK"
 fi
 
-# if [ ! -x "$(command -v java)" ]; then
-#   echo "Java..."
-#   set -x
-#   brew cask install java8
-#   # brew cask install java
-#   brew install ant maven gradle
-#   set +x
-# else
-#   echo "Java...      OK"
-# fi
+if [ ! -x "$(command -v java)" ]; then
+  echo "Java..."
+  set -x
+  brew cask install java8
+#  brew cask install java
+  brew install ant maven gradle
+  set +x
+else
+  echo "Java...      OK"
+fi
 
-# if brew cask ls --versions intellij-idea &> /dev/null; then
-#   echo "Intellij IDEA...   OK"
-# else
-#   echo "Intellij IDEA..."
-#   brew cask install intellij-idea
-# fi
+if brew cask ls --versions intellij-idea &> /dev/null; then
+  echo "Intellij IDEA...   OK"
+else
+  echo "Intellij IDEA..."
+  brew cask install intellij-idea
+#  brew cask install intellij-idea-ce
+fi
 
 # if brew cask ls --versions pycharm &> /dev/null; then
 #   echo "PyCharm...   OK"
