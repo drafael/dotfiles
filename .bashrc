@@ -37,6 +37,9 @@ alias gti=git
 # Docker
 alias d=docker
 
+# AWS
+alias aws-whoami='aws sts get-caller-identity'
+
 # Maven
 alias m=mvn
 alias mvnt='mvn test'
