@@ -28,5 +28,6 @@ telegram
 transmission
 transmit
 tunnelblick
+viber
 vlc
 webstorm
