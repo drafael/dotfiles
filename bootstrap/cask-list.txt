@@ -12,12 +12,15 @@ kindle
 macvim
 marta
 microsoft-office
+mongodb
 mpv
 mucommander
 paw
 postgres
 postico
 pycharm
+rabbitmq-app
+redis-app
 robo-3t
 send-to-kindle
 sequel-pro
