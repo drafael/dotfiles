@@ -110,6 +110,8 @@ Plugin 'rverk/snipmate-pig'                 " PigLating snippets for snipmate
 Plugin 'autowitch/hive.vim'                 " Syntax highlighting for Hive
 Plugin 'bonsaiben/bootstrap-snippets'       " Bootstrap 3.2 markup snippets for vim-snipmate
 Plugin 'Omer/vim-sparql'                    " syntax file for SPARQL
+Plugin 'sboehler/jflex-vim'                 " JFlex
+Plugin 'dylon/vim-antlr'                    " ANTLR v3 and v4
 
 " command-line tools integration
 Plugin 'tpope/vim-fugitive'                 " Git wrapper so awesome, it should be illegal
