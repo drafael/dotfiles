@@ -4,13 +4,9 @@ export PATH=$PATH:$HOME/bin
 
 # Java
 if [ -x "$(command -v java)" ]; then
-  if /usr/libexec/java_home -v 1.8 &> /dev/null; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-    export PATH=$JAVA_HOME/bin:$PATH
-  elif /usr/libexec/java_home -v 11 &> /dev/null; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-    export PATH=$JAVA_HOME/bin:$PATH
-  fi
+  export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+  # export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+  export PATH=$JAVA_HOME/bin:$PATH
 fi
 
 # use colorized output when listing files
