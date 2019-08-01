@@ -19,7 +19,7 @@ brew "the_silver_searcher"
 
 # Java
 cask "java8"
-# cask "java9"
+cask "java11"
 # cask "java"
 
 brew "ant"
@@ -51,8 +51,9 @@ cask "android-sdk"
 brew "android-platform-tools"
 cask "android-file-transfer"
 
-brew "ansible"
+# brew "ansible"
 brew "awscli"
+cask "google-cloud-sdk"
 brew "docker-clean"
 brew "ffmpeg"
 brew "go"
@@ -96,6 +97,7 @@ cask "transmit"
 
 cask "microsoft-office"
 cask "skype-for-business"
+cask "slack"
 
 # cask "kindle"
 # cask "send-to-kindle"
@@ -114,7 +116,6 @@ mas "Xee³", id: 639764244
 # mas "OneDrive", id: 823766827
 # mas "Microsoft Remote Desktop", id: 715768417
 
-mas "FullContact", id: 1094748271
 mas "WhatsApp", id: 1147396723
 
 # mas "Keynote", id: 409183694

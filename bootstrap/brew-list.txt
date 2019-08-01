@@ -1,5 +1,4 @@
 ack
-ansible
 ant
 antlr
 aom
@@ -53,6 +52,7 @@ libvpx
 libyaml
 little-cms2
 lua
+lzo
 mas
 maven
 midnight-commander
@@ -94,6 +94,7 @@ tig
 tmux
 trash
 tree
+unbound
 vim
 webp
 wget

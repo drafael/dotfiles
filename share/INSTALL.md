@@ -69,12 +69,11 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 ## Command-Line Tools
 
 ```bash
-brew install ack ag ansible bash-completion editorconfig htop httpie mc ncdu nmap peco ranger tree tig tmux tree
+brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco ranger tree tig tmux tree
 ```
 
 * [ack](http://beyondgrep.com) — a code-searching tool like `grep`, optimized for programmers
 * [ag](https://github.com/ggreer/the_silver_searcher) — a code searching tool similar to `ack`, with a focus on speed
-* [ansible](https://www.ansible.com/) — "Automate All the Things!" (c)
 * [bash-completion](https://github.com/scop/bash-completion) — Programmable completion functions for bash
 * [editorconfig](EditorConfig) — helps define and maintain consistent coding styles between different editors and IDEs
 * [htop](https://hisham.hm/htop/) — improved top (interactive process viewer)
@@ -99,7 +98,7 @@ brew install ack ag ansible bash-completion editorconfig htop httpie mc ncdu nma
 * Install Java:
   ```bash
   brew cask install java8
-  brew cask install java9
+  brew cask install java11
   # latest version
   brew cask install java
   ```
