@@ -52,6 +52,10 @@ alias mvncp='mvn clean package'
 alias mvncd='mvn clean deploy'
 alias mvnsbr='mvn spring-boot:run'
 
+mvnsbrp() {
+  mvn spring-boot:run -Dspring-boot.run.profiles="$1"
+}
+
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 alias plz=sudo
@@ -103,5 +107,3 @@ fi
 if [ -f $HOME/.bashrc.local ]; then
   source $HOME/.bashrc.local
 fi
-
-# EOF
