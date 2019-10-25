@@ -139,7 +139,7 @@ syntax enable                               " enable syntax highlighting
 augroup OverrideFileType
   autocmd!
   autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */*ansible*/*.yml,*/playbooks/*.yml,*/tasks/*.yml,*/roles/*.yml,*/vars/*,*/*_vars/*,*/handler/*.yml,*/handlers/*.yml setlocal filetype=ansible
+  autocmd BufRead,BufNewFile */*ansible*/*.yml,*/playbooks/*.yml,*/tasks/*.yml,*/roles/*.yml,*/vars/*.yml,*/*_vars/*.yml,*/handler/*.yml,*/handlers/*.yml setlocal filetype=ansible
   autocmd BufRead,BufNewFile */defaults/*,*/inventory/* setlocal filetype=ansible
   autocmd BufRead,BufNewFile */nginx/*.conf,nginx.conf if &filetype == '' | setfiletype nginx | endif
   autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile setlocal filetype=ruby
