@@ -2,6 +2,9 @@
 
 export PATH=$PATH:$HOME/bin
 
+# Python
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # Java
 if [ -x "$(command -v java)" ]; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
