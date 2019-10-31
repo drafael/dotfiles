@@ -12,6 +12,9 @@ if [ -x "$(command -v java)" ]; then
   export PATH=$JAVA_HOME/bin:$PATH
 fi
 
+# Groovy
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+
 # use colorized output when listing files
 alias ls='ls -G'
 alias lsf='ls -FG'
