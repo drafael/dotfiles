@@ -3,7 +3,7 @@
 export PATH=$PATH:$HOME/bin
 
 # Python
-export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$HOME/.local/bin:$PATH"
 
 # Java
 if [ -x "$(command -v java)" ]; then
