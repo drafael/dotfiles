@@ -138,9 +138,9 @@ syntax enable                               " enable syntax highlighting
 
 augroup OverrideFileType
   autocmd!
-  autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */*ansible*/*.yml,*/playbooks/*.yml,*/tasks/*.yml,*/roles/*.yml,*/vars/*.yml,*/*_vars/*.yml,*/handler/*.yml,*/handlers/*.yml setlocal filetype=ansible
-  autocmd BufRead,BufNewFile */defaults/*,*/inventory/* setlocal filetype=ansible
+  autocmd BufRead,BufNewFile playbook.yml,site.yml,setup.yml,main.yml setlocal filetype=yaml.ansible
+  autocmd BufRead,BufNewFile */*ansible*/*.yml,*/playbooks/*.yml,*/tasks/*.yml,*/roles/*.yml,*/vars/*.yml,*/*_vars/*.yml,*/handler/*.yml,*/handlers/*.yml setlocal filetype=yaml.ansible
+  autocmd BufRead,BufNewFile hosts,*/defaults/*,*/inventory/* setlocal filetype=yaml.ansible
   autocmd BufRead,BufNewFile */nginx/*.conf,nginx.conf if &filetype == '' | setfiletype nginx | endif
   autocmd BufRead,BufNewFile Vagrantfile,Rakefile,Capfile,Gemfile,Brewfile setlocal filetype=ruby
   autocmd BufRead,BufNewFile *.html.erb setlocal filetype=html
@@ -207,6 +207,13 @@ augroup OverrideWhitespaceSettings
   autocmd FileType hive setlocal expandtab
   autocmd FileType ruby,haml,eruby,sass,cucumber setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 augroup END
+
+"
+" Ansible syntax
+"
+let g:ansible_extra_keywords_highlight = 1
+" let g:ansible_name_highlight = 'd'    " dim the instances of name: found
+let g:ansible_name_highlight = 'b'    " brighten the instances of name: found
 
 " To ensure that plugin works well with Tim Pope's fugitive
 " and to avoid loading EditorConfig for any remote files over ssh
