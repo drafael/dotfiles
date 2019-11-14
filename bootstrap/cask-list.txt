@@ -1,8 +1,9 @@
 appcleaner
 docker
 dropbox
+electrum
+exodus
 firefox
-free-ruler
 goofy
 google-chrome
 google-cloud-sdk
@@ -14,6 +15,7 @@ kindle
 macvim
 marta
 microsoft-office
+microsoft-teams
 mongodb
 mpv
 mucommander
@@ -36,5 +38,6 @@ transmit
 tunnelblick
 viber
 vlc
+wasabi-wallet
 webstorm
 whatsapp

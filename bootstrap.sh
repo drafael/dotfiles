@@ -42,7 +42,7 @@ else
   echo "brew...      OK"
 fi
 
-for pkg in ack ag bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
+for pkg in ansible ack ag bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
   if [ ! -x "$(command -v $pkg)" ]; then
     echo "$pkg..."
     brew install $pkg
@@ -75,7 +75,7 @@ echo "Adblock Plus...";         mas install 1432731683
 echo "Murasaki...";             mas install 430300762
 echo "DjVu Reader...";          mas install 733144595
 echo "VSD Viewer...";           mas install 580788158
-echo "Xee³...";                 mas install 639764244
+# echo "Xee³...";                 mas install 639764244
 
 if brew cask ls --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
@@ -144,6 +144,7 @@ fi
 if [ ! -x "$(command -v mvim)" ]; then
   echo "MacVim..."
   brew cask install macvim
+  defaults write org.vim.MacVim MMTitlebarAppearsTransparent true
 else
   echo "MacVim...    OK"
 fi
@@ -176,7 +177,7 @@ if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
   set -x
   brew cask install java8
-#  brew cask install java
+  brew cask install java11
   brew install ant maven gradle
   set +x
 else
@@ -191,12 +192,12 @@ else
 #  brew cask install intellij-idea-ce
 fi
 
-# if brew cask ls --versions pycharm &> /dev/null; then
-#   echo "PyCharm...   OK"
-# else
-#   echo "PyCharm..."
-#   brew cask install pycharm
-# fi
+if brew cask ls --versions pycharm &> /dev/null; then
+  echo "PyCharm...   OK"
+else
+  echo "PyCharm..."
+  brew cask install pycharm
+fi
 
 # if brew cask ls --versions datagrip &> /dev/null; then
 #   echo "DataGrip...   OK"
