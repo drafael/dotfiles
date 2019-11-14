@@ -1,0 +1,20 @@
+[
+    // Windows - title bar
+    {
+        "class": "title_bar",
+        "fg": [215, 218, 224],
+        "bg": [0, 43, 54]
+    },
+
+    // Sidebar panel settings and behavioring
+    {
+      "class": "sidebar_label",
+      "color": [96, 125, 139],
+      "font.face": "var(font_face)",
+      "font.size": 12,
+      "font.bold": false,
+      "font.italic": false,
+      "shadow_color": [255, 255, 255, 0],
+      "shadow_offset": [0, 0]
+    },
+]
