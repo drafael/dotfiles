@@ -189,7 +189,6 @@ if brew cask ls --versions intellij-idea &> /dev/null; then
 else
   echo "Intellij IDEA..."
   brew cask install intellij-idea
-#  brew cask install intellij-idea-ce
 fi
 
 if brew cask ls --versions pycharm &> /dev/null; then

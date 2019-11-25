@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 if [[ -z "$DOTFILES_DIR" ]]; then
   if [[ -d "$HOME/.dotfiles" ]]; then
@@ -12,12 +12,6 @@ fi
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
-# Bash prompt with Git status
-if [ -f $DOTFILES_DIR/.bash_prompt ]; then
-  source $DOTFILES_DIR/.bash_prompt
-fi
-
 export EDITOR=vim
 
 # always use vim instead of vi
@@ -89,12 +83,12 @@ export MANPAGER="less -X"
 
 # OS specific stuff
 if [[ $OSTYPE =~ darwin ]]; then
-  if [ -f $DOTFILES_DIR/.bashrc.darwin ]; then
-    source $DOTFILES_DIR/.bashrc.darwin
+  if [ -f $DOTFILES_DIR/.zshrc.darwin ]; then
+    source $DOTFILES_DIR/.zshrc.darwin
   fi
 elif [[ $OSTYPE =~ linux ]]; then
-  if [ -f $DOTFILES_DIR/.bashrc.linux ]; then
-    source $DOTFILES_DIR/.bashrc.linux
+  if [ -f $DOTFILES_DIR/.zshrc.linux ]; then
+    source $DOTFILES_DIR/.zshrc.linux
   fi
 fi
 
@@ -105,4 +99,8 @@ fi
 
 if [ -f $HOME/.bashrc.local ]; then
   source $HOME/.bashrc.local
+fi
+
+if [ -f $HOME/.zshrc.local ]; then
+  source $HOME/.zshrc.local
 fi
