@@ -75,9 +75,6 @@ export HISTFILESIZE=10000
 # (default is 500)
 export HISTSIZE=10000
 
-# Append to the history file when exiting instead of overwriting it
-shopt -s histappend
-
 # Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
 

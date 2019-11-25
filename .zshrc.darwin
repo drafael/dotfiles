@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
-fpath=(/usr/local/share/zsh-completions $fpath)
-
-if [ -f /usr/local/opt/zsh-git-prompt/zshrc.sh ]; then
-  source /usr/local/opt/zsh-git-prompt/zshrc.sh
+if [ -f "/usr/local/opt/zsh-git-prompt/zshrc.sh" ]; then
+  source "/usr/local/opt/zsh-git-prompt/zshrc.sh"
 fi
+
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 export PATH=$PATH:$HOME/bin
 
