@@ -1,7 +1,3 @@
-#!/usr/bin/env bash
-
-# Python
-export PATH="$HOME/.poetry/bin:$HOME/.local/bin:$PATH"
 
 # set 256 color profile where possible
 if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
@@ -9,8 +5,3 @@ if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev
 elif infocmp xterm-256color >/dev/null 2>&1; then
   export TERM=xterm-256color
 fi
-
-# use colorized output when listing files
-alias ls='ls --color=auto'
-alias lsl='ls --color=auto -l'
-alias lsa='ls --color=auto -a'
