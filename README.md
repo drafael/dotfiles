@@ -10,12 +10,18 @@
 
 Clone to `~/.dotfiles`
 
+## Zsh
+
+```bash
+ln -s ~/.dotfiles/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/.zprofile ~/.zprofile
+```
+
 ## Bash
 
 ```bash
 ln -s ~/.dotfiles/.bashrc ~/.bashrc
 ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
-source ~/.bashrc
 ```
 
 I use a custom bash prompt (with Git statuses)
