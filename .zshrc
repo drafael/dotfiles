@@ -42,12 +42,23 @@ DISABLE_AUTO_UPDATE="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(git docker kubectl mvn
+plugins=(
+  git
+  # git-prompt
+  # git-flow
+  docker
+  # docker-compose
+  kubectl minikube
+  # helm
+  mvn
   # gradle
+  terraform
   # httpie
   # aws
-  # pyenv
+  # python pip pyenv pipenv
   # gem
+  # node npm yarn
+  # nmap
 )
 
 source $ZSH/oh-my-zsh.sh
