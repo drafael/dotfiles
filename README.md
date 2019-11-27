@@ -64,6 +64,13 @@ ln -s ~/.dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall
 ```
 
+## [Spacemacs](https://www.spacemacs.org/)
+
+```bash
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+ln -s ~/.dotfiles/.spacemacs ~/.spacemacs
+```
+
 ## [Sublime Text](https://www.sublimetext.com/)
 
 Installation `brew cask install sublime-text`
