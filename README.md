@@ -24,13 +24,6 @@ ln -s ~/.dotfiles/.bashrc ~/.bashrc
 ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ```
 
-I use a custom bash prompt (with Git statuses)
-created by [@necolas](https://github.com/necolas) and based on the [Solarized](http://ethanschoonover.com/solarized) color palette. For best results, you should install
-[iTerm2](http://iterm2.com) and import [Solarized Dark colors](https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized)
-or simply [use my preferences](https://github.com/drafael/dotfiles#iterm2).
-
-![Screenshot:](share/custom-bash-prompt.png)
-
 ## [iTerm2](http://iterm2.com)
 
 Install `brew cask install iterm2` and point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
