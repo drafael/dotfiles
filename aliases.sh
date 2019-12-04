@@ -1,24 +1,11 @@
 
 # OS specific stuff
 if [[ $OSTYPE =~ darwin ]]; then
-  # use colorized output when listing files
-  alias ls='ls -G'
-  alias lsf='ls -FG'
-  alias lsl='ls -lAG'
-  alias lsa='ls -AG'
-
-  # Homebrew
   alias brwe='brew'
   alias cask='brew cask'
   alias systemctl='brew services'
   alias services='brew services'
   alias service='brew services'
-  #
-elif [[ $OSTYPE =~ linux ]]; then
-  # use colorized output when listing files
-  alias ls='ls --color=auto'
-  alias lsl='ls --color=auto -l'
-  alias lsa='ls --color=auto -a'
 fi
 
 # always use vim instead of vi
