@@ -54,7 +54,6 @@ source $ZSH/oh-my-zsh.sh
 unset ZSH_THEME
 fpath+=("$DOTFILES_DIR/zsh-prompt")
 autoload -U promptinit; promptinit
-zstyle :prompt:pure:path color 242
 zstyle :prompt:pure:git:branch color green
 zstyle :prompt:pure:git:action color green
 zstyle :prompt:pure:prompt:error color red
