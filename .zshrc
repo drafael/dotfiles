@@ -14,7 +14,7 @@ export ZSH=$DOTFILES_DIR/oh-my-zsh
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="avit"
+# ZSH_THEME="avit"
 # ZSH_THEME="gentoo"
 # ZSH_THEME="kphoen"
 # ZSH_THEME="wezm"
@@ -62,6 +62,18 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Pretty, minimal and fast ZSH prompt
+# https://github.com/sindresorhus/pure
+unset ZSH_THEME
+fpath+=("$DOTFILES_DIR/zsh-prompt")
+autoload -U promptinit; promptinit
+zstyle :prompt:pure:path color 242
+zstyle :prompt:pure:git:branch color green
+zstyle :prompt:pure:git:action color green
+zstyle :prompt:pure:prompt:error color red
+zstyle :prompt:pure:prompt:success color green
+prompt pure
 
 
 if [ -f $DOTFILES_DIR/env.sh ]; then
