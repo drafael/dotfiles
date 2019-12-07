@@ -142,4 +142,3 @@ xvid
 xz
 youtube-dl
 zlib
-zsh-git-prompt
