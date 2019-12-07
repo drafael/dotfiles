@@ -32,4 +32,4 @@ if [[ $ITERM_PROFILE =~ Solarized ]]; then
 fi
 
 # Python
-export PATH="$HOME/.poetry/bin:$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.poetry/bin"
