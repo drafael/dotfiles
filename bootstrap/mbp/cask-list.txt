@@ -4,6 +4,7 @@ dropbox
 electrum
 exodus
 firefox
+font-hack
 goofy
 google-chrome
 google-cloud-sdk
