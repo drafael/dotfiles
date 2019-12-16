@@ -42,7 +42,7 @@ else
   echo "brew...      OK"
 fi
 
-for pkg in ack ag bash-completion htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
+for pkg in ack ag bash-completion htop mc ncdu nmap peco pt ranger ssh-copy-id tree tig tmux tree wget; do
   if [ ! -x "$(command -v $pkg)" ]; then
     echo "$pkg..."
     brew install $pkg
@@ -115,7 +115,6 @@ fi
 if [ ! -x "$(command -v docker)" ]; then
   echo "Docker..."
   brew cask install docker
-  brew install docker-clean
 else
   echo "Docker...    OK"
 fi
@@ -209,13 +208,6 @@ fi
 # else
 #   echo "Microsoft Office..."
 #   brew cask install microsoft-office
-# fi
-
-# if brew cask ls --versions skype-for-business &> /dev/null; then
-#   echo "Skype for Business...   OK"
-# else
-#   echo "Skype for Business..."
-#   brew cask install skype-for-business
 # fi
 
 # echo "FullContact...";  mas install 1094748271

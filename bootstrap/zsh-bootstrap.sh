@@ -8,7 +8,6 @@ echo "================================================="
 
 echo "zsh..."
 set -x
-ln -sfn "$dotfiles/.zprofile" "$HOME/.zprofile"
 ln -sfn "$dotfiles/.zshrc" "$HOME/.zshrc"
 set +x
 source "$HOME/.zshrc"
@@ -42,7 +41,7 @@ else
   echo "brew...      OK"
 fi
 
-for pkg in ack ag gcc zsh-completion zsh-git-prompt htop mc ncdu nmap peco ranger ssh-copy-id tree tig tmux tree wget; do
+for pkg in ack ag gcc htop mc ncdu neovim nmap peco pt ranger ssh-copy-id tree tig tmux tree wget; do
   if [ ! -x "$(command -v $pkg)" ]; then
     echo "$pkg..."
     brew install $pkg
@@ -115,7 +114,6 @@ fi
 if [ ! -x "$(command -v docker)" ]; then
   echo "Docker..."
   brew cask install docker
-  brew install docker-clean
 else
   echo "Docker...    OK"
 fi
