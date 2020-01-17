@@ -2,6 +2,7 @@ android-file-transfer
 appcleaner
 datagrip
 docker
+font-fira-code
 font-hack
 free-ruler
 goofy
@@ -11,9 +12,11 @@ grammarly
 intellij-idea
 iterm2
 java11
+jetbrains-toolbox
 macvim
 marshallofsound-google-play-music-player
 marta
+miniconda
 mongodb
 mpv
 mucommander

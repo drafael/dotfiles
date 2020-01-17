@@ -182,7 +182,7 @@ set autoindent                              " automatically indent to match adja
 set smartindent
 set nolist                                  " hide whitespace characters
 set linebreak
-let &listchars='tab:▸ ,space:·,nbsp:_,trail:·,eol:¬'
+let &listchars='tab:❯ ,space:·,nbsp:_,trail:·,eol:¬'
 let &showbreak='↪ '                         " string to put at the start of lines that have been wrapped
 set backspace=indent,eol,start              " configure backspace so it acts as it should act
 let g:indentLine_enabled = 0                " Plugin 'Yggdroot/indentLine'
@@ -298,6 +298,7 @@ if has("gui_running")          " GUI is running or is about to start
 
   " set guifont=Menlo:h14
   set guifont=Monaco:h14
+  " let &guifont='Fira Code:h14'
 
   if &guifont =~ 'Monaco'
     " set lines=41 columns=145
