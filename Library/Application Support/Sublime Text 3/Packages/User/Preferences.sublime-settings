@@ -1,10 +1,8 @@
 {
 	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).sublime-color-scheme",
 	"font_face": "Monaco",
-	// "font_face": "Fira Code",
 	"font_options":
 	[
-		// "gray_antialias"
 		"subpixel_antialias"
 	],
 	"font_size": 14,
