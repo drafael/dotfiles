@@ -23,6 +23,10 @@ alias gti=git
 
 # Docker
 alias d=docker
+alias k=kubectl
+alias kaf='kubectl apply -f'
+alias kg='kubectl get'
+alias kd='kubectl describe'
 
 # AWS
 alias aws-whoami='aws sts get-caller-identity'
