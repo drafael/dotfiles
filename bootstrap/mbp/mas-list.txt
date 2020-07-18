@@ -4,7 +4,7 @@
 443987910 1Password (6.8.9)
 526298438 Lightshot Screenshot (2.22)
 430300762 Murasaki (2.3)
-1432731683 Adblock Plus (2.0.6)
+1432731683 Adblock Plus (2.1)
 733144595 DjVu Reader (2.2.1)
 409201541 Pages (8.2.1)
 1046196135 Курсы валют Украины (1.0.7)
