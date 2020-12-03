@@ -69,12 +69,10 @@ fi
 
 echo "1Password...";            mas install 443987910
 echo "Keka...";                 mas install 470158793
-echo "Lightshot Screenshot..."; mas install 526298438
 echo "Adblock Plus...";         mas install 1432731683
 echo "Murasaki...";             mas install 430300762
 echo "DjVu Reader...";          mas install 733144595
 echo "VSD Viewer...";           mas install 580788158
-# echo "Xee³...";                 mas install 639764244
 
 if brew cask ls --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
@@ -173,7 +171,6 @@ fi
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
   set -x
-  brew cask install java8
   brew cask install java11
   brew install ant maven gradle
   set +x

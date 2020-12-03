@@ -70,12 +70,10 @@ fi
 
 echo "1Password...";            mas install 443987910
 echo "Keka...";                 mas install 470158793
-echo "Lightshot Screenshot..."; mas install 526298438
 echo "Adblock Plus...";         mas install 1432731683
 echo "Murasaki...";             mas install 430300762
 echo "DjVu Reader...";          mas install 733144595
 echo "VSD Viewer...";           mas install 580788158
-# echo "Xee³...";                 mas install 639764244
 
 if brew cask ls --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
@@ -174,7 +172,6 @@ fi
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
   set -x
-  brew cask install java8
   brew cask install java11
   brew install ant maven gradle
   set +x
@@ -210,13 +207,9 @@ fi
 #   brew cask install microsoft-office
 # fi
 
-# echo "FullContact...";  mas install 1094748271
-# echo "Cobook...";       mas install 525225808
-
 # echo "Keynote...";      mas install 409183694
 # echo "Numbers...";      mas install 409203825
 # echo "Pages...";        mas install 409201541
-# echo "Aperture...";     mas install 408981426
 
 brew cleanup
 # EOF

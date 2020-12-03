@@ -18,7 +18,6 @@ brew "ack"
 brew "the_silver_searcher"
 
 # Java
-cask "java8"
 cask "java11"
 # cask "java"
 
@@ -62,8 +61,6 @@ brew "nmap"
 brew "ssh-copy-id"
 brew "tig"
 brew "youtube-dl"
-cask "flume"
-cask "goofy"
 # cask "grammarly"
 cask "marta"
 cask "mpv"
@@ -96,7 +93,7 @@ cask "postico"
 cask "transmit"
 
 cask "microsoft-office"
-cask "skype-for-business"
+# cask "skype-for-business"
 cask "slack"
 
 # cask "kindle"
@@ -106,12 +103,11 @@ brew "mas"
 
 mas "1Password", id: 443987910
 mas "Keka", id: 470158793
-mas "Lightshot Screenshot", id: 526298438
+# mas "Lightshot Screenshot", id: 526298438
 mas "Adblock Plus", id: 1432731683
 mas "Murasaki", id: 430300762
 mas "DjVu Reader", id: 733144595
 mas "VSD Viewer", id: 580788158
-mas "Xee³", id: 639764244
 
 # mas "OneDrive", id: 823766827
 # mas "Microsoft Remote Desktop", id: 715768417
