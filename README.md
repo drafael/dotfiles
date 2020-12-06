@@ -14,7 +14,7 @@ Clone to `~/.dotfiles`
 ```bash
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
-Modified [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) with [Pretty, minimal and fast ZSH prompt](https://github.com/sindresorhus/pure#pure)
+Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal zsh prompt](https://github.com/sindresorhus/pure#pure)
 
 ## Bash
 
@@ -26,6 +26,7 @@ ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ## [iTerm2](http://iterm2.com)
 
 Install `brew install iterm2` and point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
+
 ![iterm2](share/iterm2-solarized-dark-theme.png)
 
 ## Git
