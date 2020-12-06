@@ -79,6 +79,9 @@ cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
 rm -r User
 ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 ```
+
+![sublime-text](share/sublime-text-material-solarized-theme.png)
+
 Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks)
 
 ## Workstation Setup
