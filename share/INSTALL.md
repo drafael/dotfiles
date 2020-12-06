@@ -1,4 +1,4 @@
-## Requirements
+## Prerequisites
 
 * macOS
 * Command Line Tools (CLT) for Xcode: `xcode-select --install`, <https://developer.apple.com/downloads> or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
@@ -7,7 +7,7 @@
 ## [Homebrew](http://brew.sh)
 
 ```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 * [homebrew-services](https://github.com/Homebrew/homebrew-services#homebrew-services) `brew tap homebrew/services`

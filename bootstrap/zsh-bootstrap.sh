@@ -28,13 +28,12 @@ fi
 
 if [ ! -x "$(command -v brew)" ]; then
   echo "brew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   echo "taps..."
   set -x
   brew tap homebrew/bundle
   brew tap homebrew/services
-  brew tap homebrew/cask
   brew tap homebrew/cask-versions
   set +x
 else
@@ -50,11 +49,11 @@ for pkg in ack ag gcc htop mc ncdu neovim nmap peco pt ranger ssh-copy-id tree t
   fi
 done
 
-if brew cask ls --versions iterm2 &> /dev/null; then
+if brew brew ls --cask --versions iterm2 &> /dev/null; then
   echo "iTerm2...    OK"
 else
   echo "iTerm2..."
-  brew cask install iterm2
+  brew install iterm2
   # open "$dotfiles/iTerm2/colors/Solarized Dark.itermcolors"
   # open "$dotfiles/iTerm2/colors/Solarized Light.itermcolors"
   # open "$dotfiles/iTerm2/colors/papercolor-light.itermcolors"
@@ -78,40 +77,40 @@ if brew cask ls --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
 else
   echo "AppCleaner..."
-  brew cask install appcleaner
+  brew install --cask appcleaner
 fi
 
-if brew cask ls --versions firefox &> /dev/null; then
+if brew ls --cask --versions firefox &> /dev/null; then
   echo "Firefox...   OK"
 else
   echo "Firefox..."
-  brew cask install firefox
+  brew install --cask firefox
 fi
 
-if brew cask ls --versions google-chrome &> /dev/null; then
+if brew ls --cask --versions google-chrome &> /dev/null; then
   echo "Google Chrome...   OK"
 else
   echo "Google Chrome..."
-  brew cask install google-chrome
+  brew install --cask google-chrome
 fi
 
-if brew cask ls --versions dropbox &> /dev/null; then
+if brew ls --cask --versions dropbox &> /dev/null; then
   echo "Dropbox...   OK"
 else
   echo "Dropbox..."
-  brew cask install dropbox
+  brew install --cask dropbox
 fi
 
-if brew cask ls --versions tunnelblick &> /dev/null; then
+if brew ls --cask --versions tunnelblick &> /dev/null; then
   echo "OpenVPN...   OK"
 else
   echo "OpenVPN..."
-  brew cask install tunnelblick
+  brew install --cask tunnelblick
 fi
 
 if [ ! -x "$(command -v docker)" ]; then
   echo "Docker..."
-  brew cask install docker
+  brew install --cask docker
 else
   echo "Docker...    OK"
 fi
@@ -139,7 +138,7 @@ fi
 
 if [ ! -x "$(command -v mvim)" ]; then
   echo "MacVim..."
-  brew cask install macvim
+  brew install --cask macvim
 else
   echo "MacVim...    OK"
 fi
@@ -147,7 +146,7 @@ fi
 if [ ! -x "$(command -v subl)" ]; then
   echo "Sublime Text..."
   set -x
-  brew cask install sublime-text
+  brew install sublime-text
   # Package Control
   mkdir -p "$HOME/Library/Application Support/Sublime Text 3"
   rm -r "$HOME/Library/Application Support/Sublime Text 3/Installed Packages"
@@ -163,7 +162,7 @@ fi
 
 if [ ! -x "$(command -v smerge)" ]; then
   echo "Sublime Merge..."
-  brew cask install sublime-merge
+  brew install sublime-merge
 else
   echo "Sublime Merge...   OK"
 fi
@@ -171,46 +170,46 @@ fi
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
   set -x
-  brew cask install java11
+  brew install java11
   brew install ant maven gradle
   set +x
 else
   echo "Java...      OK"
 fi
 
-if brew cask ls --versions intellij-idea &> /dev/null; then
+if brew ls --cask --versions intellij-idea &> /dev/null; then
   echo "Intellij IDEA...   OK"
 else
   echo "Intellij IDEA..."
-  brew cask install intellij-idea
+  brew install intellij-idea
 fi
 
-if brew cask ls --versions pycharm &> /dev/null; then
+if brew ls --cask --versions pycharm &> /dev/null; then
   echo "PyCharm...   OK"
 else
   echo "PyCharm..."
-  brew cask install pycharm
+  brew install pycharm
 fi
 
-# if brew cask ls --versions datagrip &> /dev/null; then
+# if brew ls --cask --versions datagrip &> /dev/null; then
 #   echo "DataGrip...   OK"
 # else
 #   echo "DataGrip..."
-#   brew cask install datagrip
+#   brew install datagrip
 # fi
 
-# if brew cask ls --versions microsoft-office &> /dev/null; then
+# if brew ls --cask --versions microsoft-office &> /dev/null; then
 #   echo "Microsoft Office...   OK"
 # else
 #   echo "Microsoft Office..."
-#   brew cask install microsoft-office
+#   brew install microsoft-office
 # fi
 
-if brew cask ls --versions microsoft-teams &> /dev/null; then
+if brew ls --cask --versions microsoft-teams &> /dev/null; then
   echo "Microsoft Teams...   OK"
 else
   echo "Microsoft Teams..."
-  brew cask install microsoft-teams
+  brew install microsoft-teams
 fi
 
 # echo "Keynote...";      mas install 409183694

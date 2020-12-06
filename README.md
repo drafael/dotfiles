@@ -1,10 +1,9 @@
 
-## Requirements
+## Prerequisites
 
 * macOS
+* Command Line Tools (CLT) for Xcode <https://developer.apple.com/downloads> or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
 * [Homebrew](http://brew.sh) package manager
-* [Homebrew-Cask](https://github.com/Homebrew/homebrew-cask#homebrew-cask) for Mac applications distributed as binaries
-  - Installation `brew tap homebrew/cask; brew tap homebrew/cask-versions`
 
 ## Installation
 
