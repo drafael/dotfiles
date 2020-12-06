@@ -25,7 +25,7 @@ ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 
 ## [iTerm2](http://iterm2.com)
 
-Install `brew cask install iterm2` and point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
+Install `brew install iterm2` and point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
 ## Git
 
@@ -65,7 +65,7 @@ ln -s ~/.dotfiles/.spacemacs ~/.spacemacs
 
 ## [Sublime Text](https://www.sublimetext.com/)
 
-Installation `brew cask install sublime-text`
+Installation `brew install sublime-text`
 
 [Package Control](https://packagecontrol.io/) — the first thing to do after the ST installation is to setup the package manager
 * [Installation](https://packagecontrol.io/installation) (manual)

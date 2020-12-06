@@ -25,7 +25,7 @@ brew install vim --with-override-system-vi
 * [MacVim](http://macvim-dev.github.io/macvim) installation
 
 ```bash
-brew cask install macvim
+brew install --cask macvim
 ```
 
 * Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc)
@@ -64,6 +64,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 
 - [Vim Awesome](http://vimawesome.com/)
 - [Vim Colors](http://vimcolors.com/)
+- [SpaceVim](https://spacevim.org/)
 - [Tagbar Wiki](https://github.com/majutsushi/tagbar/wiki)
 
 ## Command-Line Tools
@@ -82,7 +83,7 @@ brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco r
 * [ncdu](https://dev.yorhel.nl/ncdu) — is a disk usage analyzer with an ncurses interface
 * [nmap](https://nmap.org/) — port scanning utility for large networks
 * [peco](https://github.com/peco/peco) — simplistic interactive filtering tool
-* [ranger](http://ranger.nongnu.org/) — a console file manager with `vi` key bindings
+* [ranger](https://ranger.github.io/) — a console file manager with `vi` key bindings
 * [tree](http://mama.indstate.edu/users/ice/tree/) — recursive directory listing command that produces a depth indented listing of files
 * [tig](http://jonas.nitro.dk/tig/) — ncurses-based text-mode interface for `git`
 * [tmux](http://tmux.github.io) — a terminal multiplexer
@@ -90,20 +91,8 @@ brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco r
 
 ## Java Dev Env
 
-* Required Homebrew taps:
-  ```bash
-  brew tap homebrew/cask
-  brew tap homebrew/cask-versions
-  ```
-* Install Java:
-  ```bash
-  brew cask install java8
-  brew cask install java11
-  # latest version
-  brew cask install java
-  ```
+* Install Java `brew install java11`
 * Build tools `brew install ant maven gradle`
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-  - Community `brew cask install intellij-idea-ce`
-  - Ultimate `brew cask install intellij-idea`
-  - EAP `brew cask install intellij-idea-eap`
+  - Community `brew install intellij-idea-ce`
+  - Ultimate `brew install intellij-idea`
