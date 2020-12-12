@@ -21,7 +21,6 @@ mucommander
 paw
 postgres
 postico
-postman
 protonvpn
 pycharm
 rabbitmq-app

@@ -30,6 +30,3 @@ if [[ $ITERM_PROFILE =~ Solarized ]]; then
     export MC_SKIN=$DOTFILES_DIR/.config/mc/solarized.ini
   fi
 fi
-
-# Python
-export PATH="$PATH:$HOME/.local/bin:$HOME/.poetry/bin"

@@ -49,7 +49,7 @@ for pkg in ack ag gcc htop mc ncdu neovim nmap peco pt ranger ssh-copy-id tree t
   fi
 done
 
-if brew brew ls --cask --versions iterm2 &> /dev/null; then
+if brew ls --cask --versions iterm2 &> /dev/null; then
   echo "iTerm2...    OK"
 else
   echo "iTerm2..."
