@@ -46,7 +46,12 @@ set wildmode=list:full         " show a list when pressing <Tab> and complete fi
 set shortmess=aoOtTlfmnr
 set hidden
 set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
-set shell=bash
+
+if has('macunix') || system('uname') =~ 'Darwin'
+  set shell=zsh
+else
+  set shell=bash
+endif
 
 " Eliminating delays on ESC
 set timeout timeoutlen=1000 ttimeoutlen=0
@@ -304,74 +309,52 @@ if has("gui_running")          " GUI is running or is about to start
   set guioptions-=r            " remove right scrollbar
   set guioptions-=R            "   when there is a vertically split window
 
-  function! ToggleToolbar()
-    if &guioptions =~ 'T'
-      exec('set guioptions-=T')
-    else
-      exec('set guioptions+=T')
-    endif
-  endfunction
-
-  map <F9> <Esc>:call ToggleToolbar()<CR>
-
   " set guifont=Menlo:h14
   set guifont=Monaco:h14
   " let &guifont='Fira Code:h14'
 
   if &guifont =~ 'Monaco'
-    " set lines=41 columns=145
-    set lines=50 columns=200
+    set lines=42 columns=178
   else
     " set lines=48 columns=145
     set lines=60 columns=200
   endif
-
 
   " colorscheme solarized
   " colorscheme PaperColor
   colorscheme ayu
 
   if g:colors_name =~ 'solarized'
-    " let hour = strftime("%H")
-    " if 6 <= hour && hour < 17
-      " set background=light
-    " else
-      set background=dark
-    " endif
     call togglebg#map("<F5>")
+    " set background=light
+    set background=dark
   elseif g:colors_name =~ 'PaperColor'
     set background=light
     let g:airline_theme = 'papercolor'
   elseif g:colors_name =~ 'ayu'
-    " set termguicolors
     let ayucolor="light"
     set background=light
   endif
-else                           " this is console Vim
-  set t_Co=256                 " 256 colors
+else                                " this is console Vim
+  set t_Co=256                      " 256 colors
 
-  if exists('$ITERM_PROFILE')  " sync Vim and iTerm colors
-
-    " sync background
+  if exists('$ITERM_PROFILE')       " try to sync Vim and iTerm2 background and color scheme
     if $ITERM_PROFILE =~ "Light"
-      set background=light
+      set background=light          " iTerm2 uses light color presets
     else
-      set background=dark
+      set background=dark           " iTerm2 uses dark color presets
     endif
 
-    " sync colorscheme
     if $ITERM_PROFILE =~ "Solarized"
       colorscheme solarized
     elseif $ITERM_PROFILE =~ "PaperColor"
       colorscheme PaperColor
       let g:airline_theme = 'papercolor'
     elseif $ITERM_PROFILE =~ "Ayu Light"
-      " set termguicolors
       let ayucolor="light"
       colorscheme ayu
     endif
-
-  else " Terminal.app
+  else                              " Terminal.app
     set background=dark
     colorscheme solarized
   endif
