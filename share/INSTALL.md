@@ -63,6 +63,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 #### Also Take a Look
 
 - [Vim Awesome](http://vimawesome.com/)
+- [Awesome Vim Color Schemes](https://github.com/rafi/awesome-vim-colorschemes#awesome-vim-color-schemes)
 - [Vim Colors](http://vimcolors.com/)
 - [SpaceVim](https://spacevim.org/)
 - [Tagbar Wiki](https://github.com/majutsushi/tagbar/wiki)
