@@ -83,7 +83,7 @@ rm -r User
 ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 ```
 
-![sublime-text](share/sublime-text-material-solarized-theme.png)
+![sublime-text](share/sublime-text-material-ayu-light-theme.png)
 
 Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks)
 

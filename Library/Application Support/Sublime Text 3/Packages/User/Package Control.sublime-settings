@@ -5,9 +5,11 @@
 	],
 	"installed_packages":
 	[
+		"A File Icon",
 		"Ansible",
 		"ANTLR syntax highlight",
 		"ApplySyntax",
+		"ayu",
 		"Dockerfile Syntax Highlighting",
 		"EditorConfig",
 		"INI",
