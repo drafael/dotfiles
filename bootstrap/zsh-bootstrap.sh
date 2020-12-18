@@ -40,7 +40,7 @@ else
   echo "brew...      OK"
 fi
 
-for pkg in ack ag gcc htop mc ncdu neovim nmap peco pt ranger ssh-copy-id tree tig tmux tree wget; do
+for pkg in ack ag gcc htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id tree tig tmux tree wget; do
   if [ ! -x "$(command -v $pkg)" ]; then
     echo "$pkg..."
     brew install $pkg

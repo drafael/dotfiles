@@ -71,7 +71,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 ## Command-Line Tools
 
 ```bash
-brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco ranger tree tig tmux tree
+brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco ranger ripgrep tree tig tmux tree
 ```
 
 * [ack](http://beyondgrep.com) — a code-searching tool like `grep`, optimized for programmers
@@ -84,7 +84,9 @@ brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco r
 * [ncdu](https://dev.yorhel.nl/ncdu) — is a disk usage analyzer with an ncurses interface
 * [nmap](https://nmap.org/) — port scanning utility for large networks
 * [peco](https://github.com/peco/peco) — simplistic interactive filtering tool
+* [pt](https://github.com/monochromegane/the_platinum_searcher#the-platinum-searcher--) — a code search tool similar to `ack`, `ag`, `rg`
 * [ranger](https://ranger.github.io/) — a console file manager with `vi` key bindings
+* [ripgrep (rg)](https://github.com/BurntSushi/ripgrep#ripgrep-rg) — a line-oriented search tool that recursively searches your current directory for a regex pattern
 * [tree](http://mama.indstate.edu/users/ice/tree/) — recursive directory listing command that produces a depth indented listing of files
 * [tig](http://jonas.nitro.dk/tig/) — ncurses-based text-mode interface for `git`
 * [tmux](http://tmux.github.io) — a terminal multiplexer

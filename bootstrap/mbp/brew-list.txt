@@ -131,6 +131,7 @@ python@3.9
 ranger
 rav1e
 readline
+ripgrep
 rtmpdump
 rubberband
 ruby
