@@ -333,7 +333,10 @@ if has("gui_running")          " GUI is running or is about to start
     let g:airline_theme = 'papercolor'
   elseif g:colors_name =~ 'ayu'
     let ayucolor="light"
+    " let ayucolor="mirage"
+    " let ayucolor="dark"
     set background=light
+    " set background=dark
   endif
 else                                " this is console Vim
   set t_Co=256                      " 256 colors
@@ -352,6 +355,12 @@ else                                " this is console Vim
       let g:airline_theme = 'papercolor'
     elseif $ITERM_PROFILE =~ "Ayu Light"
       let ayucolor="light"
+      colorscheme ayu
+    elseif $ITERM_PROFILE =~ "Ayu Mirage"
+      let ayucolor="mirage"
+      colorscheme ayu
+    elseif $ITERM_PROFILE =~ "Ayu Dark"
+      let ayucolor="dark"
       colorscheme ayu
     endif
   else                              " Terminal.app
