@@ -2,7 +2,7 @@
 ## Prerequisites
 
 * macOS
-* Command Line Tools (CLT) for Xcode <https://developer.apple.com/downloads> or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
+* Command Line Tools (CLT) for Xcode: `xcode-select --install`, <https://developer.apple.com/downloads>, or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
 * [Homebrew](http://brew.sh) package manager
 
 ## Installation
@@ -14,7 +14,7 @@ Clone to `~/.dotfiles`
 ```bash
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
-Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal zsh prompt](https://github.com/sindresorhus/pure#pure)
+Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal prompt](https://github.com/sindresorhus/pure#pure).
 
 ## Bash
 
@@ -26,8 +26,6 @@ ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ## [iTerm2](http://iterm2.com)
 
 Install `brew install iterm2` and point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
-
-![iterm2](share/iterm2-solarized-dark-theme.png)
 
 ## Git
 
@@ -51,7 +49,7 @@ In order to view all of my configured aliases enter `git aliases`
 
 ## Vim
 
-Syncing [.vimrc](.vimrc) and [plugins](share/INSTALL.md#my-favorite-vim-plugins)
+Syncing [.vimrc](.vimrc) and [plugins](share/INSTALL.md#my-favorite-vim-plugins):
 
 ```bash
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
@@ -83,9 +81,7 @@ rm -r User
 ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 ```
 
-![sublime-text](share/sublime-text-material-ayu-light-theme.png)
-
-Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks)
+Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks).
 
 ## Workstation Setup
 

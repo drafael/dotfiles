@@ -16,26 +16,33 @@
 
 ## Vim
 
-* Upgrading
+* Upgrading:
 
 ```bash
 brew install vim --with-override-system-vi
 ```
 
-* [MacVim](http://macvim-dev.github.io/macvim) installation
+* [NeoVim](https://neovim.io) installation:
+
+```bash
+ln -s ~/.dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim
+brew install neovim
+```
+
+* [MacVim](http://macvim-dev.github.io/macvim) installation:
 
 ```bash
 brew install --cask macvim
 ```
 
-* Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc)
+* Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc):
 
 ```bash
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall
 ```
 
-* [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) dependencies installation
+* [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) dependencies installation:
 
 ```bash
 brew install ctags gotags
@@ -46,7 +53,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 
   - [x] [Vundle](https://github.com/VundleVim/Vundle.vim#about) — plugin manager
   - [x] [Airline](https://github.com/vim-airline/vim-airline#vim-airline-) — status bar
-  - [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots) and [PaperColor Theme](https://github.com/nlknguyen/papercolor-theme#screenshots)
+  - [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots), [PaperColor Theme](https://github.com/nlknguyen/papercolor-theme#screenshots), and [Ayu](https://github.com/ayu-theme/ayu-vim)
   - [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim#ctrlpvim) — fuzzy file finder, buffer switcher, MRU
   - [x] [Auto Pairs](https://github.com/jiangmiao/auto-pairs#auto-pairs) — insert or delete brackets, parens, quotes in pair
   - [x] [Snipmate](https://github.com/garbas/vim-snipmate#snipmate) — [Snippet](https://github.com/honza/vim-snippets#snipmate--ultisnip-snippets) manager for vim
@@ -71,7 +78,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 ## Command-Line Tools
 
 ```bash
-brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco ranger ripgrep tree tig tmux tree
+brew install ack bash-completion ag gcc htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id tree tig tmux tree wget
 ```
 
 * [ack](http://beyondgrep.com) — a code-searching tool like `grep`, optimized for programmers
@@ -94,8 +101,7 @@ brew install ack ag bash-completion editorconfig htop httpie mc ncdu nmap peco r
 
 ## Java Dev Env
 
-* Install Java `brew install java11`
-* Build tools `brew install ant maven gradle`
+* Install OpenJDK 11 and build tools `brew install java11 ant maven gradle`
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
   - Community `brew install intellij-idea-ce`
   - Ultimate `brew install intellij-idea`
