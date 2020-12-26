@@ -44,17 +44,18 @@ set gdefault                   " global search by default :%s/pattern/replacemen
 set wildmenu                   " make tab completion for files/buffers act like bash
 set wildmode=list:full         " show a list when pressing <Tab> and complete first full match
 set shortmess=aoOtTlfmnr
-set hidden
 set autochdir                  " change the current working directory whenever you open a file, switch buffers, delete a buffer or open/close a window
+set hidden
+set timeout                    " time out for mappings
+set timeoutlen=1000            " wait 1s to let me finish typing the left-hand-side of a mapping
+set ttimeout                   " time out for key codes
+set ttimeoutlen=50             " wait up to 50ms after Esc for special key
 
 if has('macunix') || system('uname') =~ 'Darwin'
   set shell=zsh
 else
   set shell=bash
 endif
-
-" Eliminating delays on ESC
-set timeout timeoutlen=1000 ttimeoutlen=0
 
 set wildignore+=.DS_Store,._*,Thumbs.db,.netrwhist
 set wildignore+=.git/*,.hg/*,.svn/*,.vagrant/*,.gradle/*
