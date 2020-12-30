@@ -22,12 +22,6 @@
 brew install vim --with-override-system-vi
 ```
 
-* [NeoVim](https://neovim.io) installation:
-
-```bash
-ln -s ~/.dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim
-brew install neovim
-```
 
 * [MacVim](http://macvim-dev.github.io/macvim) installation:
 
@@ -40,6 +34,13 @@ brew install --cask macvim
 ```bash
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
 vim +PluginInstall +qall
+```
+
+* [NeoVim](https://neovim.io):
+
+```bash
+ln -s ~/.dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim
+brew install neovim
 ```
 
 * [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) dependencies installation:

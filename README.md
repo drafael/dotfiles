@@ -2,7 +2,7 @@
 ## Prerequisites
 
 * macOS
-* Command Line Tools (CLT) for Xcode: `xcode-select --install`, <https://developer.apple.com/downloads>, or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
+* Command Line Tools (CLT) for Xcode: <https://developer.apple.com/downloads> or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
 * [Homebrew](http://brew.sh) package manager
 
 ## Installation
