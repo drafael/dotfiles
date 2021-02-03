@@ -234,6 +234,9 @@ set complete+=k
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = '<C-n>'    " navigate the completion menu from top to bottom
 
+" remove deprication warning
+let g:snipMate = { 'snippet_version' : 1 }
+
 "
 " Status Line
 "
