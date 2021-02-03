@@ -131,6 +131,7 @@ Plugin 'lambdalisue/vim-gita'               " An awesome git handling plugin
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
 Plugin 'nlknguyen/papercolor-theme'         " Inspired by Google's Material Design
 Plugin 'ayu-theme/ayu-vim'
+Plugin 'phanviet/vim-monokai-pro'           " Monokai Pro color scheme for Vim / Neovim. Inspired by https://www.monokai.pro/
 
 call vundle#end()                           " end of plugin listing
 if s:install_plugins == 1                   " auto installing plugins
