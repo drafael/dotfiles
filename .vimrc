@@ -325,9 +325,9 @@ if has("gui_running")          " GUI is running or is about to start
     set lines=60 columns=200
   endif
 
-  " colorscheme solarized
+  colorscheme solarized
   " colorscheme PaperColor
-  colorscheme ayu
+  " colorscheme ayu
 
   if g:colors_name =~ 'solarized'
     call togglebg#map("<F5>")
