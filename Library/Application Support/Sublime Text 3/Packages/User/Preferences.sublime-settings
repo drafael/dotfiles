@@ -1,5 +1,6 @@
 {
-	"color_scheme": "Packages/ayu/ayu-light.sublime-color-scheme",
+	//"color_scheme": "Packages/ayu/ayu-light.sublime-color-scheme",
+	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).sublime-color-scheme",
 	"font_face": "Monaco",
 	"font_options":
 	[
@@ -16,7 +17,8 @@
 	"material_theme_small_statusbar": true,
 	"material_theme_small_tab": true,
 	"material_theme_tabs_autowidth": true,
-	"theme": "ayu-light.sublime-theme",
+	//"theme": "ayu-light.sublime-theme",
+	"theme": "Material Solarized Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"update_check": false,
