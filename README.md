@@ -2,7 +2,7 @@
 ## Prerequisites
 
 * macOS
-* Command Line Tools (CLT) for Xcode: <https://developer.apple.com/downloads> or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
+* Command Line Tools (CLT) for Xcode: `xcode-select --install`
 * [Homebrew](http://brew.sh) package manager
 
 ## Installation
@@ -19,8 +19,7 @@ Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal prompt](h
 ## Bash
 
 ```bash
-ln -s ~/.dotfiles/.bashrc ~/.bashrc
-ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
+ln -s ~/.dotfiles/.bashrc ~/.bashrc && ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ```
 
 ## [iTerm2](http://iterm2.com)
@@ -40,9 +39,7 @@ Put in `~/.gitconfig.local` sensitive information such as the `git` user credent
 and then
 
 ```bash
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
-ln -s ~/.dotfiles/.gitignore_global ~/.gitignore
+ln -s ~/.dotfiles/.gitconfig ~/.gitconfig && ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global && ln -s ~/.dotfiles/.gitignore_global ~/.gitignore
 ```
 
 In order to view all of my configured aliases enter `git aliases`
@@ -52,15 +49,7 @@ In order to view all of my configured aliases enter `git aliases`
 Syncing [.vimrc](.vimrc) and [plugins](share/INSTALL.md#my-favorite-vim-plugins):
 
 ```bash
-ln -s ~/.dotfiles/.vimrc ~/.vimrc
-vim +PluginInstall +qall
-```
-
-## [Spacemacs](https://www.spacemacs.org/)
-
-```bash
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-ln -s ~/.dotfiles/.spacemacs ~/.spacemacs
+ln -s ~/.dotfiles/.vimrc ~/.vimrc && vim +PluginInstall +qall
 ```
 
 ## [Sublime Text](https://www.sublimetext.com/)
@@ -98,5 +87,3 @@ Inspiration and code was taken (stolen) from many sources, including:
 * [@garybernhardt](https://github.com/garybernhardt) (Gary Bernhardt) [dotfiles](https://github.com/garybernhardt/dotfiles)
 * [@necolas](https://github.com/necolas) (Nicolas Gallagher) [dotfiles](https://github.com/necolas/dotfiles)
 * [Awesome Awesomeness](https://github.com/bayandin/awesome-awesomeness): [Dotfiles](https://github.com/webpro/awesome-dotfiles), [Shell](https://github.com/alebcay/awesome-shell), [Dev Env](https://github.com/jondot/awesome-devenv), [Java](https://github.com/akullpp/awesome-java)
-* Good looking console emulators for Windows: [cmder](http://cmder.net/), [ConEmu](https://conemu.github.io/), [mintty](http://mintty.github.io/)
-

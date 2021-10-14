@@ -2,7 +2,6 @@
 # OS specific stuff
 if [[ $OSTYPE =~ darwin ]]; then
   alias brwe='brew'
-  alias cask='brew cask'
   alias systemctl='brew services'
   alias services='brew services'
   alias service='brew services'

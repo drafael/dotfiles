@@ -1,25 +1,16 @@
 ## Prerequisites
 
 * macOS
-* Command Line Tools (CLT) for Xcode: `xcode-select --install`, <https://developer.apple.com/downloads> or [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
+* Command Line Tools (CLT) for Xcode: `xcode-select --install`
 * A Bourne-compatible shell for installation (e.g. bash or zsh)
-
-## [Homebrew](http://brew.sh)
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-* [homebrew-services](https://github.com/Homebrew/homebrew-services#homebrew-services) `brew tap homebrew/services`
-* [homebrew-cask](https://github.com/Homebrew/homebrew-cask#homebrew-cask) `brew tap homebrew/cask`
-* [homebrew-cask-versions](https://github.com/Homebrew/homebrew-cask-versions#homebrew-cask-versions) `brew tap homebrew/cask-versions`
+* [Homebrew](http://brew.sh) package manager.
 
 ## Vim
 
 * Upgrading:
 
 ```bash
-brew install vim --with-override-system-vi
+brew install vim && brew link --overwrite vim
 ```
 
 
@@ -32,22 +23,19 @@ brew install --cask macvim
 * Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc):
 
 ```bash
-ln -s ~/.dotfiles/.vimrc ~/.vimrc
-vim +PluginInstall +qall
+ln -s ~/.dotfiles/.vimrc ~/.vimrc && vim +PluginInstall +qall
 ```
 
 * [NeoVim](https://neovim.io):
 
 ```bash
-ln -s ~/.dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim
-brew install neovim
+ln -s ~/.dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim && brew install neovim
 ```
 
 * [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) dependencies installation:
 
 ```bash
-brew install ctags gotags
-ln -s ~/.dotfiles/.ctags ~/.ctags
+ln -s ~/.dotfiles/.ctags ~/.ctags && brew install ctags gotags
 ```
 
 #### My Favorite VIM Plugins
@@ -79,13 +67,13 @@ ln -s ~/.dotfiles/.ctags ~/.ctags
 ## Command-Line Tools
 
 ```bash
-brew install ack bash-completion ag gcc htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id tree tig tmux tree wget
+brew install ack ag htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id tree tig tmux tree wget
 ```
 
 * [ack](http://beyondgrep.com) — a code-searching tool like `grep`, optimized for programmers
 * [ag](https://github.com/ggreer/the_silver_searcher) — a code searching tool similar to `ack`, with a focus on speed
 * [bash-completion](https://github.com/scop/bash-completion) — Programmable completion functions for bash
-* [editorconfig](EditorConfig) — helps define and maintain consistent coding styles between different editors and IDEs
+* [editorconfig](https://editorconfig.org/) — helps define and maintain consistent coding styles between different editors and IDEs
 * [htop](https://hisham.hm/htop/) — improved top (interactive process viewer)
 * [httpie](https://httpie.org/) — is a command line HTTP client
 * [mc](https://midnight-commander.org/) — terminal-based visual file manager
@@ -102,7 +90,31 @@ brew install ack bash-completion ag gcc htop mc ncdu neovim nmap peco pt ranger 
 
 ## Java Dev Env
 
-* Install OpenJDK 11 and build tools `brew install java11 ant maven gradle`
-* [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-  - Community `brew install intellij-idea-ce`
-  - Ultimate `brew install intellij-idea`
+Install OpenJDK:
+```bash
+brew install openjdk@11
+sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+```
+
+Set `JAVA_HOME` in `.zshrc` or `.bash_profile`:
+```bash
+if [ -x "$(command -v java)" ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+  export PATH=$JAVA_HOME/bin:$PATH
+fi
+```
+
+Install Java build tools:
+```bash
+brew install ant maven gradle
+```
+
+Install [IntelliJ IDEA](https://www.jetbrains.com/idea/):
+```bash
+brew install intellij-idea
+```
+
+Install [EditorConfig](https://editorconfig.org/):
+```bash
+brew install editorconfig
+```

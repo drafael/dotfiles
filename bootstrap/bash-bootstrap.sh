@@ -30,13 +30,6 @@ fi
 if [ ! -x "$(command -v brew)" ]; then
   echo "brew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  echo "taps..."
-  set -x
-  brew tap homebrew/bundle
-  brew tap homebrew/services
-  brew tap homebrew/cask-versions
-  set +x
 else
   echo "brew...      OK"
 fi
@@ -67,12 +60,13 @@ else
   echo "mas...       OK"
 fi
 
-echo "1Password...";            mas install 443987910
+echo "1Password 7...";          mas install 1333542190
 echo "Keka...";                 mas install 470158793
 echo "Adblock Plus...";         mas install 1432731683
 echo "Murasaki...";             mas install 430300762
 echo "DjVu Reader...";          mas install 733144595
 echo "VSD Viewer...";           mas install 580788158
+echo "Fantastical...";          mas install 975937182
 
 if brew ls --cask --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
@@ -95,12 +89,12 @@ else
   brew install --cask google-chrome
 fi
 
-if brew ls --cask --versions dropbox &> /dev/null; then
-  echo "Dropbox...   OK"
-else
-  echo "Dropbox..."
-  brew install --cask dropbox
-fi
+# if brew ls --cask --versions dropbox &> /dev/null; then
+#   echo "Dropbox...   OK"
+# else
+#   echo "Dropbox..."
+#   brew install --cask dropbox
+# fi
 
 if brew ls --cask --versions tunnelblick &> /dev/null; then
   echo "OpenVPN...   OK"
@@ -121,7 +115,8 @@ if brew ls --versions vim &> /dev/null; then
 else
   echo "vim..."
   set -x
-  brew install vim --with-override-system-vi
+  brew install vim
+  brew link --overwrite vim
   brew install ctags
   ln -sfn "$dotfiles/.ctags" "$HOME/.ctags"
   set +x
@@ -171,7 +166,8 @@ fi
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
   set -x
-  brew install java11
+  brew install openjdk@11
+  sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
   brew install ant maven gradle
   set +x
 else
@@ -192,12 +188,12 @@ else
   brew install pycharm
 fi
 
-# if brew ls --cask --versions datagrip &> /dev/null; then
-#   echo "DataGrip...   OK"
-# else
-#   echo "DataGrip..."
-#   brew install datagrip
-# fi
+if brew ls --cask --versions datagrip &> /dev/null; then
+  echo "DataGrip...   OK"
+else
+  echo "DataGrip..."
+  brew install datagrip
+fi
 
 # if brew ls --cask --versions microsoft-office &> /dev/null; then
 #   echo "Microsoft Office...   OK"
