@@ -91,6 +91,7 @@ Plugin 'tomtom/tcomment_vim'                " provides easy to use, file-type se
 Plugin 'bling/vim-airline'                  " Status line
 Plugin 'vim-airline/vim-airline-themes'     " A collection of themes for vim-airline
 Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+Plugin 'tacahiroy/ctrlp-funky'              " A super simple function navigator for ctrlp.vim
 Plugin 'sickill/vim-pasta'                  " Pasting in Vim with indentation adjusted to destination context
 Plugin 'airblade/vim-rooter'                " Changes Vim working directory to project root
 Plugin 'ntpeters/vim-better-whitespace'     " Strip trailing whitespace
@@ -431,6 +432,10 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 noremap <leader>t :CtrlP<CR>
 noremap <leader>e :CtrlPMRU<CR>
 noremap <leader>b :CtrlPBuffer<CR>
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>uu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 let g:ctrlp_map = '<C-p>'               " default mapping
 let g:ctrlp_cmd = 'CtrlP'               " default command
