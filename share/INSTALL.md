@@ -88,6 +88,18 @@ brew install ack ag htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id 
 * [tmux](http://tmux.github.io) — a terminal multiplexer
 * [tree](http://mama.indstate.edu/users/ice/tree/) — display directories as trees
 
+## Docker Desktop Alternatives
+
+Uninstall [Docker Desktop](https://www.docker.com/products/docker-desktop/):
+```bash
+brew uninstall --cask docker
+```
+
+Install Docker Engine and Docker Desktop alternatives ([colima](https://github.com/abiosoft/colima), [podman](https://podman.io/), [minikube](https://github.com/kubernetes/minikube)):
+```bash
+brew install docker docker-compose kubectl helm colima podman minikube
+```
+
 ## Java Dev Env
 
 Install OpenJDK:

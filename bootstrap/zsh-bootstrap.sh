@@ -104,7 +104,7 @@ fi
 
 if [ ! -x "$(command -v docker)" ]; then
   echo "Docker..."
-  brew install --cask docker
+  brew install docker docker-compose kubectl helm colima podman minikube
 else
   echo "Docker...    OK"
 fi
