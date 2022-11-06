@@ -18,6 +18,8 @@ brew install vim && brew link --overwrite vim
 
 ```bash
 brew install --cask macvim
+
+defaults write org.vim.MacVim MMTitlebarAppearsTransparent true
 ```
 
 * Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc):

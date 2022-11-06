@@ -1,1 +1,0 @@
-eval "$(pyenv virtualenv-init -)"
