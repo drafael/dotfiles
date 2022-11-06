@@ -1,9 +1,12 @@
 {
 	"extensions":
 	[
-		"bash",
+		".profile",
+		"bashrc",
+		"sh",
 		"zsh",
-		"sh"
+		"bash",
+		"ash"
 	],
-	"tab_size": 2,
+	"tab_size": 2
 }

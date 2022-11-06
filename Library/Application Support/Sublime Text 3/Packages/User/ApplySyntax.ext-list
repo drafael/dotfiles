@@ -1,7 +1,10 @@
 {
 	"Bash":
 	[
+		".profile",
+		"ash",
 		"bash",
+		"bashrc",
 		"sh",
 		"zsh"
 	],
@@ -13,6 +16,11 @@
 	[
 		".npmrc",
 		"ini.dist"
+	],
+	"JSON":
+	[
+		".babelrc",
+		".stylelintrc"
 	],
 	"PHP":
 	[
@@ -43,7 +51,10 @@
 	],
 	"Shell-Unix-Generic":
 	[
+		".profile",
+		"ash",
 		"bash",
+		"bashrc",
 		"sh",
 		"zsh"
 	],
