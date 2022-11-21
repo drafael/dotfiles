@@ -102,6 +102,9 @@ Install Docker Engine and Docker Desktop alternatives ([colima](https://github.c
 brew install docker docker-compose kubectl helm colima podman minikube
 ```
 
+Start container runtime: `colima start` or `colima start --kubernetes`.
+
+
 ## Java Dev Env
 
 Install OpenJDK:
