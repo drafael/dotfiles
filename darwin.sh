@@ -5,6 +5,11 @@ if [ -x "$(command -v java)" ]; then
   export PATH=$JAVA_HOME/bin:$PATH
 fi
 
+# If you use Colima/Lima as a Docker replacement
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+
+
 # Groovy
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
