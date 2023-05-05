@@ -44,6 +44,7 @@ plugins=(
   # python pip pyenv pipenv
   # gem
   # node npm yarn
+  zsh-nvm
   # nmap
 )
 
