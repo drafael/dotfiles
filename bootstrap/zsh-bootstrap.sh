@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+softwareupdate --install-rosetta --agree-to-license
+
 dotfiles="$( cd "$( dirname "${(%):-%N}" )" >/dev/null && pwd )"
 
 echo "================================================="
@@ -52,21 +54,6 @@ else
   # open "$dotfiles/iTerm2/colors/papercolor-light.itermcolors"
 fi
 
-if [ ! -x "$(command -v mas)" ]; then
-  echo "mas..."
-  brew install mas
-else
-  echo "mas...       OK"
-fi
-
-echo "1Password 7...";          mas install 1333542190
-echo "Keka...";                 mas install 470158793
-echo "Adblock Plus...";         mas install 1432731683
-echo "Murasaki...";             mas install 430300762
-echo "DjVu Reader...";          mas install 733144595
-echo "VSD Viewer...";           mas install 580788158
-echo "Fantastical...";          mas install 975937182
-
 if brew cask ls --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
 else
@@ -87,13 +74,6 @@ else
   echo "Google Chrome..."
   brew install --cask google-chrome
 fi
-
-# if brew ls --cask --versions dropbox &> /dev/null; then
-#   echo "Dropbox...   OK"
-# else
-#   echo "Dropbox..."
-#   brew install --cask dropbox
-# fi
 
 if brew ls --cask --versions tunnelblick &> /dev/null; then
   echo "OpenVPN...   OK"
@@ -165,8 +145,9 @@ fi
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
   set -x
-  brew install openjdk@11
-  sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+  brew install openjdk@11 openjdk@17
+  sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+  sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
   brew install ant maven gradle
   set +x
 else
@@ -207,11 +188,6 @@ else
   echo "Microsoft Teams..."
   brew install microsoft-teams
 fi
-
-# echo "Keynote...";      mas install 409183694
-# echo "Numbers...";      mas install 409203825
-# echo "Pages...";        mas install 409201541
-# echo "Aperture...";     mas install 408981426
 
 brew cleanup
 # EOF

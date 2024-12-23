@@ -32,18 +32,16 @@ plugins=(
   git
   # git-prompt
   # git-flow
-  docker
-  # docker-compose
+  docker docker-compose
   kubectl minikube
   # helm
-  mvn
-  # gradle
-  terraform
-  # httpie
+  mvn gradle
+  # terraform
   # aws
+  httpie
   # python pip pyenv pipenv
   # gem
-  # node npm yarn
+  node npm yarn
   zsh-nvm
   # nmap
 )

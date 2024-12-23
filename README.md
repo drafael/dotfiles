@@ -16,6 +16,8 @@ ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
 Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal prompt](https://github.com/sindresorhus/pure#pure).
 
+![iterm2](share/iterm2-solarized-dark-theme.png)
+
 ## Bash
 
 ```bash
@@ -71,6 +73,12 @@ ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 ```
 
 Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks).
+
+* Material [Solarized Dark](https://github.com/altercation/solarized) theme:
+![sublime-text](share/sublime-text-material-solarized-theme.png)
+
+* Material [Ayu Light](https://github.com/dempfi/ayu) theme:
+![sublime-text](share/sublime-text-material-ayu-light-theme.png)
 
 ## Workstation Setup
 

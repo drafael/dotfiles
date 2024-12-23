@@ -109,14 +109,14 @@ Start container runtime: `colima start` or `colima start --kubernetes`.
 
 Install OpenJDK:
 ```bash
-brew install openjdk@11
-sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+brew install openjdk@17
+sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
 ```
 
 Set `JAVA_HOME` in `.zshrc` or `.bash_profile`:
 ```bash
 if [ -x "$(command -v java)" ]; then
-  export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+  export JAVA_HOME=$(/usr/libexec/java_home -v 17)
   export PATH=$JAVA_HOME/bin:$PATH
 fi
 ```
