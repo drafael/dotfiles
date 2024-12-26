@@ -134,6 +134,9 @@ Plugin 'nlknguyen/papercolor-theme'         " Inspired by Google's Material Desi
 Plugin 'ayu-theme/ayu-vim'
 Plugin 'phanviet/vim-monokai-pro'           " Monokai Pro color scheme for Vim / Neovim. Inspired by https://www.monokai.pro/
 
+" LLM, Copilot, etc
+Plugin 'github/copilot.vim'
+
 call vundle#end()                           " end of plugin listing
 if s:install_plugins == 1                   " auto installing plugins
   :PluginInstall
@@ -456,6 +459,15 @@ else
       \ 'file': '\v\.(iml|ipr|iws|project|classpath|class|jar|war|ear|zip|pyc|pyo|obj|o|a|db|jpeg|jpg|png|gif|exe|so|dylib|dll|pdf)$',
       \ }
 endif
+
+"
+" Copilot
+"
+"let g:copilot_workspace_folders = [ $HOME.'code',  $HOME.'/src' ]
+
+" To use the local ollama-copilot
+"let g:copilot_proxy = 'http://localhost:11435'
+"let g:copilot_proxy_strict_ssl = v:false
 
 "
 " vim-session: extended session management for Vim http://peterodding.com/code/vim/session/

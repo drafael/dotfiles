@@ -3,6 +3,8 @@ chatgpt
 claude
 datagrip
 devtoys
+diffusionbee
+discord
 google-chrome
 intellij-idea
 iterm2
@@ -11,6 +13,7 @@ logi-options+
 macvim
 marta
 notion
+ollama
 podman-desktop
 pycharm
 rapidapi
@@ -20,4 +23,5 @@ telegram
 transmission
 transmit
 tunnelblick
+visual-studio-code
 whatsapp

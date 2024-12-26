@@ -39,11 +39,6 @@ elif [[ $OSTYPE =~ linux ]]; then
   fi
 fi
 
-# API tokens and private stuff
-if [ -f $HOME/.secrets ]; then
-  source $HOME/.secrets
-fi
-
 if [ -f $HOME/.bashrc.local ]; then
   source $HOME/.bashrc.local
 fi

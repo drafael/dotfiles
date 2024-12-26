@@ -12,6 +12,9 @@ logs/
 *.log
 *.log.*
 
+### VS CODE ###
+.vscode/
+
 ### VIM ###
 *.swp
 .netrwhist

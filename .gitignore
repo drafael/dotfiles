@@ -6,4 +6,4 @@
 
 .gitconfig.local
 .bashrc.local
-.secrets
+.zshrc.local

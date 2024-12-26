@@ -79,11 +79,6 @@ elif [[ $OSTYPE =~ linux ]]; then
   fi
 fi
 
-# API tokens and private stuff
-if [ -f $HOME/.secrets ]; then
-  source $HOME/.secrets
-fi
-
 if [ -f $HOME/.zshrc.local ]; then
   source $HOME/.zshrc.local
 fi
