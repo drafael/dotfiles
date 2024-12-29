@@ -85,7 +85,6 @@
     bv  = branch -v
     bav = branch -av
     bd  = branch -D
-    rmb = !bash -c \"git branch -D $1 && git push origin --delete $1\" -
 
     # diff
     d  = diff
@@ -95,10 +94,6 @@
     # tag
     tl   = tag -l
     tags = tag -l
-    rmt  = !bash -c \"git tag -d $1 && git push origin :refs/tags/$1\" -
-
-    # Push to Gerrit
-    review = !bash -c \"git push --force origin HEAD:refs/for/$1\" -
 
     # View a pretty git log with branch tree
     l   = !git --no-pager log -10 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
