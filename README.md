@@ -11,16 +11,14 @@ Clone to `~/.dotfiles`
 
 ## Zsh
 
-```bash
+```sh
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
 Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal prompt](https://github.com/sindresorhus/pure#pure).
 
-![iterm2](share/iterm2-solarized-dark-theme.png)
-
 ## Bash
 
-```bash
+```sh
 ln -s ~/.dotfiles/.bashrc ~/.bashrc && ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ```
 
@@ -40,52 +38,106 @@ Put in `~/.gitconfig.local` sensitive information such as the `git` user credent
 
 and then
 
-```bash
+```sh
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig && ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global && ln -s ~/.dotfiles/.gitignore_global ~/.gitignore
 ```
 
 In order to view all of my configured aliases enter `git aliases`
 
-## Vim
+## Code Editors
+
+### [Zed](https://zed.dev/)
+
+```sh
+brew install zed
+```
+
+### [Visual Studio Code](https://code.visualstudio.com/)
+
+```sh
+brew install visual-studio-code
+```
+
+AI code assistant plugins: [Continue](https://www.continue.dev) and [Llama Coder](https://marketplace.visualstudio.com/items?itemName=ex3ndr.llama-coder)
+
+### Vim
+
+[Installation or upgrading](share/INSTALL.md#vim):
+
+```sh
+brew install vim
+```
 
 Syncing [.vimrc](.vimrc) and [plugins](share/INSTALL.md#my-favorite-vim-plugins):
 
-```bash
+```sh
 ln -s ~/.dotfiles/.vimrc ~/.vimrc && vim +PluginInstall +qall
 ```
 
-## [Sublime Text](https://www.sublimetext.com/)
+### [EditorConfig](https://editorconfig.org/)
 
-Installation `brew install sublime-text`
-
-[Package Control](https://packagecontrol.io/) — the first thing to do after the ST installation is to setup the package manager
-* [Installation](https://packagecontrol.io/installation) (manual)
-```bash
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/
-rm -r Installed\ Packages/
-ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
-```
-* [Syncing](https://packagecontrol.io/docs/syncing)
-```bash
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-rm -r User
-ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
+```sh
+brew install editorconfig
 ```
 
-Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks).
+## Java Dev Tools
 
-* Material [Solarized Dark](https://github.com/altercation/solarized) theme:
-![sublime-text](share/sublime-text-material-solarized-theme.png)
+### OpenJDK
 
-* Material [Ayu Light](https://github.com/dempfi/ayu) theme:
-![sublime-text](share/sublime-text-material-ayu-light-theme.png)
+```sh
+brew install openjdk@17
+```
+```sh
+sudo ln -sfn $(brew --prefix)/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+```
 
-## Workstation Setup
+Set `JAVA_HOME` in `.zshrc` or `.bash_profile`:
+```sh
+if [ -x "$(command -v java)" ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+  export PATH=$JAVA_HOME/bin:$PATH
+fi
+```
 
-* [Vim](share/INSTALL.md#vim)
+### Java Build Tools
+
+```sh
+brew install ant maven gradle
+```
+
+### [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+
+```sh
+brew install intellij-idea
+```
+
+AI code assistant plugins: [Continue](https://www.continue.dev) and [CodeGPT](https://plugins.jetbrains.com/plugin/21056-codegpt)
+
+## Container Runtimes
+
+### Docker and [Minikube](https://github.com/kubernetes/minikube)
+
+```sh
+brew install docker docker-compose minikube kubectl helm 
+```
+
+### [Colima](https://github.com/abiosoft/colima)
+
+```sh
+brew install colima
+```
+Start container runtime: `colima start` or `colima start --kubernetes`.
+
+### [Podman](https://podman.io/)
+
+```sh
+brew install podman podman-compose podman-desktop
+```
+
+
+## See Also
+
 * [Command-Line Tools](share/INSTALL.md#command-line-tools)
-* [Docker container runtimes](share/INSTALL.md#docker-desktop-alternatives)
-* [Java Dev Env](share/INSTALL.md#java-dev-env)
 * [Productivity Tips](share/PRODUCTIVITY.md)
 
 ## Acknowledgements

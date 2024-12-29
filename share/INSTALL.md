@@ -9,34 +9,35 @@
 
 * Upgrading:
 
-```bash
+```sh
 brew install vim && brew link --overwrite vim
 ```
 
 
 * [MacVim](http://macvim-dev.github.io/macvim) installation:
 
-```bash
+```sh
 brew install --cask macvim
-
+```
+```sh
 defaults write org.vim.MacVim MMTitlebarAppearsTransparent true
 ```
 
 * Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc):
 
-```bash
+```sh
 ln -s ~/.dotfiles/.vimrc ~/.vimrc && vim +PluginInstall +qall
 ```
 
 * [NeoVim](https://neovim.io):
 
-```bash
+```sh
 ln -s ~/.dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim && brew install neovim
 ```
 
 * [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) dependencies installation:
 
-```bash
+```sh
 ln -s ~/.dotfiles/.ctags ~/.ctags && brew install ctags gotags
 ```
 
@@ -55,8 +56,6 @@ ln -s ~/.dotfiles/.ctags ~/.ctags && brew install ctags gotags
   - [x] [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace#vim-better-whitespace-plugin) — better whitespace highlighting
   - [x] [indentLine](https://github.com/Yggdroot/indentLine#indentline) — display the indention levels with thin vertical lines
   - [x] [vim-session](https://github.com/xolox/vim-session#extended-session-management-for-vim) — extended session management for Vim
-
-![macvim](macvim.png)
 
 #### Also Take a Look
 
@@ -90,48 +89,29 @@ brew install ack ag htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id 
 * [tmux](http://tmux.github.io) — a terminal multiplexer
 * [tree](http://mama.indstate.edu/users/ice/tree/) — display directories as trees
 
-## Docker Desktop Alternatives
 
-Uninstall [Docker Desktop](https://www.docker.com/products/docker-desktop/):
+## [Sublime Text](https://www.sublimetext.com/)
+
+Installation `brew install sublime-text` and configuration (Sublime Text 3):
+
+[Package Control](https://packagecontrol.io/) — the first thing to do after the ST installation is to setup the package manager
+* [Installation](https://packagecontrol.io/installation) (manual)
 ```bash
-brew uninstall --cask docker
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/
+rm -r Installed\ Packages/
+ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
+```
+* [Syncing](https://packagecontrol.io/docs/syncing)
+```bash
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+rm -r User
+ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 ```
 
-Install Docker Engine and Docker Desktop alternatives ([colima](https://github.com/abiosoft/colima), [podman](https://podman.io/), [minikube](https://github.com/kubernetes/minikube)):
-```bash
-brew install docker docker-compose kubectl helm colima podman minikube
-```
+Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks).
 
-Start container runtime: `colima start` or `colima start --kubernetes`.
+* Material [Solarized Dark](https://github.com/altercation/solarized) theme:
+![sublime-text](sublime-text-material-solarized-theme.png)
 
-
-## Java Dev Env
-
-Install OpenJDK:
-```bash
-brew install openjdk@17
-sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
-```
-
-Set `JAVA_HOME` in `.zshrc` or `.bash_profile`:
-```bash
-if [ -x "$(command -v java)" ]; then
-  export JAVA_HOME=$(/usr/libexec/java_home -v 17)
-  export PATH=$JAVA_HOME/bin:$PATH
-fi
-```
-
-Install Java build tools:
-```bash
-brew install ant maven gradle
-```
-
-Install [IntelliJ IDEA](https://www.jetbrains.com/idea/):
-```bash
-brew install intellij-idea
-```
-
-Install [EditorConfig](https://editorconfig.org/):
-```bash
-brew install editorconfig
-```
+* Material [Ayu Light](https://github.com/dempfi/ayu) theme:
+![sublime-text](sublime-text-material-ayu-light-theme.png)

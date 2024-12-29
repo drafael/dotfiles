@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 
-softwareupdate --install-rosetta --agree-to-license
+# softwareupdate --install-rosetta --agree-to-license
 
-dotfiles="$( cd "$( dirname "${(%):-%N}" )" >/dev/null && pwd )"
+# dotfiles="$( cd "$( dirname "${(%):-%N}" )" >/dev/null && pwd )"
+dotfiles="$HOME/.dotfiles"
 
 echo "================================================="
 echo "  dotfiles dir: $dotfiles"
@@ -61,12 +62,12 @@ else
   brew install --cask appcleaner
 fi
 
-if brew ls --cask --versions firefox &> /dev/null; then
-  echo "Firefox...   OK"
-else
-  echo "Firefox..."
-  brew install --cask firefox
-fi
+# if brew ls --cask --versions firefox &> /dev/null; then
+#   echo "Firefox...   OK"
+# else
+#   echo "Firefox..."
+#   brew install --cask firefox
+# fi
 
 if brew ls --cask --versions google-chrome &> /dev/null; then
   echo "Google Chrome...   OK"
@@ -111,35 +112,18 @@ else
   set +x
 fi
 
-if [ ! -x "$(command -v mvim)" ]; then
-  echo "MacVim..."
-  brew install --cask macvim
+if [ ! -x "$(command -v zed)" ]; then
+  echo "Zed..."
+  brew install --cask zed
 else
-  echo "MacVim...    OK"
+  echo "Zed...    OK"
 fi
 
-if [ ! -x "$(command -v subl)" ]; then
-  echo "Sublime Text..."
-  set -x
-  brew install sublime-text
-  # Package Control
-  mkdir -p "$HOME/Library/Application Support/Sublime Text 3"
-  rm -r "$HOME/Library/Application Support/Sublime Text 3/Installed Packages"
-  ln -s "$dotfiles/Library/Application Support/Sublime Text 3/Installed Packages" "$HOME/Library/Application Support/Sublime Text 3/Installed Packages"
-  # Syncing
-  mkdir -p "$HOME/Library/Application Support/Sublime Text 3/Packages"
-  rm -r "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
-  ln -s "$dotfiles/Library/Application Support/Sublime Text 3/Packages/User" "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
-  set +x
+if [ ! -x "$(command -v code)" ]; then
+  echo "Visual Studio Code..."
+  brew install --cask visual-studio-code
 else
-  echo "Sublime Text...   OK"
-fi
-
-if [ ! -x "$(command -v smerge)" ]; then
-  echo "Sublime Merge..."
-  brew install sublime-merge
-else
-  echo "Sublime Merge...   OK"
+  echo "Visual Studio Code...    OK"
 fi
 
 if [ ! -x "$(command -v java)" ]; then
@@ -168,12 +152,12 @@ else
   brew install pycharm
 fi
 
-if brew ls --cask --versions datagrip &> /dev/null; then
-  echo "DataGrip...   OK"
-else
-  echo "DataGrip..."
-  brew install datagrip
-fi
+# if brew ls --cask --versions datagrip &> /dev/null; then
+#   echo "DataGrip...   OK"
+# else
+#   echo "DataGrip..."
+#   brew install datagrip
+# fi
 
 # if brew ls --cask --versions microsoft-office &> /dev/null; then
 #   echo "Microsoft Office...   OK"
@@ -182,12 +166,12 @@ fi
 #   brew install microsoft-office
 # fi
 
-if brew ls --cask --versions microsoft-teams &> /dev/null; then
-  echo "Microsoft Teams...   OK"
-else
-  echo "Microsoft Teams..."
-  brew install microsoft-teams
-fi
+# if brew ls --cask --versions microsoft-teams &> /dev/null; then
+#   echo "Microsoft Teams...   OK"
+# else
+#   echo "Microsoft Teams..."
+#   brew install microsoft-teams
+# fi
 
 brew cleanup
 # EOF
