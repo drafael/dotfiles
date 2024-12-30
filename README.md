@@ -49,13 +49,13 @@ In order to view all of my configured aliases enter `git aliases`
 ### [Zed](https://zed.dev/)
 
 ```sh
-brew install zed
+brew install --cask zed
 ```
 
 ### [Visual Studio Code](https://code.visualstudio.com/)
 
 ```sh
-brew install visual-studio-code
+brew install --cask visual-studio-code
 ```
 
 AI code assistant plugins: [Continue](https://www.continue.dev) and [Llama Coder](https://marketplace.visualstudio.com/items?itemName=ex3ndr.llama-coder)
@@ -108,7 +108,7 @@ brew install ant maven gradle
 ### [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
 ```sh
-brew install intellij-idea
+brew install --cask intellij-idea
 ```
 
 AI code assistant plugins: [Continue](https://www.continue.dev) and [CodeGPT](https://plugins.jetbrains.com/plugin/21056-codegpt)
