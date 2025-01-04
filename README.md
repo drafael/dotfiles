@@ -24,7 +24,20 @@ ln -s ~/.dotfiles/.bashrc ~/.bashrc && ln -s ~/.dotfiles/.bash_profile ~/.bash_p
 
 ## [iTerm2](http://iterm2.com)
 
-Install `brew install iterm2` and point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
+```sh
+brew install --cask iterm2
+```
+Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
+
+## [Ghostty](https://ghostty.org/)
+Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.
+
+```sh
+brew install --cask ghostty
+```
+```sh
+mkdir -p $HOME/.config/ghostty && ln -s $HOME/.dotfiles/.config/ghostty/config $HOME/.config/ghostty/config
+```
 
 ## Git
 
@@ -118,7 +131,7 @@ AI code assistant plugins: [Continue](https://www.continue.dev) and [CodeGPT](ht
 ### Docker and [Minikube](https://github.com/kubernetes/minikube)
 
 ```sh
-brew install docker docker-compose minikube kubectl helm 
+brew install docker docker-compose minikube kubectl helm
 ```
 
 ### [Colima](https://github.com/abiosoft/colima)
