@@ -9,28 +9,32 @@
 
 Clone to `~/.dotfiles`
 
-## Zsh
+## Shell Environment
+
+### Zsh
 
 ```sh
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
 Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal prompt](https://github.com/sindresorhus/pure#pure).
 
-## Bash
+### Bash
 
 ```sh
 ln -s ~/.dotfiles/.bashrc ~/.bashrc && ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ```
+## Terminal Emulators
 
-## [iTerm2](http://iterm2.com)
+### [iTerm2](http://iterm2.com)
 
 ```sh
 brew install --cask iterm2
 ```
 Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
-## [Ghostty](https://ghostty.org/)
-Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.
+### [Ghostty](https://ghostty.org/)
+
+Fast cross-platform terminal emulator that uses platform-native UI and GPU acceleration.
 
 ```sh
 brew install --cask ghostty
@@ -150,14 +154,7 @@ brew install podman podman-compose podman-desktop
 
 ## See Also
 
+* [GitHub does dotfiles](https://dotfiles.github.io/)
+* [Awesome Awesomeness](https://github.com/bayandin/awesome-awesomeness): [Dotfiles](https://github.com/webpro/awesome-dotfiles), [Shell](https://github.com/alebcay/awesome-shell), [Dev Env](https://github.com/jondot/awesome-devenv), [Java](https://github.com/akullpp/awesome-java)
 * [Command-Line Tools](share/INSTALL.md#command-line-tools)
 * [Productivity Tips](share/PRODUCTIVITY.md)
-
-## Acknowledgements
-
-Inspiration and code was taken (stolen) from many sources, including:
-* [GitHub does dotfiles](https://dotfiles.github.io/)
-* [@mathiasbynens](https://github.com/mathiasbynens) (Mathias Bynens) [dotfiles](https://github.com/mathiasbynens/dotfiles)
-* [@garybernhardt](https://github.com/garybernhardt) (Gary Bernhardt) [dotfiles](https://github.com/garybernhardt/dotfiles)
-* [@necolas](https://github.com/necolas) (Nicolas Gallagher) [dotfiles](https://github.com/necolas/dotfiles)
-* [Awesome Awesomeness](https://github.com/bayandin/awesome-awesomeness): [Dotfiles](https://github.com/webpro/awesome-dotfiles), [Shell](https://github.com/alebcay/awesome-shell), [Dev Env](https://github.com/jondot/awesome-devenv), [Java](https://github.com/akullpp/awesome-java)
