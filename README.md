@@ -2,7 +2,6 @@
 ## Prerequisites
 
 * macOS
-* Command Line Tools (CLT) for Xcode: `xcode-select --install`
 * [Homebrew](http://brew.sh) package manager
 
 ## Installation
@@ -75,7 +74,7 @@ brew install --cask zed
 brew install --cask visual-studio-code
 ```
 
-AI code assistant plugins: [Continue](https://www.continue.dev) and [Llama Coder](https://marketplace.visualstudio.com/items?itemName=ex3ndr.llama-coder)
+[Make your own custom AI code assistant](share/AI_CODE_ASSISTANT.md)
 
 ### Vim
 
@@ -128,7 +127,7 @@ brew install ant maven gradle
 brew install --cask intellij-idea
 ```
 
-AI code assistant plugins: [Continue](https://www.continue.dev) and [CodeGPT](https://plugins.jetbrains.com/plugin/21056-codegpt)
+[Make your own custom AI code assistant](share/AI_CODE_ASSISTANT.md)
 
 ## Container Runtimes
 
