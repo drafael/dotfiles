@@ -1,0 +1,46 @@
+name: minimal
+version: 0.0.1
+
+models:
+  - name: Autodetect
+    provider: ollama
+    model: AUTODETECT
+
+  - name: Autodetect
+    provider: lmstudio
+    model: AUTODETECT
+
+  - name: Qwen2.5-Coder 1.5B
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    roles:
+      - autocomplete
+  
+  - name: Nomic Embed v1.5
+    provider: ollama
+    model: nomic-embed-text:v1.5
+    roles:
+      - embed
+
+context:
+  - uses: docs
+
+  - uses: codebase
+    with:
+      nRetrieve: 30
+      nFinal: 3
+
+  - uses: diff  
+
+prompts:
+  - name: check
+    description: Check for mistakes in my code
+    prompt: |
+      Please read the highlighted code and check for any mistakes. You should look for the following, and be extremely vigilant:
+        - Syntax errors
+        - Logic errors
+        - Security vulnerabilities
+        - Performance issues
+        - Anything else that looks wrong
+
+      Once you find an error, please explain it as clearly as possible, but without using extra words. For example, instead of saying 'I think there is a syntax error on line 5', you should say 'Syntax error on line 5'. Give your answer as one bullet point per mistake found.

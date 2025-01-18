@@ -15,24 +15,22 @@ ollama pull llama3.1:8b-instruct-q4_K_M
 ```
 
 ```sh
-ollama pull codellama:7b-instruct-q4_0
-```
-
-```sh
-ollama pull codeqwen:7b-chat-v1.5-q4_0
-```
-
-```sh
-ollama pull codegemma:7b-instruct-v1.1-q4_0
-```
-
-```sh
 ollama pull qwen2.5-coder:7b-instruct
 ollama pull qwen2.5-coder:7b-instruct-q4_K_M
 ```
 
 ```sh
+ollama pull qwen2.5:14b-instruct
+ollama pull qwen2.5:14b
+```
+
+```sh
 ollama pull deepseek-coder:6.7b-instruct-q4_0
+```
+
+```sh
+ollama pull deepseek-r1:14b
+ollama pull deepseek-r1:14b-qwen-distill-q4_K_M
 ```
 
 ## Pull models for code completion
@@ -72,35 +70,30 @@ Click on the gear icon in the bottom right corner of Continue to open your `~/.c
 ```json
 "models": [
   {
-    "title": "Llama 3.1 8B",
-    "provider": "ollama",
-    "model": "llama3.1:8b-instruct-q4_K_M"
-  },
-  {
-    "title": "CodeLlama 7B",
-    "provider": "ollama",
-    "model": "codellama:7b-instruct-q4_0"
-  },
-  {
-    "title": "CodeQwen1.5 7B",
-    "provider": "ollama",
-    "model": "codeqwen:7b-chat-v1.5-q4_0"
-  },
-  {
-    "title": "CodeGemma 7B",
-    "provider": "ollama",
-    "model": "codegemma:7b-instruct-v1.1-q4_0"
-  },
-  {
-    "title": "Qwen2.5 Coder 7B",
-    "provider": "ollama",
-    "model": "qwen2.5-coder:7b-instruct-q4_K_M"
-  },
-  {
-    "title": "DeepSeek Coder 6.7B",
-    "provider": "ollama",
-    "model": "deepseek-coder:6.7b-instruct-q4_0"
-  }
+      "title": "Llama 3.1 8B",
+      "provider": "ollama",
+      "model": "llama3.1:8b-instruct-q4_K_M"
+    },
+    {
+      "title": "Qwen2.5 Coder 7B",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b-instruct-q4_K_M"
+    },
+    {
+      "title": "Qwen2.5 14b",
+      "provider": "ollama",
+      "model": "qwen2.5:14b-instruct"
+    },
+    {
+      "title": "DeepSeek Coder 6.7B",
+      "provider": "ollama",
+      "model": "deepseek-coder:6.7b-instruct-q4_0"
+    },
+    {
+      "title": "DeepSeek R1 14b",
+      "provider": "ollama",
+      "model": "deepseek-r1:14b"
+    }
 ],
 ```
 or
