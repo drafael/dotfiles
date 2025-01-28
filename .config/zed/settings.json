@@ -10,18 +10,18 @@
   "assistant": {
     "default_model": {
       "provider": "ollama",
-      "model": "codeqwen:chat"
+      "model": "llama3.1:8b"
     },
     "version": "2"
   },
-  "ui_font_size": 15,
-  "buffer_font_size": 15,
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
   "buffer_font_family": "Monaco",
   // "buffer_font_family": "Fira Code",
   "preferred_line_length": 120,
   "autosave": "on_focus_change",
   "theme": {
-    "mode": "dark",
+    "mode": "light",
     "light": "One Light",
     "dark": "Solarized Dark"
   },

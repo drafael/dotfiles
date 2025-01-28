@@ -68,6 +68,10 @@ In order to view all of my configured aliases enter `git aliases`
 brew install --cask zed
 ```
 
+```sh
+mkdir -p $HOME/.config/zed && ln -s $HOME/.dotfiles/.config/zed/settings.json $HOME/.config/zed/settings.json
+```
+
 ### [Visual Studio Code](https://code.visualstudio.com/)
 
 ```sh
