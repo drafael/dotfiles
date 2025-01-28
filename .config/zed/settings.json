@@ -7,24 +7,37 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "theme": "One Dark",
+  "edit_predictions": {
+    "disabled_globs": [
+      "**/.zshrc.local",
+      "**/.bashrc.local",
+      "**/.env*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/secrets.yml"
+    ],
+    "mode": "eager_preview"
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
   "assistant": {
     "default_model": {
       "provider": "ollama",
-      "model": "codeqwen:chat"
+      "model": "mistral:7b"
     },
     "version": "2"
   },
-  "ui_font_size": 15,
-  "buffer_font_size": 15,
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
   "buffer_font_family": "Monaco",
   // "buffer_font_family": "Fira Code",
   "preferred_line_length": 120,
   "autosave": "on_focus_change",
-  "theme": {
-    "mode": "dark",
-    "light": "One Light",
-    "dark": "Solarized Dark"
-  },
+  "icon_theme": "Material Icon Theme",
   "tabs": {
     "git_status": true
   },
