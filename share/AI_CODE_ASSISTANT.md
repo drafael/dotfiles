@@ -11,26 +11,27 @@
 ## Pull models for chat
 
 ```sh
-ollama pull llama3.1:8b-instruct-q4_K_M
+ollama pull llama3.1:8b
 ```
 
 ```sh
 ollama pull qwen2.5-coder:7b-instruct
-ollama pull qwen2.5-coder:7b-instruct-q4_K_M
 ```
 
 ```sh
-ollama pull qwen2.5:14b-instruct
+ollama pull qwen2.5-coder:14b
+```
+
+```sh
 ollama pull qwen2.5:14b
 ```
 
 ```sh
-ollama pull deepseek-coder:6.7b-instruct-q4_0
+ollama pull deepseek-coder:6.7b-instruct
 ```
 
 ```sh
 ollama pull deepseek-r1:14b
-ollama pull deepseek-r1:14b-qwen-distill-q4_K_M
 ```
 
 ## Pull models for code completion
@@ -48,11 +49,15 @@ ollama pull qwen2.5-coder:7b-base
 ```
 
 ```sh
+ollama pull qwen2.5-coder:14b-base
+```
+
+```sh
 ollama pull deepseek-coder:1.3b-base
 ```
 
 ```sh
-ollama pull deepseek-coder:6.7b-base-q4_0
+ollama pull deepseek-coder:6.7b-base
 ```
 
 ## Pull embeddings to power @codebase
@@ -69,15 +74,20 @@ Click on the gear icon in the bottom right corner of Continue to open your `~/.c
 
 ```json
 "models": [
-  {
+    {
       "title": "Llama 3.1 8B",
       "provider": "ollama",
-      "model": "llama3.1:8b-instruct-q4_K_M"
+      "model": "llama3.1:8b"
     },
     {
       "title": "Qwen2.5 Coder 7B",
       "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct-q4_K_M"
+      "model": "qwen2.5-coder:7b-instruct"
+    },
+    {
+      "title": "Qwen2.5 Coder 14B",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:14b"
     },
     {
       "title": "Qwen2.5 14b",
@@ -87,7 +97,7 @@ Click on the gear icon in the bottom right corner of Continue to open your `~/.c
     {
       "title": "DeepSeek Coder 6.7B",
       "provider": "ollama",
-      "model": "deepseek-coder:6.7b-instruct-q4_0"
+      "model": "deepseek-coder:6.7b-instruct"
     },
     {
       "title": "DeepSeek R1 14b",
@@ -121,10 +131,6 @@ or
   "provider": "ollama",
   "model": "qwen2.5-coder:1.5b-base"
 },
-"tabAutocompleteOptions": {
-  "debounceDelay": 100,
-  "maxPromptTokens": 8192
-},
 ```
 
 or
@@ -134,10 +140,6 @@ or
   "title": "Autocomplete Model",
   "provider": "ollama",
   "model": "deepseek-coder:1.3b-base"
-},
-"tabAutocompleteOptions": {
-  "debounceDelay": 100,
-  "maxPromptTokens": 8192
 },
 ```
 
@@ -150,32 +152,6 @@ or
 },
 ```
 
-### [Slash commands](https://docs.continue.dev/customize/slash-commands)
-
-```json
-"slashCommands": [
-    {
-      "name": "edit",
-      "description": "Edit selected code"
-    },
-    {
-      "name": "explain",
-      "description": "Explain the selected code"
-    },
-    {
-      "name": "comment",
-      "description": "Write comments for the selected code"
-    },
-    {
-      "name": "commit",
-      "description": "Generate a git commit message"
-    },
-    {
-      "name": "share",
-      "description": "Export the current chat session to markdown"
-    }
-  ],
-```
 
 ### TBD
 

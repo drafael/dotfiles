@@ -4,7 +4,7 @@ version: 0.0.1
 models:
   - name: Llama 3.1 8B
     provider: ollama
-    model: llama3.1:8b-instruct-q4_K_M
+    model: llama3.1:8b
     roles:
       - chat
       - edit
@@ -12,7 +12,15 @@ models:
   
   - name: Qwen2.5 Coder 7B
     provider: ollama
-    model: qwen2.5-coder:7b-instruct-q4_K_M
+    model: qwen2.5-coder:7b-instruct
+    roles:
+      - chat
+      - edit
+      - summarize
+
+  - name: Qwen2.5 Coder 14B
+    provider: ollama
+    model: qwen2.5-coder:14b
     roles:
       - chat
       - edit
@@ -28,7 +36,7 @@ models:
 
   - name: DeepSeek Coder 6.7B
     provider: ollama
-    model: deepseek-coder:6.7b-instruct-q4_0
+    model: deepseek-coder:6.7b-instruct
     roles:
       - chat
       - edit
@@ -52,7 +60,7 @@ models:
 
   - name: Qwen2.5-Coder 1.5B
     provider: ollama
-    model: qwen2.5-coder:1.5b
+    model: qwen2.5-coder:1.5b-base
     roles:
       - autocomplete
   

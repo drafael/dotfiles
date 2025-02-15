@@ -14,14 +14,7 @@
   "tabAutocompleteModel": {
     "title": "Qwen2.5-Coder 1.5B",
     "provider": "ollama",
-    "model": "qwen2.5-coder:1.5b"
-  },
-  "tabAutocompleteOptions": {
-    "debounceDelay": 100,
-    "useCache": true,
-    "useCopyBuffer": true,
-    "maxPromptTokens": 4016,
-    "multilineCompletions": "auto"
+    "model": "qwen2.5-coder:1.5b-base"
   },
   "embeddingsProvider": {
     "provider": "ollama",

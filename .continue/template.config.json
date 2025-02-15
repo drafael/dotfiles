@@ -3,12 +3,17 @@
     {
       "title": "Llama 3.1 8B",
       "provider": "ollama",
-      "model": "llama3.1:8b-instruct-q4_K_M"
+      "model": "llama3.1:8b"
     },
     {
       "title": "Qwen2.5 Coder 7B",
       "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct-q4_K_M"
+      "model": "qwen2.5-coder:7b-instruct"
+    },
+    {
+      "title": "Qwen2.5 Coder 14B",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:14b"
     },
     {
       "title": "Qwen2.5 14b",
@@ -18,7 +23,7 @@
     {
       "title": "DeepSeek Coder 6.7B",
       "provider": "ollama",
-      "model": "deepseek-coder:6.7b-instruct-q4_0"
+      "model": "deepseek-coder:6.7b-instruct"
     },
     {
       "title": "DeepSeek R1 14b",
@@ -39,14 +44,7 @@
   "tabAutocompleteModel": {
     "title": "Qwen2.5-Coder 1.5B",
     "provider": "ollama",
-    "model": "qwen2.5-coder:1.5b"
-  },
-  "tabAutocompleteOptions": {
-    "debounceDelay": 100,
-    "useCache": true,
-    "useCopyBuffer": true,
-    "maxPromptTokens": 4016,
-    "multilineCompletions": "auto"
+    "model": "qwen2.5-coder:1.5b-base"
   },
   "embeddingsProvider": {
     "provider": "ollama",
