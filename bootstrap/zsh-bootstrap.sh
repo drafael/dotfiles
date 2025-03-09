@@ -15,23 +15,10 @@ ln -sfn "$dotfiles/.zshrc" "$HOME/.zshrc"
 set +x
 source "$HOME/.zshrc"
 
-echo "Git..."
-if [ ! -x "$(command -v git)" ]; then
-  set -x
-  if [ ! -x "$(command -v xcode-select)" ]; then
-    echo "Please install the Xcode or CLT"
-    exit 1
-  else
-    xcode-select --install
-  fi
-  set +x
-else
-  echo "Git... OK"
-fi
 
 if [ ! -x "$(command -v brew)" ]; then
   echo "brew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$(curl -fsSL /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")"
 else
   echo "brew...      OK"
 fi
@@ -55,19 +42,20 @@ else
   # open "$dotfiles/iTerm2/colors/papercolor-light.itermcolors"
 fi
 
+if brew ls --cask --versions ghostty &> /dev/null; then
+  echo "Ghostty...    OK"
+else
+  echo "Ghostty..."
+  brew install --cask ghostty
+  mkdir -p $HOME/.config/ghostty && ln -sfn $HOME/.dotfiles/.config/ghostty/config $HOME/.config/ghostty/config
+fi
+
 if brew cask ls --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
 else
   echo "AppCleaner..."
   brew install --cask appcleaner
 fi
-
-# if brew ls --cask --versions firefox &> /dev/null; then
-#   echo "Firefox...   OK"
-# else
-#   echo "Firefox..."
-#   brew install --cask firefox
-# fi
 
 if brew ls --cask --versions google-chrome &> /dev/null; then
   echo "Google Chrome...   OK"
@@ -96,7 +84,6 @@ else
   echo "vim..."
   set -x
   brew install vim
-  brew link --overwrite vim
   brew install ctags
   ln -sfn "$dotfiles/.ctags" "$HOME/.ctags"
   set +x
@@ -129,9 +116,9 @@ fi
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
   set -x
-  brew install openjdk@11 openjdk@17
-  sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
-  sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+  brew install openjdk@11 openjdk@21
+  sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+  sudo ln -sfn $(brew --prefix)/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
   brew install ant maven gradle
   set +x
 else
@@ -152,12 +139,12 @@ else
   brew install pycharm
 fi
 
-# if brew ls --cask --versions datagrip &> /dev/null; then
-#   echo "DataGrip...   OK"
-# else
-#   echo "DataGrip..."
-#   brew install datagrip
-# fi
+if brew ls --cask --versions datagrip &> /dev/null; then
+  echo "DataGrip...   OK"
+else
+  echo "DataGrip..."
+  brew install datagrip
+fi
 
 # if brew ls --cask --versions microsoft-office &> /dev/null; then
 #   echo "Microsoft Office...   OK"

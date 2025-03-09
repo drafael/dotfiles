@@ -105,16 +105,16 @@ brew install editorconfig
 ### OpenJDK
 
 ```sh
-brew install openjdk@17
+brew install openjdk@21
 ```
 ```sh
-sudo ln -sfn $(brew --prefix)/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+sudo ln -sfn $(brew --prefix)/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
 ```
 
 Set `JAVA_HOME` in `.zshrc` or `.bash_profile`:
 ```sh
 if [ -x "$(command -v java)" ]; then
-  export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+  export JAVA_HOME=$(/usr/libexec/java_home -v 21)
   export PATH=$JAVA_HOME/bin:$PATH
 fi
 ```
