@@ -15,11 +15,7 @@ ollama pull llama3.1:8b
 ```
 
 ```sh
-ollama pull qwen2.5-coder:7b-instruct
-```
-
-```sh
-ollama pull qwen2.5-coder:14b
+ollama pull qwen2.5:7b
 ```
 
 ```sh
@@ -27,7 +23,11 @@ ollama pull qwen2.5:14b
 ```
 
 ```sh
-ollama pull deepseek-coder:6.7b-instruct
+ollama pull qwen2.5-coder:7b
+```
+
+```sh
+ollama pull qwen2.5-coder:14b
 ```
 
 ```sh
@@ -52,14 +52,6 @@ ollama pull qwen2.5-coder:7b-base
 ollama pull qwen2.5-coder:14b-base
 ```
 
-```sh
-ollama pull deepseek-coder:1.3b-base
-```
-
-```sh
-ollama pull deepseek-coder:6.7b-base
-```
-
 ## Pull embeddings to power @codebase
 
 ```sh
@@ -80,24 +72,24 @@ Click on the gear icon in the bottom right corner of Continue to open your `~/.c
       "model": "llama3.1:8b"
     },
     {
+      "title": "Qwen2.5 7b",
+      "provider": "ollama",
+      "model": "qwen2.5:7b"
+    },
+    {
+      "title": "Qwen2.5 14b",
+      "provider": "ollama",
+      "model": "qwen2.5:14b"
+    },
+    {
       "title": "Qwen2.5 Coder 7B",
       "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct"
+      "model": "qwen2.5-coder:7b"
     },
     {
       "title": "Qwen2.5 Coder 14B",
       "provider": "ollama",
       "model": "qwen2.5-coder:14b"
-    },
-    {
-      "title": "Qwen2.5 14b",
-      "provider": "ollama",
-      "model": "qwen2.5:14b-instruct"
-    },
-    {
-      "title": "DeepSeek Coder 6.7B",
-      "provider": "ollama",
-      "model": "deepseek-coder:6.7b-instruct"
     },
     {
       "title": "DeepSeek R1 14b",

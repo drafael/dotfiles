@@ -6,24 +6,24 @@
       "model": "llama3.1:8b"
     },
     {
+      "title": "Qwen2.5 7b",
+      "provider": "ollama",
+      "model": "qwen2.5:7b"
+    },
+    {
+      "title": "Qwen2.5 14b",
+      "provider": "ollama",
+      "model": "qwen2.5:14b"
+    },
+    {
       "title": "Qwen2.5 Coder 7B",
       "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct"
+      "model": "qwen2.5-coder:7b"
     },
     {
       "title": "Qwen2.5 Coder 14B",
       "provider": "ollama",
       "model": "qwen2.5-coder:14b"
-    },
-    {
-      "title": "Qwen2.5 14b",
-      "provider": "ollama",
-      "model": "qwen2.5:14b-instruct"
-    },
-    {
-      "title": "DeepSeek Coder 6.7B",
-      "provider": "ollama",
-      "model": "deepseek-coder:6.7b-instruct"
     },
     {
       "title": "DeepSeek R1 14b",

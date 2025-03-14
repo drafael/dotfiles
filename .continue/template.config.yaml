@@ -9,10 +9,26 @@ models:
       - chat
       - edit
       - summarize
+
+  - name: Qwen2.5 7b
+    provider: ollama
+    model: qwen2.5:7b
+    roles:
+      - chat
+      - edit
+      - summarize
+
+  - name: Qwen2.5 14b
+    provider: ollama
+    model: qwen2.5:14b
+    roles:
+      - chat
+      - edit
+      - summarize
   
   - name: Qwen2.5 Coder 7B
     provider: ollama
-    model: qwen2.5-coder:7b-instruct
+    model: qwen2.5-coder:7b
     roles:
       - chat
       - edit
@@ -21,22 +37,6 @@ models:
   - name: Qwen2.5 Coder 14B
     provider: ollama
     model: qwen2.5-coder:14b
-    roles:
-      - chat
-      - edit
-      - summarize
-
-  - name: Qwen2.5 14b
-    provider: ollama
-    model: qwen2.5:14b-instruct
-    roles:
-      - chat
-      - edit
-      - summarize
-
-  - name: DeepSeek Coder 6.7B
-    provider: ollama
-    model: deepseek-coder:6.7b-instruct
     roles:
       - chat
       - edit
