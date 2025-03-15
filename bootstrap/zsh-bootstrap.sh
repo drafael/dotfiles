@@ -2,7 +2,6 @@
 
 # softwareupdate --install-rosetta --agree-to-license
 
-# dotfiles="$( cd "$( dirname "${(%):-%N}" )" >/dev/null && pwd )"
 dotfiles="$HOME/.dotfiles"
 
 echo "================================================="
@@ -10,15 +9,13 @@ echo "  dotfiles dir: $dotfiles"
 echo "================================================="
 
 echo "zsh..."
-set -x
 ln -sfn "$dotfiles/.zshrc" "$HOME/.zshrc"
-set +x
 source "$HOME/.zshrc"
 
 
 if [ ! -x "$(command -v brew)" ]; then
   echo "brew..."
-  /bin/bash -c "$(curl -fsSL /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "brew...      OK"
 fi
@@ -82,21 +79,17 @@ if brew ls --versions vim &> /dev/null; then
   echo "vim...       OK"
 else
   echo "vim..."
-  set -x
   brew install vim
   brew install ctags
   ln -sfn "$dotfiles/.ctags" "$HOME/.ctags"
-  set +x
 fi
 
 if [ -d "$HOME/.vim" ]; then
   echo ".vimrc...    OK"
 else
   echo ".vimrc..."
-  set -x
   ln -sfn "$dotfiles/.vimrc" "$HOME/.vimrc"
   vim +PluginInstall +qall
-  set +x
 fi
 
 if [ ! -x "$(command -v zed)" ]; then
@@ -115,12 +108,10 @@ fi
 
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
-  set -x
   brew install openjdk@11 openjdk@21
   sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
   sudo ln -sfn $(brew --prefix)/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
   brew install ant maven gradle
-  set +x
 else
   echo "Java...      OK"
 fi

@@ -2,35 +2,52 @@ name: minimal
 version: 0.0.1
 
 models:
-  - name: Autodetect
+  - name: Ollama
     provider: ollama
     model: AUTODETECT
 
-  - name: Autodetect
+  - name: LM Studio
     provider: lmstudio
     model: AUTODETECT
 
-  - name: Qwen2.5-Coder 1.5B
+  - name: Qwen2.5 Coder 1.5B base
     provider: ollama
     model: qwen2.5-coder:1.5b-base
-    roles:
-      - autocomplete
-  
+    roles: [autocomplete]
+
+  - name: Qwen2.5 Coder 3B base
+    provider: ollama
+    model: qwen2.5-coder:3b-base
+    roles: [autocomplete]
+
+  - name: Qwen2.5 Coder 7B base
+    provider: ollama
+    model: qwen2.5-coder:7b-base
+    roles: [autocomplete]
+
   - name: Nomic Embed v1.5
     provider: ollama
     model: nomic-embed-text:v1.5
-    roles:
-      - embed
+    roles: [embed]
 
 context:
-  - uses: docs
-
-  - uses: codebase
-    with:
-      nRetrieve: 30
-      nFinal: 3
-
-  - uses: diff  
+  - provider: file
+  - provider: currentFile
+  - provider: open
+    params:
+      onlyPinned: true
+  - provider: tree
+  - provider: code
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: search
+  - provider: docs
+  - provider: folder
+  - provider: repo-map
+    params:
+      includeSignatures: false
+  - provider: codebase
 
 prompts:
   - name: check
