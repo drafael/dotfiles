@@ -65,7 +65,11 @@ models:
 Instruction-Tuned LLMs (usually have `-instruct` suffix in the tag aliases) are derived from base models but undergo additional fine-tuning on datasets specifically designed for instruction-following tasks. Optimized to follow user prompts accurately and consistently, even for complex or multi-step instructions. Better at structured outputs like summaries, lists, or step-by-step guides. They adapt well to different tones and styles based on user requests
 
 ```sh
-ollama pull llama3.1:8b
+ollama pull cogito:8b
+```
+
+```sh
+ollama pull cogito:14b
 ```
 
 ```sh
@@ -92,9 +96,14 @@ ollama pull deepseek-r1:14b
 
 ```yaml
 models:
-  - name: Llama 3.1 8B
+  - name: Cogito 8B
     provider: ollama
-    model: llama3.1:8b
+    model: cogito:8b
+    roles: [chat, edit, apply]
+
+  - name: Cogito 14B
+    provider: ollama
+    model: cogito:14b
     roles: [chat, edit, apply]
 
   - name: Qwen2.5 7B
