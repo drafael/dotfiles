@@ -25,3 +25,6 @@ macos-non-native-fullscreen = visible-menu
 #macos-titlebar-style = transparent
 
 copy-on-select = true
+
+window-width = 178
+window-height = 42
