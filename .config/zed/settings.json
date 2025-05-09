@@ -24,7 +24,7 @@
   "features": {
     "edit_prediction_provider": "copilot"
   },
-  "assistant": {
+  "agent": {
     "always_allow_tool_actions": true,
     "profiles": {
       "write": {
@@ -44,7 +44,7 @@
           "list_directory": false,
           "move_path": false,
           "now": true,
-          "path_search": true,
+          "find_path": true,
           "read_file": true,
           "grep": true,
           "rename": true,
@@ -61,8 +61,8 @@
     },
     "version": "2"
   },
-  "ui_font_size": 14,
-  "buffer_font_size": 14,
+  "ui_font_size": 13,
+  "buffer_font_size": 13,
   "buffer_font_family": "Monaco",
   // "buffer_font_family": "Fira Code",
   "preferred_line_length": 120,
