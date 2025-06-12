@@ -45,7 +45,7 @@ ln -s ~/.dotfiles/.ctags ~/.ctags && brew install ctags gotags
 
   - [x] [Vundle](https://github.com/VundleVim/Vundle.vim#about) — plugin manager
   - [x] [Airline](https://github.com/vim-airline/vim-airline#vim-airline-) — status bar
-  - [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots), [PaperColor Theme](https://github.com/nlknguyen/papercolor-theme#screenshots), and [Ayu](https://github.com/ayu-theme/ayu-vim)
+  - [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots), [PaperColor Theme](https://github.com/nlknguyen/papercolor-theme#screenshots), [Ayu](https://github.com/ayu-theme/ayu-vim), and [Catppuccin](https://github.com/catppuccin/vim)
   - [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim#ctrlpvim) — fuzzy file finder, buffer switcher, MRU
   - [x] [Auto Pairs](https://github.com/jiangmiao/auto-pairs#auto-pairs) — insert or delete brackets, parens, quotes in pair
   - [x] [Snipmate](https://github.com/garbas/vim-snipmate#snipmate) — [Snippet](https://github.com/honza/vim-snippets#snipmate--ultisnip-snippets) manager for vim

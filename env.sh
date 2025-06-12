@@ -28,4 +28,8 @@ if [[ $ITERM_PROFILE =~ Solarized ]]; then
   if [ -f $DOTFILES_DIR/.config/mc/solarized.ini ]; then
     export MC_SKIN=$DOTFILES_DIR/.config/mc/solarized.ini
   fi
+else
+  if [ -f $DOTFILES_DIR/.config/mc/catppuccin.ini ]; then
+    export MC_SKIN=$DOTFILES_DIR/.config/mc/catppuccin.ini
+  fi
 fi

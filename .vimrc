@@ -24,6 +24,7 @@ set visualbell                 " don't beep
 set t_vb=                      "   and don't flash the screen either
 set ruler                      " always show current position
 set mouse=a                    " enable using the mouse if terminal emulator supports it
+set termguicolors              " enable 24-bit RGB color in the terminal
 set mousehide                  " hide the mouse cursor while typing
 set virtualedit=all            " moving beyond the end of a line
 set showcmd                    " display incomplete commands
@@ -132,7 +133,7 @@ Plugin 'lambdalisue/vim-gita'               " An awesome git handling plugin
 Plugin 'altercation/vim-colors-solarized'   " http://ethanschoonover.com/solarized
 Plugin 'nlknguyen/papercolor-theme'         " Inspired by Google's Material Design
 Plugin 'ayu-theme/ayu-vim'
-Plugin 'phanviet/vim-monokai-pro'           " Monokai Pro color scheme for Vim / Neovim. Inspired by https://www.monokai.pro/
+Plugin 'catppuccin/vim'                     " Catppuccin color scheme for Vim a warm and fuzzy pastel theme https://catppuccin.com/
 
 " LLM, Copilot, etc
 Plugin 'github/copilot.vim'
@@ -207,7 +208,7 @@ augroup OverrideWhitespaceSettings
   " strip all trailing whitespace everytime you save the file
   autocmd BufWritePre * :StripWhitespace
   " replace tabs with spaces
-  autocmd BufWritePre * if &filetype != 'go' | :retab | endif
+  " autocmd BufWritePre * if &filetype != 'go' | :retab | endif
 
   " override whitespace settings
   autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
@@ -353,9 +354,11 @@ else                                " this is console Vim
 
     if $ITERM_PROFILE =~ "Solarized"
       colorscheme solarized
+
     elseif $ITERM_PROFILE =~ "PaperColor"
       colorscheme PaperColor
       let g:airline_theme = 'papercolor'
+
     elseif $ITERM_PROFILE =~ "Ayu Light"
       let ayucolor="light"
       colorscheme ayu
@@ -365,10 +368,26 @@ else                                " this is console Vim
     elseif $ITERM_PROFILE =~ "Ayu Dark"
       let ayucolor="dark"
       colorscheme ayu
+
+    elseif $ITERM_PROFILE =~ "Catppuccin Latte"
+      set background=light
+      colorscheme catppuccin_latte
+      let g:airline_theme = 'catppuccin_latte'
+    elseif $ITERM_PROFILE =~ "Catppuccin Frappé"
+      colorscheme catppuccin_frappe
+      let g:airline_theme = 'catppuccin_frappe'
+    elseif $ITERM_PROFILE =~ "Catppuccin Macchiato"
+      colorscheme catppuccin_macchiato
+      let g:airline_theme = 'catppuccin_macchiato'
+    elseif $ITERM_PROFILE =~ "Catppuccin Mocha"
+      colorscheme catppuccin_mocha
+      let g:airline_theme = 'catppuccin_mocha'
     endif
-  else                              " Terminal.app
+
+  else " no iTerm2 profile, use default color scheme
     set background=dark
-    colorscheme solarized
+    colorscheme catppuccin_frappe
+    let g:airline_theme = 'catppuccin_frappe'
   endif
 endif
 

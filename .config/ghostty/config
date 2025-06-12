@@ -13,9 +13,9 @@ font-size = 14
 #window-theme = system
 window-theme = dark
 
-
+theme = catppuccin-frappe.conf
 #theme = dark:ayu,light:ayu_light
-theme = dark:Builtin Solarized Dark,light:Builtin Solarized Light
+#theme = dark:Builtin Solarized Dark,light:Builtin Solarized Light
 #theme = dark:tokyonight,light:tokyonight-day
 
 window-save-state = always
@@ -24,7 +24,12 @@ macos-non-native-fullscreen = visible-menu
 
 #macos-titlebar-style = transparent
 
-copy-on-select = true
-
-window-width = 178
+window-width = 160
 window-height = 42
+
+# Copy to clipboard when selecting text
+copy-on-select = clipboard
+
+# Specify which clipboard to use (primary, clipboard, or both)
+clipboard-read = allow
+clipboard-write = allow

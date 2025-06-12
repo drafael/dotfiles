@@ -39,7 +39,7 @@ Fast cross-platform terminal emulator that uses platform-native UI and GPU accel
 brew install --cask ghostty
 ```
 ```sh
-mkdir -p $HOME/.config/ghostty && ln -s $HOME/.dotfiles/.config/ghostty/config $HOME/.config/ghostty/config
+ln -s $HOME/.dotfiles/.config/ghostty $HOME/.config/ghostty
 ```
 
 ## Git
@@ -130,8 +130,6 @@ brew install ant maven gradle
 ```sh
 brew install --cask intellij-idea
 ```
-
-[Make your own custom AI code assistant](share/AI_CODE_ASSISTANT.md)
 
 ## Container Runtimes
 
