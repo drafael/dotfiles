@@ -7,7 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "theme": "Catppuccin Frappé (Blur)",
+  "theme": "Rosé Pine Dawn",
   "edit_predictions": {
     "disabled_globs": [
       "**/.zshrc.local",
