@@ -1,0 +1,14 @@
+[flavor]
+dark = "catppuccin-frappe"
+light = "catppuccin-latte"
+
+[status]
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+[icon]
+globs = []
+dirs = []
+files = []
+exts = []
+conds = []

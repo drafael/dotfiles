@@ -10,6 +10,8 @@ fi
 # always use vim instead of vi
 alias vi=vim
 
+alias y=yazi
+
 alias ..="cd .."
 alias cd..="cd .."
 alias ...="cd ../.."
