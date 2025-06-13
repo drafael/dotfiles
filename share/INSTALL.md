@@ -88,30 +88,3 @@ brew install ack ag htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id 
 * [tig](http://jonas.nitro.dk/tig/) — ncurses-based text-mode interface for `git`
 * [tmux](http://tmux.github.io) — a terminal multiplexer
 * [tree](http://mama.indstate.edu/users/ice/tree/) — display directories as trees
-
-
-## [Sublime Text](https://www.sublimetext.com/)
-
-Installation `brew install sublime-text` and configuration (Sublime Text 3):
-
-[Package Control](https://packagecontrol.io/) — the first thing to do after the ST installation is to setup the package manager
-* [Installation](https://packagecontrol.io/installation) (manual)
-```bash
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/
-rm -r Installed\ Packages/
-ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
-```
-* [Syncing](https://packagecontrol.io/docs/syncing)
-```bash
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-rm -r User
-ln -s ~/.dotfiles/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
-```
-
-Also take a look awesome [Quick Start Guides](https://github.com/dreikanter/sublime-bookmarks).
-
-* Material [Solarized Dark](https://github.com/altercation/solarized) theme:
-![sublime-text](sublime-text-material-solarized-theme.png)
-
-* Material [Ayu Light](https://github.com/dempfi/ayu) theme:
-![sublime-text](sublime-text-material-ayu-light-theme.png)
