@@ -42,6 +42,15 @@ brew install --cask ghostty
 ln -s $HOME/.dotfiles/.config/ghostty $HOME/.config/ghostty
 ```
 
+### [Warp](https://warp.dev/)
+
+```sh
+brew install --cask warp
+```
+```sh
+ln -s $HOME/.dotfiles/.warp $HOME/.warp
+```
+
 ## Git
 
 Put in `~/.gitconfig.local` sensitive information such as the `git` user credentials, e.g.:
