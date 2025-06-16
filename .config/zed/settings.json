@@ -67,7 +67,7 @@
   // "buffer_font_family": "Fira Code",
   "preferred_line_length": 120,
   "autosave": "on_focus_change",
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": "Catppuccin Frappé",
   "tabs": {
     "git_status": true
   },
