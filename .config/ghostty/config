@@ -33,3 +33,4 @@ copy-on-select = clipboard
 # Specify which clipboard to use (primary, clipboard, or both)
 clipboard-read = allow
 clipboard-write = allow
+keybind = shift+enter=text:\n
