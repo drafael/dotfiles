@@ -31,6 +31,8 @@ brew install --cask iterm2
 ```
 Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
 
+![iTerm2-settings](iTerm2/iTerm2-settings.png)
+
 ### [Ghostty](https://ghostty.org/)
 
 Fast cross-platform terminal emulator that uses platform-native UI and GPU acceleration.
