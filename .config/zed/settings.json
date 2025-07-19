@@ -58,8 +58,7 @@
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4"
-    },
-    "version": "2"
+    }
   },
   "ui_font_size": 13,
   "buffer_font_size": 13,
@@ -70,6 +69,15 @@
   "icon_theme": "Catppuccin Frappé",
   "tabs": {
     "git_status": true
+  },
+  "title_bar": {
+    "show_branch_icon": true
+  },
+  // "scrollbar": {
+  //   "show": "system"
+  // },
+  "minimap": {
+    "show": "auto"
   },
   "terminal": {
     "copy_on_select": true
