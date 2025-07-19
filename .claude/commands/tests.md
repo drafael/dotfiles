@@ -7,17 +7,18 @@ Write unit and integration tests
 Follow this systematic approach to write effective tests: **$ARGUMENTS**
 
 1. **Test Framework Detection**
-   - Identify the testing framework in use (Jest, Mocha, PyTest, RSpec, etc.)
+   - Identify the testing framework in use (JUnit, Jest, Mocha, PyTest, RSpec, etc.)
    - Review existing test structure and conventions
    - Check test configuration files and setup
    - Understand project-specific testing patterns
    - Always use the AssertJ assertions and matchers for Spring Boot codebase
    - Always add `@DisplayName` with human readable description to test methods in Java codebase
-   - For the test case method names follow the convention `{methodName}_{precondition|inputData}_{expectedOutcome}` but never include test case method name in the `@DisplayName` annotation
+   - Do not include Java test case method name in the `@DisplayName`
+   - Follow the convention `{methodName}_{precondition|input}_{expectedOutcome}` for the Java test case method names
    - Prefer using `@InjectsMocks` (if possible) over instatiating the tested class in the setup method `@BeforeEach`
    - Follow the naming convention of naming instances of the tested class as a `subject` - subject under test
    - Never create tests for the JPA/Hibrnate entities, only for the business logic and services
-   - Never create tests for the Spring Boot `@Configuration` beans
+   - Never create tests for the DTOs and Spring Boot `@Configuration` beans
    - Do not create testd for the Spring Data repositories, only for the business logic and services
 
 2. **Code Analysis for Testing**
@@ -137,11 +138,10 @@ describe('ComponentName', () => {
   });
 
   it('should handle valid input correctly', () => {
-    // Arrange
     const input = 'test';
-    // Act
+
     const result = functionToTest(input);
-    // Assert
+
     expect(result).toBe(expectedValue);
   });
 });
@@ -155,11 +155,10 @@ class TestClassName:
         pass
 
     def test_should_handle_valid_input(self):
-        # Arrange
         input_data = "test"
-        # Act
+
         result = function_to_test(input_data)
-        # Assert
+
         assert result == expected_value
 ```
 
@@ -168,11 +167,10 @@ class TestClassName:
 RSpec.describe ClassName do
   describe '#method_name' do
     it 'handles valid input correctly' do
-      # Arrange
       input = 'test'
-      # Act
+
       result = subject.method_name(input)
-      # Assert
+
       expect(result).to eq(expected_value)
     end
   end
