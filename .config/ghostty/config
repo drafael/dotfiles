@@ -6,8 +6,13 @@ font-family = Monaco
 
 font-size = 14
 
-#font-style = bold
+#cursor-style = bar
+cursor-style = block
+shell-integration-features = no-cursor
+cursor-style-blink = false
 
+background-opacity = 0.96
+background-blur = 8
 
 #window-theme = auto
 #window-theme = system
@@ -33,4 +38,5 @@ copy-on-select = clipboard
 # Specify which clipboard to use (primary, clipboard, or both)
 clipboard-read = allow
 clipboard-write = allow
+
 keybind = shift+enter=text:\n
