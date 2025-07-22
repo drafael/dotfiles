@@ -96,5 +96,29 @@
     "Plain Text": ["txt"],
     "JSONC": ["**/.zed/**/*.json", "**/zed/**/*.json", "**/Zed/**/*.json", "**/.vscode/**/*.json"],
     "Shell Script": [".zshrc.*", ".bashrc.*", ".env.*"]
+  },
+  "languages": {
+    "JSON": {
+      "format_on_save": "on",
+      "formatter": "language_server",
+      "tab_size": 2,
+      "hard_tabs": false,
+      "preferred_line_length": 40
+    }
+  },
+  "lsp": {
+    "json-languageserver": {
+      "settings": {
+        "json": {
+          "format": {
+            "enable": true,
+            "insertSpaces": true,
+            "tabSize": 2,
+            "insertFinalNewline": true,
+            "keepLines": false
+          }
+        }
+      }
+    }
   }
 }
