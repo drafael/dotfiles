@@ -1,5 +1,17 @@
 #!/usr/bin/env zsh
 
+# Enable Reduce Motion (make macOS UI fast)
+defaults write com.apple.universalaccess reduceMotion -bool true
+
+# Enable Stage Manager
+defaults write com.apple.WindowManager GloballyEnabled -bool true
+
+# Show desktop items when Stage Manager is active
+defaults write com.apple.WindowManager StandardHideDesktopIcons -bool false
+
+# Hide widgets when Stage Manager is active
+defaults write com.apple.WindowManager StandardHideWidgets -bool true
+
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
