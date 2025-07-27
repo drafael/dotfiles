@@ -5421,7 +5421,7 @@
 			<key>Name</key>
 			<string>mc</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -6169,7 +6169,7 @@
 			<key>Name</key>
 			<string>mc (Solarized)</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -7044,9 +7044,11 @@
 			<key>Name</key>
 			<string>Ayu Light</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
@@ -7927,9 +7929,11 @@
 			<key>Name</key>
 			<string>Ayu Mirage</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
@@ -8810,9 +8814,11 @@
 			<key>Name</key>
 			<string>Ayu Dark</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
@@ -9568,9 +9574,11 @@
 			<key>Name</key>
 			<string>Solarized Light</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
@@ -10318,9 +10326,11 @@
 			<key>Name</key>
 			<string>Solarized Dark</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
@@ -11413,9 +11423,11 @@
 			<key>Name</key>
 			<string>Catppuccin Latte</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
@@ -12309,9 +12321,11 @@
 			<key>Name</key>
 			<string>Catppuccin Frappé</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
+			<key>Non-ASCII Ligatures</key>
+			<false/>
 			<key>Normal Font</key>
 			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
@@ -13205,7 +13219,7 @@
 			<key>Name</key>
 			<string>Catppuccin Macchiato</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -14101,7 +14115,7 @@
 			<key>Name</key>
 			<string>Catppuccin Mocha</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -14997,7 +15011,7 @@
 			<key>Name</key>
 			<string>Rosé Pine</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -15906,7 +15920,7 @@
 			<key>Name</key>
 			<string>Rosé Pine Moon</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -16815,7 +16829,7 @@
 			<key>Name</key>
 			<string>Rosé Pine Dawn</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -17625,7 +17639,7 @@
 			<key>Name</key>
 			<string>PaperColor Light</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
@@ -18375,7 +18389,7 @@
 			<key>Name</key>
 			<string>4mc</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 14</string>
+			<string>SymbolsNFM 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
