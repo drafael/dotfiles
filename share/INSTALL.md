@@ -68,13 +68,14 @@ ln -s ~/.dotfiles/.ctags ~/.ctags && brew install ctags gotags
 ## Command-Line Tools
 
 ```bash
-brew install ack ag htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id tree tig tmux tree wget
+brew install ack ag btop htop mc ncdu neovim nmap peco pt ranger ripgrep ssh-copy-id tree tig tmux tree wget
 ```
 
 * [ack](http://beyondgrep.com) — a code-searching tool like `grep`, optimized for programmers
 * [ag](https://github.com/ggreer/the_silver_searcher) — a code searching tool similar to `ack`, with a focus on speed
 * [bash-completion](https://github.com/scop/bash-completion) — Programmable completion functions for bash
 * [editorconfig](https://editorconfig.org/) — helps define and maintain consistent coding styles between different editors and IDEs
+* [btop](https://github.com/aristocratos/btop) — resource monitor that shows usage and stats for processor, memory, disks, network and processes.
 * [htop](https://hisham.hm/htop/) — improved top (interactive process viewer)
 * [httpie](https://httpie.org/) — is a command line HTTP client
 * [mc](https://midnight-commander.org/) — terminal-based visual file manager

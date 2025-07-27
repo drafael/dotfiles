@@ -1,36 +1,14 @@
-
-# OS specific stuff
-if [[ $OSTYPE =~ darwin ]]; then
-  alias brwe='brew'
-  alias systemctl='brew services'
-  alias services='brew services'
-  alias service='brew services'
-fi
-
-# always use vim instead of vi
-alias vi=vim
-
-alias y=yazi
-
 alias ..="cd .."
 alias cd..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# Git
 alias g=git
 alias gt=git
 alias gti=git
 
-# Docker
-alias d=docker
-alias k=kubectl
-alias kaf='kubectl apply -f'
-alias kg='kubectl get'
-alias kd='kubectl describe'
-
-# AWS
-alias aws-whoami='aws sts get-caller-identity'
+alias vi=vim
+alias y=yazi
 
 # Maven
 alias m=mvn
@@ -48,7 +26,6 @@ mvnsbrp() {
   mvn spring-boot:run -Dspring-boot.run.profiles="$1"
 }
 
-# Enable aliases to be sudo’ed
 alias sudo='sudo '
 alias plz=sudo
 
@@ -59,6 +36,9 @@ alias clera=clear
 
 alias j="jobs"
 alias h="history"
+
+# AWS
+alias aws-whoami='aws sts get-caller-identity'
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
