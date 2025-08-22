@@ -14,7 +14,7 @@ Follow this systematic approach to write effective tests: **$ARGUMENTS**
    - Always use the AssertJ assertions and matchers for Spring Boot codebase
    - Always add `@DisplayName` with human readable description to test methods in Java codebase
    - Do not include Java test case method name in the `@DisplayName`
-   - Follow the convention `{methodName}_{precondition|input}_{expectedOutcome}` for the Java test case method names
+   - Follow the convention `{methodName}_{precondition}_{expectedOutcome}` for the Java test case method names
    - Prefer using `@InjectsMocks` (if possible) over instatiating the tested class in the setup method `@BeforeEach`
    - Follow the naming convention of naming instances of the tested class as a `subject` - subject under test
    - Never create tests for the JPA/Hibrnate entities, only for the business logic and services
