@@ -73,6 +73,14 @@ In order to view all of my configured aliases enter `git aliases`
 
 ## Code Editors
 
+### [Visual Studio Code](https://code.visualstudio.com/)
+
+```sh
+brew install --cask visual-studio-code
+```
+
+[Make your own custom AI code assistant](share/AI_CODE_ASSISTANT.md)
+
 ### [Zed](https://zed.dev/)
 
 ```sh
@@ -82,14 +90,6 @@ brew install --cask zed
 ```sh
 mkdir -p $HOME/.config/zed && ln -s $HOME/.dotfiles/.config/zed/settings.json $HOME/.config/zed/settings.json
 ```
-
-### [Visual Studio Code](https://code.visualstudio.com/)
-
-```sh
-brew install --cask visual-studio-code
-```
-
-[Make your own custom AI code assistant](share/AI_CODE_ASSISTANT.md)
 
 ### Vim
 
@@ -109,6 +109,47 @@ ln -s ~/.dotfiles/.vimrc ~/.vimrc && vim +PluginInstall +qall
 
 ```sh
 brew install editorconfig
+```
+
+## AI Agents
+
+### [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)
+
+[Installation](https://docs.anthropic.com/en/docs/claude-code/quickstart#step-1%3A-install-claude-code):
+```sh
+brew install claude-code
+```
+
+Global [context (memory) file](https://docs.anthropic.com/en/docs/claude-code/memory) for instructions that apply to all projects:
+```sh
+ln -s ~/.dotfiles/.claude/CLAUDE.md ~/.claude/CLAUDE.md
+```
+
+[Settings file](https://docs.anthropic.com/en/docs/claude-code/settings#settings-files) for all projects:
+```sh
+ln -s ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
+```
+
+Global [custom commands](https://docs.anthropic.com/en/docs/claude-code/slash-commands#custom-slash-commands):
+```sh
+ln -s ~/.dotfiles/.claude/commands ~/.claude/commands
+```
+
+### [Gemini CLI](https://github.com/google-gemini/gemini-cli#gemini-cli)
+
+[Installation](https://github.com/google-gemini/gemini-cli#-installation):
+```sh
+brew install gemini-cli
+```
+
+Global [context file](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md#context-files-hierarchical-instructional-context) for instructions that apply to all projects:
+```sh
+ln -s ~/.dotfiles/.gemini/GEMINI.md ~/.gemini/GEMINI.md
+```
+
+Global [custom commands](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/commands.md#custom-commands):
+```sh
+ln -s ~/.dotfiles/.gemini/commands ~/.gemini/commands
 ```
 
 ## Java Dev Tools
