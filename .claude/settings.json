@@ -6,7 +6,11 @@
       "Bash(grep:*)",
       "Bash(ls:*)",
       "Bash(mvn:*)",
-      "Bash(mvnw:*)"
+      "Bash(mvn clean:*)",
+      "Bash(mvn test:*)",
+      "Bash(mvn package:*)",
+      "Bash(mvnw:*)",
+      "WebFetch(domain:docs.spring.io)"
     ]
   }
 }
