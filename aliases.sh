@@ -7,7 +7,8 @@ alias g=git
 alias gt=git
 alias gti=git
 
-alias vi=vim
+alias v=nvim
+alias vi=nvim
 alias y=yazi
 
 # Maven
