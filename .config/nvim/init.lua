@@ -199,6 +199,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- indent-blankline.nvim
+vim.keymap.set('n', '<leader>ti', '<cmd>IBLToggle<CR>', { desc = '[T]oggle [I]ndent guides' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -1026,6 +1029,34 @@ require('lazy').setup({
         server_opts_overrides = {},
       }
     end,
+  },
+
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {
+      indent = {
+        char = '┊',
+      },
+      scope = {
+        enabled = false,
+      },
+      exclude = {
+        filetypes = {
+          'help',
+          'alpha',
+          'dashboard',
+          'neo-tree',
+          'Trouble',
+          'lazy',
+          'mason',
+          'notify',
+          'toggleterm',
+          'lazyterm',
+        },
+        buftypes = { 'terminal', 'nofile' },
+      },
+    },
   },
 
   -- Highlight todo, notes, etc in comments
