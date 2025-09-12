@@ -73,12 +73,12 @@
   "title_bar": {
     "show_branch_icon": true
   },
-  // "scrollbar": {
-  //   "show": "system"
-  // },
-  "minimap": {
+  "scrollbar": {
     "show": "auto"
   },
+  // "minimap": {
+  //   "show": "auto"
+  // },
   "terminal": {
     "copy_on_select": true
   },
