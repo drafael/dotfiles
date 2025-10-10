@@ -5033,7 +5033,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -5807,7 +5807,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -6640,7 +6640,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -7525,7 +7525,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -8410,7 +8410,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -9210,7 +9210,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -9962,7 +9962,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -11006,7 +11006,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -11904,7 +11904,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -12802,7 +12802,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -13698,7 +13698,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -14594,7 +14594,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -15503,7 +15503,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -16412,7 +16412,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -17249,7 +17249,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>145</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -18025,7 +18025,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>178</integer>
+			<integer>180</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
