@@ -73,6 +73,16 @@ In order to view all of my configured aliases enter `git aliases`
 
 ## Code Editors
 
+### [NeoVim](https://neovim.io/) with [Kickstart](https://github.com/nvim-lua/kickstart.nvim) Configuration
+
+```sh
+brew install neovim
+```
+
+```sh
+ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
+```
+
 ### [Visual Studio Code](https://code.visualstudio.com/)
 
 ```sh
@@ -89,20 +99,6 @@ brew install --cask zed
 
 ```sh
 mkdir -p $HOME/.config/zed && ln -s $HOME/.dotfiles/.config/zed/settings.json $HOME/.config/zed/settings.json
-```
-
-### Vim
-
-[Installation or upgrading](share/INSTALL.md#vim):
-
-```sh
-brew install vim
-```
-
-Syncing [.vimrc](.vimrc) and [plugins](share/INSTALL.md#my-favorite-vim-plugins):
-
-```sh
-ln -s ~/.dotfiles/.vimrc ~/.vimrc && vim +PluginInstall +qall
 ```
 
 ### [EditorConfig](https://editorconfig.org/)

@@ -5,65 +5,6 @@
 * A Bourne-compatible shell for installation (e.g. bash or zsh)
 * [Homebrew](http://brew.sh) package manager.
 
-## Vim
-
-* Upgrading:
-
-```sh
-brew install vim && brew link --overwrite vim
-```
-
-
-* [MacVim](http://macvim-dev.github.io/macvim) installation:
-
-```sh
-brew install --cask macvim
-```
-```sh
-defaults write org.vim.MacVim MMTitlebarAppearsTransparent true
-```
-
-* Syncing [.vimrc](https://github.com/drafael/dotfiles/blob/master/.vimrc):
-
-```sh
-ln -s ~/.dotfiles/.vimrc ~/.vimrc && vim +PluginInstall +qall
-```
-
-* [NeoVim](https://neovim.io):
-
-```sh
-ln -s ~/.dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim && brew install neovim
-```
-
-* [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) dependencies installation:
-
-```sh
-ln -s ~/.dotfiles/.ctags ~/.ctags && brew install ctags gotags
-```
-
-#### My Favorite VIM Plugins
-
-  - [x] [Vundle](https://github.com/VundleVim/Vundle.vim#about) — plugin manager
-  - [x] [Airline](https://github.com/vim-airline/vim-airline#vim-airline-) — status bar
-  - [x] [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized#screenshots), [PaperColor Theme](https://github.com/nlknguyen/papercolor-theme#screenshots), [Ayu](https://github.com/ayu-theme/ayu-vim), and [Catppuccin](https://github.com/catppuccin/vim)
-  - [x] [CtrlP](https://github.com/ctrlpvim/ctrlp.vim#ctrlpvim) — fuzzy file finder, buffer switcher, MRU
-  - [x] [Auto Pairs](https://github.com/jiangmiao/auto-pairs#auto-pairs) — insert or delete brackets, parens, quotes in pair
-  - [x] [Snipmate](https://github.com/garbas/vim-snipmate#snipmate) — [Snippet](https://github.com/honza/vim-snippets#snipmate--ultisnip-snippets) manager for vim
-  - [x] [Syntastic](https://github.com/vim-syntastic/syntastic) — syntax checking hacks for vim
-  - [x] [Tagbar](https://github.com/majutsushi/tagbar#tagbar-a-class-outline-viewer-for-vim) — plugin that displays tags in a window, ordered by scope
-  - [x] [vim-polyglot](https://github.com/sheerun/vim-polyglot#vim-polyglot--) — meta-plugin for syntaxes
-  - [x] [vim-rooter](https://github.com/airblade/vim-rooter#rooter) — changes working directory to project root
-  - [x] [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace#vim-better-whitespace-plugin) — better whitespace highlighting
-  - [x] [indentLine](https://github.com/Yggdroot/indentLine#indentline) — display the indention levels with thin vertical lines
-  - [x] [vim-session](https://github.com/xolox/vim-session#extended-session-management-for-vim) — extended session management for Vim
-
-#### Also Take a Look
-
-- [Vim Awesome](http://vimawesome.com/)
-- [Awesome Vim Color Schemes](https://github.com/rafi/awesome-vim-colorschemes#awesome-vim-color-schemes)
-- [Vim Colors](http://vimcolors.com/)
-- [SpaceVim](https://spacevim.org/)
-- [Tagbar Wiki](https://github.com/majutsushi/tagbar/wiki)
 
 ## Command-Line Tools
 
