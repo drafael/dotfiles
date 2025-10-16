@@ -109,6 +109,18 @@ brew install editorconfig
 
 ## AI Agents
 
+### [GitHub Copilot CLI](https://github.com/github/copilot-cli)
+
+[Installation](https://github.com/github/copilot-cli?tab=readme-ov-file#installation):
+```sh
+npm install -g @github/copilot
+```
+
+Global [personal custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-personal-instructions) for GitHub Copilot
+```sh
+ln -s ~/.dotfiles/.copilot/copilot-instructions.md ~/.copilot/copilot-instructions.md
+```
+
 ### [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)
 
 [Installation](https://docs.anthropic.com/en/docs/claude-code/quickstart#step-1%3A-install-claude-code):
