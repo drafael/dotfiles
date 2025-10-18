@@ -1,0 +1,98 @@
+# Window configuration
+[window]
+opacity = 0.95
+padding = { x = 10, y = 10 }
+# Hides title bar completely
+#decorations = "buttonless"  
+
+[window.dimensions]
+columns = 160
+lines = 41
+
+# Font configuration
+[font]
+size = 14.0
+
+[font.normal]
+family = "Monaco"
+style = "Regular"
+
+[font.bold]
+family = "Monaco"
+style = "Bold"
+
+[font.italic]
+family = "Monaco"
+style = "Italic"
+
+# Catppuccine Frappe Theme
+[colors.primary]
+background = "#303446"
+foreground = "#c6d0f5"
+dim_foreground = "#f1f5f9"
+bright_foreground = "#ffffff"
+
+[colors.cursor]
+text = "#303446"
+cursor = "#f2d5cf"
+
+[colors.vi_mode_cursor]
+text = "#303446"
+cursor = "#a6d189"
+
+[colors.search.matches]
+foreground = "#303446"
+background = "#a6e3a1"
+
+[colors.search.focused_match]
+foreground = "#303446"
+background = "#f2cc8f"
+
+[colors.hints.start]
+foreground = "#303446"
+background = "#a6d189"
+
+[colors.hints.end]
+foreground = "#303446"
+background = "#a6e3a1"
+
+[colors.normal]
+black = "#51576d"
+red = "#e78284"
+green = "#a6d189"
+yellow = "#e5c890"
+blue = "#8caaee"
+magenta = "#f085c7"
+cyan = "#81c8be"
+white = "#b5bfe2"
+
+[colors.bright]
+black = "#626880"
+red = "#ef9f76"
+green = "#b0e8c7"
+yellow = "#f8d7a1"
+blue = "#a5b4fc"
+magenta = "#f5a3d0"
+cyan = "#a8d8ea"
+white = "#c6d0f5"
+
+[colors.dim]
+black = "#41454e"
+red = "#d17878"
+green = "#94c973"
+yellow = "#d5be7a"
+blue = "#7c9ef5"
+magenta = "#dd7e9b"
+cyan = "#6fb3c8"
+white = "#a5adce"
+
+# Bell configuration
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+
+# Selection configuration
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\\t"
+save_to_clipboard = true
+
