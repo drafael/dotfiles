@@ -34,9 +34,6 @@ if brew ls --cask --versions iterm2 &> /dev/null; then
 else
   echo "iTerm2..."
   brew install iterm2
-  # open "$dotfiles/iTerm2/colors/Solarized Dark.itermcolors"
-  # open "$dotfiles/iTerm2/colors/Solarized Light.itermcolors"
-  # open "$dotfiles/iTerm2/colors/papercolor-light.itermcolors"
 fi
 
 if brew ls --cask --versions ghostty &> /dev/null; then
@@ -75,23 +72,6 @@ else
   echo "Docker...    OK"
 fi
 
-if brew ls --versions vim &> /dev/null; then
-  echo "vim...       OK"
-else
-  echo "vim..."
-  brew install vim
-  brew install ctags
-  ln -sfn "$dotfiles/.ctags" "$HOME/.ctags"
-fi
-
-if [ -d "$HOME/.vim" ]; then
-  echo ".vimrc...    OK"
-else
-  echo ".vimrc..."
-  ln -sfn "$dotfiles/.vimrc" "$HOME/.vimrc"
-  vim +PluginInstall +qall
-fi
-
 if [ ! -x "$(command -v zed)" ]; then
   echo "Zed..."
   brew install --cask zed
@@ -108,8 +88,7 @@ fi
 
 if [ ! -x "$(command -v java)" ]; then
   echo "Java..."
-  brew install openjdk@11 openjdk@21
-  sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+  brew install openjdk@21
   sudo ln -sfn $(brew --prefix)/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
   brew install ant maven gradle
 else
@@ -123,19 +102,19 @@ else
   brew install intellij-idea
 fi
 
-if brew ls --cask --versions pycharm &> /dev/null; then
-  echo "PyCharm...   OK"
-else
-  echo "PyCharm..."
-  brew install pycharm
-fi
+# if brew ls --cask --versions pycharm &> /dev/null; then
+#   echo "PyCharm...   OK"
+# else
+#   echo "PyCharm..."
+#   brew install pycharm
+# fi
 
-if brew ls --cask --versions datagrip &> /dev/null; then
-  echo "DataGrip...   OK"
-else
-  echo "DataGrip..."
-  brew install datagrip
-fi
+# if brew ls --cask --versions datagrip &> /dev/null; then
+#   echo "DataGrip...   OK"
+# else
+#   echo "DataGrip..."
+#   brew install datagrip
+# fi
 
 # if brew ls --cask --versions microsoft-office &> /dev/null; then
 #   echo "Microsoft Office...   OK"

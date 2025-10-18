@@ -17,11 +17,6 @@ ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
 Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal prompt](https://github.com/sindresorhus/pure#pure).
 
-### Bash
-
-```sh
-ln -s ~/.dotfiles/.bashrc ~/.bashrc && ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
-```
 ## Terminal Emulators
 
 ### [iTerm2](http://iterm2.com)
