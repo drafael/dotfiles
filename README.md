@@ -48,6 +48,21 @@ brew install --cask warp
 ln -s $HOME/.dotfiles/.warp $HOME/.warp
 ```
 
+## [Tmux](https://github.com/tmux/tmux/wiki)
+
+```sh
+brew install tmux
+```
+
+[Tmux Plugin Manager](https://github.com/tmux-plugins/tpm):
+```sh
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+```
+```sh
+ln -s ~/.dotfiles/.config/tmux ~/.config/tmux
+```
+Start new session `tmux` and install plugins `prefix` + `I`, where prefix is `Ctrl` + `a`
+
 ## Git
 
 Put in `~/.gitconfig.local` sensitive information such as the `git` user credentials, e.g.:
@@ -143,6 +158,10 @@ ln -s ~/.dotfiles/.claude/commands ~/.claude/commands
 [Installation](https://github.com/google-gemini/gemini-cli#-installation):
 ```sh
 brew install gemini-cli
+```
+or install globally with npm:
+```sh
+npm install -g @google/gemini-cli
 ```
 
 Global [context file](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md#context-files-hierarchical-instructional-context) for instructions that apply to all projects:
