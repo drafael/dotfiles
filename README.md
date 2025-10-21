@@ -61,7 +61,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```sh
 ln -s ~/.dotfiles/.config/tmux ~/.config/tmux
 ```
-Start new session `tmux` and install plugins `prefix` + `I`, where prefix is `Ctrl` + `a`
+Start new session `tmux` and install plugins `prefix` + `I`, where prefix is `Ctrl` + `Space`
 
 ## Git
 
