@@ -12,15 +12,6 @@ Follow this systematic approach to write effective tests: {{args}}
    - Review existing test structure and conventions
    - Check test configuration files and setup
    - Understand project-specific testing patterns
-   - Always use the AssertJ assertions and matchers for Spring Boot codebase
-   - Always add `@DisplayName` with human readable description to test methods in Java codebase
-   - Do not include Java test case method name in the `@DisplayName`
-   - Follow the convention `{methodName}_{precondition}_{expectedOutcome}` for the Java test case method names
-   - Prefer using `@InjectsMocks` (if possible) over instatiating the tested class in the setup method `@BeforeEach`
-   - Follow the naming convention of naming instances of the tested class as a `subject` - subject under test
-   - Never create tests for the JPA/Hibrnate entities, only for the business logic and services
-   - Never create tests for the DTOs and Spring Boot `@Configuration` beans
-   - Do not create testd for the Spring Data repositories, only for the business logic and services
 
 2. **Code Analysis for Testing**
    - Analyze the code that needs testing
@@ -43,6 +34,15 @@ Follow this systematic approach to write effective tests: {{args}}
    - Test edge cases and boundary conditions
    - Test error conditions and exception handling
    - Use proper assertions and expectations
+   - Always use the AssertJ assertions and matchers for Spring Boot codebase
+   - Always add `@DisplayName` with human readable description to test methods in Java codebase
+   - Do not include Java test case method name in the `@DisplayName`
+   - Follow the convention `{methodName}_{precondition}_{expectedOutcome}` for the Java test case method names
+   - Prefer using `@InjectsMocks` (if possible) over instatiating the tested class in the setup method `@BeforeEach`
+   - Follow the naming convention of naming instances of the tested class as a `subject` - subject under test
+   - Never create tests for the JPA/Hibrnate entities, only for the business logic and services
+   - Never create tests for the DTOs and Spring Boot `@Configuration` beans
+   - Do not create testd for the Spring Data repositories, only for the business logic and services
 
 5. **Test Structure and Organization**
    - Follow the AAA pattern (Arrange, Act, Assert)
@@ -128,55 +128,6 @@ Follow this systematic approach to write effective tests: {{args}}
     - Refactor tests when code is refactored
     - Remove obsolete tests and update assertions
     - Monitor and fix flaky tests
-
-**Framework-Specific Guidelines:**
-
-**Jest/JavaScript:**
-```javascript
-describe('ComponentName', () => {
-  beforeEach(() => {
-    // Setup
-  });
-
-  it('should handle valid input correctly', () => {
-    const input = 'test';
-
-    const result = functionToTest(input);
-
-    expect(result).toBe(expectedValue);
-  });
-});
-```
-
-**PyTest/Python:**
-```python
-class TestClassName:
-    def setup_method(self):
-        # Setup
-        pass
-
-    def test_should_handle_valid_input(self):
-        input_data = "test"
-
-        result = function_to_test(input_data)
-
-        assert result == expected_value
-```
-
-**RSpec/Ruby:**
-```ruby
-RSpec.describe ClassName do
-  describe '#method_name' do
-    it 'handles valid input correctly' do
-      input = 'test'
-
-      result = subject.method_name(input)
-
-      expect(result).to eq(expected_value)
-    end
-  end
-end
-```
 
 Remember to prioritize testing critical business logic and user-facing functionality first, then expand coverage to supporting code.
 """
