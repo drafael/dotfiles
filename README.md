@@ -36,7 +36,16 @@ Fast cross-platform terminal emulator that uses platform-native UI and GPU accel
 brew install --cask ghostty
 ```
 ```sh
-ln -s $HOME/.dotfiles/.config/ghostty $HOME/.config/ghostty
+ln -s ~/.dotfiles/.config/ghostty ~/.config/ghostty
+```
+
+### [WezTerm](https://wezterm.org/)
+
+```sh
+brew install --cask wezterm
+```
+```sh
+ln -s ~/.dotfiles/.config/wezterm ~/.config/wezterm
 ```
 
 ### [Warp](https://warp.dev/)
@@ -45,7 +54,7 @@ ln -s $HOME/.dotfiles/.config/ghostty $HOME/.config/ghostty
 brew install --cask warp
 ```
 ```sh
-ln -s $HOME/.dotfiles/.warp $HOME/.warp
+ln -s ~/.dotfiles/.warp ~/.warp
 ```
 
 ## [Tmux](https://github.com/tmux/tmux/wiki)
