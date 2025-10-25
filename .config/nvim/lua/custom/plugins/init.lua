@@ -187,6 +187,17 @@ return {
   },
 
   {
+    'nvim-tree/nvim-web-devicons',
+    lazy = false, -- Load immediately on startup
+    priority = 1000, -- Load before other plugins
+    config = function()
+      require('nvim-web-devicons').setup {
+        default = true,
+      }
+    end,
+  },
+
+  {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
     dependencies = {
@@ -201,6 +212,11 @@ return {
     opts = {
       filesystem = {
         hijack_netrw_behavior = 'disabled', -- Let oil handle netrw
+        filtered_items = {
+          visible = true, -- This is what you want: show hidden files by default
+          hide_dotfiles = false,
+          hide_gitignored = false,
+        },
       },
     },
   },
