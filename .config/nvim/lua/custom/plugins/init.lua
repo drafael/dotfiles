@@ -145,6 +145,19 @@ return {
   },
 
   {
+    'folke/edgy.nvim',
+    event = 'VeryLazy',
+    opts = {
+      right = {
+        {
+          ft = 'sidekick_terminal',
+          size = { width = 0.5 },
+        },
+      },
+    },
+  },
+
+  {
     'stevearc/oil.nvim',
     ---@module 'oil'
     ---@type oil.SetupOpts
