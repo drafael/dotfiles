@@ -13,8 +13,8 @@ config.color_scheme = "Catppuccin Frappe"
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 20
-config.initial_cols = 180
-config.initial_rows = 48
+config.initial_cols = 208
+config.initial_rows = 54
 
 -- Catppuccin Frappé colors for titlebar matching
 local frappe = {
@@ -48,8 +48,9 @@ local frappe = {
 
 -- Window frame colors (for titlebar)
 config.window_frame = {
-	font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
-	font_size = 11.0,
+	-- font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
+	font = wezterm.font({ family = "Monaco", weight = "Bold" }),
+	font_size = 13.0,
 	active_titlebar_bg = frappe.base,
 	inactive_titlebar_bg = frappe.mantle,
 }
@@ -88,7 +89,7 @@ config.colors = {
 -- Font configuration
 config.font = wezterm.font("Monaco")
 --config.font = wezterm.font("JetBrains Mono")
-config.font_size = 14.0
+config.font_size = 13.0
 
 -- Tab bar
 config.enable_tab_bar = true
@@ -125,5 +126,7 @@ config.window_padding = {
 -- Misc settings
 config.enable_scroll_bar = false
 config.adjust_window_size_when_changing_font_size = false
+
+config.window_close_confirmation = "NeverPrompt"
 
 return config
