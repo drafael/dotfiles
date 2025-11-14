@@ -19,9 +19,6 @@ background-blur = 8
 window-theme = dark
 
 theme = catppuccin-frappe.conf
-#theme = dark:ayu,light:ayu_light
-#theme = dark:Builtin Solarized Dark,light:Builtin Solarized Light
-#theme = dark:tokyonight,light:tokyonight-day
 
 window-save-state = always
 
@@ -29,7 +26,7 @@ macos-non-native-fullscreen = visible-menu
 
 #macos-titlebar-style = transparent
 
-window-width = 180
+window-width = 208
 window-height = 48
 
 # Copy to clipboard when selecting text
