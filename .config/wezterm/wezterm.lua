@@ -50,7 +50,7 @@ local frappe = {
 config.window_frame = {
 	-- font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
 	font = wezterm.font({ family = "Monaco", weight = "Bold" }),
-	font_size = 13.0,
+	font_size = 12.2,
 	active_titlebar_bg = frappe.base,
 	inactive_titlebar_bg = frappe.mantle,
 }
