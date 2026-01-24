@@ -7,3 +7,5 @@
 .gitconfig.local
 .bashrc.local
 .zshrc.local
+
+.claude/settings.local.json

@@ -257,6 +257,20 @@ return {
   },
 
   {
+    'OXY2DEV/markview.nvim',
+    lazy = false,
+    opts = {
+      preview = {
+        enable = false,
+        filetypes = { 'markdown', 'asciidoc' },
+      },
+    },
+    keys = {
+      { '<leader>tm', '<cmd>Markview Toggle<cr>', desc = 'Toggle Markview' },
+    },
+  },
+
+  {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
