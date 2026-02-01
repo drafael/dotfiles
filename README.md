@@ -128,6 +128,24 @@ brew install editorconfig
 
 ## AI Agents
 
+### [Skills](https://agentskills.io/)
+
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.claude/skills
+```
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.pi/agent/skills
+```
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.config/opencode/skills
+```
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.codex/skills
+```
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.gemini/skills
+```
+
 ### [GitHub Copilot CLI](https://github.com/github/copilot-cli)
 
 [Installation](https://github.com/github/copilot-cli?tab=readme-ov-file#installation):
