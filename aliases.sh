@@ -7,12 +7,18 @@ alias g=git
 alias gt=git
 alias gti=git
 
+alias cc=claude
+alias oc=opencode
+alias cld=claude
+alias cpt=copilot
+alias gmn=gemini
+
+alias y=yazi
+
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
 alias nv=nvim
-
-alias y=yazi
 
 # Maven
 alias m=mvn
