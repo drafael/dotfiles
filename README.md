@@ -92,20 +92,25 @@ In order to view all of my configured aliases enter `git aliases`
 
 ## Code Editors
 
-### [NeoVim](https://neovim.io/) with [Kickstart](https://github.com/nvim-lua/kickstart.nvim) Configuration
+### [NeoVim](https://neovim.io/)
 
 ```sh
 brew install neovim
 ```
 
+[Kickstart](https://github.com/nvim-lua/kickstart.nvim) based configuration:
 ```sh
 ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
 ```
 
-### [Visual Studio Code](https://code.visualstudio.com/)
+### [Visual Studio Code](https://code.visualstudio.com/) and Forks
 
 ```sh
 brew install --cask visual-studio-code
+```
+
+```sh
+brew install --cask cursor
 ```
 
 ### [Zed](https://zed.dev/)
