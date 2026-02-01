@@ -118,8 +118,22 @@ vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
+-- EditorConfig support (built-in, highest priority over local settings)
+vim.g.editorconfig = true
+
 -- Enable break indent
 vim.o.breakindent = true
+
+-- Java: 4 spaces indentation (fallback when no .editorconfig is present)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'java',
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+    vim.bo.expandtab = true
+  end,
+})
 
 -- Save undo history
 vim.o.undofile = true
