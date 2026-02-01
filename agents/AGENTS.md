@@ -1,4 +1,4 @@
-# Personal Claude Preferences
+# Personal Preferences
 
 ## Communication Style
 - Be concise but thorough in explanations
