@@ -108,8 +108,6 @@ ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
 brew install --cask visual-studio-code
 ```
 
-[Make your own custom AI code assistant](share/AI_CODE_ASSISTANT.md)
-
 ### [Zed](https://zed.dev/)
 
 ```sh
@@ -124,81 +122,6 @@ mkdir -p $HOME/.config/zed && ln -s $HOME/.dotfiles/.config/zed/settings.json $H
 
 ```sh
 brew install editorconfig
-```
-
-## AI Agents
-
-### [Skills](https://agentskills.io/)
-
-```sh
-ln -s ~/.dotfiles/agents/skills ~/.claude/skills
-```
-```sh
-ln -s ~/.dotfiles/agents/skills ~/.pi/agent/skills
-```
-```sh
-ln -s ~/.dotfiles/agents/skills ~/.config/opencode/skills
-```
-```sh
-ln -s ~/.dotfiles/agents/skills ~/.codex/skills
-```
-```sh
-ln -s ~/.dotfiles/agents/skills ~/.gemini/skills
-```
-
-### [GitHub Copilot CLI](https://github.com/github/copilot-cli)
-
-[Installation](https://github.com/github/copilot-cli?tab=readme-ov-file#installation):
-```sh
-npm install -g @github/copilot
-```
-
-Global [personal custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-personal-instructions) for GitHub Copilot
-```sh
-ln -s ~/.dotfiles/.copilot/copilot-instructions.md ~/.copilot/copilot-instructions.md
-```
-
-### [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)
-
-[Installation](https://docs.anthropic.com/en/docs/claude-code/quickstart#step-1%3A-install-claude-code):
-```sh
-brew install claude-code
-```
-
-Global [context (memory) file](https://docs.anthropic.com/en/docs/claude-code/memory) for instructions that apply to all projects:
-```sh
-ln -s ~/.dotfiles/.claude/CLAUDE.md ~/.claude/CLAUDE.md
-```
-
-[Settings file](https://docs.anthropic.com/en/docs/claude-code/settings#settings-files) for all projects:
-```sh
-ln -s ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
-```
-
-Global [custom commands](https://docs.anthropic.com/en/docs/claude-code/slash-commands#custom-slash-commands):
-```sh
-ln -s ~/.dotfiles/.claude/commands ~/.claude/commands
-```
-
-### [Gemini CLI](https://github.com/google-gemini/gemini-cli#gemini-cli)
-
-[Installation](https://github.com/google-gemini/gemini-cli#-installation):
-```sh
-brew install gemini-cli
-```
-or install globally with npm:
-```sh
-npm install -g @google/gemini-cli
-```
-
-Global [context file](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md#context-files-hierarchical-instructional-context) for instructions that apply to all projects:
-```sh
-ln -s ~/.dotfiles/.gemini/GEMINI.md ~/.gemini/GEMINI.md
-```
-
-Global [custom commands](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/commands.md#custom-commands):
-```sh
-ln -s ~/.dotfiles/.gemini/commands ~/.gemini/commands
 ```
 
 ## Java Dev Tools
@@ -252,6 +175,72 @@ Start container runtime: `colima start` or `colima start --kubernetes`.
 ```sh
 brew install podman podman-compose podman-desktop
 ```
+
+## AI Coding Agents
+
+### Installation
+
+Prerequisites: `brew install node`
+
+- [Claude Code](https://code.claude.com/docs/en/quickstart#step-1%3A-install-claude-code)
+- [Pi Coding Agent](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#quick-start)
+- [OpenCode](https://opencode.ai/docs/#install)
+- [Codex CLI](https://developers.openai.com/codex/quickstart?setup=cli)
+- [Gemini CLI](https://geminicli.com/docs/get-started/installation/)
+- [GitHub Copilot CLI](https://github.com/github/copilot-cli?tab=readme-ov-file#installation)
+
+### Context Files 
+
+```sh
+ln -s ~/.dotfiles/agents/AGENTS.md ~/.claude/CLAUDE.md
+```
+```sh
+ln -s ~/.dotfiles/agents/AGENTS.md ~/.pi/agent/AGENTS.md
+```
+```sh
+ln -s ~/.dotfiles/agents/AGENTS.md ~/.config/opencode/AGENTS.md
+```
+```sh
+ln -s ~/.dotfiles/agents/AGENTS.md ~/.codex/AGENTS.md
+```
+```sh
+ln -s ~/.dotfiles/agents/AGENTS.md ~/.gemini/GEMINI.md
+```
+```sh
+ln -s ~/.dotfiles/.copilot/copilot-instructions.md ~/.copilot/copilot-instructions.md
+```
+
+> [!NOTE]
+> For more details, see [CLAUDE.md](https://code.claude.com/docs/en/memory), [Pi AGENTS.md](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#context-files), [OpenCode AGENTS.md](https://opencode.ai/docs/rules/), [Codex AGENTS.md](https://developers.openai.com/codex/guides/agents-md), [GEMINI.md](https://geminicli.com/docs/cli/gemini-md/), and [copilot-instructions.md](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-personal-instructions)
+
+### [Skills](https://agentskills.io/)
+
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.claude/skills
+```
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.pi/agent/skills
+```
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.config/opencode/skills
+```
+```sh
+mv ~/.codex/skills ~/.codex/skills.bak \
+&& ln -s ~/.dotfiles/agents/skills ~/.codex/skills
+```
+```sh
+ln -s ~/.dotfiles/agents/skills ~/.gemini/skills
+```
+
+### Configuration
+
+```sh
+ln -s ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
+```
+
+> [!NOTE]
+> For more details, see [Claude Code](https://code.claude.com/docs/en/settings), [pi-coding-agent](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/settings.md), [OpenCode](https://opencode.ai/docs/config/), [Codex](https://developers.openai.com/codex/config-basic), and [Gemini CLI](https://geminicli.com/docs/cli/settings/).
+
 
 
 ## See Also

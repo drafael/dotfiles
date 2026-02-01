@@ -5,6 +5,7 @@
       "Bash(rg:*)",
       "Bash(grep:*)",
       "Bash(ls:*)",
+      "Bash(tree:*)",
       "Bash(mvn:*)",
       "Bash(mvn clean:*)",
       "Bash(mvn test:*)",
