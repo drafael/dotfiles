@@ -124,13 +124,23 @@ vim.g.editorconfig = true
 -- Enable break indent
 vim.o.breakindent = true
 
--- Java: 4 spaces indentation (fallback when no .editorconfig is present)
+-- Indentation defaults per language (fallback when no .editorconfig is present)
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'java',
   callback = function()
     vim.bo.tabstop = 4
     vim.bo.shiftwidth = 4
     vim.bo.softtabstop = 4
+    vim.bo.expandtab = true
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
     vim.bo.expandtab = true
   end,
 })
@@ -689,8 +699,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
+        ts_ls = {},
 
         jdtls = {},
 
@@ -778,11 +787,10 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
