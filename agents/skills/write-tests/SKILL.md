@@ -38,7 +38,6 @@ Follow this systematic approach to write effective tests:
    - Cover happy path scenarios first
    - Test edge cases and boundary conditions
    - Test error conditions and exception handling
-   - Use proper assertions and expectations
    - Always use the AssertJ assertions and matchers for Spring Boot codebase
    - Always add `@DisplayName` with human readable description to test methods in Java codebase
    - Do not include Java test case method name in the `@DisplayName`
@@ -48,6 +47,11 @@ Follow this systematic approach to write effective tests:
    - Never create tests for the JPA/Hibernate entities, only for the business logic and services
    - Never create tests for the DTOs and Spring Boot `@Configuration` beans
    - Do not create tests for the Spring Data repositories, only for the business logic and services
+   - Prefer using Java’s `var` for local variables that are initialized by a constructor or builder call
+   - Always follow the best practices for using constants in test matchers and assertions:
+     - Use constants for expected values that are used in multiple test cases
+     - Avoid using constants for values that are only used in a single test case
+     - Use descriptive names for constants to improve readability
 
 5. **Test Structure and Organization**
    - Follow the AAA pattern (Arrange, Act, Assert)

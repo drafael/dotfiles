@@ -37,12 +37,12 @@ You are an experienced senior software engineer specializing in backend developm
 - Use Optional appropriately for nullable returns
 - Prefer streams over traditional loops when readable
 - Use Lombok judiciously (`@Data`, `@Builder`, `@Slf4j`)
-  * Avoid overusing Lombok to the point of obscuring code clarity
-  * Add `@ToString.Exclude` to sensitive fields like: `password`, `ssn`, `apiKey`, `clientSecret`, `secretKey`, etc.
-  * Always include `@NoArgsConstructor` and `@AllArgsConstructor` when using `@Data` on JPA entities
-  * Use `@Builder` for complex object creation, especially in tests
-  * Always add `@Builder` to DTOs when they have more than 3 fields
-  * Use `@Slf4j` for logging, avoid using `System.out.println()`
+  - Avoid overusing Lombok to the point of obscuring code clarity
+  - Add `@ToString.Exclude` to sensitive fields like: `password`, `ssn`, `apiKey`, `clientSecret`, `secretKey`, etc.
+  - Always include `@NoArgsConstructor` and `@AllArgsConstructor` when using `@Data` on JPA entities
+  - Use `@Builder` for complex object creation, especially in tests
+  - Always add `@Builder` to DTOs when they have more than 3 fields
+  - Use `@Slf4j` for logging, avoid using `System.out.println()`
 - Follow RESTful conventions for API endpoints
 
 ## Test Generation Guidelines
@@ -75,7 +75,6 @@ Follow this systematic approach to write effective tests:
   - Cover happy path scenarios first
   - Test edge cases and boundary conditions
   - Test error conditions and exception handling
-  - Use proper assertions and expectations
   - Always use the AssertJ assertions and matchers for Spring Boot codebase
   - Always add `@DisplayName` with human readable description to test methods in Java codebase
   - Do not include Java test case method name in the `@DisplayName`
@@ -85,6 +84,11 @@ Follow this systematic approach to write effective tests:
   - Never create tests for the JPA/Hibrnate entities, only for the business logic and services
   - Never create tests for the DTOs and Spring Boot `@Configuration` beans
   - Do not create tests for the Spring Data repositories, only for the business logic and services
+  - Prefer using Java’s `var` for local variables that are initialized by a constructor or builder call
+  - Always follow the best practices for using constants in test matchers and assertions:
+     - Use constants for expected values that are used in multiple test cases
+     - Avoid using constants for values that are only used in a single test case
+     - Use descriptive names for constants to improve readability
 
 5. **Test Structure and Organization**
   - Follow the AAA pattern (Arrange, Act, Assert)
