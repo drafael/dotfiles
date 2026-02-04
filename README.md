@@ -197,22 +197,22 @@ Prerequisites: `brew install node`
 ### Context Files 
 
 ```sh
-ln -s ~/.dotfiles/agents/AGENTS.md ~/.claude/CLAUDE.md
+ln -s ~/.dotfiles/.agents/AGENTS.md ~/.claude/CLAUDE.md
 ```
 ```sh
-ln -s ~/.dotfiles/agents/AGENTS.md ~/.pi/agent/AGENTS.md
+ln -s ~/.dotfiles/.agents/AGENTS.md ~/.pi/agent/AGENTS.md
 ```
 ```sh
-ln -s ~/.dotfiles/agents/AGENTS.md ~/.config/opencode/AGENTS.md
+ln -s ~/.dotfiles/.agents/AGENTS.md ~/.config/opencode/AGENTS.md
 ```
 ```sh
-ln -s ~/.dotfiles/agents/AGENTS.md ~/.codex/AGENTS.md
+ln -s ~/.dotfiles/.agents/AGENTS.md ~/.codex/AGENTS.md
 ```
 ```sh
-ln -s ~/.dotfiles/agents/AGENTS.md ~/.gemini/GEMINI.md
+ln -s ~/.dotfiles/.agents/AGENTS.md ~/.gemini/GEMINI.md
 ```
 ```sh
-ln -s ~/.dotfiles/.copilot/copilot-instructions.md ~/.copilot/copilot-instructions.md
+ln -s ~/.dotfiles/.agents/AGENTS.md ~/.copilot/copilot-instructions.md
 ```
 
 > [!NOTE]
@@ -221,20 +221,20 @@ ln -s ~/.dotfiles/.copilot/copilot-instructions.md ~/.copilot/copilot-instructio
 ### [Skills](https://agentskills.io/)
 
 ```sh
-ln -s ~/.dotfiles/agents/skills ~/.claude/skills
+ln -s ~/.dotfiles/.agents/skills ~/.claude/skills
 ```
 ```sh
-ln -s ~/.dotfiles/agents/skills ~/.pi/agent/skills
+ln -s ~/.dotfiles/.agents/skills ~/.pi/agent/skills
 ```
 ```sh
-ln -s ~/.dotfiles/agents/skills ~/.config/opencode/skills
+ln -s ~/.dotfiles/.agents/skills ~/.config/opencode/skills
 ```
 ```sh
-mv ~/.codex/skills ~/.codex/skills.bak \
-&& ln -s ~/.dotfiles/agents/skills ~/.codex/skills
+ln -s ~/.dotfiles/.agents/skills ~/.gemini/skills
 ```
 ```sh
-ln -s ~/.dotfiles/agents/skills ~/.gemini/skills
+# Codex, Copilot ~/.agents/skills/
+ln -s ~/.dotfiles/.agents ~/.agents
 ```
 
 ### Configuration
