@@ -188,7 +188,7 @@ brew install podman podman-compose podman-desktop
 Prerequisites: `brew install node`
 
 - [Claude Code](https://code.claude.com/docs/en/quickstart#step-1%3A-install-claude-code)
-- [Pi Coding Agent](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#quick-start)
+- [Pi Coding Agent](https://pi.dev)
 - [OpenCode](https://opencode.ai/docs/#install)
 - [Codex CLI](https://developers.openai.com/codex/quickstart?setup=cli)
 - [Gemini CLI](https://geminicli.com/docs/get-started/installation/)
@@ -230,11 +230,7 @@ ln -s ~/.dotfiles/.agents/skills ~/.pi/agent/skills
 ln -s ~/.dotfiles/.agents/skills ~/.config/opencode/skills
 ```
 ```sh
-ln -s ~/.dotfiles/.agents/skills ~/.gemini/skills
-```
-```sh
-# Codex, Copilot ~/.agents/skills/
-ln -s ~/.dotfiles/.agents ~/.agents
+ln -s ~/.dotfiles/.agents ~/.agents # skill discovery alias ~/.agents/skills/
 ```
 
 ### Configuration
