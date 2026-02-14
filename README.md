@@ -227,10 +227,8 @@ ln -s ~/.dotfiles/.agents/skills ~/.claude/skills
 ln -s ~/.dotfiles/.agents/skills ~/.pi/agent/skills
 ```
 ```sh
-ln -s ~/.dotfiles/.agents/skills ~/.config/opencode/skills
-```
-```sh
-ln -s ~/.dotfiles/.agents ~/.agents # skill discovery alias ~/.agents/skills/
+# skill auto discovery alias ~/.agents/skills/
+ln -s ~/.dotfiles/.agents ~/.agents 
 ```
 
 ### Configuration
