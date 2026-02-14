@@ -237,7 +237,13 @@ ln -s ~/.dotfiles/.agents ~/.agents
 ln -s ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
 ```
 ```sh
+ln -s ~/.dotfiles/.claude/commands ~/.claude/commands
+```
+```sh
 ln -s ~/.dotfiles/.pi/agent/themes ~/.pi/agent/themes
+```
+```sh
+ln -s ~/.dotfiles/.pi/agent/prompts ~/.pi/agent/prompts
 ```
 
 > [!NOTE]
