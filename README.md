@@ -236,6 +236,9 @@ ln -s ~/.dotfiles/.agents ~/.agents
 ```sh
 ln -s ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
 ```
+```sh
+ln -s ~/.dotfiles/.pi/agent/themes ~/.pi/agent/themes
+```
 
 > [!NOTE]
 > For more details, see [Claude Code](https://code.claude.com/docs/en/settings), [pi-coding-agent](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/settings.md), [OpenCode](https://opencode.ai/docs/config/), [Codex](https://developers.openai.com/codex/config-basic), and [Gemini CLI](https://geminicli.com/docs/cli/settings/).
