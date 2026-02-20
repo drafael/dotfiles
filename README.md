@@ -224,9 +224,6 @@ ln -s ~/.dotfiles/.agents/AGENTS.md ~/.copilot/copilot-instructions.md
 ln -s ~/.dotfiles/.agents/skills ~/.claude/skills
 ```
 ```sh
-ln -s ~/.dotfiles/.agents/skills ~/.pi/agent/skills
-```
-```sh
 # skill auto discovery alias ~/.agents/skills/
 ln -s ~/.dotfiles/.agents ~/.agents 
 ```
