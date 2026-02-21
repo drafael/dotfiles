@@ -1,39 +1,50 @@
 
-
-#font-family = PT Mono
-font-family = Monaco
-#font-family = Menlo
-
-font-size = 14
-
-#cursor-style = bar
-cursor-style = block
-shell-integration-features = no-cursor
-cursor-style-blink = false
-
-background-opacity = 0.96
-background-blur = 8
+theme = dark:Catppuccin Frappe,light:Catppuccin Latte
 
 #window-theme = auto
 #window-theme = system
 window-theme = dark
 
-theme = catppuccin-frappe.conf
+window-width = 208
+window-height = 50
+window-padding-x = 4
+window-padding-y = 4
 
 window-save-state = always
+window-inherit-working-directory = true
 
 macos-non-native-fullscreen = visible-menu
 
-#macos-titlebar-style = transparent
+background-opacity = 0.96
+background-blur = 8
 
-window-width = 208
-window-height = 50
+font-family = Monaco
+font-size = 14
 
-# Copy to clipboard when selecting text
+cursor-style = block
+cursor-style-blink = false
+
 copy-on-select = clipboard
 
-# Specify which clipboard to use (primary, clipboard, or both)
 clipboard-read = allow
 clipboard-write = allow
 
 keybind = shift+enter=text:\n
+
+keybind = cmd+ctrl+h=resize_split:left,40
+keybind = cmd+ctrl+l=resize_split:right,40
+keybind = cmd+ctrl+k=resize_split:up,20
+keybind = cmd+ctrl+j=resize_split:down,20
+
+keybind = cmd+ctrl+left=resize_split:left,40
+keybind = cmd+ctrl+right=resize_split:right,40
+keybind = cmd+ctrl+up=resize_split:up,20
+keybind = cmd+ctrl+down=resize_split:down,20
+
+shell-integration = detect
+shell-integration-features = no-cursor,sudo,title
+
+term = xterm-256color
+
+scrollback-limit = 100000
+
