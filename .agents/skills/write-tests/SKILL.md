@@ -8,134 +8,45 @@ allowed-tools: Read, Grep, Glob, Bash, Write, Edit
 
 Write unit and integration tests: **$ARGUMENTS**
 
-## Instructions
+## Process
 
-Follow this systematic approach to write effective tests:
+Follow these steps in order:
 
-1. **Test Framework Detection**
-   - Identify the testing framework in use (JUnit, Jest, Mocha, PyTest, RSpec, etc.)
-   - Review existing test structure and conventions
-   - Check test configuration files and setup
-   - Understand project-specific testing patterns
+1. **Understand the project's test conventions**
+   - Identify the testing framework (JUnit, Jest, PyTest, RSpec, etc.)
+   - Read existing tests to learn the project's naming, structure, and assertion style
+   - Check test configuration and setup files
 
-2. **Code Analysis for Testing**
-   - Analyze the code that needs testing
-   - Identify public interfaces and critical business logic
-   - Map out dependencies and external interactions
-   - Understand error conditions and edge cases
-   - Ensure that line and branch coverage is more than 80%, and add test cases to cover uncovered lines and branches
+2. **Analyse the code under test**
+   - Identify the public interface and critical business logic
+   - Map dependencies and external interactions
+   - Note error conditions, edge cases, and validation rules
+   - Target >80% line and branch coverage; identify gaps before writing
 
-3. **Test Strategy Planning**
-   - Determine test levels needed:
-     - Unit tests for individual functions/methods
-     - Integration tests for component interactions
-     - End-to-end tests for user workflows
-   - Plan test coverage goals and priorities
-   - Identify mock and stub requirements
+3. **Plan the test strategy**
+   - Decide which levels are needed: unit, integration, end-to-end
+   - List what to mock or stub, and why
+   - Prioritise business-critical paths first
 
-4. **Unit Test Implementation**
-   - Test individual functions and methods in isolation
-   - Cover happy path scenarios first
-   - Test edge cases and boundary conditions
-   - Test error conditions and exception handling
-   - Always use the AssertJ assertions and matchers for Spring Boot codebase
-   - Always add `@DisplayName` with human readable description to test methods in Java codebase
-   - Do not include Java test case method name in the `@DisplayName`
-   - Follow the convention `{methodName}_{precondition}_{expectedOutcome}` for the Java test case method names
-   - Prefer using `@InjectMocks` (if possible) over instantiating the tested class in the setup method `@BeforeEach`
-   - Follow the naming convention of naming instances of the tested class as `subject` - subject under test
-   - Never create tests for the JPA/Hibernate entities, only for the business logic and services
-   - Never create tests for the DTOs and Spring Boot `@Configuration` beans
-   - Do not create tests for the Spring Data repositories, only for the business logic and services
-   - Prefer using Java’s `var` for local variables that are initialized by a constructor or builder call
-   - Always follow the best practices for using constants in test matchers and assertions:
-     - Use constants for expected values that are used in multiple test cases
-     - Avoid using constants for values that are only used in a single test case
-     - Use descriptive names for constants to improve readability
+4. **Write unit tests**
+   - Test each function or method in isolation
+   - Cover: happy path → edge cases → boundary conditions → error/exception paths
+   - Follow the AAA pattern (Arrange / Act / Assert) — use blank lines to separate phases, never write `// Arrange` comments
+   - Use descriptive test names that explain the scenario being tested
+   - Keep each test focused on one behaviour; avoid assertions on unrelated state
 
-5. **Test Structure and Organization**
-   - Follow the AAA pattern (Arrange, Act, Assert)
-   - DO NOT WRITE obvious comments like "Arrange, Act, Assert" or "Given, When, Then" - use empty lines instead
-   - Use descriptive test names that explain the scenario
-   - Group related tests using test suites/describe blocks
-   - Keep tests focused and atomic
+5. **Write integration tests**
+   - Test real interactions between components: APIs, databases, external services
+   - Verify data flow end-to-end across layer boundaries
+   - Cover failure modes and partial failures, not just the happy path
 
-6. **Mocking and Stubbing**
-   - Mock external dependencies and services
-   - Stub complex operations for unit tests
-   - Use proper isolation for reliable tests
-   - Avoid over-mocking that makes tests brittle
+6. **Mocking and test data**
+   - Mock external dependencies to keep unit tests fast and deterministic
+   - Avoid over-mocking — if a mock replicates production logic, use a real object instead
+   - Use factories or builders for complex test data; keep setup out of assertion code
+   - Ensure tests are isolated — no shared mutable state between cases
 
-7. **Data Setup and Teardown**
-   - Create test fixtures and sample data
-   - Set up and tear down test environments cleanly
-   - Use factories or builders for complex test data
-   - Ensure tests don't interfere with each other
-
-8. **Integration Test Writing**
-   - Test component interactions and data flow
-   - Test API endpoints with various scenarios
-   - Test database operations and transactions
-   - Test external service integrations
-
-9. **Error and Exception Testing**
-   - Test all error conditions and exception paths
-   - Verify proper error messages and codes
-   - Test error recovery and fallback mechanisms
-   - Test validation and security scenarios
-
-10. **Performance and Load Testing**
-    - Add performance tests for critical operations
-    - Test under different load conditions
-    - Verify memory usage and resource cleanup
-    - Test timeout and rate limiting scenarios
-
-11. **Security Testing**
-    - Test authentication and authorization
-    - Test input validation and sanitization
-    - Test for common security vulnerabilities
-    - Test access control and permissions
-
-12. **Accessibility Testing (for UI)**
-    - Test keyboard navigation and screen readers
-    - Test color contrast and visual accessibility
-    - Test ARIA attributes and semantic markup
-    - Test with assistive technology simulations
-
-13. **Cross-Platform Testing**
-    - Test on different operating systems
-    - Test on different browsers (for web apps)
-    - Test on different device sizes and resolutions
-    - Test with different versions of dependencies
-
-14. **Test Utilities and Helpers**
-    - Create reusable test utilities and helpers
-    - Build test data factories and builders
-    - Create custom matchers and assertions
-    - Set up common test setup and teardown functions
-
-15. **Snapshot and Visual Testing**
-    - Use snapshot testing for UI components
-    - Implement visual regression testing
-    - Test rendered output and markup
-    - Version control snapshots properly
-
-16. **Async Testing**
-    - Test asynchronous operations properly
-    - Use appropriate async testing patterns
-    - Test promise resolution and rejection
-    - Test callback and event-driven code
-
-17. **Test Documentation**
-    - Document complex test scenarios and reasoning
-    - Add comments for non-obvious test logic
-    - Create test documentation for team reference
-    - Document test data requirements and setup
-
-18. **Test Maintenance**
-    - Keep tests up to date with code changes
-    - Refactor tests when code is refactored
-    - Remove obsolete tests and update assertions
-    - Monitor and fix flaky tests
-
-Remember to prioritize testing critical business logic and user-facing functionality first, then expand coverage to supporting code.
+7. **Apply applicable specialist concerns**
+   - **Async code**: use the framework's async test utilities; test both resolution and rejection
+   - **Security**: cover auth checks, input validation, and access control boundaries
+   - **UI**: test rendered output, keyboard navigation, and ARIA semantics where relevant
