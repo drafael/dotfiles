@@ -121,29 +121,16 @@ end)
 -- EditorConfig support (built-in, highest priority over local settings)
 vim.g.editorconfig = true
 
+-- Sane indentation defaults (Vim's default tabstop=8 is a legacy from terminal hardware).
+-- These globals apply to every buffer unless overridden by EditorConfig, IDE config,
+-- language defaults, or guess-indent (see lua/custom/indent.lua for the full chain).
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.expandtab = true
+
 -- Enable break indent
 vim.o.breakindent = true
-
--- Indentation defaults per language (fallback when no .editorconfig is present)
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'java',
-  callback = function()
-    vim.bo.tabstop = 4
-    vim.bo.shiftwidth = 4
-    vim.bo.softtabstop = 4
-    vim.bo.expandtab = true
-  end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
-  callback = function()
-    vim.bo.tabstop = 2
-    vim.bo.shiftwidth = 2
-    vim.bo.softtabstop = 2
-    vim.bo.expandtab = true
-  end,
-})
 
 -- Save undo history
 vim.o.undofile = true
@@ -265,7 +252,7 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  { 'NMAC427/guess-indent.nvim', opts = {} }, -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -972,6 +959,9 @@ require('lazy').setup({
     },
   },
 })
+
+-- Indentation priority chain: editorconfig → IntelliJ → Eclipse → VS Code → lang defaults → guess-indent
+require('custom.indent').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
