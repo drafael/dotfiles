@@ -13,5 +13,6 @@
       "Bash(mvnw:*)",
       "WebFetch(domain:docs.spring.io)"
     ]
-  }
+  },
+  "model": "opus"
 }

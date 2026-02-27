@@ -121,6 +121,15 @@ end)
 -- EditorConfig support (built-in, highest priority over local settings)
 vim.g.editorconfig = true
 
+-- Lombok support for jdtls: expose javaagent globally before any LSP setup runs.
+do
+  local lombok_javaagent = '-javaagent:' .. vim.fn.stdpath 'data' .. '/mason/share/jdtls/lombok.jar'
+  local current = vim.env.JDTLS_JVM_ARGS or ''
+  if not current:find(lombok_javaagent, 1, true) then
+    vim.env.JDTLS_JVM_ARGS = (current .. ' ' .. lombok_javaagent):gsub('^%s+', '')
+  end
+end
+
 -- Sane indentation defaults (Vim's default tabstop=8 is a legacy from terminal hardware).
 -- These globals apply to every buffer unless overridden by EditorConfig, IDE config,
 -- language defaults, or guess-indent (see lua/custom/indent.lua for the full chain).
@@ -688,12 +697,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
 
-        jdtls = {
-          cmd = {
-            'jdtls',
-            '--jvm-arg=-javaagent:' .. vim.fn.stdpath('data') .. '/mason/share/jdtls/lombok.jar',
-          },
-        },
+        jdtls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -886,30 +890,36 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  { -- Highlight, edit, and navigate code
+  { -- Highlight, edit, and navigate code (new nvim-treesitter API)
     'nvim-treesitter/nvim-treesitter',
+    lazy = false, -- upstream notes this plugin should not be lazy-loaded
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    config = function()
+      local ts = require 'nvim-treesitter'
+
+      -- Optional setup (currently only install_dir is configurable).
+      ts.setup {}
+
+      -- Install parsers asynchronously (no-op for already installed ones).
+      ts.install { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+
+      -- Enable Treesitter highlighting/folds/indent for all filetypes where available.
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('kickstart-treesitter', { clear = true }),
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+
+          -- Keep Ruby indent on regex-based indenting (same behavior as before).
+          if vim.bo[args.buf].filetype ~= 'ruby' then
+            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+
+          -- Optional treesitter-based folding (uncomment if desired):
+          -- vim.wo[args.buf].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          -- vim.wo[args.buf].foldmethod = 'expr'
+        end,
+      })
+    end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
