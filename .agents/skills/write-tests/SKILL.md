@@ -14,6 +14,11 @@ Follow these steps in order:
 
 1. **Understand the project's test conventions**
    - Identify the testing framework (JUnit, Jest, PyTest, RSpec, etc.)
+   - Load the reference file that matches the detected framework (if exists) to learn the naming, structure, and assertion style:
+      - `references/junit.md`
+      - `references/jest.md`
+      - `references/pytest.md`
+      - `references/rspec.md`
    - Read existing tests to learn the project's naming, structure, and assertion style
    - Check test configuration and setup files
 
