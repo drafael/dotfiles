@@ -7,11 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "context_servers": {
-    
-  },
+  "context_servers": {},
   "theme": "Catppuccin Frappé (Blur)",
   "edit_predictions": {
+    "provider": "copilot",
     "disabled_globs": [
       "**/.zshrc.local",
       "**/.bashrc.local",
@@ -20,15 +19,14 @@
       "**/*.key",
       "**/*.cert",
       "**/*.crt",
-      "**/secrets.yml"
+      "**/secrets.yml",
     ],
-    "mode": "eager"
-  },
-  "features": {
-    "edit_prediction_provider": "copilot"
+    "mode": "eager",
   },
   "agent": {
-    "always_allow_tool_actions": true,
+    "tool_permissions": {
+      "default": "allow",
+    },
     "profiles": {
       "write": {
         "name": "Write",
@@ -52,16 +50,16 @@
           "grep": true,
           "rename": true,
           "symbol_info": true,
-          "thinking": true
+          "thinking": true,
         },
         "enable_all_context_servers": true,
-        "context_servers": {}
-      }
+        "context_servers": {},
+      },
     },
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5"
-    }
+      "model": "claude-sonnet-4.6",
+    },
   },
   "ui_font_size": 13,
   "buffer_font_size": 13,
@@ -71,19 +69,19 @@
   "autosave": "on_focus_change",
   "icon_theme": "Material Icon Theme",
   "tabs": {
-    "git_status": true
+    "git_status": true,
   },
   "title_bar": {
-    "show_branch_icon": true
+    "show_branch_icon": true,
   },
   "scrollbar": {
-    "show": "auto"
+    "show": "auto",
   },
   // "minimap": {
   //   "show": "auto"
   // },
   "terminal": {
-    "copy_on_select": true
+    "copy_on_select": true,
   },
   "private_files": [
     "**/.zshrc.local",
@@ -93,12 +91,12 @@
     "**/*.key",
     "**/*.cert",
     "**/*.crt",
-    "**/secrets.yml"
+    "**/secrets.yml",
   ],
   "file_types": {
     "Plain Text": ["txt"],
     "JSONC": ["**/.zed/**/*.json", "**/zed/**/*.json", "**/Zed/**/*.json", "**/.vscode/**/*.json"],
-    "Shell Script": [".zshrc.*", ".bashrc.*", ".env.*"]
+    "Shell Script": [".zshrc.*", ".bashrc.*", ".env.*"],
   },
   "languages": {
     "JSON": {
@@ -106,22 +104,7 @@
       "formatter": "language_server",
       "tab_size": 2,
       "hard_tabs": false,
-      "preferred_line_length": 40
-    }
+      "preferred_line_length": 40,
+    },
   },
-  "lsp": {
-    "json-languageserver": {
-      "settings": {
-        "json": {
-          "format": {
-            "enable": true,
-            "insertSpaces": true,
-            "tabSize": 2,
-            "insertFinalNewline": true,
-            "keepLines": false
-          }
-        }
-      }
-    }
-  }
 }
