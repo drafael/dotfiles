@@ -10,23 +10,6 @@ if [[ -z "$DOTFILES_DIR" ]]; then
   fi
 fi
 
-export ZSH=$DOTFILES_DIR/oh-my-zsh
-# ZSH_THEME="robbyrussell"
-# ZSH_THEME="avit"
-# ZSH_THEME="gentoo"
-# ZSH_THEME="wezm"
-
-HIST_STAMPS="yyyy-mm-dd"
-# CASE_SENSITIVE="true"
-HYPHEN_INSENSITIVE="true"
-DISABLE_AUTO_UPDATE="true"
-# DISABLE_AUTO_TITLE="true"
-# ENABLE_CORRECTION="true"
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-source $ZSH/oh-my-zsh.sh
-
-
 if [ -f "$DOTFILES_DIR/env.sh" ]; then
   source "$DOTFILES_DIR/env.sh"
 fi
@@ -53,7 +36,6 @@ if command -v starship &>/dev/null; then
   export STARSHIP_CONFIG="$DOTFILES_DIR/.config/starship.toml"
   eval "$(starship init zsh)"
 else
-  unset ZSH_THEME
   fpath+=("$DOTFILES_DIR/zsh-prompt")
   autoload -U promptinit; promptinit
   zstyle :prompt:pure:git:branch color green

@@ -15,7 +15,9 @@ Clone to `~/.dotfiles`
 ```sh
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
-Modified [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) with [minimal prompt](https://github.com/sindresorhus/pure#pure).
+
+### Shell Prompt
+This dotfiles setup uses [Starship](https://starship.rs) (if installed) or [Pure](https://github.com/sindresorhus/pure#pure) as the shell prompt.
 
 ## Terminal Emulators
 
