@@ -21,4 +21,6 @@ export PATH=$PATH:$DOTFILES_DIR/bin
 export GOPATH="$HOME/code/go"
 export PATH="$GOPATH/bin:$PATH"
 
+export YAZI_CONFIG_HOME=$DOTFILES_DIR/.config/yazi
+
 export MC_SKIN=$DOTFILES_DIR/.config/mc/catppuccin.ini
