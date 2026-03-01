@@ -17,7 +17,12 @@ ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ```
 
 ### Shell Prompt
+
 This dotfiles setup uses [Starship](https://starship.rs) (if installed) or [Pure](https://github.com/sindresorhus/pure#pure) as the shell prompt.
+
+```sh
+brew install starship
+```
 
 ## Terminal Emulators
 
@@ -225,10 +230,14 @@ ln -s ~/.dotfiles/.agents/AGENTS.md ~/.copilot/copilot-instructions.md
 ```sh
 ln -s ~/.dotfiles/.agents/skills ~/.claude/skills
 ```
+
+Alias for skill auto discovery: `~/.agents/skills/ -> ~/.dotfiles/.agents/skills/`
 ```sh
-# skill auto discovery alias ~/.agents/skills/
 ln -s ~/.dotfiles/.agents ~/.agents 
 ```
+
+> [!NOTE]
+> For more details, see [Claude Code](https://code.claude.com/docs/en/skills#extend-claude-with-skills), [Pi](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#skills), [OpenCode](https://opencode.ai/docs/skills#place-files), [Codex](https://developers.openai.com/codex/skills#where-to-save-skills), [Gemini CLI](https://geminicli.com/docs/cli/skills/#skill-discovery-tiers), and [Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)
 
 ### Configuration
 
@@ -246,7 +255,7 @@ ln -s ~/.dotfiles/.pi/agent/prompts ~/.pi/agent/prompts
 ```
 
 > [!NOTE]
-> For more details, see [Claude Code](https://code.claude.com/docs/en/settings), [pi-coding-agent](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/settings.md), [OpenCode](https://opencode.ai/docs/config/), [Codex](https://developers.openai.com/codex/config-basic), and [Gemini CLI](https://geminicli.com/docs/cli/settings/).
+> For more details, see [Claude Code](https://code.claude.com/docs/en/settings), [Pi](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/settings.md), [OpenCode](https://opencode.ai/docs/config/), [Codex](https://developers.openai.com/codex/config-basic), and [Gemini CLI](https://geminicli.com/docs/cli/settings/).
 
 
 
