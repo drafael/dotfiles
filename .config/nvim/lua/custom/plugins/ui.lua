@@ -48,6 +48,12 @@ return {
   {
     'OXY2DEV/markview.nvim',
     lazy = false,
+    init = function()
+      -- Set alpha to 0 so backgrounds match Normal (no visible tint)
+      vim.g.markview_alpha = 0
+      vim.g.markview_code_alpha = 0
+      vim.g.markview_inline_code_alpha = 0
+    end,
     opts = {
       preview = {
         enable = false,
