@@ -34,25 +34,25 @@ format = "[$branch]($style)"
 style = "green"
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+format = '([$all_status](218)( [$ahead_behind]($style)))'
 style = "cyan"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
-stashed = "≡"
-ahead = "⇡$count"
-behind = "⇣$count"
-diverged = "⇣$behind_count⇡$ahead_count"
+conflicted = "*"
+untracked = "?"
+modified = "*"
+staged = "*"
+renamed = "»"
+deleted = "✘"
+stashed = ""
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇣⇡"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "green"
 
 [cmd_duration]
-format = "[$duration]($style) "
+format = " [$duration]($style)"
 style = "yellow"
 
 [python]
