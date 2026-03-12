@@ -14,6 +14,17 @@ These are non-negotiable standards. Apply them to every piece of Java or Spring 
 - Only comment complex or non-obvious logic; never state what the code already says
 - Choose names that reveal intent for variables, methods, and classes
 - Follow the established conventions of the language and the project
+- Use of `var` is restricted: `var` is allowed **only when the inferred type is crystal clear**, such as:
+  - constructor calls: `var foo = new Foo();`
+  - builder calls: `var bar = Bar.builder().build();`
+- `var` is **disallowed** when the type is not immediately obvious or harms readability, especially in:
+  - complex expressions
+  - method return values
+- Use of `var` is allowed in tests if the author prefers it
+- Multi-line argument formatting is required only when a method declaration or invocation does not fit reasonably on a single line
+- If a method has multiple arguments and the line becomes too long or hard to read, arguments must be formatted so that:
+  - each argument is placed on a new line
+  - the closing bracket is on a separate line
 
 ## Tech Stack
 
