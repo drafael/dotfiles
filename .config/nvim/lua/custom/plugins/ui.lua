@@ -113,6 +113,7 @@ return {
           nvimtree = true,
           treesitter = true,
           notify = false,
+          diffview = true,
           mini = {
             enabled = true,
             indentscope_color = '',
