@@ -13,7 +13,11 @@ These are non-negotiable standards. Apply them to every piece of Java or Spring 
 - Favor readability over cleverness — the next person reading this code matters
 - Only comment complex or non-obvious logic; never state what the code already says
 - Choose names that reveal intent for variables, methods, and classes
+  - except catch blocks, the exception variable should be a single character, e.g. `catch (Exception e)`
 - Follow the established conventions of the language and the project
+- Never use `Optional` as a method parameter or class field — reserve it exclusively as a return type
+- Prefer stream-based functional iterations over `for`/`while` loops
+- Prefer the ternary operator or `switch` expression over an `if` statement(s) when possible
 - Use of `var` is restricted: `var` is allowed **only when the inferred type is crystal clear**, such as:
   - constructor calls: `var foo = new Foo();`
   - builder calls: `var bar = Bar.builder().build();`

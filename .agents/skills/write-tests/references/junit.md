@@ -1,6 +1,8 @@
 
 ## JUnit
 
+Use the **java-coder** skill, but the instructions from this file take precedence over it for writing tests only
+
 **Assertions**
 - Always use AssertJ — never raw JUnit assertions
 

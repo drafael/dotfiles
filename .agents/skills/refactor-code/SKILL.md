@@ -36,7 +36,6 @@ Follow this systematic approach to refactor code: **$ARGUMENTS**
    - Plan the refactoring in small, incremental steps
 
 4. **Environment Setup**
-   - Create a new branch: `git checkout -b refactor/$ARGUMENTS`
    - Ensure all tests pass before starting
    - Set up any additional tooling needed (profilers, analyzers)
 
