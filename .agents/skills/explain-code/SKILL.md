@@ -2,6 +2,9 @@
 name: explain-code
 description: Analyze and explain code functionality with structured breakdowns. Use when the user asks to "explain this code", "how does this work", "what does this do", or "walk me through this code".
 allowed-tools: Read, Grep, Glob
+metadata:
+  author: Quintin Henry
+  repository: "https://github.com/qdhenry/Claude-Command-Suite"
 ---
 
 # Analyze and Explain Code Functionality

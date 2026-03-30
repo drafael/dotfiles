@@ -2,6 +2,9 @@
 name: debug-error
 description: Systematically debug and fix errors using structured investigation. Use when the user asks to "debug", "fix an error", "troubleshoot", "investigate a bug", or shares an error message or stack trace.
 allowed-tools: Read, Grep, Glob, Bash, Write, Edit
+metadata:
+  author: Quintin Henry
+  repository: "https://github.com/qdhenry/Claude-Command-Suite"
 ---
 
 # Systematically Debug and Fix Errors

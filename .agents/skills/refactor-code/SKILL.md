@@ -2,6 +2,9 @@
 name: refactor-code
 description: Intelligently refactor and improve code quality with incremental, test-backed changes. Use when the user asks to "refactor", "clean up code", "improve code quality", "restructure", or "simplify this code".
 allowed-tools: Read, Grep, Glob, Bash, Write, Edit
+metadata:
+  author: Quintin Henry
+  repository: "https://github.com/qdhenry/Claude-Command-Suite"
 ---
 
 # Intelligently Refactor and Improve Code Quality

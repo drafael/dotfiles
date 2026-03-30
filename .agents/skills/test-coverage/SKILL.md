@@ -2,6 +2,9 @@
 name: test-coverage
 description: Analyze and improve test coverage. Use when reviewing coverage gaps, writing missing tests, setting up coverage tooling, or improving branch/line/statement coverage for any language or framework.
 allowed-tools: Read, Grep, Glob, Bash, Write, Edit
+metadata:
+  author: Quintin Henry
+  repository: "https://github.com/qdhenry/Claude-Command-Suite"
 ---
 
 # Test Coverage

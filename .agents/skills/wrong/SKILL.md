@@ -2,6 +2,9 @@
 name: wrong
 description: Reset and re-evaluate when current approach isn't working. Use when user says "wrong", "this isn't working", "wrong approach", "start over", "try again", "bad direction", or when the current solution path has hit a dead end and needs a fresh perspective.
 allowed-tools: Read, Grep, Glob, EnterPlanMode, AskUserQuestion
+metadata:
+  skill-author: Umputun
+  skill-repository: "https://github.com/umputun/cc-thingz"
 ---
 
 # Wrong — Reset and Re-evaluate

@@ -2,6 +2,9 @@
 name: write-tests
 description: Write unit and integration tests for code. Use when the user asks to "write tests", "add tests", "add test coverage", or "create test cases" for functions, services, or components.
 allowed-tools: Read, Grep, Glob, Bash, Write, Edit
+metadata:
+  author: Quintin Henry
+  repository: "https://github.com/qdhenry/Claude-Command-Suite"
 ---
 
 # Write Tests

@@ -2,6 +2,9 @@
 name: code-review
 description: Perform a comprehensive code quality review covering security, performance, architecture, and testing. Use when the user asks to "review code", "check code quality", "audit code", or "review this codebase".
 allowed-tools: Read, Grep, Glob, Bash
+metadata:
+  author: Quintin Henry
+  repository: "https://github.com/qdhenry/Claude-Command-Suite"
 ---
 
 # Comprehensive Code Quality Review
