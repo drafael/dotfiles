@@ -1,0 +1,60 @@
+name = "Nord Light Frost"
+
+[palette]
+polar_night_0 = "#2e3440"
+polar_night_1 = "#3b4252"
+polar_night_2 = "#434c5e"
+polar_night_3 = "#4c566a"
+snow_storm_4  = "#d8dee9"
+snow_storm_5  = "#e5e9f0"
+snow_storm_6  = "#eceff4"
+frost_7       = "#8fbcbb"
+frost_8       = "#88c0d0"
+frost_9       = "#81a1c1"
+frost_10      = "#5e81ac"
+aurora_11     = "#bf616a"
+aurora_12     = "#d08770"
+aurora_13     = "#ebcb8b"
+aurora_14     = "#a3be8c"
+aurora_15     = "#b48ead"
+
+[panel]
+border_fg        = "snow_storm_4"
+border_bg        = "snow_storm_6"
+border_active_fg = "frost_10"
+border_active_bg = "snow_storm_6"
+header_fg        = "frost_10"
+header_bg        = "snow_storm_6"
+header_active_fg = "frost_9"
+header_active_bg = "snow_storm_6"
+
+[panel.file]
+normal_fg        = "polar_night_0"
+normal_bg        = "snow_storm_6"
+dir_fg           = "frost_10"
+dir_bg           = "snow_storm_6"
+dir_bold         = true
+exec_fg          = "aurora_14"
+exec_bg          = "snow_storm_6"
+symlink_fg       = "aurora_15"
+symlink_bg       = "snow_storm_6"
+cursor_fg        = "snow_storm_6"
+cursor_bg        = "frost_9"
+cursor_dir_fg    = "snow_storm_6"
+cursor_dir_bg    = "frost_10"
+cursor_dir_bold  = true
+selected_fg      = "polar_night_0"
+selected_bg      = "snow_storm_4"
+selected_bold    = true
+
+[statusbar]
+fg = "polar_night_0"
+bg = "snow_storm_4"
+
+[menubar]
+fg            = "polar_night_0"
+bg            = "snow_storm_5"
+fkey_hint_fg  = "polar_night_3"
+fkey_hint_bg  = "snow_storm_6"
+fkey_label_fg = "snow_storm_6"
+fkey_label_bg = "frost_10"

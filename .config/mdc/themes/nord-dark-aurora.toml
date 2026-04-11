@@ -1,0 +1,60 @@
+name = "Nord Dark Aurora"
+
+[palette]
+polar_night_0 = "#2e3440"
+polar_night_1 = "#3b4252"
+polar_night_2 = "#434c5e"
+polar_night_3 = "#4c566a"
+snow_storm_4  = "#d8dee9"
+snow_storm_5  = "#e5e9f0"
+snow_storm_6  = "#eceff4"
+frost_7       = "#8fbcbb"
+frost_8       = "#88c0d0"
+frost_9       = "#81a1c1"
+frost_10      = "#5e81ac"
+aurora_11     = "#bf616a"
+aurora_12     = "#d08770"
+aurora_13     = "#ebcb8b"
+aurora_14     = "#a3be8c"
+aurora_15     = "#b48ead"
+
+[panel]
+border_fg        = "polar_night_3"
+border_bg        = "polar_night_0"
+border_active_fg = "aurora_13"
+border_active_bg = "polar_night_0"
+header_fg        = "aurora_13"
+header_bg        = "polar_night_0"
+header_active_fg = "aurora_12"
+header_active_bg = "polar_night_0"
+
+[panel.file]
+normal_fg        = "snow_storm_6"
+normal_bg        = "polar_night_0"
+dir_fg           = "frost_9"
+dir_bg           = "polar_night_0"
+dir_bold         = true
+exec_fg          = "aurora_14"
+exec_bg          = "polar_night_0"
+symlink_fg       = "aurora_15"
+symlink_bg       = "polar_night_0"
+cursor_fg        = "polar_night_0"
+cursor_bg        = "aurora_12"
+cursor_dir_fg    = "polar_night_0"
+cursor_dir_bg    = "frost_9"
+cursor_dir_bold  = true
+selected_fg      = "snow_storm_6"
+selected_bg      = "polar_night_1"
+selected_bold    = true
+
+[statusbar]
+fg = "snow_storm_6"
+bg = "polar_night_1"
+
+[menubar]
+fg            = "snow_storm_6"
+bg            = "polar_night_2"
+fkey_hint_fg  = "polar_night_3"
+fkey_hint_bg  = "polar_night_0"
+fkey_label_fg = "polar_night_0"
+fkey_label_bg = "aurora_13"

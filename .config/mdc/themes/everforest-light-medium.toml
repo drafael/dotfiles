@@ -1,0 +1,62 @@
+name = "Everforest Light Medium"
+
+[palette]
+bg_dim     = "#F2EFDF"
+bg0        = "#FFFBEF"
+bg1        = "#F8F5E4"
+bg2        = "#F2EFDF"
+bg3        = "#EDEADA"
+bg4        = "#E8E5D5"
+bg5        = "#BEC5B2"
+fg         = "#434B3D"
+red        = "#F85552"
+orange     = "#DF9323"
+yellow     = "#C88C28"
+green      = "#8FA876"
+aqua       = "#72A67F"
+blue       = "#5C8F96"
+purple     = "#B4728E"
+grey0      = "#939F91"
+grey1      = "#9BA393"
+grey2      = "#B2BAA3"
+
+[panel]
+border_fg        = "bg3"
+border_bg        = "bg0"
+border_active_fg = "green"
+border_active_bg = "bg0"
+header_fg        = "blue"
+header_bg        = "bg0"
+header_active_fg = "green"
+header_active_bg = "bg0"
+
+[panel.file]
+normal_fg        = "fg"
+normal_bg        = "bg0"
+dir_fg           = "blue"
+dir_bg           = "bg0"
+dir_bold         = true
+exec_fg          = "green"
+exec_bg          = "bg0"
+symlink_fg       = "purple"
+symlink_bg       = "bg0"
+cursor_fg        = "bg0"
+cursor_bg        = "blue"
+cursor_dir_fg    = "bg0"
+cursor_dir_bg    = "green"
+cursor_dir_bold  = true
+selected_fg      = "fg"
+selected_bg      = "bg1"
+selected_bold    = true
+
+[statusbar]
+fg = "fg"
+bg = "bg1"
+
+[menubar]
+fg            = "fg"
+bg            = "bg2"
+fkey_hint_fg  = "grey1"
+fkey_hint_bg  = "bg0"
+fkey_label_fg = "bg0"
+fkey_label_bg = "green"
