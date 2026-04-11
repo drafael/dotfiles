@@ -10,25 +10,81 @@ These are non-negotiable standards. Apply them to every piece of Java or Spring 
 
 ## General
 
-- Favor readability over cleverness — the next person reading this code matters
-- Only comment complex or non-obvious logic; never state what the code already says
-- Choose names that reveal intent for variables, methods, and classes
-  - except catch blocks, the exception variable should be a single character, e.g. `catch (Exception e)`
-- Follow the established conventions of the language and the project
-- Never use `Optional` as a method parameter or class field — reserve it exclusively as a return type
-- Prefer stream-based functional iterations over `for`/`while` loops
-- Prefer the ternary operator or `switch` expression over an `if` statement(s) when possible
-- Use of `var` is restricted: `var` is allowed **only when the inferred type is crystal clear**, such as:
-  - constructor calls: `var foo = new Foo();`
-  - builder calls: `var bar = Bar.builder().build();`
-- `var` is **disallowed** when the type is not immediately obvious or harms readability, especially in:
-  - complex expressions
-  - method return values
-- Use of `var` is allowed in tests if the author prefers it
-- Multi-line argument formatting is required only when a method declaration or invocation does not fit reasonably on a single line
-- If a method has multiple arguments and the line becomes too long or hard to read, arguments must be formatted so that:
-  - each argument is placed on a new line
-  - the closing bracket is on a separate line
+- **Favor readability over cleverness** — write for the next person who reads this code
+- **Comment only complex or non-obvious logic** — never restate what the code already expresses
+- **Choose names that reveal intent** for variables, methods, and classes
+  - Exception: catch-block variables should be a single character (e.g., `catch (Exception e)`)
+- **Follow established language and project conventions**
+
+---
+
+### Imports
+
+- Always prefer simple class names over fully qualified names — add an import instead:
+  - ✅ `ClassName` | ❌ `com.package.ClassName` *(unless the name conflicts with another import)*
+- Always use **static imports** for utility methods, including but not limited to:
+  - `Collections.emptyList()`, `Collections.emptyMap()`, `Collections.emptySet()`
+  - `Collectors.toList()`, `Collectors.toSet()`, `Collectors.joining()`
+
+---
+
+### Collections & Optionals
+
+- Prefer empty-collection factory methods over `List/Map/Set.of()` for empty collections:
+  - ✅ `emptyList()`, `emptyMap()`, `emptySet()`
+- Never use `Optional` as a method parameter or class field — it is **exclusively a return type**
+
+---
+
+### Code Style
+
+- **Always wrap statement bodies in braces**, even for single-line blocks
+- Prefer `String.formatted(...)` over `+` string concatenation
+- Prefer **stream-based functional iteration** over `for`/`while` loops
+- Prefer the **ternary operator** or a **`switch` expression** over `if` statements where it improves clarity
+
+---
+
+### `var` Usage
+
+`var` is allowed **only when the inferred type is immediately and unambiguously clear**:
+
+| ✅ Allowed | ❌ Disallowed |
+|---|---|
+| Constructor calls: `var foo = new Foo();` | Complex or chained expressions |
+| Builder calls: `var bar = Bar.builder().build();` | Method return values where the type is not obvious |
+
+- `var` is **freely allowed in tests** at the author's discretion
+
+---
+
+### Sensitive Data & `record` Classes
+
+- **Always override `toString`** in `record` classes to prevent sensitive fields from leaking into logs
+  - Fields to mask include (but are not limited to): `password`, `ssn`, `apiKey`, `clientSecret`, `secretKey`
+
+---
+
+### Method Formatting
+
+- Keep method declarations and invocations on a **single line** when they fit reasonably
+- When a method has multiple arguments and the line becomes too long or hard to read, **format each argument on its own line** with the closing parenthesis on a separate line — except for lambda blocks, where `})` should remain on the same line:
+
+```java
+// ✅ Multi-line when needed
+someMethod(
+    firstArgument,
+    secondArgument,
+    thirdArgument
+);
+
+someMethodWithLambda(e -> {
+    // ...
+}); // ✅ should remain on the same line
+
+// ✅ Single line when it fits
+someMethod(firstArgument, secondArgument);
+
 
 ## Tech Stack
 
