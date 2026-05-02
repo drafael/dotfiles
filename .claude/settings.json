@@ -14,5 +14,23 @@
       "WebFetch(domain:docs.spring.io)"
     ]
   },
-  "model": "opus"
+  "model": "opus",
+  "enabledPlugins": {
+    "revdiff@revdiff": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "revdiff": {
+      "source": {
+        "source": "github",
+        "repo": "umputun/revdiff"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  }
 }
