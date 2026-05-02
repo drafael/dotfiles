@@ -898,6 +898,7 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code (new nvim-treesitter API)
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main', -- new API (ts.install / ts.setup) lives on main; master still has the old configs API
     lazy = false, -- upstream notes this plugin should not be lazy-loaded
     build = ':TSUpdate',
     config = function()
