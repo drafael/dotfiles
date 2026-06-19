@@ -44,6 +44,14 @@ else
   mkdir -p $HOME/.config/ghostty && ln -sfn $HOME/.dotfiles/.config/ghostty/config $HOME/.config/ghostty/config
 fi
 
+if brew ls --cask --versions kitty &> /dev/null; then
+  echo "Kitty...      OK"
+else
+  echo "Kitty..."
+  brew install --cask kitty
+  mkdir -p $HOME/.config/kitty && ln -sfn $HOME/.dotfiles/.config/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
+fi
+
 if brew cask ls --versions appcleaner &> /dev/null; then
   echo "AppCleaner...   OK"
 else

@@ -55,6 +55,17 @@ brew install --cask wezterm
 ln -s ~/.dotfiles/.config/wezterm ~/.config/wezterm
 ```
 
+### [Kitty](https://sw.kovidgoyal.net/kitty/)
+
+GPU-based terminal emulator. Config is a 1:1 port of the Ghostty setup (Catppuccin Frappé, splits).
+
+```sh
+brew install --cask kitty
+```
+```sh
+mkdir -p ~/.config/kitty && ln -sfn ~/.dotfiles/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf
+```
+
 ### [Warp](https://warp.dev/)
 
 ```sh

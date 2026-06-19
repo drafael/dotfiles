@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 local config = {}
 
 -- Use config builder if available (WezTerm 20220807-113146-c2fee766 and later)
@@ -128,5 +129,43 @@ config.enable_scroll_bar = false
 config.adjust_window_size_when_changing_font_size = false
 
 config.window_close_confirmation = "NeverPrompt"
+
+-- Don't dim inactive splits (WezTerm dims them by default; ghostty does not)
+config.inactive_pane_hsb = {
+	saturation = 1.0,
+	brightness = 1.0,
+}
+
+-- ============================================
+-- PANE / SPLIT KEYBINDINGS (match Ghostty/Kitty)
+-- ============================================
+config.keys = {
+	-- shift+enter -> send a literal newline
+	{ key = "Enter", mods = "SHIFT", action = act.SendString("\n") },
+
+	-- Create splits (new pane inherits cwd via CurrentPaneDomain).
+	-- WezTerm naming gotcha: SplitHorizontal = left/right, SplitVertical = top/bottom.
+	{ key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "d", mods = "CMD|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+
+	-- Navigate / focus split: cmd+alt+arrows
+	{ key = "LeftArrow", mods = "CMD|ALT", action = act.ActivatePaneDirection("Left") },
+	{ key = "RightArrow", mods = "CMD|ALT", action = act.ActivatePaneDirection("Right") },
+	{ key = "UpArrow", mods = "CMD|ALT", action = act.ActivatePaneDirection("Up") },
+	{ key = "DownArrow", mods = "CMD|ALT", action = act.ActivatePaneDirection("Down") },
+
+	-- Resize (directional, like ghostty): cmd+ctrl+arrows AND cmd+ctrl+hjkl
+	{ key = "LeftArrow", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
+	{ key = "RightArrow", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "UpArrow", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Up", 3 }) },
+	{ key = "DownArrow", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Down", 3 }) },
+	{ key = "h", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
+	{ key = "l", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "k", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Up", 3 }) },
+	{ key = "j", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Down", 3 }) },
+
+	-- Close current split (no confirmation)
+	{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
+}
 
 return config
