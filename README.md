@@ -201,74 +201,7 @@ brew install podman podman-compose podman-desktop
 
 ## AI Coding Agents
 
-### Installation
-
-Prerequisites: `brew install node`
-
-- [Claude Code](https://code.claude.com/docs/en/quickstart#step-1%3A-install-claude-code)
-- [Pi Coding Agent](https://pi.dev)
-- [OpenCode](https://opencode.ai/docs/#install)
-- [Codex CLI](https://developers.openai.com/codex/quickstart?setup=cli)
-- [Gemini CLI](https://geminicli.com/docs/get-started/installation/)
-- [GitHub Copilot CLI](https://github.com/github/copilot-cli?tab=readme-ov-file#installation)
-
-### Context Files 
-
-```sh
-ln -s ~/.dotfiles/.agents/AGENTS.md ~/.claude/CLAUDE.md
-```
-```sh
-ln -s ~/.dotfiles/.agents/AGENTS.md ~/.pi/agent/AGENTS.md
-```
-```sh
-ln -s ~/.dotfiles/.agents/AGENTS.md ~/.config/opencode/AGENTS.md
-```
-```sh
-ln -s ~/.dotfiles/.agents/AGENTS.md ~/.codex/AGENTS.md
-```
-```sh
-ln -s ~/.dotfiles/.agents/AGENTS.md ~/.gemini/GEMINI.md
-```
-```sh
-ln -s ~/.dotfiles/.agents/AGENTS.md ~/.copilot/copilot-instructions.md
-```
-
-> [!NOTE]
-> For more details, see [CLAUDE.md](https://code.claude.com/docs/en/memory), [Pi AGENTS.md](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#context-files), [OpenCode AGENTS.md](https://opencode.ai/docs/rules/), [Codex AGENTS.md](https://developers.openai.com/codex/guides/agents-md), [GEMINI.md](https://geminicli.com/docs/cli/gemini-md/), and [copilot-instructions.md](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-personal-instructions)
-
-### [Skills](https://agentskills.io/)
-
-```sh
-ln -s ~/.dotfiles/.agents/skills ~/.claude/skills
-```
-
-Alias for skill auto discovery: `~/.agents/skills/ -> ~/.dotfiles/.agents/skills/`
-```sh
-ln -s ~/.dotfiles/.agents ~/.agents 
-```
-
-> [!NOTE]
-> For more details, see [Claude Code](https://code.claude.com/docs/en/skills#extend-claude-with-skills), [Pi](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent#skills), [OpenCode](https://opencode.ai/docs/skills#place-files), [Codex](https://developers.openai.com/codex/skills#where-to-save-skills), [Gemini CLI](https://geminicli.com/docs/cli/skills/#skill-discovery-tiers), and [Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)
-
-### Configuration
-
-```sh
-ln -s ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
-```
-```sh
-ln -s ~/.dotfiles/.claude/commands ~/.claude/commands
-```
-```sh
-ln -s ~/.dotfiles/.pi/agent/themes ~/.pi/agent/themes
-```
-```sh
-ln -s ~/.dotfiles/.pi/agent/prompts ~/.pi/agent/prompts
-```
-
-> [!NOTE]
-> For more details, see [Claude Code](https://code.claude.com/docs/en/settings), [Pi](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/settings.md), [OpenCode](https://opencode.ai/docs/config/), [Codex](https://developers.openai.com/codex/config-basic), and [Gemini CLI](https://geminicli.com/docs/cli/settings/).
-
-
+My AI coding-agent setup now lives in a separate repository: [drafael/coding-harness](https://github.com/drafael/coding-harness).
 
 ## See Also
 
