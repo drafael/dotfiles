@@ -143,6 +143,17 @@ config.keys = {
 	-- shift+enter -> send a literal newline
 	{ key = "Enter", mods = "SHIFT", action = act.SendString("\n") },
 
+	-- Select tabs (ghostty-style cmd+number). WezTerm uses zero-based indexes.
+	{ key = "1", mods = "CMD", action = act.ActivateTab(0) },
+	{ key = "2", mods = "CMD", action = act.ActivateTab(1) },
+	{ key = "3", mods = "CMD", action = act.ActivateTab(2) },
+	{ key = "4", mods = "CMD", action = act.ActivateTab(3) },
+	{ key = "5", mods = "CMD", action = act.ActivateTab(4) },
+	{ key = "6", mods = "CMD", action = act.ActivateTab(5) },
+	{ key = "7", mods = "CMD", action = act.ActivateTab(6) },
+	{ key = "8", mods = "CMD", action = act.ActivateTab(7) },
+	{ key = "9", mods = "CMD", action = act.ActivateTab(8) },
+
 	-- Create splits (new pane inherits cwd via CurrentPaneDomain).
 	-- WezTerm naming gotcha: SplitHorizontal = left/right, SplitVertical = top/bottom.
 	{ key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
