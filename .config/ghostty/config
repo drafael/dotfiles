@@ -46,5 +46,9 @@ shell-integration-features = no-cursor,sudo,title
 
 term = xterm-256color
 
-scrollback-limit = 100000
+# 100 MB: roughly 40,000 lines at the configured 208-column width.
+scrollback-limit = 100000000
+
+# Kitty parity target: roughly 100,000 lines at 208 columns (250 MB).
+# scrollback-limit = 250000000
 
