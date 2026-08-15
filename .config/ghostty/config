@@ -41,6 +41,8 @@ keybind = cmd+ctrl+right=resize_split:right,40
 keybind = cmd+ctrl+up=resize_split:up,20
 keybind = cmd+ctrl+down=resize_split:down,20
 
+keybind = cmd+ctrl+==equalize_splits
+
 shell-integration = detect
 shell-integration-features = no-cursor,sudo,title
 
