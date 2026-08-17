@@ -11,4 +11,22 @@ return {
     },
     opts = {},
   },
+
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'sindrets/diffview.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    cmd = 'Neogit',
+    keys = {
+      { '<leader>gg', '<cmd>Neogit<cr>', desc = 'Neogit: open status' },
+    },
+    opts = {
+      integrations = {
+        diffview = true,
+        telescope = true,
+      },
+    },
+  },
 }
