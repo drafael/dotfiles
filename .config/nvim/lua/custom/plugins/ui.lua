@@ -71,7 +71,7 @@ return {
     priority = 1000,
     config = function()
       require('catppuccin').setup {
-        flavour = 'frappe', -- latte, frappe, macchiato, mocha
+        flavour = 'auto', -- auto, latte, frappe, macchiato, mocha
         background = { -- :h background
           light = 'latte',
           dark = 'frappe',
