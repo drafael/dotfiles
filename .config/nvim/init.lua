@@ -816,15 +816,17 @@ require('lazy').setup({
           return 'make install_jsregexp'
         end)(),
         dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          -- Keep friendly-snippets under LuaSnip so lazy.nvim loads the snippet data
+          -- before LuaSnip tries to discover it. Blink can load friendly-snippets
+          -- automatically with its default vim.snippet engine, but this config uses
+          -- the LuaSnip preset below, which requires the VS Code-format loader.
+          -- lazy_load() defers parsing by filetype; load() is the eager alternative.
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
         opts = {},
       },
@@ -835,8 +837,30 @@ require('lazy').setup({
     opts = {
       keymap = {
         preset = 'enter',
-        ['<Tab>'] = false,
-        ['<S-Tab>'] = false,
+
+        -- Preserve the established Copilot-on-Tab workflow while keeping one owner
+        -- for the key. Copilot's default is <M-l>, and Blink's enter preset normally
+        -- uses Tab for snippet_forward. This explicit chain gives a visible Copilot
+        -- suggestion priority, then jumps through LuaSnip fields, then inserts Tab.
+        -- To separate the features instead, remove this override, restore Blink's
+        -- preset behavior, and set Copilot accept to <M-l> (or another unused key).
+        ['<Tab>'] = {
+          function()
+            -- Copilot loads on InsertEnter. pcall keeps Tab usable if Copilot is
+            -- unavailable or disabled for the current filetype.
+            local ok, suggestion = pcall(require, 'copilot.suggestion')
+            if ok and suggestion.is_visible() then
+              suggestion.accept()
+              return true
+            end
+          end,
+          'snippet_forward',
+          'fallback',
+        },
+
+        -- This is Blink's enter-preset default: jump backward in an active snippet,
+        -- otherwise pass Shift-Tab through to the next mapping or Neovim.
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
       },
 
       appearance = {
