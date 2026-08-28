@@ -15,6 +15,12 @@ alias gmn=gemini
 
 alias y=yazi
 
+# Tmux sessions: tc NAME, ta NAME, tl, tk NAME
+alias tc='tmux new-session -s'
+alias ta='tmux attach-session -t'
+alias tl='tmux list-sessions'
+alias tk='tmux kill-session -t'
+
 alias v=nvim
 alias vi=nvim
 alias vim=nvim

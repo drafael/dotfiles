@@ -1,0 +1,131 @@
+#!/bin/sh
+# Create or switch to a project session chosen from zoxide and configured roots.
+
+if ! command -v fzf >/dev/null 2>&1; then
+  tmux display-message "fzf is required for the project launcher"
+  exit 1
+fi
+
+candidates=$(mktemp "${TMPDIR:-/tmp}/tmux-projects.XXXXXX") || exit 1
+unique=$(mktemp "${TMPDIR:-/tmp}/tmux-projects-unique.XXXXXX") || {
+  rm -f "$candidates"
+  exit 1
+}
+trap 'rm -f "$candidates" "$unique"' EXIT HUP INT TERM
+
+# Zoxide contributes ranked, previously visited directories when installed.
+if command -v zoxide >/dev/null 2>&1; then
+  zoxide query -l 2>/dev/null >>"$candidates" || true
+fi
+
+# Debian and Ubuntu package fd under the fdfind executable name.
+if command -v fd >/dev/null 2>&1; then
+  fd_command=fd
+elif command -v fdfind >/dev/null 2>&1; then
+  fd_command=fdfind
+else
+  fd_command=
+fi
+
+# A colon-separated override keeps machine-specific roots out of this repo.
+if [ -n "${TMUX_PROJECT_DIRS:-}" ]; then
+  roots=$TMUX_PROJECT_DIRS
+else
+  roots="$HOME/code:$HOME/src"
+  # Dotfiles is a project itself, not a container whose children are projects.
+  [ -d "$HOME/dotfiles" ] && printf '%s\n' "$HOME/dotfiles" >>"$candidates"
+fi
+
+old_ifs=$IFS
+IFS=:
+for root in $roots; do
+  [ -d "$root" ] || continue
+
+  # Only immediate children are treated as projects; zoxide supplies deeper
+  # frequently visited directories without an expensive whole-home scan.
+  if [ -n "$fd_command" ]; then
+    "$fd_command" --type d --min-depth 1 --max-depth 1 --absolute-path . "$root" 2>/dev/null >>"$candidates" || true
+  else
+    find "$root" -mindepth 1 -maxdepth 1 -type d -print 2>/dev/null >>"$candidates"
+  fi
+done
+IFS=$old_ifs
+
+# Preserve source ranking while removing duplicates and stale paths.
+awk 'NF && !seen[$0]++' "$candidates" |
+  while IFS= read -r directory; do
+    [ -d "$directory" ] && printf '%s\n' "$directory"
+  done >"$unique"
+
+if [ ! -s "$unique" ]; then
+  tmux display-message "no projects found; set TMUX_PROJECT_DIRS or visit directories with zoxide"
+  exit 1
+fi
+
+case $(tmux show-option -gv @theme 2>/dev/null) in
+  latte)
+    colors='fg:#4c4f69,bg:#eff1f5,hl:#1e66f5,fg+:#4c4f69,bg+:#ccd0da,hl+:#1e66f5,info:#179299,prompt:#8839ef,pointer:#d20f39,marker:#40a02b,spinner:#df8e1d,header:#7287fd'
+    ;;
+  *)
+    colors='fg:#c6d0f5,bg:#303446,hl:#8caaee,fg+:#c6d0f5,bg+:#414559,hl+:#8caaee,info:#81c8be,prompt:#ca9ee6,pointer:#e78284,marker:#a6d189,spinner:#e5c890,header:#babbf1'
+    ;;
+esac
+
+preview='path={}; printf "Git\n"; git -C "$path" status --short --branch 2>/dev/null || printf "not a Git repository\n"; printf "\nFiles\n"; if command -v fd >/dev/null 2>&1; then fd --max-depth 2 --color always . "$path" 2>/dev/null | head -80; elif command -v fdfind >/dev/null 2>&1; then fdfind --max-depth 2 --color always . "$path" 2>/dev/null | head -80; else find "$path" -mindepth 1 -maxdepth 2 -print 2>/dev/null | head -80; fi'
+
+project=$(fzf \
+  --prompt 'project> ' \
+  --header 'zoxide ranking + TMUX_PROJECT_DIRS' \
+  --layout reverse \
+  --border none \
+  --color "$colors" \
+  --preview "$preview" \
+  --preview-window 'right,55%,wrap' \
+  <"$unique") || exit 0
+
+# Canonical paths make metadata comparisons stable across symlinks.
+project=$(cd "$project" 2>/dev/null && pwd -P) || {
+  tmux display-message "project directory is no longer accessible"
+  exit 1
+}
+
+tab=$(printf '\t')
+existing=
+while IFS="$tab" read -r session_id session_path; do
+  if [ "$session_path" = "$project" ]; then
+    existing=$session_id
+    break
+  fi
+done <<EOF
+$(tmux list-sessions -F "#{session_id}${tab}#{@project_path}")
+EOF
+
+if [ -n "$existing" ]; then
+  tmux switch-client -t "$existing"
+  exit 0
+fi
+
+base=$(basename "$project" | tr -c '[:alnum:]_-' '-')
+base=$(printf '%s' "$base" | sed 's/^-*//; s/-*$//')
+[ -n "$base" ] || base=project
+name=$base
+
+# A stable checksum avoids silently reusing a same-named session for a
+# different directory.  Increment only for the extremely unlikely collision.
+if tmux has-session -t "=$name" 2>/dev/null; then
+  suffix=$(printf '%s' "$project" | cksum | awk '{print substr($1, 1, 6)}')
+  name="$base-$suffix"
+  counter=2
+  while tmux has-session -t "=$name" 2>/dev/null; do
+    name="$base-$suffix-$counter"
+    counter=$((counter + 1))
+  done
+fi
+
+session_id=$(tmux new-session -d -P -F '#{session_id}' -s "$name" -c "$project") || {
+  tmux display-message "could not create tmux session for $project"
+  exit 1
+}
+
+tmux set-option -t "$session_id" @project_path "$project"
+tmux switch-client -t "$session_id"

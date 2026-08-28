@@ -1,0 +1,18 @@
+#!/bin/sh
+# Toggle the server-wide Catppuccin palette and reapply every dependent style.
+
+config_dir=$(tmux show-option -gv @config_dir)
+current=$(tmux show-option -gv @theme)
+
+if [ "$current" = "latte" ]; then
+  next=frappe
+  label="Frappé"
+else
+  next=latte
+  label="Latte"
+fi
+
+tmux set-option -g @theme "$next"
+tmux source-file "$config_dir/themes/$next.conf"
+tmux source-file "$config_dir/conf/status.conf"
+tmux display-message "tmux theme: Catppuccin $label"

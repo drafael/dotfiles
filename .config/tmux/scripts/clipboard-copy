@@ -1,0 +1,23 @@
+#!/bin/sh
+# Copy stdin to the first desktop clipboard provider available.  tmux's
+# copy-pipe command still retains the same selection in its own paste buffer.
+
+if command -v pbcopy >/dev/null 2>&1; then
+  exec pbcopy
+fi
+
+if command -v wl-copy >/dev/null 2>&1; then
+  exec wl-copy
+fi
+
+if command -v xclip >/dev/null 2>&1; then
+  exec xclip -selection clipboard -in
+fi
+
+if command -v xsel >/dev/null 2>&1; then
+  exec xsel --clipboard --input
+fi
+
+# Consume stdin cleanly when no desktop provider exists.  OSC 52 remains
+# available through tmux's set-clipboard option and internal paste buffer.
+cat >/dev/null

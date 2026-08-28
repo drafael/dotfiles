@@ -1,0 +1,9 @@
+#!/bin/sh
+# Return success when the pane's foreground process should own Ctrl navigation.
+# Ignoring stopped processes avoids treating a suspended editor as active.
+
+pane_tty=${1:-}
+[ -n "$pane_tty" ] || exit 1
+
+ps -o state= -o comm= -t "$pane_tty" 2>/dev/null |
+  grep -Eiq '^[^TXZ[:space:]]+[[:space:]]+(.*/)?(n?vim|n?vimdiff|vimx|view|fzf)([[:space:]]|$)'

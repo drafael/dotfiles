@@ -1,0 +1,20 @@
+#!/bin/sh
+# Cycle the server-wide status line through bottom, top, hidden, then bottom.
+
+if [ "$(tmux show-option -gv status)" = "off" ]; then
+  tmux set-option -g status on
+  tmux set-option -g status-position bottom
+  tmux display-message "status line: bottom"
+  exit 0
+fi
+
+case $(tmux show-option -gv status-position) in
+  bottom)
+    tmux set-option -g status-position top
+    tmux display-message "status line: top"
+    ;;
+  *)
+    tmux set-option -g status off
+    tmux display-message "status line: hidden"
+    ;;
+esac

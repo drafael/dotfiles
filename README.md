@@ -77,18 +77,113 @@ ln -s ~/.dotfiles/.warp ~/.warp
 
 ## [Tmux](https://github.com/tmux/tmux/wiki)
 
+The tmux configuration is plugin-free and supports tmux 3.3 or newer on macOS and Linux. It uses Catppuccin Frappé by default, includes a runtime Latte theme, integrates with Neovim and fzf, and copies selections to the local desktop clipboard.
+
+### Install dependencies
+
+On macOS:
+
 ```sh
-brew install tmux
+brew install tmux fzf fd zoxide
 ```
 
-[Tmux Plugin Manager](https://github.com/tmux-plugins/tpm):
+On Ubuntu 24.04 or newer:
+
 ```sh
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+sudo apt install tmux fzf fd-find zoxide wl-clipboard
 ```
+
+On Arch Linux:
+
 ```sh
-ln -s ~/.dotfiles/.config/tmux ~/.config/tmux
+sudo pacman -S tmux fzf fd zoxide wl-clipboard
 ```
-Start new session `tmux` and install plugins `prefix` + `I`, where prefix is `Ctrl` + `Space`
+
+`fzf` is required for the switcher and project launcher. `fd` and `zoxide` improve project discovery but are optional; the launcher falls back to `find`. For an X11 desktop, install `xclip` or `xsel` instead of `wl-clipboard`.
+
+Check that the installed tmux meets the minimum version:
+
+```sh
+tmux -V
+```
+
+### Link the configuration
+
+```sh
+ln -sfn ~/.dotfiles/.config/tmux ~/.config/tmux
+```
+
+Tmux reads `~/.config/tmux/tmux.conf` automatically. No plugin manager or installation step is required.
+
+If this replaces the previous TPM-based configuration, let existing sessions finish and restart the tmux server once. The following command closes every running tmux session, so do not run it until their work is saved:
+
+```sh
+tmux kill-server
+```
+
+Start or attach to a new session with:
+
+```sh
+tmux new-session -A -s main
+```
+
+### Key bindings
+
+The prefix is `Ctrl-Space`.
+
+| Binding | Action |
+| --- | --- |
+| `prefix`, `Ctrl-Space` | Send the prefix to a nested tmux session |
+| `prefix`, `r` | Reload the complete configuration |
+| `prefix`, `\|` | Split right in the active directory |
+| `prefix`, `-` | Split below in the active directory |
+| `prefix`, `c` | Create a window in the active directory |
+| `prefix`, `x` | Close the current pane, with confirmation; closes the window when it is the last pane |
+| `prefix`, `q` | Close the current pane immediately; closes the window when it is the last pane |
+| `prefix`, `H/J/K/L` | Resize a tmux pane; repeat without pressing the prefix again |
+| `Ctrl-h/j/k/l` | Navigate across Neovim splits and tmux panes |
+| `Ctrl-Shift-h/j/k/l` | Resize Neovim splits or tmux panes |
+| `prefix`, `z` | Zoom or restore the active pane |
+| `prefix`, `f` | Search sessions, windows, and panes with fzf |
+| `prefix`, `p` | Create or switch to a project session with fzf |
+| `prefix`, `T` | Toggle Catppuccin Frappé and Latte |
+| `prefix`, `S` | Cycle the status line through bottom, top, and hidden |
+| `prefix`, `[` | Enter Vi-style copy mode |
+
+In copy mode, press `v` to begin a selection, `Ctrl-v` to toggle a rectangle, and `y` to copy. Tmux writes the selection to its paste buffer and to the first available desktop provider: `pbcopy`, `wl-copy`, `xclip`, or `xsel`. OSC 52 clipboard support remains enabled for compatible terminals.
+
+The status line shows the session, windows, and `user@host:~/current/path`. Theme and status-position changes apply to every client attached to the same tmux server and survive a configuration reload. They reset when the server exits; a new server starts with Frappé and a bottom status line.
+
+### Configure project discovery
+
+The project launcher combines zoxide's ranked directories with immediate child directories under configured roots. Set a colon-separated root list before starting tmux:
+
+```sh
+export TMUX_PROJECT_DIRS="$HOME/code:$HOME/src"
+```
+
+Without this variable, the launcher scans immediate children of `~/code` and `~/src` and includes `~/dotfiles` directly when those directories exist. If the tmux server is already running, update its environment with:
+
+```sh
+tmux set-environment -g TMUX_PROJECT_DIRS "$TMUX_PROJECT_DIRS"
+```
+
+### Terminal capabilities
+
+Ghostty and Kitty keep their native `xterm-ghostty` and `xterm-kitty` values outside tmux. Applications inside tmux see `tmux-256color`. Do not force `TERM=xterm-256color`; doing so hides terminal capabilities that tmux uses for colors, keys, clipboard access, and hyperlinks.
+
+When a remote host does not know the local terminal's terminfo entry, install it on that host. For example:
+
+```sh
+infocmp -x xterm-ghostty | ssh HOST 'tic -x -'
+infocmp -x xterm-kitty | ssh HOST 'tic -x -'
+```
+
+The configuration enables `allow-passthrough` so trusted applications can use terminal graphics protocols through tmux. Passthrough also allows programs in visible panes to send wrapped escape sequences to the outer terminal. Do not run untrusted terminal applications in these panes.
+
+If colors or modified keys are incorrect, confirm that `tmux-256color` exists with `infocmp tmux-256color` and that tmux is at least version 3.3. Tmux 3.5 or newer can emit CSI-u sequences for distinct `Ctrl-Shift` keys.
+
+The setup follows the official [tmux manual](https://github.com/tmux/tmux/blob/master/tmux.1), the [fzf reference](https://junegunn.github.io/fzf/reference/), and the official [Catppuccin palette](https://github.com/catppuccin/catppuccin).
 
 ## Git
 

@@ -1,0 +1,54 @@
+#!/bin/sh
+# Search all tmux sessions, windows, and panes, then jump to the selected target.
+
+if ! command -v fzf >/dev/null 2>&1; then
+  tmux display-message "fzf is required for the tmux switcher"
+  exit 1
+fi
+
+tab=$(printf '\t')
+entries=$(mktemp "${TMPDIR:-/tmp}/tmux-switch.XXXXXX") || exit 1
+trap 'rm -f "$entries"' EXIT HUP INT TERM
+
+# Keep stable tmux IDs in hidden fields; labels are strictly presentation.
+tmux list-sessions -F "session${tab}#{session_id}${tab}#{session_id}${tab}#{session_name}${tab}#{session_windows} windows" >"$entries"
+tmux list-windows -a -F "window${tab}#{window_id}${tab}#{session_id}${tab}#{session_name}:#{window_index}${tab}#{window_name}" >>"$entries"
+tmux list-panes -a -F "pane${tab}#{pane_id}${tab}#{session_id}${tab}#{session_name}:#{window_index}.#{pane_index}${tab}#{pane_current_command}${tab}#{pane_current_path}" >>"$entries"
+
+# Match fzf itself to the current Catppuccin flavor.
+case $(tmux show-option -gv @theme 2>/dev/null) in
+  latte)
+    colors='fg:#4c4f69,bg:#eff1f5,hl:#1e66f5,fg+:#4c4f69,bg+:#ccd0da,hl+:#1e66f5,info:#179299,prompt:#8839ef,pointer:#d20f39,marker:#40a02b,spinner:#df8e1d,header:#7287fd'
+    ;;
+  *)
+    colors='fg:#c6d0f5,bg:#303446,hl:#8caaee,fg+:#c6d0f5,bg+:#414559,hl+:#8caaee,info:#81c8be,prompt:#ca9ee6,pointer:#e78284,marker:#a6d189,spinner:#e5c890,header:#babbf1'
+    ;;
+esac
+
+selection=$(fzf \
+  --delimiter "$tab" \
+  --with-nth '1,4..' \
+  --prompt 'tmux> ' \
+  --header 'sessions · windows · panes' \
+  --layout reverse \
+  --border none \
+  --color "$colors" \
+  --preview 'tmux capture-pane -ep -S -200 -t {2} 2>/dev/null' \
+  --preview-window 'down,50%,wrap' \
+  <"$entries") || exit 0
+
+kind=$(printf '%s\n' "$selection" | cut -f1)
+target=$(printf '%s\n' "$selection" | cut -f2)
+session=$(printf '%s\n' "$selection" | cut -f3)
+
+case $kind in
+  session)
+    tmux switch-client -t "$session"
+    ;;
+  window)
+    tmux switch-client -t "$session" \; select-window -t "$target"
+    ;;
+  pane)
+    tmux switch-client -t "$session" \; select-window -t "$target" \; select-pane -t "$target"
+    ;;
+esac

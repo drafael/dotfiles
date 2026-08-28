@@ -46,7 +46,8 @@ keybind = cmd+ctrl+==equalize_splits
 shell-integration = detect
 shell-integration-features = no-cursor,sudo,title
 
-term = xterm-256color
+# Keep Ghostty's native xterm-ghostty TERM value so tmux can detect its
+# color, key, clipboard, and hyperlink capabilities.
 
 # 100 MB: roughly 40,000 lines at the configured 208-column width.
 scrollback-limit = 100000000
