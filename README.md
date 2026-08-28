@@ -152,7 +152,7 @@ The prefix is `Ctrl-Space`.
 
 In copy mode, press `v` to begin a selection, `Ctrl-v` to toggle a rectangle, and `y` to copy. Tmux writes the selection to its paste buffer and to the first available desktop provider: `pbcopy`, `wl-copy`, `xclip`, or `xsel`. OSC 52 clipboard support remains enabled for compatible terminals.
 
-The status line shows the session, windows, and `user@host:~/current/path`. Theme and status-position changes apply to every client attached to the same tmux server and survive a configuration reload. They reset when the server exits; a new server starts with Frappé and a bottom status line.
+The status line shows the session, windows, and `user@host:~/current/path`. Windows running Pi, OpenCode, or Claude Code are named `pi`, `opencode`, or `claude code`; other windows retain their active command name. Theme and status-position changes apply to every client attached to the same tmux server and survive a configuration reload. They reset when the server exits; a new server starts with Frappé and a bottom status line.
 
 ### Configure project discovery
 
