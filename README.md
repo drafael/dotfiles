@@ -44,7 +44,7 @@ On macOS, the script installs Homebrew when needed. Package installation and log
 
 The bootstrap installs:
 
-- Git, Git LFS, Starship, tmux, Neovim, fzf, fd, zoxide, and ripgrep
+- Git, Git LFS, GitHub CLI (`gh`), GitLab CLI (`glab`), Starship, tmux, Neovim, fzf, fd, zoxide, and ripgrep
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
 - JDK 25 and the platform-appropriate Java build tools
 - Claude Code, Pi, and OpenCode outside Omarchy
@@ -81,17 +81,31 @@ Create `~/.gitconfig.local`; the tracked Git configuration includes it automatic
     email = YOUR EMAIL
 ```
 
-### Configure GitHub SSH access
+### Authenticate Git hosts
 
-This Git configuration pushes to GitHub over SSH. Create a key if the workstation does not have one, then add the public key to [GitHub](https://github.com/settings/ssh/new):
+This Git configuration pushes to GitHub over SSH. Let `gh` configure authentication and the SSH protocol, then verify it:
 
 ```sh
-ssh-keygen -t ed25519 -C "YOUR EMAIL"
-cat ~/.ssh/id_ed25519.pub
+gh auth login --git-protocol ssh
+gh auth status
 ssh -T git@github.com
 ```
 
-The final command should report that GitHub authenticated the key.
+Authenticate GitLab.com with:
+
+```sh
+glab auth login --hostname gitlab.com --git-protocol ssh
+glab auth status --hostname gitlab.com
+```
+
+For a self-managed GitLab instance, replace the hostname:
+
+```sh
+glab auth login --hostname gitlab.example.com --git-protocol ssh
+glab auth status --hostname gitlab.example.com
+```
+
+See [share/GIT.md](share/GIT.md) for SSH keys, personal access tokens, separate API or SSH hosts, and credential storage.
 
 ### Authenticate coding agents
 

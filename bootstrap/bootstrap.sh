@@ -152,7 +152,7 @@ ensure_homebrew() {
 install_macos_packages() {
   ensure_homebrew
   info 'Installing macOS packages'
-  brew install git git-lfs starship tmux neovim fzf fd zoxide ripgrep node openjdk@25 maven gradle
+  brew install git git-lfs gh glab starship tmux neovim fzf fd zoxide ripgrep node openjdk@25 maven gradle
   brew install --cask ghostty
 
   jdk_source="$(brew --prefix openjdk@25)/libexec/openjdk.jdk"
@@ -236,15 +236,28 @@ install_starship() {
   download_installer Starship sh https://starship.rs/install.sh -y -b "$HOME/.local/bin"
 }
 
+install_ubuntu_glab() {
+  info 'Installing current GitLab CLI for Ubuntu'
+  sudo systemctl enable --now snapd.socket >/dev/null 2>&1 || warn 'could not start snapd.socket; snap may already be active'
+  if ! sudo snap list glab >/dev/null 2>&1; then
+    sudo snap install glab
+  fi
+  sudo snap connect glab:ssh-keys >/dev/null 2>&1 || warn 'could not grant glab access to SSH keys'
+  sudo snap connect glab:password-manager-service >/dev/null 2>&1 || warn 'could not connect glab to the desktop keyring; it may use plaintext credential storage'
+  PATH="/snap/bin:$PATH"
+  export PATH
+}
+
 install_ubuntu_packages() {
   info 'Enabling Ubuntu package repositories'
   sudo apt-get update
-  sudo apt-get install -y software-properties-common curl ca-certificates xz-utils python3
+  sudo apt-get install -y software-properties-common curl ca-certificates xz-utils python3 snapd
   sudo add-apt-repository -y universe
   sudo apt-get update
 
   info 'Installing Ubuntu packages'
-  sudo apt-get install -y git git-lfs zsh tmux fzf fd-find zoxide ripgrep kitty wl-clipboard build-essential unzip openjdk-25-jdk maven
+  sudo apt-get install -y git git-lfs gh zsh tmux fzf fd-find zoxide ripgrep kitty wl-clipboard build-essential unzip openjdk-25-jdk maven
+  install_ubuntu_glab
   install_starship
   install_ubuntu_neovim
   link_path /usr/bin/fdfind "$HOME/.local/bin/fd"
@@ -252,13 +265,15 @@ install_ubuntu_packages() {
 
 install_arch_packages() {
   info 'Installing Arch Linux packages'
-  sudo pacman -S --needed --noconfirm git git-lfs curl zsh starship tmux neovim fzf fd zoxide ripgrep ghostty wl-clipboard base-devel unzip nodejs npm jdk25-openjdk maven gradle
+  sudo pacman -S --needed --noconfirm git git-lfs github-cli glab curl zsh starship tmux neovim fzf fd zoxide ripgrep ghostty wl-clipboard base-devel unzip nodejs npm jdk25-openjdk maven gradle
 }
 
 install_omarchy_packages() {
   info 'Checking Omarchy packages'
-  # Omarchy's repository names its configured Neovim package "nvim".
-  omarchy pkg add git git-lfs tmux nvim fzf fd zoxide ripgrep starship wl-clipboard base-devel unzip jdk25-openjdk maven gradle
+  # Omarchy already provides a lazy gh launcher and names its configured
+  # Neovim package "nvim". Install glab as the missing Git host CLI.
+  omarchy pkg add git git-lfs glab tmux nvim fzf fd zoxide ripgrep starship wl-clipboard base-devel unzip jdk25-openjdk maven gradle
+  command -v gh >/dev/null 2>&1 || omarchy-mise-install gh
 }
 
 install_packages() {
@@ -401,11 +416,19 @@ verify_installation() {
   set_java_environment
   info 'Installed versions'
 
-  for command_name in git git-lfs tmux nvim fzf fd zoxide rg java javac mvn; do
+  for command_name in git git-lfs gh glab tmux nvim fzf fd zoxide rg java javac mvn; do
     if command -v "$command_name" >/dev/null 2>&1; then
       case $command_name in
         git) first_line git --version ;;
         git-lfs) first_line git lfs version ;;
+        gh)
+          if [ "$PLATFORM" = omarchy ]; then
+            printf 'gh: Omarchy lazy launcher available\n'
+          else
+            first_line gh --version
+          fi
+          ;;
+        glab) first_line glab --version ;;
         tmux) first_line tmux -V ;;
         nvim) first_line nvim --version ;;
         fzf) first_line fzf --version ;;

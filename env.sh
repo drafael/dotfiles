@@ -24,6 +24,7 @@ export MANPAGER="less -X"
 # Keep user-managed tools ahead of system packages without duplicating entries
 # when this file is sourced more than once.
 for path_entry in \
+  "/snap/bin" \
   "$HOME/.local/share/pi-node/current/bin" \
   "$HOME/.opencode/bin" \
   "$HOME/.local/bin" \
