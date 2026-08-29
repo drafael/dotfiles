@@ -39,7 +39,7 @@ The prefix is `Ctrl-Space`.
 | `prefix`, `f` | Search sessions, windows, and panes with fzf |
 | `prefix`, `p` | Create or switch to a project session with fzf |
 | `prefix`, `T` | Toggle Catppuccin Frappé and Latte |
-| `prefix`, `S` | Cycle the status line through bottom, top, and hidden |
+| `prefix`, `S` | Cycle the status line through top, hidden, and bottom |
 | `prefix`, `[` | Enter Vi-style copy mode |
 
 Killing the last pane also closes its window.
