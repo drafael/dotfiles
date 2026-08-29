@@ -28,7 +28,8 @@ for path_entry in \
   "$HOME/.local/share/pi-node/current/bin" \
   "$HOME/.opencode/bin" \
   "$HOME/.local/bin" \
-  "$DOTFILES_DIR/bin"
+  "$DOTFILES_DIR/bin" \
+  "$HOME/.local/share/mise/shims"
 do
   if [ -d "$path_entry" ]; then
     case ":$PATH:" in

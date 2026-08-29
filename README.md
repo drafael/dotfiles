@@ -45,6 +45,7 @@ On macOS, the script installs Homebrew when needed. Package installation and log
 The bootstrap installs:
 
 - Git, Git LFS, GitHub CLI (`gh`), GitLab CLI (`glab`), Starship, tmux, Neovim, fzf, fd, zoxide, and ripgrep
+- The latest Node.js LTS plus TypeScript, TypeScript Language Server, and `tsx`
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
 - JDK 25 and the platform-appropriate Java build tools
 - Claude Code, Pi, and OpenCode outside Omarchy
@@ -83,29 +84,16 @@ Create `~/.gitconfig.local`; the tracked Git configuration includes it automatic
 
 ### Authenticate Git hosts
 
-This Git configuration pushes to GitHub over SSH. Let `gh` configure authentication and the SSH protocol, then verify it:
+This Git configuration pushes to GitHub over SSH. Authenticate the hosts you use:
 
 ```sh
 gh auth login --git-protocol ssh
-gh auth status
-ssh -T git@github.com
-```
-
-Authenticate GitLab.com with:
-
-```sh
 glab auth login --hostname gitlab.com --git-protocol ssh
-glab auth status --hostname gitlab.com
-```
-
-For a self-managed GitLab instance, replace the hostname:
-
-```sh
+# Self-managed GitLab:
 glab auth login --hostname gitlab.example.com --git-protocol ssh
-glab auth status --hostname gitlab.example.com
 ```
 
-See [share/GIT.md](share/GIT.md) for SSH keys, personal access tokens, separate API or SSH hosts, and credential storage.
+See [share/GIT.md](share/GIT.md) for verification, SSH keys, personal access tokens, separate API or SSH hosts, and credential storage.
 
 ### Authenticate coding agents
 
@@ -142,6 +130,20 @@ gradle --version  # not installed globally on Ubuntu
 ```
 
 Prefer a repository's `./mvnw` or `./gradlew` wrapper when it exists. Ubuntu intentionally omits its outdated global Gradle package. Neovim installs JDTLS through Mason and includes Lombok support. IntelliJ IDEA is an optional install documented in [share/INSTALL.md](share/INSTALL.md).
+
+## Node.js and TypeScript
+
+Bootstrap uses `mise` to install the latest supported Node.js LTS release, TypeScript compiler, TypeScript Language Server, and `tsx` on every platform. Verify them with:
+
+```sh
+node --version
+npm --version
+tsc --version
+typescript-language-server --version
+tsx --version
+```
+
+Keep ESLint, Prettier, test runners, and framework tooling in each project so their versions remain reproducible. Follow the package manager and lockfile already used by the project.
 
 ## Local customization
 

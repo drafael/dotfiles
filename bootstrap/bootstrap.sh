@@ -152,7 +152,7 @@ ensure_homebrew() {
 install_macos_packages() {
   ensure_homebrew
   info 'Installing macOS packages'
-  brew install git git-lfs gh glab starship tmux neovim fzf fd zoxide ripgrep node openjdk@25 maven gradle
+  brew install git git-lfs gh glab mise starship tmux neovim fzf fd zoxide ripgrep openjdk@25 maven gradle
   brew install --cask ghostty
 
   jdk_source="$(brew --prefix openjdk@25)/libexec/openjdk.jdk"
@@ -265,14 +265,14 @@ install_ubuntu_packages() {
 
 install_arch_packages() {
   info 'Installing Arch Linux packages'
-  sudo pacman -S --needed --noconfirm git git-lfs github-cli glab curl zsh starship tmux neovim fzf fd zoxide ripgrep ghostty wl-clipboard base-devel unzip nodejs npm jdk25-openjdk maven gradle
+  sudo pacman -S --needed --noconfirm git git-lfs github-cli glab curl zsh mise starship tmux neovim fzf fd zoxide ripgrep ghostty wl-clipboard base-devel unzip jdk25-openjdk maven gradle
 }
 
 install_omarchy_packages() {
   info 'Checking Omarchy packages'
   # Omarchy already provides a lazy gh launcher and names its configured
   # Neovim package "nvim". Install glab as the missing Git host CLI.
-  omarchy pkg add git git-lfs glab tmux nvim fzf fd zoxide ripgrep starship wl-clipboard base-devel unzip jdk25-openjdk maven gradle
+  omarchy pkg add git git-lfs glab mise-bin tmux nvim fzf fd zoxide ripgrep starship wl-clipboard base-devel unzip jdk25-openjdk maven gradle
   command -v gh >/dev/null 2>&1 || omarchy-mise-install gh
 }
 
@@ -283,6 +283,29 @@ install_packages() {
     arch) install_arch_packages ;;
     omarchy) install_omarchy_packages ;;
   esac
+}
+
+install_mise() {
+  if command -v mise >/dev/null 2>&1; then
+    return
+  fi
+  download_installer mise sh https://mise.run
+  PATH="$HOME/.local/bin:$PATH"
+  export PATH
+  require_command mise
+}
+
+install_node_tooling() {
+  install_mise
+  info 'Installing the latest Node.js LTS and TypeScript tools'
+  mise use --global node@lts
+  PATH="$HOME/.local/share/mise/shims:$PATH"
+  export PATH
+  hash -r 2>/dev/null || true
+  require_command node
+  require_command npm
+  npm install --global typescript@latest typescript-language-server@latest tsx@latest
+  mise reshim
 }
 
 install_agents() {
@@ -416,7 +439,7 @@ verify_installation() {
   set_java_environment
   info 'Installed versions'
 
-  for command_name in git git-lfs gh glab tmux nvim fzf fd zoxide rg java javac mvn; do
+  for command_name in git git-lfs gh glab mise node npm tsc typescript-language-server tsx tmux nvim fzf fd zoxide rg java javac mvn; do
     if command -v "$command_name" >/dev/null 2>&1; then
       case $command_name in
         git) first_line git --version ;;
@@ -429,6 +452,12 @@ verify_installation() {
           fi
           ;;
         glab) first_line glab --version ;;
+        mise) first_line mise --version ;;
+        node) first_line node --version ;;
+        npm) first_line npm --version ;;
+        tsc) first_line tsc --version ;;
+        typescript-language-server) first_line typescript-language-server --version ;;
+        tsx) first_line tsx --version ;;
         tmux) first_line tmux -V ;;
         nvim) first_line nvim --version ;;
         fzf) first_line fzf --version ;;
@@ -469,6 +498,7 @@ main() {
   info "Bootstrapping $PLATFORM from $DOTFILES_DIR"
   install_packages
   require_command curl
+  install_node_tooling
   install_agents
   link_configuration
   verify_installation
