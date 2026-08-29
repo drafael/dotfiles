@@ -9,6 +9,9 @@ fi
 
 export EDITOR=nvim
 
+# Use the same XDG configuration layout on macOS and Linux.
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
 # Ignore duplicate commands in the history
 export HISTCONTROL=ignoredups
 

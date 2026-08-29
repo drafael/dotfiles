@@ -7,11 +7,12 @@ EXPECTED_DOTFILES_DIR="$HOME/.dotfiles"
 BACKUP_BASE="$HOME/.dotfiles-backups"
 BACKUP_DIR=""
 PLATFORM=""
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
 
 # Keep user-installed coding agents and Ubuntu's managed Neovim ahead of
 # system paths during this run. env.sh applies the same order to new shells.
 PATH="$HOME/.local/bin:$HOME/.opencode/bin:$HOME/.local/share/pi-node/current/bin:$PATH"
-export PATH
+export PATH XDG_CONFIG_HOME
 
 info() {
   printf '\n==> %s\n' "$*"
@@ -394,6 +395,7 @@ link_configuration() {
   link_path "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
   link_path "$DOTFILES_DIR/.config/tmux" "$HOME/.config/tmux"
   link_path "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
+  link_path "$DOTFILES_DIR/.config/lazygit/config.yml" "$XDG_CONFIG_HOME/lazygit/config.yml"
 
   case $PLATFORM in
     macos)
