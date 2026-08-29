@@ -396,6 +396,7 @@ link_configuration() {
   link_path "$DOTFILES_DIR/.config/tmux" "$HOME/.config/tmux"
   link_path "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
   link_path "$DOTFILES_DIR/.config/lazygit/config.yml" "$XDG_CONFIG_HOME/lazygit/config.yml"
+  link_path "$DOTFILES_DIR/.config/tig/config" "$XDG_CONFIG_HOME/tig/config"
 
   case $PLATFORM in
     macos)

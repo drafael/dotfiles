@@ -76,7 +76,7 @@ Install these only when a project or workflow needs them:
 | --- | --- |
 | `btop` or `htop` | Process and resource monitoring |
 | `jq` | JSON processing |
-| `lazygit` or `tig` | Terminal Git interfaces; Lazygit uses the included Catppuccin Frappé configuration |
+| `lazygit` or `tig` | Terminal Git interfaces with included Catppuccin Frappé configurations |
 | `mc` or `yazi` | Terminal file management |
 | `ncdu` | Disk usage analysis |
 | `nmap` | Network inspection |

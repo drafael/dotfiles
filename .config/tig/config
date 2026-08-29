@@ -1,0 +1,46 @@
+# Catppuccin Frappé through the terminal ANSI palette.
+
+# Interface and selection.
+color default default default
+color cursor default color0 bold
+color cursor-blur default color0
+color status color0 blue bold
+color title-focus color0 blue bold
+color title-blur default color0
+color search-result color0 yellow bold
+color delimiter color8 default
+color header blue default bold
+
+# Commit and file metadata.
+color line-number color8 default
+color id green default
+color date yellow default
+color author magenta default
+color committer magenta default
+color directory blue default
+color file default default
+color graph-commit blue default
+
+# References.
+color main-head color0 green bold
+color main-remote cyan default
+color main-tracked green default
+color main-tag color0 yellow bold
+color main-local-tag yellow default
+color main-ref blue default
+color main-stash magenta default
+
+# Working tree status.
+color stat-staged green default
+color stat-unstaged yellow default
+color stat-untracked red default
+
+# Diffs.
+color diff-header blue default bold
+color diff-chunk magenta default
+color diff-stat cyan default
+color diff-add green default
+color diff-add2 green default
+color diff-del red default
+color diff-del2 red default
+color diff-index blue default
