@@ -48,7 +48,7 @@ The bootstrap installs:
 - The latest Node.js LTS plus TypeScript, TypeScript Language Server, and `tsx`
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
 - JDK 25 and the platform-appropriate Java build tools
-- Claude Code, Pi, and OpenCode outside Omarchy
+- Claude Code, Codex, OpenCode, and Pi outside Omarchy
 
 It links Git, tmux, and Neovim configuration on every platform. Zsh platforms also receive `.zshrc` and terminal configuration. On Omarchy, the script preserves Bash and Foot and adds a small source block to `~/.bashrc`.
 
@@ -101,6 +101,7 @@ Start each agent and follow its authentication flow:
 
 ```sh
 claude
+codex
 opencode
 pi
 ```

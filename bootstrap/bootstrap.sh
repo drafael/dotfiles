@@ -311,6 +311,7 @@ install_node_tooling() {
 install_agents() {
   if [ "$PLATFORM" = omarchy ]; then
     info 'Keeping Omarchy coding-agent launchers'
+    command -v codex >/dev/null 2>&1 || omarchy-mise-install codex
     return
   fi
 
@@ -323,7 +324,15 @@ install_agents() {
   fi
 
   if ! command -v pi >/dev/null 2>&1; then
-    download_installer Pi sh https://pi.dev/install.sh
+    info 'Installing Pi'
+    npm install --global --ignore-scripts --min-release-age=0 --no-fund --no-audit @earendil-works/pi-coding-agent@latest
+    mise reshim
+  fi
+
+  if ! command -v codex >/dev/null 2>&1; then
+    info 'Installing Codex CLI'
+    npm install --global @openai/codex@latest
+    mise reshim
   fi
 }
 
@@ -478,9 +487,9 @@ verify_installation() {
   fi
 
   if [ "$PLATFORM" = omarchy ]; then
-    printf 'Claude Code, OpenCode, and Pi will install through Omarchy when first launched.\n'
+    printf 'Claude Code, Codex, OpenCode, and Pi will install through Omarchy when first launched.\n'
   else
-    for agent in claude opencode pi; do
+    for agent in claude codex opencode pi; do
       if command -v "$agent" >/dev/null 2>&1; then
         printf '%s: installed\n' "$agent"
       else
@@ -505,9 +514,9 @@ main() {
 
   info 'Next steps'
   if [ "$PLATFORM" = omarchy ]; then
-    printf '%s\n' '1. Open a new terminal.' '2. Run claude, opencode, and pi once to install and authenticate them.'
+    printf '%s\n' '1. Open a new terminal.' '2. Run claude, codex, opencode, and pi once to install and authenticate them.'
   else
-    printf '%s\n' '1. Run: exec zsh' '2. Run claude, opencode, and pi to authenticate them.'
+    printf '%s\n' '1. Run: exec zsh' '2. Run claude, codex, opencode, and pi to authenticate them.'
   fi
   printf '%s\n' '3. Add your Git identity to ~/.gitconfig.local.'
   if [ -n "$BACKUP_DIR" ]; then
