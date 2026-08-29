@@ -1,6 +1,11 @@
 
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+if locale -a 2>/dev/null | grep -Eiq '^en_US[.]utf-?8$'; then
+  export LANG="en_US.UTF-8"
+  export LC_ALL="en_US.UTF-8"
+elif locale -a 2>/dev/null | grep -Eiq '^C[.]utf-?8$'; then
+  export LANG="C.UTF-8"
+  export LC_ALL="C.UTF-8"
+fi
 
 export EDITOR=nvim
 
@@ -16,10 +21,29 @@ export HISTSIZE=10000
 # Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
-export PATH=$PATH:$DOTFILES_DIR/bin
+# Keep user-managed tools ahead of system packages without duplicating entries
+# when this file is sourced more than once.
+for path_entry in \
+  "$HOME/.local/share/pi-node/current/bin" \
+  "$HOME/.opencode/bin" \
+  "$HOME/.local/bin" \
+  "$DOTFILES_DIR/bin"
+do
+  if [ -d "$path_entry" ]; then
+    case ":$PATH:" in
+      *":$path_entry:"*) ;;
+      *) PATH="$path_entry:$PATH" ;;
+    esac
+  fi
+done
+unset path_entry
 
 export GOPATH="$HOME/code/go"
-export PATH="$GOPATH/bin:$PATH"
+case ":$PATH:" in
+  *":$GOPATH/bin:"*) ;;
+  *) PATH="$GOPATH/bin:$PATH" ;;
+esac
+export PATH
 
 export YAZI_CONFIG_HOME=$DOTFILES_DIR/.config/yazi
 

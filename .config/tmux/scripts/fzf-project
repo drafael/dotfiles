@@ -33,6 +33,7 @@ if [ -n "${TMUX_PROJECT_DIRS:-}" ]; then
 else
   roots="$HOME/code:$HOME/src"
   # Dotfiles is a project itself, not a container whose children are projects.
+  [ -d "$HOME/.dotfiles" ] && printf '%s\n' "$HOME/.dotfiles" >>"$candidates"
   [ -d "$HOME/dotfiles" ] && printf '%s\n' "$HOME/dotfiles" >>"$candidates"
 fi
 
