@@ -33,7 +33,6 @@ if [ -f "$HOME/.zshrc.local" ]; then
 fi
 
 if command -v starship &>/dev/null; then
-  export STARSHIP_CONFIG="$DOTFILES_DIR/.config/starship.toml"
   eval "$(starship init zsh)"
 else
   fpath+=("$DOTFILES_DIR/zsh-prompt")

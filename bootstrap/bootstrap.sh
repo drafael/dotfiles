@@ -395,8 +395,16 @@ link_configuration() {
   link_path "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
   link_path "$DOTFILES_DIR/.config/tmux" "$HOME/.config/tmux"
   link_path "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
+  link_path "$DOTFILES_DIR/.config/starship.toml" "$XDG_CONFIG_HOME/starship.toml"
   link_path "$DOTFILES_DIR/.config/lazygit/config.yml" "$XDG_CONFIG_HOME/lazygit/config.yml"
   link_path "$DOTFILES_DIR/.config/tig/config" "$XDG_CONFIG_HOME/tig/config"
+  link_path "$DOTFILES_DIR/.config/btop" "$XDG_CONFIG_HOME/btop"
+  link_path "$DOTFILES_DIR/.config/htop/htoprc" "$XDG_CONFIG_HOME/htop/htoprc"
+  link_path "$DOTFILES_DIR/.config/mc/catppuccin.ini" "$XDG_CONFIG_HOME/mc/catppuccin.ini"
+  link_path "$DOTFILES_DIR/.config/mc/solarized.ini" "$XDG_CONFIG_HOME/mc/solarized.ini"
+  link_path "$DOTFILES_DIR/.config/mdc" "$XDG_CONFIG_HOME/mdc"
+  link_path "$DOTFILES_DIR/.config/mpv" "$XDG_CONFIG_HOME/mpv"
+  link_path "$DOTFILES_DIR/.config/yazi" "$XDG_CONFIG_HOME/yazi"
 
   case $PLATFORM in
     macos)

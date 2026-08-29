@@ -84,7 +84,7 @@ Install these only when a project or workflow needs them:
 | `tree` | Directory trees |
 | `wget` or `httpie` | HTTP downloads and requests |
 
-Use Homebrew on macOS, `apt` on Ubuntu, `pacman` on Arch, or `omarchy pkg add` on Omarchy.
+Use Homebrew on macOS, `apt` on Ubuntu, `pacman` on Arch, or `omarchy pkg add` on Omarchy. Bootstrap links the Starship configuration and the included btop, htop, MC theme, MDC, mpv, and Yazi configurations, even when an optional tool is not installed yet.
 
 ## Productivity notes
 
