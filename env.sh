@@ -50,6 +50,6 @@ case ":$PATH:" in
 esac
 export PATH
 
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship.toml"
-export YAZI_CONFIG_HOME="$XDG_CONFIG_HOME/yazi"
-export MC_SKIN="$XDG_CONFIG_HOME/mc/catppuccin.ini"
+export STARSHIP_CONFIG="$DOTFILES_DIR/.config/starship.toml"
+export YAZI_CONFIG_HOME="$DOTFILES_DIR/.config/yazi"
+export MC_SKIN="$DOTFILES_DIR/.config/mc/catppuccin.ini"
