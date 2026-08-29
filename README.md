@@ -26,15 +26,6 @@ brew install starship
 
 ## Terminal Emulators
 
-### [iTerm2](http://iterm2.com)
-
-```sh
-brew install --cask iterm2
-```
-Point your preferences to `~/.dotfiles/iTerm2/com.googlecode.iterm2.plist`
-
-![iTerm2-settings](iTerm2/iTerm2-settings.png)
-
 ### [Ghostty](https://ghostty.org/)
 
 Fast cross-platform terminal emulator that uses platform-native UI and GPU acceleration.
@@ -46,15 +37,6 @@ brew install --cask ghostty
 ln -s ~/.dotfiles/.config/ghostty ~/.config/ghostty
 ```
 
-### [WezTerm](https://wezterm.org/)
-
-```sh
-brew install --cask wezterm
-```
-```sh
-ln -s ~/.dotfiles/.config/wezterm ~/.config/wezterm
-```
-
 ### [Kitty](https://sw.kovidgoyal.net/kitty/)
 
 GPU-based terminal emulator. Config is a 1:1 port of the Ghostty setup (Catppuccin Frappé, splits).
@@ -64,15 +46,6 @@ brew install --cask kitty
 ```
 ```sh
 mkdir -p ~/.config/kitty && ln -sfn ~/.dotfiles/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf
-```
-
-### [Warp](https://warp.dev/)
-
-```sh
-brew install --cask warp
-```
-```sh
-ln -s ~/.dotfiles/.warp ~/.warp
 ```
 
 ## [Tmux](https://github.com/tmux/tmux/wiki)
