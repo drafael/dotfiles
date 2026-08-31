@@ -60,6 +60,14 @@ When a destination already exists, the script moves it to:
 
 A numeric suffix is added if two runs start during the same second.
 
+To link every top-level entry from this repository's `.config` directory instead of the platform-specific selection, run the separate script manually:
+
+```sh
+~/.dotfiles/bootstrap/link-config.sh
+```
+
+It uses `${XDG_CONFIG_HOME:-$HOME/.config}`, leaves correct symlinks unchanged, and backs up conflicting destinations under `~/.dotfiles-backups/`.
+
 ### 3. Start the configured shell
 
 On macOS, Ubuntu, or Arch:
