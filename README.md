@@ -40,12 +40,18 @@ cd ~/.dotfiles
 ./bootstrap/bootstrap.sh
 ```
 
-On macOS, the script installs Homebrew when needed. Package installation and login-shell changes may request your password. If a package or download fails, fix the reported problem and run the same command again.
+On macOS, the script installs Homebrew when needed and uses its unversioned `node` and `bun` formulas for the current releases by default. To manage both runtimes with `mise` instead, run:
+
+```sh
+./bootstrap/bootstrap.sh --javascript-runtime-manager=mise
+```
+
+Package installation and login-shell changes may request your password. If a package or download fails, fix the reported problem and run the same command again.
 
 The bootstrap installs:
 
 - Git, Git LFS, GitHub CLI (`gh`), GitLab CLI (`glab`), Starship, tmux, Neovim, fzf, fd, zoxide, and ripgrep
-- The latest Node.js LTS plus TypeScript, TypeScript Language Server, and `tsx`
+- Node.js and Bun runtimes, plus TypeScript, TypeScript Language Server, and `tsx`
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
 - JDK 25 and the platform-appropriate Java build tools
 - Claude Code, Codex, OpenCode, and Pi outside Omarchy
@@ -140,13 +146,14 @@ gradle --version  # not installed globally on Ubuntu
 
 Prefer a repository's `./mvnw` or `./gradlew` wrapper when it exists. Ubuntu intentionally omits its outdated global Gradle package. Neovim installs JDTLS through Mason and includes Lombok support. IntelliJ IDEA is an optional install documented in [share/INSTALL.md](share/INSTALL.md).
 
-## Node.js and TypeScript
+## JavaScript runtimes and TypeScript
 
-Bootstrap uses `mise` to install the latest supported Node.js LTS release, TypeScript compiler, TypeScript Language Server, and `tsx` on every platform. Verify them with:
+On macOS, bootstrap installs the current Node.js and Bun releases with Homebrew's unversioned `node` and `bun` formulas by default. Pass `--javascript-runtime-manager=mise` to install the latest supported Node.js LTS release and latest Bun release through `mise` instead. Linux platforms use `mise`. Bootstrap also installs the TypeScript compiler, TypeScript Language Server, and `tsx`. Verify them with:
 
 ```sh
 node --version
 npm --version
+bun --version
 tsc --version
 typescript-language-server --version
 tsx --version

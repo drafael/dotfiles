@@ -7,6 +7,7 @@ EXPECTED_DOTFILES_DIR="$HOME/.dotfiles"
 BACKUP_BASE="$HOME/.dotfiles-backups"
 BACKUP_DIR=""
 PLATFORM=""
+JAVASCRIPT_RUNTIME_MANAGER=""
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
 
 # Keep user-installed coding agents and Ubuntu's managed Neovim ahead of
@@ -29,6 +30,56 @@ fail() {
 
 require_command() {
   command -v "$1" >/dev/null 2>&1 || fail "required command not found: $1"
+}
+
+usage() {
+  printf '%s\n' \
+    'Usage: bootstrap.sh [--javascript-runtime-manager=homebrew|mise]' \
+    '' \
+    'macOS uses Homebrew for current Node.js and Bun releases by default.' \
+    'Pass mise to use mise instead. Linux platforms always use mise.'
+}
+
+parse_arguments() {
+  while [ "$#" -gt 0 ]; do
+    case $1 in
+      --javascript-runtime-manager=*)
+        JAVASCRIPT_RUNTIME_MANAGER=${1#*=}
+        [ -n "$JAVASCRIPT_RUNTIME_MANAGER" ] || fail 'missing value for --javascript-runtime-manager'
+        ;;
+      --javascript-runtime-manager)
+        [ "$#" -ge 2 ] || fail 'missing value for --javascript-runtime-manager'
+        shift
+        JAVASCRIPT_RUNTIME_MANAGER=$1
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      *)
+        fail "unknown option: $1"
+        ;;
+    esac
+    shift
+  done
+}
+
+select_javascript_runtime_manager() {
+  if [ -z "$JAVASCRIPT_RUNTIME_MANAGER" ]; then
+    if [ "$PLATFORM" = macos ]; then
+      JAVASCRIPT_RUNTIME_MANAGER=homebrew
+    else
+      JAVASCRIPT_RUNTIME_MANAGER=mise
+    fi
+  fi
+
+  case $JAVASCRIPT_RUNTIME_MANAGER in
+    homebrew)
+      [ "$PLATFORM" = macos ] || fail 'Homebrew JavaScript runtimes are supported only on macOS'
+      ;;
+    mise) ;;
+    *) fail "unsupported JavaScript runtime manager: $JAVASCRIPT_RUNTIME_MANAGER" ;;
+  esac
 }
 
 create_backup_dir() {
@@ -153,7 +204,13 @@ ensure_homebrew() {
 install_macos_packages() {
   ensure_homebrew
   info 'Installing macOS packages'
-  brew install git git-lfs gh glab mise starship tmux neovim fzf fd zoxide ripgrep openjdk@25 maven gradle
+  brew install git git-lfs gh glab starship tmux neovim fzf fd zoxide ripgrep openjdk@25 maven gradle
+  if [ "$JAVASCRIPT_RUNTIME_MANAGER" = homebrew ]; then
+    # Unversioned formulas track the current releases rather than a Node.js LTS line.
+    brew install node bun
+  else
+    brew install mise
+  fi
   brew install --cask ghostty
 
   jdk_source="$(brew --prefix openjdk@25)/libexec/openjdk.jdk"
@@ -296,17 +353,36 @@ install_mise() {
   require_command mise
 }
 
-install_node_tooling() {
-  install_mise
-  info 'Installing the latest Node.js LTS and TypeScript tools'
-  mise use --global node@lts
-  PATH="$HOME/.local/share/mise/shims:$PATH"
-  export PATH
+reshim_javascript_tools() {
+  if [ "$JAVASCRIPT_RUNTIME_MANAGER" = mise ]; then
+    mise reshim
+  fi
+}
+
+install_javascript_tooling() {
+  case $JAVASCRIPT_RUNTIME_MANAGER in
+    homebrew)
+      info 'Using current Homebrew Node.js and Bun releases'
+      homebrew_prefix=$(brew --prefix)
+      PATH="$homebrew_prefix/bin:$homebrew_prefix/sbin:$PATH"
+      export PATH
+      ;;
+    mise)
+      install_mise
+      info 'Installing the latest Node.js LTS and Bun with mise'
+      mise use --global node@lts bun@latest
+      PATH="$HOME/.local/share/mise/shims:$PATH"
+      export PATH
+      ;;
+  esac
+
   hash -r 2>/dev/null || true
   require_command node
   require_command npm
+  require_command bun
+  info 'Installing TypeScript tools'
   npm install --global typescript@latest typescript-language-server@latest tsx@latest
-  mise reshim
+  reshim_javascript_tools
 }
 
 install_agents() {
@@ -327,13 +403,13 @@ install_agents() {
   if ! command -v pi >/dev/null 2>&1; then
     info 'Installing Pi'
     npm install --global --ignore-scripts --min-release-age=0 --no-fund --no-audit @earendil-works/pi-coding-agent@latest
-    mise reshim
+    reshim_javascript_tools
   fi
 
   if ! command -v codex >/dev/null 2>&1; then
     info 'Installing Codex CLI'
     npm install --global @openai/codex@latest
-    mise reshim
+    reshim_javascript_tools
   fi
 }
 
@@ -459,7 +535,13 @@ verify_installation() {
   set_java_environment
   info 'Installed versions'
 
-  for command_name in git git-lfs gh glab mise node npm tsc typescript-language-server tsx tmux nvim fzf fd zoxide rg java javac mvn; do
+  if command -v mise >/dev/null 2>&1; then
+    first_line mise --version
+  elif [ "$JAVASCRIPT_RUNTIME_MANAGER" = mise ]; then
+    warn 'mise is not available'
+  fi
+
+  for command_name in git git-lfs gh glab node npm bun tsc typescript-language-server tsx tmux nvim fzf fd zoxide rg java javac mvn; do
     if command -v "$command_name" >/dev/null 2>&1; then
       case $command_name in
         git) first_line git --version ;;
@@ -472,9 +554,9 @@ verify_installation() {
           fi
           ;;
         glab) first_line glab --version ;;
-        mise) first_line mise --version ;;
         node) first_line node --version ;;
         npm) first_line npm --version ;;
+        bun) first_line bun --version ;;
         tsc) first_line tsc --version ;;
         typescript-language-server) first_line typescript-language-server --version ;;
         tsx) first_line tsx --version ;;
@@ -511,14 +593,17 @@ verify_installation() {
 }
 
 main() {
+  parse_arguments "$@"
   [ "$(id -u)" -ne 0 ] || fail 'run bootstrap as your normal user, not root'
   [ "$DOTFILES_DIR" = "$EXPECTED_DOTFILES_DIR" ] || fail "clone this repository to $EXPECTED_DOTFILES_DIR before running bootstrap"
   detect_platform
+  select_javascript_runtime_manager
 
   info "Bootstrapping $PLATFORM from $DOTFILES_DIR"
+  printf 'JavaScript runtimes: %s\n' "$JAVASCRIPT_RUNTIME_MANAGER"
   install_packages
   require_command curl
-  install_node_tooling
+  install_javascript_tooling
   install_agents
   link_configuration
   verify_installation
