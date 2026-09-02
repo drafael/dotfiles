@@ -6,12 +6,12 @@ alias ....="cd ../../.."
 alias g=git
 alias gt=git
 alias gti=git
+alias lg=lazygit
 
 alias cc=claude
 alias oc=opencode
 alias cld=claude
 alias cpt=copilot
-alias gmn=gemini
 
 alias y=yazi
 
