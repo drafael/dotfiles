@@ -202,6 +202,11 @@ vim.keymap.set('n', '<leader>tw', function()
   vim.wo.linebreak = vim.wo.wrap
 end, { desc = '[T]oggle [W]ord wrap' })
 
+-- Toggle relative line numbers for the current window
+vim.keymap.set('n', '<leader>tr', function()
+  vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = '[T]oggle [R]elative line numbers' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
