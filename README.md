@@ -2,16 +2,7 @@
 
 A personal terminal and Java development environment for macOS, Ubuntu, Arch Linux, and Omarchy 4. The bootstrap installs the core tools, backs up conflicting files, and links this repository's configuration.
 
-## Supported platforms
-
-| Platform | Shell | Terminal | Coding agents |
-| --- | --- | --- | --- |
-| macOS | Zsh | Ghostty | Official installers |
-| Ubuntu 24.04+ | Zsh | Kitty | Official installers |
-| Arch Linux | Zsh | Ghostty | Official installers |
-| Omarchy 4 | Bash | Foot | Omarchy lazy launchers |
-
-Omarchy keeps its native shell, terminal, desktop theme integration, package lifecycle, and agent launchers. The bootstrap applies the portable Git, tmux, Neovim, aliases, and environment configuration there.
+See [Supported platforms](share/PLATFORMS.md) for the operating systems, shells, terminals, and coding-agent installation methods covered by the bootstrap.
 
 ## Bootstrap a workstation
 
@@ -46,17 +37,41 @@ On macOS, the script installs Homebrew when needed and uses its unversioned `nod
 ./bootstrap/bootstrap.sh --javascript-runtime-manager=mise
 ```
 
-Package installation and login-shell changes may request your password. If a package or download fails, fix the reported problem and run the same command again.
+Package installation and login-shell changes may request your password. Each script installs missing tools without upgrading tools that are already present. If a package or download fails, fix the reported problem and run the same command again.
 
-The bootstrap installs:
+The default bootstrap installs:
 
 - Git, Git LFS, GitHub CLI (`gh`), GitLab CLI (`glab`), Starship, tmux, Neovim, fzf, fd, zoxide, and ripgrep
+- btop, htop, LazyGit, Tig, Midnight Commander, Yazi, Midday Commander (`mdc`), jq, tree, and wget
+- Yazi preview support through FFmpeg, 7-Zip, Poppler, `resvg`, and ImageMagick where platform packages are available
 - Node.js and Bun runtimes, plus TypeScript, TypeScript Language Server, and `tsx`
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
 - JDK 25 and the platform-appropriate Java build tools
 - Claude Code, Codex, OpenCode, and Pi outside Omarchy
 
-It links Git, tmux, and Neovim configuration on every platform. Zsh platforms also receive `.zshrc` and terminal configuration. On Omarchy, the script preserves Bash and Foot and adds a small source block to `~/.bashrc`.
+The bootstrap is composed of independently runnable category scripts:
+
+| Script | Responsibility |
+| --- | --- |
+| `cli-tools.sh` | Git clients, terminal utilities, file managers, Yazi preview support, and command-line prerequisites |
+| `javascript.sh` | Node.js, Bun, TypeScript, TypeScript Language Server, and `tsx` |
+| `java.sh` | JDK 25, Maven, and Gradle where supported |
+| `terminal-tools.sh` | Neovim and the platform terminal |
+| `coding-agents.sh` | Claude Code, Codex, OpenCode, and Pi |
+| `link-dotfiles.sh` | Repository configuration links and shell integration |
+| `verify.sh` | Read-only installed-version summary |
+| `gui-editors.sh` | Optional IntelliJ IDEA, VS Code, Cursor, and Zed installation |
+
+Run a category from the repository root when only that part of the workstation needs provisioning, for example:
+
+```sh
+./bootstrap/java.sh
+./bootstrap/link-dotfiles.sh
+```
+
+`gui-editors.sh` is optional and is not called by the default bootstrap. Ubuntu installs Yazi from its official APT repository; unavailable optional preview dependencies such as `resvg` produce a warning instead of failing the bootstrap.
+
+`link-dotfiles.sh` links each portable top-level entry under `.config` into `${XDG_CONFIG_HOME:-$HOME/.config}`. Ghostty and Kitty are handled separately so each platform receives the correct terminal configuration; Omarchy retains its terminal configuration. Root Git files remain explicit, Zsh platforms receive `.zshrc`, and Omarchy receives a managed source block in `~/.bashrc`.
 
 When a destination already exists, the script moves it to:
 
@@ -64,15 +79,7 @@ When a destination already exists, the script moves it to:
 ~/.dotfiles-backups/YYYYMMDD-HHMMSS/
 ```
 
-A numeric suffix is added if two runs start during the same second.
-
-To link every top-level entry from this repository's `.config` directory instead of the platform-specific selection, run the separate script manually:
-
-```sh
-~/.dotfiles/bootstrap/link-config.sh
-```
-
-It uses `${XDG_CONFIG_HOME:-$HOME/.config}`, leaves correct symlinks unchanged, and backs up conflicting destinations under `~/.dotfiles-backups/`.
+A numeric suffix is added if two runs start during the same second. Correct symlinks remain unchanged, and stale links are not removed automatically. Most configuration directories are linked wholesale, so application changes within them write directly into this repository.
 
 ### 3. Start the configured shell
 
@@ -124,27 +131,7 @@ Omarchy installs these agents through its existing `mise` launchers the first ti
 
 The optional shared agent configuration lives in [drafael/coding-harness](https://github.com/drafael/coding-harness).
 
-## Java development environment
-
-Bootstrap installs JDK 25 everywhere:
-
-| Platform | JDK | Build tools |
-| --- | --- | --- |
-| macOS | Homebrew `openjdk@25` | Maven and Gradle |
-| Ubuntu | `openjdk-25-jdk` | Maven; Gradle wrapper only |
-| Arch | `jdk25-openjdk` | Maven and Gradle |
-| Omarchy | `jdk25-openjdk` through Omarchy | Maven and Gradle |
-
-`JAVA_HOME` and `PATH` select JDK 25 in new shells. Verify the environment with:
-
-```sh
-java -version
-javac -version
-mvn -version
-gradle --version  # not installed globally on Ubuntu
-```
-
-Prefer a repository's `./mvnw` or `./gradlew` wrapper when it exists. Ubuntu intentionally omits its outdated global Gradle package. Neovim installs JDTLS through Mason and includes Lombok support. IntelliJ IDEA is an optional install documented in [share/INSTALL.md](share/INSTALL.md).
+See [Java development environment](share/JAVA.md) for the JDK and build tools installed on each platform, environment setup, and verification commands.
 
 ## JavaScript runtimes and TypeScript
 

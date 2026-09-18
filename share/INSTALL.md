@@ -34,14 +34,13 @@ The repository's Ghostty configuration is tuned for macOS and generic Arch. The 
 
 ## Editors and IDEs
 
-Neovim is installed and configured by the main bootstrap. Install other editors only when needed:
+Neovim is installed and configured by the main bootstrap. On macOS, install the optional GUI editors only when needed:
 
 ```sh
-# macOS
-brew install --cask intellij-idea visual-studio-code cursor zed
+~/.dotfiles/bootstrap/gui-editors.sh
 ```
 
-For Linux, use the editor's official distribution or the desktop's package UI:
+The script installs missing IntelliJ IDEA, Visual Studio Code, Cursor, and Zed casks without upgrading existing installations. For Linux, use the editor's official distribution or the desktop's package UI:
 
 - [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 - [Visual Studio Code](https://code.visualstudio.com/docs/setup/linux)
@@ -70,21 +69,19 @@ Omarchy already includes Docker and Docker Compose. Its default configuration re
 
 ## Additional command-line tools
 
+The main bootstrap installs btop, htop, LazyGit, Tig, Midnight Commander, Yazi, Midday Commander (`mdc`), jq, tree, and wget. It also installs Yazi's recommended preview dependencies except for a Nerd Font. On Ubuntu, unavailable optional dependencies such as `resvg` produce a warning.
+
 Install these only when a project or workflow needs them:
 
 | Tool | Purpose |
 | --- | --- |
-| `btop` or `htop` | Process and resource monitoring |
-| `jq` | JSON processing |
-| `lazygit` or `tig` | Terminal Git interfaces with included Catppuccin Frappé configurations |
-| `mc` or `yazi` | Terminal file management |
+| `httpie` | Alternative HTTP client |
+| `mpv` | Media playback |
 | `ncdu` | Disk usage analysis |
 | `nmap` | Network inspection |
 | `shellcheck` | Shell script analysis |
-| `tree` | Directory trees |
-| `wget` or `httpie` | HTTP downloads and requests |
 
-Use Homebrew on macOS, `apt` on Ubuntu, `pacman` on Arch, or `omarchy pkg add` on Omarchy. Bootstrap links the Starship configuration and the included btop, htop, MC theme, MDC, mpv, and Yazi configurations, even when an optional tool is not installed yet.
+Use Homebrew on macOS, `apt` on Ubuntu, `pacman` on Arch, or `omarchy pkg add` on Omarchy. Bootstrap links tracked configuration even when the corresponding optional tool is not installed.
 
 ## Productivity notes
 
