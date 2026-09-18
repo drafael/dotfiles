@@ -57,7 +57,7 @@ The bootstrap is composed of independently runnable category scripts:
 | `javascript.sh` | Node.js, Bun, TypeScript, TypeScript Language Server, and `tsx` |
 | `java.sh` | JDK 25, Maven, and Gradle where supported |
 | `terminal-tools.sh` | Neovim and the platform terminal |
-| `coding-agents.sh` | Claude Code, Codex, OpenCode, and Pi |
+| `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, and shared harness configuration |
 | `link-dotfiles.sh` | Repository configuration links and shell integration |
 | `verify.sh` | Read-only installed-version summary |
 | `gui-editors.sh` | Optional IntelliJ IDEA, VS Code, Cursor, and Zed installation |
@@ -129,7 +129,9 @@ pi
 
 Omarchy installs these agents through its existing `mise` launchers the first time each command runs. Other platforms use the agents' official installers during bootstrap.
 
-The optional shared agent configuration lives in [drafael/coding-harness](https://github.com/drafael/coding-harness).
+Bootstrap clones [drafael/coding-harness](https://github.com/drafael/coding-harness) to `~/code/harness`, preferring SSH and warning before falling back to HTTPS. Existing HTTPS or SSH checkouts are left at their current revision.
+
+The bootstrap links the harness skills into `~/.agents/skills` and `~/.claude/skills`. It also links the shared Pi themes, prompts, extensions, and `AGENTS.md` under `~/.pi/agent`, creates `~/.agents/AGENTS.md`, and links `CLAUDE.md` to `~/.claude/CLAUDE.md`. Conflicting paths are backed up under `~/.dotfiles-backups/` before replacement.
 
 See [Java development environment](share/JAVA.md) for the JDK and build tools installed on each platform, environment setup, and verification commands.
 

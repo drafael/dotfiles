@@ -6,6 +6,8 @@ BOOTSTRAP_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 # shellcheck source=lib.sh
 . "$BOOTSTRAP_DIR/lib.sh"
 
+HARNESS_DIR="$HOME/code/harness"
+
 usage() {
   printf '%s\n' \
     'Usage: verify.sh' \
@@ -89,6 +91,36 @@ print_yazi_support() {
   fi
 }
 
+verify_harness_link() {
+  harness_link_source=$1
+  harness_link_destination=$2
+  if symlink_points_to_path "$harness_link_destination" "$harness_link_source"; then
+    printf 'harness link: %s\n' "$harness_link_destination"
+  else
+    warn "$harness_link_destination does not link to $harness_link_source"
+  fi
+}
+
+print_harness_status() {
+  if [ -d "$HARNESS_DIR/.git" ] && command -v git >/dev/null 2>&1; then
+    harness_origin=$(git -C "$HARNESS_DIR" remote get-url origin 2>/dev/null || printf 'unknown')
+    printf 'coding harness: %s (%s)\n' "$HARNESS_DIR" "$harness_origin"
+  elif [ -d "$HARNESS_DIR/.git" ]; then
+    printf 'coding harness: %s (origin unavailable without Git)\n' "$HARNESS_DIR"
+  else
+    warn "coding harness checkout is not available at $HARNESS_DIR"
+  fi
+
+  verify_harness_link "$HARNESS_DIR/skills" "$HOME/.agents/skills"
+  verify_harness_link "$HARNESS_DIR/skills" "$HOME/.claude/skills"
+  verify_harness_link "$HARNESS_DIR/.pi/agent/themes" "$HOME/.pi/agent/themes"
+  verify_harness_link "$HARNESS_DIR/.pi/agent/prompts" "$HOME/.pi/agent/prompts"
+  verify_harness_link "$HARNESS_DIR/.pi/agent/extensions" "$HOME/.pi/agent/extensions"
+  verify_harness_link "$HARNESS_DIR/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
+  verify_harness_link "$HARNESS_DIR/AGENTS.md" "$HOME/.agents/AGENTS.md"
+  verify_harness_link "$HARNESS_DIR/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+}
+
 main() {
   case ${1:-} in
     -h|--help) usage; exit 0 ;;
@@ -115,6 +147,8 @@ main() {
   if [ "$PLATFORM" != ubuntu ]; then
     print_command_version gradle
   fi
+
+  print_harness_status
 
   if [ "$PLATFORM" = omarchy ]; then
     printf 'Claude Code, Codex, OpenCode, and Pi install through Omarchy when first launched.\n'

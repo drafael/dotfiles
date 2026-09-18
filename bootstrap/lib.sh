@@ -260,6 +260,43 @@ link_path() {
   printf 'linked     %s -> %s\n' "$link_destination" "$link_source"
 }
 
+resolved_existing_path() {
+  resolve_input=$1
+  if [ -d "$resolve_input" ]; then
+    (CDPATH= cd -- "$resolve_input" && pwd -P)
+    return
+  fi
+  [ -e "$resolve_input" ] || return 1
+  resolve_parent=$(CDPATH= cd -- "$(dirname -- "$resolve_input")" && pwd -P) || return 1
+  printf '%s/%s\n' "$resolve_parent" "$(basename -- "$resolve_input")"
+}
+
+symlink_points_to_path() {
+  checked_link=$1
+  expected_path=$2
+  [ -L "$checked_link" ] || return 1
+
+  raw_target=$(readlink "$checked_link")
+  case $raw_target in
+    /*) candidate_path=$raw_target ;;
+    *) candidate_path="$(dirname -- "$checked_link")/$raw_target" ;;
+  esac
+
+  resolved_candidate=$(resolved_existing_path "$candidate_path") || return 1
+  resolved_expected=$(resolved_existing_path "$expected_path") || return 1
+  [ "$resolved_candidate" = "$resolved_expected" ]
+}
+
+link_path_resolved() {
+  resolved_link_source=$1
+  resolved_link_destination=$2
+  if symlink_points_to_path "$resolved_link_destination" "$resolved_link_source"; then
+    printf 'linked     %s\n' "$resolved_link_destination"
+    return
+  fi
+  link_path "$resolved_link_source" "$resolved_link_destination"
+}
+
 ensure_real_directory() {
   directory_path=$1
   if [ -d "$directory_path" ] && [ ! -L "$directory_path" ]; then
