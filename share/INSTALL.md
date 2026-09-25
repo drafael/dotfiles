@@ -51,21 +51,31 @@ Omarchy exposes supported editors under **Install > Editor**.
 
 ## Container tools
 
-On macOS, Colima provides a lightweight Docker-compatible runtime:
+Container tooling is optional and is not part of the default bootstrap. Install the Docker-compatible stack:
 
 ```sh
-brew install colima docker docker-compose kubectl helm
-colima start
+~/.dotfiles/bootstrap/containers.sh
 ```
 
-Other options:
+This installs Colima and the Docker CLI on macOS, Docker Engine from the platform repository on Ubuntu and Arch, and preserves Omarchy's native Docker setup. Compose v2, Buildx, kubectl, Helm, and Minikube are included. Ubuntu's Kubernetes tools use architecture-specific upstream releases with published SHA-256 verification.
 
-- [Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-- [Docker on Arch Linux](https://wiki.archlinux.org/title/Docker)
-- [Podman](https://podman.io/docs/installation)
-- [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+Select Podman instead when needed:
 
-Omarchy already includes Docker and Docker Compose. Its default configuration requires `sudo`; review the Omarchy security guidance before enabling sudoless Docker.
+```sh
+~/.dotfiles/bootstrap/containers.sh --runtime=podman
+```
+
+The script verifies client commands but does not deliberately start or enable services, initialize a VM, grant Docker group access, or create a Kubernetes cluster. Ubuntu's package manager may apply its normal service defaults while installing Docker.
+
+Start the selected runtime separately:
+
+- macOS with Docker: `colima start`
+- macOS with Podman: `podman machine init && podman machine start`
+- Ubuntu or Arch with Docker: `sudo systemctl enable --now docker`
+- Linux with Podman: run `podman info`; its native mode is rootless
+- Omarchy: keep using `sudo docker`, or review **Setup > Security > Sudoless Docker** before changing access
+
+Docker group membership grants root-equivalent access and is never changed by the script. After the runtime works without elevated privileges, create an isolated local cluster with `minikube start --driver=docker`. The Podman driver is available through `minikube start --driver=podman` but remains experimental. Colima's built-in Kubernetes support is also available through `colima start --kubernetes` when a separate Minikube cluster is unnecessary.
 
 ## Additional command-line tools
 

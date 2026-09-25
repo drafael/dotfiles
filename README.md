@@ -63,6 +63,7 @@ The bootstrap is composed of independently runnable category scripts:
 | `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, RevDiff integrations, and shared harness configuration |
 | `link-dotfiles.sh` | Repository configuration links and shell integration |
 | `verify.sh` | Read-only installed-version summary |
+| `containers.sh` | Optional Docker- or Podman-based runtime and local Kubernetes tools |
 | `gui-editors.sh` | Optional IntelliJ IDEA, VS Code, Cursor, and Zed installation |
 
 Run a category from the repository root when only that part of the workstation needs provisioning, for example:
@@ -72,7 +73,14 @@ Run a category from the repository root when only that part of the workstation n
 ./bootstrap/link-dotfiles.sh
 ```
 
-`gui-editors.sh` is optional and is not called by the default bootstrap. Ubuntu installs Yazi from its official APT repository; unavailable optional preview dependencies such as `resvg` produce a warning instead of failing the bootstrap.
+`containers.sh` and `gui-editors.sh` are optional and are not called by the default bootstrap. Install the Docker-compatible container stack, or select Podman explicitly:
+
+```sh
+./bootstrap/containers.sh
+./bootstrap/containers.sh --runtime=podman
+```
+
+The container script installs runtime packages and command-line tools but does not deliberately start runtimes or services, grant Docker group access, or create Kubernetes clusters. Ubuntu installs Yazi from its official APT repository; unavailable optional preview dependencies such as `resvg` produce a warning instead of failing the bootstrap.
 
 `link-dotfiles.sh` links each portable top-level entry under `.config` into `${XDG_CONFIG_HOME:-$HOME/.config}`. Ghostty and Kitty are handled separately so each platform receives the correct terminal configuration; Omarchy retains its terminal configuration. Root Git files remain explicit, Zsh platforms receive `.zshrc`, and Omarchy receives a managed source block in `~/.bashrc`.
 
