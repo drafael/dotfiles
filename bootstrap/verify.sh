@@ -56,6 +56,7 @@ print_command_version() {
     fd) first_line fd --version ;;
     zoxide) first_line zoxide --version ;;
     rg) first_line rg --version ;;
+    revdiff) first_line revdiff --version ;;
     java) first_line java -version ;;
     javac) first_line javac -version ;;
     mvn) first_line mvn -version ;;
@@ -139,7 +140,7 @@ main() {
     warn 'mise is not available'
   fi
 
-  for command_name in git git-lfs gh glab node npm bun tsc typescript-language-server tsx tmux nvim btop htop lazygit tig mc yazi mdc jq tree wget fzf fd zoxide rg java javac mvn; do
+  for command_name in git git-lfs gh glab node npm bun tsc typescript-language-server tsx tmux nvim btop htop lazygit tig mc yazi mdc jq tree wget fzf fd zoxide rg revdiff java javac mvn; do
     print_command_version "$command_name"
   done
   print_yazi_support

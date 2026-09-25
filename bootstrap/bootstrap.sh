@@ -93,7 +93,7 @@ main() {
   else
     printf '%s\n' '1. Run: exec zsh' '2. Run claude, codex, opencode, and pi to authenticate them.'
   fi
-  printf '%s\n' '3. Add your Git identity to ~/.gitconfig.local.'
+  printf '%s\n' '3. In Codex, open /hooks and trust the RevDiff planning hook.' '4. Add your Git identity to ~/.gitconfig.local.'
 }
 
 main "$@"

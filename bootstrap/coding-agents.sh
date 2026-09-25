@@ -9,12 +9,14 @@ BOOTSTRAP_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 HARNESS_DIR="$HOME/code/harness"
 HARNESS_HTTPS_URL=https://github.com/drafael/coding-harness.git
 HARNESS_SSH_URL=git@github.com:drafael/coding-harness.git
+REVDIFF_REPOSITORY=umputun/revdiff
+REVDIFF_URL=https://github.com/umputun/revdiff
 
 usage() {
   printf '%s\n' \
     'Usage: coding-agents.sh' \
     '' \
-    'Install missing coding-agent tools and provision shared harness configuration.'
+    'Install missing coding-agent tools, RevDiff integrations, and shared harness configuration.'
 }
 
 ensure_javascript_prerequisite() {
@@ -133,6 +135,127 @@ install_agents() {
   fi
 }
 
+ensure_revdiff_prerequisites() {
+  ensure_curl
+  case $PLATFORM in
+    macos) ensure_brew_formulas jq ;;
+    ubuntu) ensure_ubuntu_packages jq tar ;;
+    arch) ensure_arch_packages jq tar ;;
+    omarchy) ensure_omarchy_packages jq tar ;;
+  esac
+}
+
+install_revdiff() {
+  if command -v revdiff >/dev/null 2>&1; then
+    return
+  fi
+
+  ensure_revdiff_prerequisites
+  if [ "$PLATFORM" = macos ]; then
+    ensure_brew_formulas umputun/apps/revdiff
+  else
+    case $(uname -m) in
+      x86_64|amd64) release_arch=amd64 ;;
+      aarch64|arm64) release_arch=arm64 ;;
+      *) fail "RevDiff does not publish a supported Linux archive for $(uname -m)" ;;
+    esac
+    install_github_release_archive RevDiff "$REVDIFF_REPOSITORY" revdiff_ "_linux_${release_arch}.tar.gz" revdiff
+  fi
+
+  refresh_standard_paths
+  require_command revdiff
+}
+
+command_output_contains() {
+  expected_text=$1
+  shift
+  "$@" 2>/dev/null | grep -Fq "$expected_text"
+}
+
+install_claude_revdiff_plugins() {
+  if ! command_output_contains "$REVDIFF_REPOSITORY" claude plugin marketplace list --json; then
+    info 'Adding the RevDiff marketplace to Claude Code'
+    claude plugin marketplace add --scope user "$REVDIFF_REPOSITORY"
+  fi
+
+  for plugin_name in revdiff revdiff-planning; do
+    plugin_id="$plugin_name@revdiff"
+    if ! command_output_contains "$plugin_id" claude plugin list --json; then
+      info "Installing $plugin_id for Claude Code"
+      claude plugin install --scope user --yes "$plugin_id"
+    fi
+  done
+}
+
+install_codex_revdiff_plugins() {
+  if ! command_output_contains "$REVDIFF_REPOSITORY" codex plugin marketplace list --json; then
+    info 'Adding the RevDiff marketplace to Codex'
+    codex plugin marketplace add "$REVDIFF_REPOSITORY"
+  fi
+
+  for plugin_name in revdiff revdiff-planning; do
+    plugin_id="$plugin_name@revdiff"
+    if ! command_output_contains "$plugin_id" codex plugin list --json; then
+      info "Installing $plugin_id for Codex"
+      codex plugin add "$plugin_id"
+    fi
+  done
+}
+
+install_pi_revdiff_package() {
+  if command_output_contains "$REVDIFF_URL" pi list; then
+    return
+  fi
+  info 'Installing the RevDiff package for Pi'
+  pi install "$REVDIFF_URL"
+}
+
+opencode_revdiff_is_installed() {
+  opencode_config_dir="$HOME/.config/opencode"
+  for relative_path in \
+    commands/revdiff.md \
+    tools/revdiff.ts \
+    tools/launch-revdiff.sh \
+    plugins/revdiff-plan-review.ts \
+    plugins/launch-plan-review.sh; do
+    [ -f "$opencode_config_dir/$relative_path" ] || return 1
+  done
+
+  grep -Fq './plugins/revdiff-plan-review.ts' "$opencode_config_dir/opencode.json" 2>/dev/null ||
+    grep -Fq './plugins/revdiff-plan-review.ts' "$opencode_config_dir/opencode.jsonc" 2>/dev/null
+}
+
+install_opencode_revdiff_integration() {
+  if opencode_revdiff_is_installed; then
+    return
+  fi
+
+  temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/revdiff-plugin.XXXXXX")
+  info 'Installing the RevDiff integration for OpenCode'
+  if git clone --depth 1 "$REVDIFF_URL.git" "$temp_dir/revdiff" &&
+    bash "$temp_dir/revdiff/plugins/opencode/setup.sh" &&
+    opencode_revdiff_is_installed; then
+    rm -rf "$temp_dir"
+  else
+    status=$?
+    rm -rf "$temp_dir"
+    fail "OpenCode RevDiff integration failed with status $status"
+  fi
+}
+
+install_revdiff_integrations() {
+  ensure_revdiff_prerequisites
+  ensure_git
+  for agent in claude codex opencode pi; do
+    require_command "$agent"
+  done
+
+  install_claude_revdiff_plugins
+  install_codex_revdiff_plugins
+  install_pi_revdiff_package
+  install_opencode_revdiff_integration
+}
+
 main() {
   case ${1:-} in
     -h|--help) usage; exit 0 ;;
@@ -142,6 +265,8 @@ main() {
 
   bootstrap_init
   install_agents
+  install_revdiff
+  install_revdiff_integrations
   provision_harness
 }
 

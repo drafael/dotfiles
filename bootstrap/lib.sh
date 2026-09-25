@@ -100,6 +100,43 @@ download_installer() {
   rm -f "$installer"
 }
 
+install_github_release_archive() {
+  label=$1
+  repository=$2
+  archive_prefix=$3
+  archive_suffix=$4
+  binary_name=$5
+
+  temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-release.XXXXXX")
+  metadata="$temp_dir/release.json"
+  curl -fsSL "https://api.github.com/repos/$repository/releases/latest" -o "$metadata"
+
+  release_tag=$(jq -er '.tag_name' "$metadata") || fail "could not determine the latest $label release"
+  release_version=${release_tag#v}
+  archive="${archive_prefix}${release_version}${archive_suffix}"
+  archive_url=$(jq -er --arg name "$archive" '.assets[] | select(.name == $name) | .browser_download_url' "$metadata") ||
+    fail "$label release asset not found: $archive"
+  checksums_url=$(jq -er '(([.assets[] | select(.name == "checksums.txt")][0] // [.assets[] | select(.name | endswith("_checksums.txt"))][0]).browser_download_url // empty)' "$metadata") ||
+    fail "$label release checksums were not published"
+
+  info "Installing $label $release_tag"
+  curl -fsSL "$archive_url" -o "$temp_dir/$archive"
+  curl -fsSL "$checksums_url" -o "$temp_dir/checksums.txt"
+  checksum_line=$(awk -v name="$archive" '$2 == name { print; exit }' "$temp_dir/checksums.txt")
+  [ -n "$checksum_line" ] || fail "$label checksum not found for $archive"
+  printf '%s\n' "$checksum_line" >"$temp_dir/checksum"
+  (cd "$temp_dir" && sha256sum -c checksum)
+
+  mkdir -p "$temp_dir/extracted" "$HOME/.local/bin"
+  tar -xzf "$temp_dir/$archive" -C "$temp_dir/extracted"
+  binary_source=$(find "$temp_dir/extracted" -type f -name "$binary_name" -print | head -1)
+  [ -n "$binary_source" ] || fail "$binary_name was not found in $archive"
+  install -m 0755 "$binary_source" "$HOME/.local/bin/$binary_name"
+  rm -rf "$temp_dir"
+  refresh_standard_paths
+  require_command "$binary_name"
+}
+
 ensure_homebrew() {
   refresh_standard_paths
   if command -v brew >/dev/null 2>&1; then

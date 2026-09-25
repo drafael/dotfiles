@@ -48,6 +48,7 @@ The default bootstrap installs:
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
 - JDK 25 and the platform-appropriate Java build tools
 - Claude Code, Codex, OpenCode, and Pi outside Omarchy
+- RevDiff plus its Claude Code, Codex, OpenCode, and Pi integrations, including automatic plan review where supported
 
 The bootstrap is composed of independently runnable category scripts:
 
@@ -57,7 +58,7 @@ The bootstrap is composed of independently runnable category scripts:
 | `javascript.sh` | Node.js, Bun, TypeScript, TypeScript Language Server, and `tsx` |
 | `java.sh` | JDK 25, Maven, and Gradle where supported |
 | `terminal-tools.sh` | Neovim and the platform terminal |
-| `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, and shared harness configuration |
+| `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, RevDiff integrations, and shared harness configuration |
 | `link-dotfiles.sh` | Repository configuration links and shell integration |
 | `verify.sh` | Read-only installed-version summary |
 | `gui-editors.sh` | Optional IntelliJ IDEA, VS Code, Cursor, and Zed installation |
@@ -128,6 +129,8 @@ pi
 ```
 
 Omarchy installs these agents through its existing `mise` launchers the first time each command runs. Other platforms use the agents' official installers during bootstrap.
+
+Bootstrap also installs [RevDiff](https://github.com/umputun/revdiff). macOS uses its Homebrew formula; Linux installs the checksummed release archive in `~/.local/bin`. Claude Code and Codex receive the `revdiff` and `revdiff-planning` marketplace plugins, Pi receives the RevDiff package, and OpenCode receives its command, tool, and plan-review plugin. Start a new agent session after bootstrap; in Codex, open `/hooks` and trust the RevDiff planning hook before using automatic Plan-mode review.
 
 Bootstrap clones [drafael/coding-harness](https://github.com/drafael/coding-harness) to `~/code/harness`, preferring SSH and warning before falling back to HTTPS. Existing HTTPS or SSH checkouts are left at their current revision.
 
