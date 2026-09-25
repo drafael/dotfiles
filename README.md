@@ -130,7 +130,7 @@ pi
 
 Omarchy installs these agents through its existing `mise` launchers the first time each command runs. Other platforms use the agents' official installers during bootstrap.
 
-Bootstrap also installs [RevDiff](https://github.com/umputun/revdiff). macOS uses its Homebrew formula; Linux installs the checksummed release archive in `~/.local/bin`. Claude Code and Codex receive the `revdiff` and `revdiff-planning` marketplace plugins, Pi receives the RevDiff package, and OpenCode receives its command, tool, and plan-review plugin. Start a new agent session after bootstrap; in Codex, open `/hooks` and trust the RevDiff planning hook before using automatic Plan-mode review.
+Bootstrap also installs [RevDiff](https://github.com/umputun/revdiff). macOS uses its Homebrew formula; Linux installs the checksummed release archive in `~/.local/bin`. Claude Code and Codex receive the `revdiff` and `revdiff-planning` marketplace plugins. Pi receives the RevDiff package plus the [pi-subagents](https://github.com/nicobailon/pi-subagents), [pi-web-access](https://github.com/nicobailon/pi-web-access), and [pi-intercom](https://github.com/nicobailon/pi-intercom) npm packages. OpenCode receives the RevDiff command, tool, and plan-review plugin. Start a new agent session after bootstrap; in Codex, open `/hooks` and trust the RevDiff planning hook before using automatic Plan-mode review.
 
 Bootstrap clones [drafael/coding-harness](https://github.com/drafael/coding-harness) to `~/code/harness`, preferring SSH and warning before falling back to HTTPS. Existing HTTPS or SSH checkouts are left at their current revision.
 

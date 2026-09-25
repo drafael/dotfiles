@@ -202,12 +202,22 @@ install_codex_revdiff_plugins() {
   done
 }
 
-install_pi_revdiff_package() {
-  if command_output_contains "$REVDIFF_URL" pi list; then
+install_pi_package() {
+  package_label=$1
+  package_name=$2
+  package_source=$3
+  if command_output_contains "$package_name" pi list; then
     return
   fi
-  info 'Installing the RevDiff package for Pi'
-  pi install "$REVDIFF_URL"
+  info "Installing $package_label for Pi"
+  pi install "$package_source"
+}
+
+install_pi_packages() {
+  install_pi_package RevDiff revdiff "$REVDIFF_URL"
+  install_pi_package pi-subagents pi-subagents npm:pi-subagents
+  install_pi_package pi-web-access pi-web-access npm:pi-web-access
+  install_pi_package pi-intercom pi-intercom npm:pi-intercom
 }
 
 opencode_revdiff_is_installed() {
@@ -252,7 +262,7 @@ install_revdiff_integrations() {
 
   install_claude_revdiff_plugins
   install_codex_revdiff_plugins
-  install_pi_revdiff_package
+  install_pi_packages
   install_opencode_revdiff_integration
 }
 
