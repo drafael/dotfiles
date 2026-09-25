@@ -12,8 +12,8 @@ usage() {
   printf '%s\n' \
     'Usage: bootstrap.sh [--javascript-runtime-manager=homebrew|mise]' \
     '' \
-    'Provision the default command-line, JavaScript, Java, terminal, agent,' \
-    'and dotfile environment. Optional GUI editors are installed separately' \
+    'Provision the default command-line, JavaScript, Java, font, terminal,' \
+    'coding-agent, and dotfile environment. Optional GUI editors are installed separately' \
     'with gui-editors.sh.' \
     '' \
     'macOS uses Homebrew for current Node.js and Bun releases by default.' \
@@ -82,6 +82,7 @@ main() {
   fi
 
   run_category 'Java development tools' java.sh
+  run_category 'Fonts' fonts.sh
   run_category 'Terminal and editor tools' terminal-tools.sh
   run_category 'Coding agents' coding-agents.sh
   run_category 'Dotfile links' link-dotfiles.sh

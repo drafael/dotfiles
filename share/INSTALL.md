@@ -69,7 +69,11 @@ Omarchy already includes Docker and Docker Compose. Its default configuration re
 
 ## Additional command-line tools
 
-The main bootstrap installs btop, htop, LazyGit, Tig, Midnight Commander, Yazi, Midday Commander (`mdc`), jq, tree, and wget. It also installs Yazi's recommended preview dependencies except for a Nerd Font. On Ubuntu, unavailable optional dependencies such as `resvg` produce a warning.
+The main bootstrap installs btop, htop, LazyGit, Tig, Midnight Commander, Yazi, Midday Commander (`mdc`), jq, tree, and wget. It also installs Yazi's recommended preview dependencies. On Ubuntu, unavailable optional dependencies such as `resvg` produce a warning.
+
+The fonts category installs Fira Code, FiraCode Nerd Font, and the regular and monospace symbols-only Nerd Fonts. macOS uses Homebrew casks. Arch and Omarchy use their signed platform packages; Omarchy's selected system font remains unchanged. Ubuntu installs regular Fira Code from APT and checksummed Nerd Fonts release archives under `${XDG_DATA_HOME:-$HOME/.local/share}/fonts`, with the upstream Fontconfig fallback configuration under `${XDG_CONFIG_HOME:-$HOME/.config}/fontconfig/conf.d`.
+
+Yazi's icons require Nerd Font glyphs. Use `FiraCode Nerd Font Mono` as the terminal's primary font, or keep another primary font and configure `Symbols Nerd Font Mono` as its fallback. Restart the terminal after changing fonts.
 
 Install these only when a project or workflow needs them:
 
