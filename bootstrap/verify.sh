@@ -74,6 +74,25 @@ dependency_state() {
   printf 'missing'
 }
 
+font_family_state() {
+  verified_family=$1
+  if ! command -v fc-list >/dev/null 2>&1; then
+    printf 'unknown'
+  elif fc-list : family 2>/dev/null | grep -Fq "$verified_family"; then
+    printf 'ok'
+  else
+    printf 'missing'
+  fi
+}
+
+print_font_support() {
+  printf 'Font support: jetbrains-mono=%s cascadia-code=%s source-code-pro=%s hack=%s\n' \
+    "$(font_family_state 'JetBrains Mono')" \
+    "$(font_family_state 'Cascadia Code')" \
+    "$(font_family_state 'Source Code Pro')" \
+    "$(font_family_state Hack)"
+}
+
 print_yazi_support() {
   file_state=$(dependency_state file)
   printf 'Yazi support: file=%s ffmpeg=%s 7zip=%s poppler=%s resvg=%s imagemagick=%s fd=%s rg=%s fzf=%s zoxide=%s\n' \
@@ -144,6 +163,7 @@ main() {
     print_command_version "$command_name"
   done
   print_yazi_support
+  print_font_support
 
   if [ "$PLATFORM" != ubuntu ]; then
     print_command_version gradle

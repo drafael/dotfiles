@@ -46,7 +46,7 @@ The default bootstrap installs:
 - Yazi preview support through FFmpeg, 7-Zip, Poppler, `resvg`, and ImageMagick where platform packages are available
 - Node.js and Bun runtimes, plus TypeScript, TypeScript Language Server, and `tsx`
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
-- Fira Code, FiraCode Nerd Font, and the regular and monospace symbols-only Nerd Fonts
+- Fira Code, JetBrains Mono, Cascadia Code, Source Code Pro, Hack, FiraCode Nerd Font, and the regular and monospace symbols-only Nerd Fonts
 - JDK 25 and the platform-appropriate Java build tools
 - Claude Code, Codex, OpenCode, and Pi outside Omarchy
 - RevDiff plus its Claude Code, Codex, OpenCode, and Pi integrations, including automatic plan review where supported
@@ -58,7 +58,7 @@ The bootstrap is composed of independently runnable category scripts:
 | `cli-tools.sh` | Git clients, terminal utilities, file managers, Yazi preview support, and command-line prerequisites |
 | `javascript.sh` | Node.js, Bun, TypeScript, TypeScript Language Server, and `tsx` |
 | `java.sh` | JDK 25, Maven, and Gradle where supported |
-| `fonts.sh` | Fira Code, FiraCode Nerd Font, and symbols-only Nerd Fonts |
+| `fonts.sh` | Programming fonts and Nerd Font symbol families |
 | `terminal-tools.sh` | Neovim and the platform terminal |
 | `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, RevDiff integrations, and shared harness configuration |
 | `link-dotfiles.sh` | Repository configuration links and shell integration |

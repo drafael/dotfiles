@@ -7,12 +7,18 @@ BOOTSTRAP_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 . "$BOOTSTRAP_DIR/lib.sh"
 
 NERD_FONTS_REPOSITORY=ryanoasis/nerd-fonts
+# Ubuntu 24.04 has no Source Code Pro package, so pin Adobe's upstream OTF release.
+SOURCE_CODE_PRO_VERSION=2.042R-u_1.062R-i
+SOURCE_CODE_PRO_ARCHIVE="OTF-source-code-pro-$SOURCE_CODE_PRO_VERSION.zip"
+SOURCE_CODE_PRO_SHA256=754a2e3ebb945ae905d720ac5896b3b34acc9546dd6551ef9536869788629dae
+SOURCE_CODE_PRO_URL="https://github.com/adobe-fonts/source-code-pro/releases/download/2.042R-u/1.062R-i/1.026R-vf/$SOURCE_CODE_PRO_ARCHIVE"
 
 usage() {
   printf '%s\n' \
     'Usage: fonts.sh' \
     '' \
-    'Install Fira Code, FiraCode Nerd Font, and symbols-only Nerd Fonts.' \
+    'Install Fira Code, JetBrains Mono, Cascadia Code, Source Code Pro, Hack,' \
+    'FiraCode Nerd Font, and symbols-only Nerd Fonts.' \
     'Font installation does not change the selected terminal or desktop font.'
 }
 
@@ -53,10 +59,45 @@ install_ubuntu_nerd_font_asset() {
   find "$extracted" -type f \( -name '*.ttf' -o -name '*.otf' \) -exec cp -f {} "$destination/" \;
 }
 
+install_ubuntu_source_code_pro() {
+  font_family_is_available 'Source Code Pro' && return
+
+  info "Installing Source Code Pro $SOURCE_CODE_PRO_VERSION"
+  temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-source-code-pro.XXXXXX")
+  curl -fsSL "$SOURCE_CODE_PRO_URL" -o "$temp_dir/$SOURCE_CODE_PRO_ARCHIVE"
+  printf '%s  %s\n' "$SOURCE_CODE_PRO_SHA256" "$SOURCE_CODE_PRO_ARCHIVE" >"$temp_dir/checksum"
+  (cd "$temp_dir" && sha256sum -c checksum)
+  unzip -q "$temp_dir/$SOURCE_CODE_PRO_ARCHIVE" -d "$temp_dir/extracted"
+
+  source_dir="$temp_dir/extracted/OTF"
+  if ! find "$source_dir" -type f -name '*.otf' -print | grep -q .; then
+    fail "no OpenType fonts found in $SOURCE_CODE_PRO_ARCHIVE"
+  fi
+
+  destination=${XDG_DATA_HOME:-"$HOME/.local/share"}/fonts/SourceCodePro
+  rm -rf "$destination"
+  mkdir -p "$destination"
+  find "$source_dir" -type f -name '*.otf' -exec cp -f {} "$destination/" \;
+  rm -rf "$temp_dir"
+  fc-cache -f
+  font_family_is_available 'Source Code Pro' || fail 'Source Code Pro was not installed'
+}
+
 install_ubuntu_fonts() {
   ensure_ubuntu_packages software-properties-common
   sudo add-apt-repository -y universe
-  ensure_ubuntu_packages ca-certificates curl fontconfig fonts-firacode jq xz-utils
+  ensure_ubuntu_packages \
+    ca-certificates \
+    curl \
+    fontconfig \
+    fonts-cascadia-code \
+    fonts-firacode \
+    fonts-hack \
+    fonts-jetbrains-mono \
+    jq \
+    unzip \
+    xz-utils
+  install_ubuntu_source_code_pro
 
   install_firacode_nerd=false
   install_symbols_nerd=false
@@ -95,6 +136,20 @@ install_ubuntu_fonts() {
   [ -f "$symbols_fallback_config" ] || fail 'Nerd Fonts symbols fallback configuration was not installed'
 }
 
+verify_requested_fonts() {
+  if ! command -v fc-list >/dev/null 2>&1; then
+    warn 'fontconfig is unavailable; skipping font-family verification'
+    return
+  fi
+
+  if command -v fc-cache >/dev/null 2>&1; then
+    fc-cache -f
+  fi
+  for family_name in 'JetBrains Mono' 'Cascadia Code' 'Source Code Pro' Hack; do
+    font_family_is_available "$family_name" || fail "$family_name was not installed"
+  done
+}
+
 install_fonts() {
   info "Ensuring workstation fonts are installed on $PLATFORM"
   case $PLATFORM in
@@ -102,8 +157,12 @@ install_fonts() {
       # Yazi uses Nerd Font icons. The symbols-only family can be selected as a
       # terminal fallback without replacing the primary text font.
       ensure_brew_casks \
+        font-cascadia-code \
         font-fira-code \
         font-fira-code-nerd-font \
+        font-hack \
+        font-jetbrains-mono \
+        font-source-code-pro \
         font-symbols-only-nerd-font
       ;;
     ubuntu)
@@ -111,16 +170,26 @@ install_fonts() {
       ;;
     arch)
       ensure_arch_packages \
+        adobe-source-code-pro-fonts \
+        fontconfig \
+        ttf-cascadia-code \
         ttf-fira-code \
         ttf-firacode-nerd \
+        ttf-hack \
+        ttf-jetbrains-mono \
         ttf-nerd-fonts-symbols \
         ttf-nerd-fonts-symbols-mono
       ;;
     omarchy)
       # Keep Omarchy's selected system font and install the families only.
       ensure_omarchy_packages \
+        adobe-source-code-pro-fonts \
+        fontconfig \
+        ttf-cascadia-code \
         ttf-fira-code \
         ttf-firacode-nerd \
+        ttf-hack \
+        ttf-jetbrains-mono \
         ttf-nerd-fonts-symbols \
         ttf-nerd-fonts-symbols-mono
       ;;
@@ -136,6 +205,7 @@ main() {
 
   bootstrap_init
   install_fonts
+  verify_requested_fonts
 }
 
 main "$@"
