@@ -201,7 +201,9 @@ verify_ubuntu_candidate() {
   package_name=$1
   policy=$(apt-cache policy "$package_name") || fail "cannot inspect APT candidate for $package_name"
   candidate=$(printf '%s\n' "$policy" | awk '$1 == "Candidate:" { print $2; exit }')
-  [ -n "$candidate" ] && [ "$candidate" != '(none)' ] || fail "no APT candidate for $package_name"
+  if [ -z "$candidate" ] || [ "$candidate" = '(none)' ]; then
+    fail "no APT candidate for $package_name"
+  fi
 
   # APT chooses a version by pin priority, but may download an identical
   # version from another source. Reject ambiguous candidate versions too.
@@ -260,8 +262,12 @@ install_vendor_desktop() {
   mkdir "$temp_dir/extracted"
   tar -xzf "$archive" -C "$temp_dir/extracted"
   extracted_dir=$(find "$temp_dir/extracted" -mindepth 1 -maxdepth 1 -type d -name '1password-*' -print -quit)
-  [ -n "$extracted_dir" ] && [ -f "$extracted_dir/after-install.sh" ] || fail '1Password desktop archive has an unexpected layout'
-  [ ! -e /opt/1Password ] && [ ! -L /opt/1Password ] || fail '/opt/1Password already exists; refusing to overwrite it'
+  if [ -z "$extracted_dir" ] || [ ! -f "$extracted_dir/after-install.sh" ]; then
+    fail '1Password desktop archive has an unexpected layout'
+  fi
+  if [ -e /opt/1Password ] || [ -L /opt/1Password ]; then
+    fail '/opt/1Password already exists; refusing to overwrite it'
+  fi
   sudo install -d -m 0755 /opt/1Password
   sudo cp -R "$extracted_dir"/. /opt/1Password/
   sudo chown -R root:root /opt/1Password
@@ -279,9 +285,13 @@ install_vendor_cli() {
     "https://cache.agilebits.com/dist/1P/op2/pkg/v${cli_version}/$cli_zip" -o "$temp_dir/cli.zip"
   unzip -p "$temp_dir/cli.zip" op >"$temp_dir/op"
   unzip -p "$temp_dir/cli.zip" op.sig >"$temp_dir/op.sig"
-  [ -s "$temp_dir/op" ] && [ -s "$temp_dir/op.sig" ] || fail '1Password CLI archive is incomplete'
+  if [ ! -s "$temp_dir/op" ] || [ ! -s "$temp_dir/op.sig" ]; then
+    fail '1Password CLI archive is incomplete'
+  fi
   verify_vendor_signature "$temp_dir/op.sig" "$temp_dir/op"
-  [ ! -e /usr/local/bin/op ] && [ ! -L /usr/local/bin/op ] || fail '/usr/local/bin/op already exists; refusing to overwrite it'
+  if [ -e /usr/local/bin/op ] || [ -L /usr/local/bin/op ]; then
+    fail '/usr/local/bin/op already exists; refusing to overwrite it'
+  fi
   sudo install -m 0755 "$temp_dir/op" /usr/local/bin/op
   cmp -s "$temp_dir/op" /usr/local/bin/op || fail 'installed op differs from the signed binary'
   refresh_standard_paths
