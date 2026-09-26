@@ -83,7 +83,7 @@ The main bootstrap installs btop, htop, LazyGit, Tig, Midnight Commander, Yazi, 
 
 The fonts category installs Fira Code, JetBrains Mono, Cascadia Code, Source Code Pro, Hack, FiraCode Nerd Font, and the regular and monospace symbols-only Nerd Fonts. macOS uses Homebrew casks. Arch and Omarchy use their signed platform packages; Omarchy's selected system font remains unchanged. Ubuntu installs Fira Code, JetBrains Mono, Cascadia Code, and Hack from APT. Because Ubuntu 24.04 does not package Source Code Pro, the script installs Adobe's pinned, checksum-verified OpenType release under `${XDG_DATA_HOME:-$HOME/.local/share}/fonts`. Ubuntu also installs checksum-verified Nerd Fonts release archives there and copies the upstream Fontconfig fallback configuration to `${XDG_CONFIG_HOME:-$HOME/.config}/fontconfig/conf.d`.
 
-Yazi's icons require Nerd Font glyphs. Use `FiraCode Nerd Font Mono` as the terminal's primary font, or keep another primary font and configure `Symbols Nerd Font Mono` as its fallback. Restart the terminal after changing fonts.
+Yazi and Neovim emit Nerd Font icon glyphs but rely on their host terminal to render them. The Ghostty, Kitty, WezTerm, and Zed terminal configurations use `Symbols Nerd Font Mono` as a fallback while preserving their primary text font. Linux also installs the Nerd Fonts Fontconfig fallback for Foot and other Fontconfig-based applications. Restart the terminal after installing or changing fonts.
 
 Install these only when a project or workflow needs them:
 

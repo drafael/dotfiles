@@ -19,6 +19,7 @@ background-opacity = 0.96
 background-blur = 8
 
 font-family = Monaco
+font-family = Symbols Nerd Font Mono
 font-size = 14
 
 cursor-style = block

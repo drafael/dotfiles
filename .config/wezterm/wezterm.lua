@@ -49,8 +49,11 @@ local frappe = {
 
 -- Window frame colors (for titlebar)
 config.window_frame = {
-	-- font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
-	font = wezterm.font({ family = "Monaco", weight = "Bold" }),
+	-- Keep title icons available when the primary font has no Nerd Font glyphs.
+	font = wezterm.font_with_fallback({
+		{ family = "Monaco", weight = "Bold" },
+		"Symbols Nerd Font Mono",
+	}),
 	font_size = 12.2,
 	active_titlebar_bg = frappe.base,
 	inactive_titlebar_bg = frappe.mantle,
@@ -88,8 +91,11 @@ config.colors = {
 }
 
 -- Font configuration
-config.font = wezterm.font("Monaco")
---config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font_with_fallback({
+	"Monaco",
+	"Symbols Nerd Font Mono",
+})
+-- config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font Mono" })
 config.font_size = 13.0
 
 -- Tab bar

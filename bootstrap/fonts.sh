@@ -27,6 +27,29 @@ font_family_is_available() {
   fc-list : family 2>/dev/null | grep -Fq "$family_name"
 }
 
+install_nerd_font_fallback_config() {
+  fallback_source=$1
+  fallback_destination="$XDG_CONFIG_HOME/fontconfig/conf.d/10-nerd-font-symbols.conf"
+  fallback_temp=$(mktemp "${TMPDIR:-/tmp}/dotfiles-nerd-font-fallback.XXXXXX")
+  sed 's#<family>Symbols Nerd Font</family>#<family>Symbols Nerd Font Mono</family>#g' \
+    "$fallback_source" >"$fallback_temp"
+  grep -Fq '<family>Symbols Nerd Font Mono</family>' "$fallback_temp" || {
+    rm -f "$fallback_temp"
+    fail 'Nerd Fonts fallback configuration does not define the monospace symbols family'
+  }
+  mkdir -p "$(dirname -- "$fallback_destination")"
+  if ! cmp -s "$fallback_temp" "$fallback_destination"; then
+    cp -f "$fallback_temp" "$fallback_destination"
+  fi
+  rm -f "$fallback_temp"
+}
+
+install_packaged_nerd_font_fallback_config() {
+  fallback_source=/usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf
+  [ -f "$fallback_source" ] || fail "Nerd Fonts fallback configuration not found: $fallback_source"
+  install_nerd_font_fallback_config "$fallback_source"
+}
+
 install_ubuntu_nerd_font_asset() {
   metadata=$1
   temp_dir=$2
@@ -103,7 +126,8 @@ install_ubuntu_fonts() {
   install_symbols_nerd=false
   symbols_fallback_config="$XDG_CONFIG_HOME/fontconfig/conf.d/10-nerd-font-symbols.conf"
   font_family_is_available 'FiraCode Nerd Font Mono' || install_firacode_nerd=true
-  if ! font_family_is_available 'Symbols Nerd Font Mono' || [ ! -f "$symbols_fallback_config" ]; then
+  if ! font_family_is_available 'Symbols Nerd Font Mono' ||
+     ! grep -Fq '<family>Symbols Nerd Font Mono</family>' "$symbols_fallback_config" 2>/dev/null; then
     install_symbols_nerd=true
   fi
   if [ "$install_firacode_nerd" = false ] && [ "$install_symbols_nerd" = false ]; then
@@ -125,15 +149,15 @@ install_ubuntu_fonts() {
     install_ubuntu_nerd_font_asset "$metadata" "$temp_dir" NerdFontsSymbolsOnly.tar.xz "$font_root/NerdFontsSymbolsOnly"
     fallback_config=$(find "$symbols_extract_dir" -type f -name 10-nerd-font-symbols.conf -print | head -1)
     [ -n "$fallback_config" ] || fail 'Nerd Fonts symbols fallback configuration was not found'
-    mkdir -p "$(dirname -- "$symbols_fallback_config")"
-    cp -f "$fallback_config" "$symbols_fallback_config"
+    install_nerd_font_fallback_config "$fallback_config"
   fi
 
   rm -rf "$temp_dir"
   fc-cache -f
   font_family_is_available 'FiraCode Nerd Font Mono' || fail 'FiraCode Nerd Font Mono was not installed'
   font_family_is_available 'Symbols Nerd Font Mono' || fail 'Symbols Nerd Font Mono was not installed'
-  [ -f "$symbols_fallback_config" ] || fail 'Nerd Fonts symbols fallback configuration was not installed'
+  grep -Fq '<family>Symbols Nerd Font Mono</family>' "$symbols_fallback_config" ||
+    fail 'Nerd Fonts monospace symbols fallback configuration was not installed'
 }
 
 verify_requested_fonts() {
@@ -145,7 +169,7 @@ verify_requested_fonts() {
   if command -v fc-cache >/dev/null 2>&1; then
     fc-cache -f
   fi
-  for family_name in 'JetBrains Mono' 'Cascadia Code' 'Source Code Pro' Hack; do
+  for family_name in 'JetBrains Mono' 'Cascadia Code' 'Source Code Pro' Hack 'Symbols Nerd Font Mono'; do
     font_family_is_available "$family_name" || fail "$family_name was not installed"
   done
 }
@@ -179,6 +203,7 @@ install_fonts() {
         ttf-jetbrains-mono \
         ttf-nerd-fonts-symbols \
         ttf-nerd-fonts-symbols-mono
+      install_packaged_nerd_font_fallback_config
       ;;
     omarchy)
       # Keep Omarchy's selected system font and install the families only.
@@ -192,6 +217,7 @@ install_fonts() {
         ttf-jetbrains-mono \
         ttf-nerd-fonts-symbols \
         ttf-nerd-fonts-symbols-mono
+      install_packaged_nerd_font_fallback_config
       ;;
   esac
 }

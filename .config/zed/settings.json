@@ -80,8 +80,10 @@
     },
   },
   "ui_font_size": 13,
+  "ui_font_fallbacks": ["Symbols Nerd Font Mono"],
   "buffer_font_size": 13,
   "buffer_font_family": "Monaco",
+  "buffer_font_fallbacks": ["Symbols Nerd Font Mono"],
   // "buffer_font_family": "Fira Code",
   "preferred_line_length": 120,
   "autosave": "on_focus_change",
@@ -100,6 +102,7 @@
   // },
   "terminal": {
     "copy_on_select": true,
+    "font_fallbacks": ["Symbols Nerd Font Mono"],
   },
   "private_files": [
     "**/.zshrc.local",

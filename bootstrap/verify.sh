@@ -86,11 +86,12 @@ font_family_state() {
 }
 
 print_font_support() {
-  printf 'Font support: jetbrains-mono=%s cascadia-code=%s source-code-pro=%s hack=%s\n' \
+  printf 'Font support: jetbrains-mono=%s cascadia-code=%s source-code-pro=%s hack=%s nerd-symbols-mono=%s\n' \
     "$(font_family_state 'JetBrains Mono')" \
     "$(font_family_state 'Cascadia Code')" \
     "$(font_family_state 'Source Code Pro')" \
-    "$(font_family_state Hack)"
+    "$(font_family_state Hack)" \
+    "$(font_family_state 'Symbols Nerd Font Mono')"
 }
 
 print_yazi_support() {
