@@ -137,6 +137,66 @@ install_macos() {
   fi
 }
 
+verify_macos_signature() {
+  signed_path=$1
+  label=$2
+  codesign --verify --deep --strict "$signed_path" || fail "$label code signature is invalid: $signed_path"
+  team_id=$(codesign -dv --verbose=2 "$signed_path" 2>&1 | awk -F= '$1 == "TeamIdentifier" { print $2; exit }')
+  [ "$team_id" = 2BUA8C4S2C ] || fail "$label is not signed by 1Password: $signed_path"
+}
+
+verify_macos_installation() {
+  app_path=""
+  if [ -d /Applications/1Password.app ]; then
+    app_path=/Applications/1Password.app
+  elif [ -d "$HOME/Applications/1Password.app" ]; then
+    app_path="$HOME/Applications/1Password.app"
+  fi
+  if [ "$CLI_ONLY" = false ]; then
+    if [ -n "$app_path" ]; then
+      verify_macos_signature "$app_path" '1Password desktop'
+    else
+      warn '1Password desktop is not in a standard Applications directory; its signature could not be checked'
+    fi
+  fi
+  verify_macos_signature "$(command -v op)" '1Password CLI'
+}
+
+current_cli_release_version() {
+  release_file=$1
+  curl --proto '=https' --proto-redir '=https' -fsSL --max-time 15 \
+    https://app-updates.agilebits.com/check/1/0/CLI2/en/2000001/N -o "$release_file" &&
+    jq -er '.version | select(type == "string" and test("^[0-9]+[.][0-9]+[.][0-9]+$"))' "$release_file"
+}
+
+warn_if_outdated_cli() {
+  installed_version=$1
+  if ! command -v curl >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1; then
+    warn 'curl and jq are needed to check the current 1Password CLI release; skipping version comparison'
+    return
+  fi
+  release_file=$(mktemp "${TMPDIR:-/tmp}/dotfiles-onepassword-version.XXXXXX")
+  if ! latest_version=$(current_cli_release_version "$release_file" 2>/dev/null); then
+    warn 'could not check the current 1Password CLI release version'
+    rm -f "$release_file"
+    return
+  fi
+  rm -f "$release_file"
+  if awk -v installed="$installed_version" -v latest="$latest_version" '
+    BEGIN {
+      if (installed !~ /^[0-9]+[.][0-9]+[.][0-9]+$/) exit 1
+      split(installed, a, "."); split(latest, b, ".")
+      for (i = 1; i <= 3; i++) {
+        if (a[i] + 0 < b[i] + 0) exit 0
+        if (a[i] + 0 > b[i] + 0) exit 1
+      }
+      exit 1
+    }
+  '; then
+    warn "1Password CLI $installed_version is older than the vendor's stable $latest_version; update it manually or through your package manager"
+  fi
+}
+
 verify_ubuntu_candidate() {
   package_name=$1
   policy=$(apt-cache policy "$package_name") || fail "cannot inspect APT candidate for $package_name"
@@ -206,12 +266,12 @@ install_vendor_desktop() {
   sudo cp -R "$extracted_dir"/. /opt/1Password/
   sudo chown -R root:root /opt/1Password
   sudo /opt/1Password/after-install.sh
+  cmp -s "$extracted_dir/1password" /opt/1Password/1password ||
+    fail 'installed 1Password desktop binary differs from the signed archive'
 }
 
 install_vendor_cli() {
-  curl --proto '=https' --proto-redir '=https' -fsSL \
-    https://app-updates.agilebits.com/check/1/0/CLI2/en/2000001/N -o "$temp_dir/cli-release.json"
-  cli_version=$(jq -er '.version | select(type == "string" and test("^[0-9]+[.][0-9]+[.][0-9]+$"))' "$temp_dir/cli-release.json") ||
+  cli_version=$(current_cli_release_version "$temp_dir/cli-release.json") ||
     fail 'could not determine the current stable 1Password CLI version'
   cli_zip="op_linux_${cli_arch}_v${cli_version}.zip"
   info "Installing signed 1Password CLI $cli_version for $cli_arch"
@@ -223,7 +283,10 @@ install_vendor_cli() {
   verify_vendor_signature "$temp_dir/op.sig" "$temp_dir/op"
   [ ! -e /usr/local/bin/op ] && [ ! -L /usr/local/bin/op ] || fail '/usr/local/bin/op already exists; refusing to overwrite it'
   sudo install -m 0755 "$temp_dir/op" /usr/local/bin/op
+  cmp -s "$temp_dir/op" /usr/local/bin/op || fail 'installed op differs from the signed binary'
   refresh_standard_paths
+  [ "$(/usr/local/bin/op --version)" = "$cli_version" ] ||
+    fail "installed op version does not match the signed release $cli_version"
 }
 
 configure_vendor_cli_integration() {
@@ -317,7 +380,12 @@ main() {
   if [ "$CLI_ONLY" = false ] && need_desktop; then
     fail '1Password desktop was not installed'
   fi
-  printf '1Password CLI: %s\n' "$(op --version)"
+  if [ "$PLATFORM" = macos ]; then
+    verify_macos_installation
+  fi
+  installed_cli_version=$(op --version)
+  warn_if_outdated_cli "$installed_cli_version"
+  printf '1Password CLI: %s\n' "$installed_cli_version"
   if [ "$CLI_ONLY" = false ]; then
     printf '1Password desktop: installed (sign in interactively to use it)\n'
   fi
