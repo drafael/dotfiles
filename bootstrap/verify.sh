@@ -57,6 +57,7 @@ print_command_version() {
     zoxide) first_line zoxide --version ;;
     rg) first_line rg --version ;;
     revdiff) first_line revdiff --version ;;
+    op) printf 'op: %s\n' "$(op --version)" ;;
     java) first_line java -version ;;
     javac) first_line javac -version ;;
     mvn) first_line mvn -version ;;
@@ -165,6 +166,8 @@ main() {
   done
   print_yazi_support
   print_font_support
+
+  print_command_version op
 
   if [ "$PLATFORM" != ubuntu ]; then
     print_command_version gradle

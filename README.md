@@ -48,6 +48,7 @@ The default bootstrap installs:
 - Ghostty on macOS and Arch, or Kitty on Ubuntu
 - Fira Code, JetBrains Mono, Cascadia Code, Source Code Pro, Hack, FiraCode Nerd Font, and the regular and monospace symbols-only Nerd Fonts
 - JDK 25 and the platform-appropriate Java build tools
+- 1Password desktop app and CLI (`op`); pass `--onepassword-cli-only` on headless Linux
 - Claude Code, Codex, OpenCode, and Pi outside Omarchy
 - RevDiff plus its Claude Code, Codex, OpenCode, and Pi integrations, including automatic plan review where supported
 
@@ -65,6 +66,7 @@ The bootstrap is composed of independently runnable category scripts:
 | `verify.sh` | Read-only installed-version summary |
 | `containers.sh` | Optional Docker- or Podman-based runtime and local Kubernetes tools |
 | `gui-editors.sh` | Optional IntelliJ IDEA, VS Code, Cursor, and Zed installation |
+| `1password.sh` | 1Password desktop app and CLI (`op`); `--cli-only` for headless Linux |
 
 Run a category from the repository root when only that part of the workstation needs provisioning, for example:
 
@@ -73,7 +75,7 @@ Run a category from the repository root when only that part of the workstation n
 ./bootstrap/link-dotfiles.sh
 ```
 
-`containers.sh` and `gui-editors.sh` are optional and are not called by the default bootstrap. Install the Docker-compatible container stack, or select Podman explicitly:
+`containers.sh` and `gui-editors.sh` are optional and are not called by the default bootstrap. The default bootstrap includes 1Password; on headless Linux, use `./bootstrap/bootstrap.sh --onepassword-cli-only`. Arch and Omarchy ARM64 use signature-verified vendor releases; Omarchy x86-64 uses its signed repository packages. See [share/INSTALL.md](share/INSTALL.md#1password) for installation and update requirements. Install the Docker-compatible container stack, or select Podman explicitly:
 
 ```sh
 ./bootstrap/containers.sh

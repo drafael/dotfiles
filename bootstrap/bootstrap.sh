@@ -7,17 +7,19 @@ BOOTSTRAP_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 . "$BOOTSTRAP_DIR/lib.sh"
 
 JAVASCRIPT_RUNTIME_MANAGER=""
+ONEPASSWORD_CLI_ONLY=false
 
 usage() {
   printf '%s\n' \
-    'Usage: bootstrap.sh [--javascript-runtime-manager=homebrew|mise]' \
+    'Usage: bootstrap.sh [--javascript-runtime-manager=homebrew|mise] [--onepassword-cli-only]' \
     '' \
-    'Provision the default command-line, JavaScript, Java, font, terminal,' \
-    'coding-agent, and dotfile environment. Optional GUI editors are installed separately' \
-    'with gui-editors.sh.' \
+    'Provision the default command-line, 1Password, JavaScript, Java, font,' \
+    'terminal, coding-agent, and dotfile environment. Optional GUI editors are' \
+    'installed separately with gui-editors.sh.' \
     '' \
     'macOS uses Homebrew for current Node.js and Bun releases by default.' \
-    'Pass mise to use mise instead. Linux platforms always use mise.'
+    'Pass mise to use mise instead. Linux platforms always use mise.' \
+    'On headless Linux, pass --onepassword-cli-only to skip the desktop app.'
 }
 
 parse_arguments() {
@@ -32,6 +34,9 @@ parse_arguments() {
         shift
         JAVASCRIPT_RUNTIME_MANAGER=$1
         ;;
+      --onepassword-cli-only)
+        ONEPASSWORD_CLI_ONLY=true
+        ;;
       -h|--help)
         usage
         exit 0
@@ -43,6 +48,9 @@ parse_arguments() {
 }
 
 validate_arguments() {
+  if [ "$ONEPASSWORD_CLI_ONLY" = true ] && [ "$PLATFORM" = macos ]; then
+    fail '--onepassword-cli-only is intended for Linux hosts'
+  fi
   case $JAVASCRIPT_RUNTIME_MANAGER in
     '') ;;
     homebrew)
@@ -74,6 +82,11 @@ main() {
 
   info "Bootstrapping $PLATFORM from $DOTFILES_DIR"
   run_category 'Command-line tools' cli-tools.sh
+  if [ "$ONEPASSWORD_CLI_ONLY" = true ]; then
+    run_category '1Password CLI' 1password.sh --cli-only
+  else
+    run_category '1Password' 1password.sh
+  fi
 
   if [ -n "$JAVASCRIPT_RUNTIME_MANAGER" ]; then
     run_category 'JavaScript and TypeScript' javascript.sh --runtime-manager "$JAVASCRIPT_RUNTIME_MANAGER"

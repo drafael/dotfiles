@@ -1,6 +1,6 @@
-# Optional workstation software
+# Workstation software and optional installations
 
-`bootstrap/bootstrap.sh` installs the daily terminal and Java environment. Use this page for software that is useful on some workstations but does not belong in the default bootstrap.
+`bootstrap/bootstrap.sh` installs the daily terminal and Java environment, plus 1Password. This page covers additional setup and software installed separately from the default bootstrap.
 
 ## macOS settings
 
@@ -48,6 +48,28 @@ The script installs missing IntelliJ IDEA, Visual Studio Code, Cursor, and Zed c
 - [Zed](https://zed.dev/docs/linux)
 
 Omarchy exposes supported editors under **Install > Editor**.
+
+## 1Password
+
+The default bootstrap installs the 1Password desktop app and CLI (`op`). On a headless Linux VM, install only the CLI:
+
+```sh
+~/.dotfiles/bootstrap/bootstrap.sh --onepassword-cli-only
+```
+
+Run just the 1Password category with `~/.dotfiles/bootstrap/1password.sh` or `~/.dotfiles/bootstrap/1password.sh --cli-only`. A session without a display is not necessarily headless (for example, SSH into a desktop), so select CLI-only explicitly. The scripts install missing packages without upgrading existing ones; they do not sign in, unlock a vault, or change SSH-agent configuration.
+
+macOS uses Homebrew casks. Ubuntu uses 1Password's signed APT repository and checks the signing-key fingerprint before configuring it. For missing 1Password packages, it pins `1password` and `1password-cli` to the vendor's APT host, rejects other repositories, and stops if the chosen version appears in more than one source. Already-installed packages are left untouched; APT and dpkg do not establish where they were originally downloaded. A conflicting existing 1Password APT source or preferences file causes the script to stop rather than replace it. The repository supplies both packages on amd64 and only the CLI on arm64. For an Ubuntu arm64 desktop, follow the vendor's [signed ARM64 tarball instructions](https://support.1password.com/install-linux/#arm-or-other-distributions-targz) separately. Omarchy x86-64 installs its signed repository packages through `omarchy pkg add`, without opening the app or installing a Chromium extension. For Omarchy's extension and launcher setup, use **Install > Service > 1Password** instead.
+
+### Arch and Omarchy ARM64: verified vendor releases
+
+Plain Arch and Omarchy ARM64 download 1Password's [Linux desktop tarball and detached signature](https://support.1password.com/install-linux/#arm-or-other-distributions-targz), plus the official [CLI release containing `op` and `op.sig`](https://developer.1password.com/docs/cli/get-started/). The script verifies the signing key's published fingerprint (`3FEF9748469ADBE15DA7CA80AC2D62742012EA22`) and verifies each release in an isolated keyring before installing that component. It does not execute an AUR recipe. The desktop app is copied into `/opt/1Password`, then its vendor-supplied `after-install.sh` runs with `sudo`. The CLI installs as a root-owned `/usr/local/bin/op`; for desktop integration the script applies the vendor's `onepassword-cli` group and setgid permissions. CLI-only installs omit those desktop permissions.
+
+Already-installed components are left untouched. When a vendor component is missing, the vendor path rejects any existing pacman-managed 1Password package rather than mixing package-manager files with manual installation. It also refuses to overwrite an existing `/opt/1Password` directory or `/usr/local/bin/op`. If migrating from AUR or another package, plan its removal and replacement separately; bootstrap will not remove package-managed files to force a switch.
+
+**Updates are manual on these two paths.** The bootstrap ensures the binaries are present but does not upgrade them, and `omarchy update` cannot update vendor-installed files. Monitor 1Password releases and follow its [tarball update instructions](https://support.1password.com/update-1password/) to download, verify, and reinstall newer signed releases when needed. Omarchy x86-64 keeps its normal package-managed update path.
+
+After desktop installation, sign in using the app. To authenticate the CLI through the desktop app, enable **Integrate with 1Password CLI** under **Settings > Developer**. On Linux, also enable **Unlock using system authentication** under **Settings > Security**. For a CLI-only VM, follow [1Password's CLI sign-in instructions](https://developer.1password.com/docs/cli/get-started/) rather than expecting desktop integration. Check installation with `op --version`; commands that access vaults require authentication.
 
 ## Container tools
 
