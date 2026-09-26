@@ -75,6 +75,8 @@ Run a category from the repository root when only that part of the workstation n
 ./bootstrap/link-dotfiles.sh
 ```
 
+The [bootstrap CI workflow](.github/workflows/bootstrap.yml) checks POSIX shell syntax and non-installing `--help` paths on Ubuntu and macOS, and runs ShellCheck on Ubuntu. It does not install packages or exercise Arch and Omarchy at runtime.
+
 `containers.sh` and `gui-editors.sh` are optional and are not called by the default bootstrap. The default bootstrap includes 1Password; on headless Linux, use `./bootstrap/bootstrap.sh --onepassword-cli-only`. Arch and Omarchy ARM64 use signature-verified vendor releases; Omarchy x86-64 uses its signed repository packages. See [share/INSTALL.md](share/INSTALL.md#1password) for installation and update requirements. Install the Docker-compatible container stack, or select Podman explicitly:
 
 ```sh

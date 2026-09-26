@@ -1,0 +1,47 @@
+name: Verify bootstrap scripts
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    name: Bootstrap checks (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-latest]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Check POSIX shell syntax
+        run: |
+          for script in bootstrap/*.sh; do
+            sh -n "$script"
+          done
+
+      - name: Lint shell scripts
+        if: runner.os == 'Linux'
+        run: |
+          if ! command -v shellcheck >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y shellcheck
+          fi
+          # Existing CDPATH= cd usage and literal shell snippets are intentional.
+          shellcheck --external-sources --source-path=bootstrap -s sh -e SC1007,SC2016 bootstrap/*.sh
+
+      - name: Smoke-test help without installing software
+        run: |
+          for script in bootstrap/bootstrap.sh bootstrap/1password.sh \
+            bootstrap/cli-tools.sh bootstrap/coding-agents.sh bootstrap/containers.sh \
+            bootstrap/fonts.sh bootstrap/gui-editors.sh bootstrap/java.sh \
+            bootstrap/javascript.sh bootstrap/link-dotfiles.sh \
+            bootstrap/terminal-tools.sh bootstrap/verify.sh; do
+            "$script" --help >/dev/null
+          done
