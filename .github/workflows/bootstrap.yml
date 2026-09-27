@@ -69,7 +69,7 @@ jobs:
 
       - name: Check Fedora package names
         run: |
-          packages='git git-lfs gh glab curl ca-certificates zsh util-linux tmux fzf fd-find zoxide ripgrep wl-clipboard gcc gcc-c++ make unzip btop htop tig mc jq tree wget file ffmpeg-free 7zip poppler-utils ImageMagick java-25-openjdk-devel maven neovim kitty adobe-source-code-pro-fonts cascadia-code-fonts fira-code-fonts fontconfig jetbrains-mono-fonts source-foundry-hack-fonts gnupg2 moby-engine docker-compose docker-buildx podman podman-compose'
+          packages='git git-lfs gh glab curl ca-certificates zsh util-linux tmux fzf fd-find zoxide ripgrep wl-clipboard gcc gcc-c++ make unzip btop htop tig mc jq tree wget1-wget file ffmpeg-free 7zip poppler-utils ImageMagick java-25-openjdk-devel maven neovim kitty adobe-source-code-pro-fonts cascadia-code-fonts fira-code-fonts fontconfig jetbrains-mono-fonts source-foundry-hack-fonts gnupg2 moby-engine docker-compose docker-buildx podman podman-compose'
           # The package list is fixed in this workflow.
           dnf repoquery --available --queryformat '%{name}\n' $packages > /tmp/fedora-packages
           for package in $packages; do

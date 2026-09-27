@@ -157,7 +157,8 @@ install_fedora_yazi() {
 install_fedora_cli_tools() {
   ensure_fedora_packages \
     git git-lfs gh glab curl ca-certificates zsh util-linux tmux fzf fd-find zoxide ripgrep wl-clipboard \
-    gcc gcc-c++ make unzip btop htop tig mc jq tree wget file 7zip poppler-utils ImageMagick
+    gcc gcc-c++ make unzip btop htop tig mc jq tree file 7zip poppler-utils ImageMagick
+  command -v wget >/dev/null 2>&1 || ensure_fedora_packages wget1-wget
   command -v ffmpeg >/dev/null 2>&1 || ensure_fedora_packages ffmpeg-free
   install_starship
   install_fedora_yazi
