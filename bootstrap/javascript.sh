@@ -85,7 +85,7 @@ install_javascript_tooling() {
     mise)
       case $PLATFORM in
         macos) ensure_brew_formulas mise ;;
-        ubuntu) install_mise ;;
+        ubuntu|fedora) install_mise ;;
         arch) ensure_arch_packages mise ;;
         omarchy) ensure_omarchy_packages mise-bin ;;
       esac

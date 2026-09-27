@@ -32,6 +32,9 @@ install_java_tools() {
     ubuntu)
       ensure_ubuntu_packages openjdk-25-jdk maven
       ;;
+    fedora)
+      ensure_fedora_packages java-25-openjdk-devel maven
+      ;;
     arch)
       ensure_arch_packages jdk25-openjdk maven gradle
       ;;
@@ -54,7 +57,7 @@ main() {
   require_command java
   require_command javac
   require_command mvn
-  if [ "$PLATFORM" != ubuntu ]; then
+  if [ "$PLATFORM" != ubuntu ] && [ "$PLATFORM" != fedora ]; then
     require_command gradle
   fi
 }

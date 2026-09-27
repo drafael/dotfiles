@@ -38,6 +38,7 @@ need_desktop() {
       fi
       ;;
     ubuntu) dpkg-query -W -f='${Status}' 1password 2>/dev/null | grep -q 'install ok installed' && return 1 ;;
+    fedora) rpm -q 1password >/dev/null 2>&1 && return 1 ;;
     arch|omarchy)
       if pacman -Q 1password >/dev/null 2>&1 || [ -x /opt/1Password/1password ]; then
         return 1
@@ -239,6 +240,80 @@ install_ubuntu() {
   sudo apt-get install -y "$@"
 }
 
+install_fedora_repository() {
+  repo_arch=$(uname -m)
+  case $repo_arch in
+    x86_64|aarch64) ;;
+    *) fail "1Password RPM repository is not supported on $repo_arch" ;;
+  esac
+  if [ "$repo_arch" = aarch64 ] && need_desktop; then
+    fail '1Password desktop is not in the Fedora ARM64 RPM repository; use --cli-only or install the vendor-signed ARM64 tarball manually'
+  fi
+  ensure_fedora_packages ca-certificates curl gnupg2
+  require_command gpg
+
+  rpm_key=/etc/pki/rpm-gpg/RPM-GPG-KEY-1password
+  rpm_repo=/etc/yum.repos.d/1password.repo
+  temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-onepassword-rpm.XXXXXX")
+  trap 'rm -rf "$temp_dir"' EXIT HUP INT TERM
+  curl --proto '=https' --proto-redir '=https' -fsSL "$ONEPASSWORD_KEY_URL" -o "$temp_dir/1password.asc"
+  verify_vendor_key "$temp_dir/1password.asc"
+  if [ -e "$rpm_key" ]; then
+    verify_vendor_key "$rpm_key"
+  elif [ -L "$rpm_key" ]; then
+    fail "unexpected 1Password RPM signing key: $rpm_key"
+  else
+    sudo install -m 0644 "$temp_dir/1password.asc" "$rpm_key"
+  fi
+  sudo rpm --import "$rpm_key"
+
+  printf '%s\n' \
+    '[1password]' \
+    'name=1Password Stable Channel' \
+    'baseurl=https://downloads.1password.com/linux/rpm/stable/$basearch' \
+    'enabled=1' \
+    'pkg_gpgcheck=1' \
+    'repo_gpgcheck=1' \
+    "gpgkey=file://$rpm_key" >"$temp_dir/1password.repo"
+  if [ -e "$rpm_repo" ]; then
+    cmp -s "$temp_dir/1password.repo" "$rpm_repo" || fail "unexpected 1Password RPM source: $rpm_repo"
+  elif [ -L "$rpm_repo" ]; then
+    fail "unexpected 1Password RPM source: $rpm_repo"
+  else
+    sudo install -m 0644 "$temp_dir/1password.repo" "$rpm_repo"
+  fi
+  rm -rf "$temp_dir"
+  trap - EXIT HUP INT TERM
+}
+
+install_fedora() {
+  if ! need_cli && ! need_desktop; then
+    return
+  fi
+  if need_cli && rpm -q 1password-cli >/dev/null 2>&1; then
+    fail '1password-cli is installed but op is not in PATH; check the installation rather than upgrading it'
+  fi
+  if { [ -e /opt/1Password ] || [ -L /opt/1Password ]; } && ! rpm -q 1password >/dev/null 2>&1; then
+    fail '1Password vendor desktop files are present; refusing to mix them with Fedora RPM packages'
+  fi
+  if [ -e /usr/local/bin/op ] || [ -L /usr/local/bin/op ]; then
+    fail '1Password vendor CLI files are present; refusing to mix them with Fedora RPM packages'
+  fi
+  install_fedora_repository
+  set --
+  if need_desktop; then
+    set -- 1password
+  fi
+  if need_cli; then
+    set -- "$@" 1password-cli
+  fi
+  for package_name in "$@"; do
+    sudo dnf -y --repo=1password repoquery --available --queryformat '%{name}' "$package_name" | grep -Fxq "$package_name" ||
+      fail "1Password RPM repository does not provide $package_name for $repo_arch"
+  done
+  sudo dnf install -y --from-repo=1password "$@"
+}
+
 vendor_architecture() {
   case $(uname -m) in
     x86_64|amd64) vendor_arch=x86_64; cli_arch=amd64 ;;
@@ -383,6 +458,7 @@ main() {
   case $PLATFORM in
     macos) install_macos ;;
     ubuntu) install_ubuntu ;;
+    fedora) install_fedora ;;
     arch) install_vendor_linux ;;
     omarchy) install_omarchy ;;
   esac

@@ -85,6 +85,12 @@ install_terminal_tools() {
       ensure_ubuntu_packages curl ca-certificates xz-utils python3 kitty
       install_ubuntu_neovim
       ;;
+    fedora)
+      ensure_fedora_packages neovim kitty
+      if ! nvim_version_is_supported; then
+        fail 'Fedora Neovim must be at least 0.11; update the Fedora package or install a supported release separately'
+      fi
+      ;;
     arch)
       ensure_arch_packages neovim ghostty
       ;;

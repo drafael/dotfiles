@@ -50,7 +50,7 @@ install_packaged_nerd_font_fallback_config() {
   install_nerd_font_fallback_config "$fallback_source"
 }
 
-install_ubuntu_nerd_font_asset() {
+install_linux_nerd_font_asset() {
   metadata=$1
   temp_dir=$2
   asset_name=$3
@@ -121,7 +121,22 @@ install_ubuntu_fonts() {
     unzip \
     xz-utils
   install_ubuntu_source_code_pro
+  install_linux_nerd_fonts
+}
 
+install_fedora_fonts() {
+  ensure_fedora_packages \
+    adobe-source-code-pro-fonts \
+    cascadia-code-fonts \
+    fira-code-fonts \
+    fontconfig \
+    jetbrains-mono-fonts \
+    source-foundry-hack-fonts \
+    curl jq tar xz unzip
+  install_linux_nerd_fonts
+}
+
+install_linux_nerd_fonts() {
   install_firacode_nerd=false
   install_symbols_nerd=false
   symbols_fallback_config="$XDG_CONFIG_HOME/fontconfig/conf.d/10-nerd-font-symbols.conf"
@@ -142,11 +157,11 @@ install_ubuntu_fonts() {
   info "Installing Nerd Fonts $release_tag"
 
   if [ "$install_firacode_nerd" = true ]; then
-    install_ubuntu_nerd_font_asset "$metadata" "$temp_dir" FiraCode.tar.xz "$font_root/FiraCodeNerdFont"
+    install_linux_nerd_font_asset "$metadata" "$temp_dir" FiraCode.tar.xz "$font_root/FiraCodeNerdFont"
   fi
   if [ "$install_symbols_nerd" = true ]; then
     symbols_extract_dir="$temp_dir/NerdFontsSymbolsOnly"
-    install_ubuntu_nerd_font_asset "$metadata" "$temp_dir" NerdFontsSymbolsOnly.tar.xz "$font_root/NerdFontsSymbolsOnly"
+    install_linux_nerd_font_asset "$metadata" "$temp_dir" NerdFontsSymbolsOnly.tar.xz "$font_root/NerdFontsSymbolsOnly"
     fallback_config=$(find "$symbols_extract_dir" -type f -name 10-nerd-font-symbols.conf -print | head -1)
     [ -n "$fallback_config" ] || fail 'Nerd Fonts symbols fallback configuration was not found'
     install_nerd_font_fallback_config "$fallback_config"
@@ -191,6 +206,9 @@ install_fonts() {
       ;;
     ubuntu)
       install_ubuntu_fonts
+      ;;
+    fedora)
+      install_fedora_fonts
       ;;
     arch)
       ensure_arch_packages \

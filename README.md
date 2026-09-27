@@ -1,6 +1,6 @@
 # Workstation dotfiles
 
-A personal terminal and Java development environment for macOS, Ubuntu, Arch Linux, and Omarchy 4. The bootstrap installs the core tools, backs up conflicting files, and links this repository's configuration.
+A personal terminal and Java development environment for macOS, Ubuntu, Fedora Workstation, Arch Linux, and Omarchy 4. The bootstrap installs the core tools, backs up conflicting files, and links this repository's configuration.
 
 See [Supported platforms](share/PLATFORMS.md) for the operating systems, shells, terminals, and coding-agent installation methods covered by the bootstrap.
 
@@ -45,7 +45,7 @@ The default bootstrap installs:
 - btop, htop, LazyGit, Tig, Midnight Commander, Yazi, Midday Commander (`mdc`), jq, tree, and wget
 - Yazi preview support through FFmpeg, 7-Zip, Poppler, `resvg`, and ImageMagick where platform packages are available
 - Node.js and Bun runtimes, plus TypeScript, TypeScript Language Server, and `tsx`
-- Ghostty on macOS and Arch, or Kitty on Ubuntu
+- Ghostty on macOS and Arch, or Kitty on Ubuntu and Fedora
 - Fira Code, JetBrains Mono, Cascadia Code, Source Code Pro, Hack, FiraCode Nerd Font, and the regular and monospace symbols-only Nerd Fonts
 - JDK 25 and the platform-appropriate Java build tools
 - 1Password desktop app and CLI (`op`); pass `--onepassword-cli-only` on headless Linux
@@ -75,9 +75,9 @@ Run a category from the repository root when only that part of the workstation n
 ./bootstrap/link-dotfiles.sh
 ```
 
-The [bootstrap CI workflow](.github/workflows/bootstrap.yml) checks POSIX shell syntax and non-installing `--help` paths on Ubuntu and macOS, and runs ShellCheck on Ubuntu. It does not install packages or exercise Arch and Omarchy at runtime.
+The [bootstrap CI workflow](.github/workflows/bootstrap.yml) checks POSIX shell syntax and non-installing `--help` paths on Ubuntu and macOS, runs ShellCheck on Ubuntu, and checks Fedora detection and package names in a Fedora container. It does not run a privileged workstation install or exercise Arch and Omarchy at runtime.
 
-`containers.sh` and `gui-editors.sh` are optional and are not called by the default bootstrap. The default bootstrap includes 1Password; on headless Linux, use `./bootstrap/bootstrap.sh --onepassword-cli-only`. Arch and Omarchy ARM64 use signature-verified vendor releases; Omarchy x86-64 uses its signed repository packages. See [share/INSTALL.md](share/INSTALL.md#1password) for installation and update requirements. Install the Docker-compatible container stack, or select Podman explicitly:
+`containers.sh` and `gui-editors.sh` are optional and are not called by the default bootstrap. The default bootstrap includes 1Password; on headless Linux, use `./bootstrap/bootstrap.sh --onepassword-cli-only`. Arch and Omarchy ARM64 use signature-verified vendor releases; Fedora uses 1Password's signed RPM repository, and Omarchy x86-64 uses its signed repository packages. See [share/INSTALL.md](share/INSTALL.md#1password) for installation and update requirements. Install the Docker-compatible container stack, or select Podman explicitly:
 
 ```sh
 ./bootstrap/containers.sh
@@ -98,7 +98,7 @@ A numeric suffix is added if two runs start during the same second. Correct syml
 
 ### 3. Start the configured shell
 
-On macOS, Ubuntu, or Arch:
+On macOS, Ubuntu, Fedora, or Arch:
 
 ```sh
 exec zsh

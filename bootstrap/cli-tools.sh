@@ -122,6 +122,52 @@ install_ubuntu_cli_tools() {
   link_path /usr/bin/fdfind "$HOME/.local/bin/fd"
 }
 
+install_fedora_yazi() {
+  command -v yazi >/dev/null 2>&1 && return
+
+  case $(uname -m) in
+    x86_64|aarch64) release_arch=$(uname -m) ;;
+    *) fail "Yazi does not publish a supported Linux archive for $(uname -m)" ;;
+  esac
+  asset="yazi-${release_arch}-unknown-linux-gnu.zip"
+  temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-yazi.XXXXXX")
+  metadata="$temp_dir/release.json"
+  curl -fsSL https://api.github.com/repos/sxyazi/yazi/releases/latest -o "$metadata"
+  asset_url=$(jq -er --arg name "$asset" '.assets[] | select(.name == $name) | .browser_download_url' "$metadata") ||
+    fail "Yazi release asset not found: $asset"
+  asset_digest=$(jq -er --arg name "$asset" '.assets[] | select(.name == $name) | .digest | select(type == "string" and test("^sha256:[0-9a-fA-F]{64}$"))' "$metadata") ||
+    fail "Yazi release asset has no SHA-256 digest: $asset"
+  curl -fsSL "$asset_url" -o "$temp_dir/$asset"
+  printf '%s  %s\n' "${asset_digest#sha256:}" "$asset" >"$temp_dir/checksum"
+  (cd "$temp_dir" && sha256sum -c checksum)
+  unzip -q "$temp_dir/$asset" -d "$temp_dir/extracted"
+  release_dir="$temp_dir/extracted/${asset%.zip}"
+  if [ ! -f "$release_dir/yazi" ] || [ ! -f "$release_dir/ya" ]; then
+    fail "unexpected Yazi archive layout: $asset"
+  fi
+  ensure_real_directory "$HOME/.local/bin"
+  install -m 0755 "$release_dir/yazi" "$HOME/.local/bin/yazi"
+  if ! command -v ya >/dev/null 2>&1; then
+    install -m 0755 "$release_dir/ya" "$HOME/.local/bin/ya"
+  fi
+  rm -rf "$temp_dir"
+  refresh_standard_paths
+}
+
+install_fedora_cli_tools() {
+  ensure_fedora_packages \
+    git git-lfs gh glab curl ca-certificates zsh util-linux tmux fzf fd-find zoxide ripgrep wl-clipboard \
+    gcc gcc-c++ make unzip btop htop tig mc jq tree wget file 7zip poppler-utils ImageMagick
+  command -v ffmpeg >/dev/null 2>&1 || ensure_fedora_packages ffmpeg-free
+  install_starship
+  install_fedora_yazi
+  install_linux_lazygit
+  install_linux_mdc
+  if ! command -v resvg >/dev/null 2>&1; then
+    warn 'resvg is unavailable from the Fedora repositories; Yazi SVG previews will be unavailable'
+  fi
+}
+
 install_arch_cli_tools() {
   ensure_arch_packages \
     git git-lfs github-cli glab curl zsh starship tmux fzf fd zoxide ripgrep wl-clipboard base-devel unzip \
@@ -157,6 +203,7 @@ install_cli_tools() {
   case $PLATFORM in
     macos) install_macos_cli_tools ;;
     ubuntu) install_ubuntu_cli_tools ;;
+    fedora) install_fedora_cli_tools ;;
     arch) install_arch_cli_tools ;;
     omarchy) install_omarchy_cli_tools ;;
   esac

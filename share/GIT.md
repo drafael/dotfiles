@@ -1,6 +1,6 @@
 # Git host authentication
 
-Bootstrap installs Git, Git LFS, GitHub CLI (`gh`), and GitLab CLI (`glab`). Ubuntu uses the current `glab` Snap because Ubuntu 24.04's archive contains an older CLI; bootstrap grants the Snap access to SSH keys and the desktop keyring. Omarchy keeps its lazy `gh` launcher and installs `glab` through `omarchy pkg add`.
+Bootstrap installs Git, Git LFS, GitHub CLI (`gh`), and GitLab CLI (`glab`). Ubuntu uses the current `glab` Snap because Ubuntu 24.04's archive contains an older CLI; bootstrap grants the Snap access to SSH keys and the desktop keyring. Fedora installs both CLIs from its package repositories. Omarchy keeps its lazy `gh` launcher and installs `glab` through `omarchy pkg add`.
 
 ## GitHub
 

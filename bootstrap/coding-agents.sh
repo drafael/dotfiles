@@ -37,6 +37,7 @@ ensure_git() {
   case $PLATFORM in
     macos) ensure_brew_formulas git ;;
     ubuntu) ensure_ubuntu_packages git ;;
+    fedora) ensure_fedora_packages git ;;
     arch) ensure_arch_packages git ;;
     omarchy) ensure_omarchy_packages git ;;
   esac
@@ -140,6 +141,7 @@ ensure_revdiff_prerequisites() {
   case $PLATFORM in
     macos) ensure_brew_formulas jq ;;
     ubuntu) ensure_ubuntu_packages jq tar ;;
+    fedora) ensure_fedora_packages jq tar ;;
     arch) ensure_arch_packages jq tar ;;
     omarchy) ensure_omarchy_packages jq tar ;;
   esac

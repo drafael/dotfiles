@@ -47,6 +47,11 @@ detect_platform() {
         major_version=${VERSION_ID%%.*}
         [ "$major_version" -ge 24 ] 2>/dev/null || fail 'Ubuntu 24.04 or newer is required'
         PLATFORM=ubuntu
+      elif [ "${ID:-}" = fedora ]; then
+        [ ! -e /run/ostree-booted ] || fail 'Fedora Atomic is not supported; use a mutable Fedora Workstation installation'
+        major_version=${VERSION_ID%%.*}
+        [ "$major_version" -ge 43 ] 2>/dev/null || fail 'Fedora 43 or newer is required'
+        PLATFORM=fedora
       elif [ "${ID:-}" = arch ]; then
         PLATFORM=arch
       else
@@ -194,6 +199,20 @@ ensure_ubuntu_packages() {
   fi
 }
 
+ensure_fedora_packages() {
+  missing_packages=""
+  for package_name in "$@"; do
+    if ! rpm -q "$package_name" >/dev/null 2>&1; then
+      missing_packages="$missing_packages $package_name"
+    fi
+  done
+  if [ -n "$missing_packages" ]; then
+    # Package names are fixed by these bootstrap scripts.
+    # shellcheck disable=SC2086
+    sudo dnf install -y $missing_packages
+  fi
+}
+
 ensure_arch_packages() {
   missing_packages=""
   for package_name in "$@"; do
@@ -222,6 +241,7 @@ ensure_curl() {
   case $PLATFORM in
     macos) fail 'curl is required but is not available' ;;
     ubuntu) ensure_ubuntu_packages curl ca-certificates ;;
+    fedora) ensure_fedora_packages curl ca-certificates ;;
     arch) ensure_arch_packages curl ca-certificates ;;
     omarchy) ensure_omarchy_packages curl ca-certificates ;;
   esac
@@ -353,8 +373,8 @@ set_java_environment() {
         JAVA_HOME=$(/usr/libexec/java_home -v 25)
       fi
       ;;
-    ubuntu)
-      for candidate in /usr/lib/jvm/java-25-openjdk-*; do
+    ubuntu|fedora)
+      for candidate in /usr/lib/jvm/java-25-openjdk*; do
         if [ -x "$candidate/bin/java" ]; then
           JAVA_HOME=$candidate
           break

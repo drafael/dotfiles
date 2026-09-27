@@ -120,7 +120,7 @@ install_verified_binary() {
   require_command "$command_name"
 }
 
-install_ubuntu_kubectl() {
+install_linux_kubectl() {
   command -v kubectl >/dev/null 2>&1 && return
   architecture=$(linux_release_architecture)
   kubectl_version=$(curl -fsSL https://dl.k8s.io/release/stable.txt)
@@ -129,7 +129,7 @@ install_ubuntu_kubectl() {
   install_verified_binary kubectl kubectl "$kubectl_url" "$kubectl_url.sha256"
 }
 
-install_ubuntu_minikube() {
+install_linux_minikube() {
   command -v minikube >/dev/null 2>&1 && return
   architecture=$(linux_release_architecture)
   metadata=$(mktemp "${TMPDIR:-/tmp}/dotfiles-minikube-release.XXXXXX")
@@ -144,7 +144,7 @@ install_ubuntu_minikube() {
   install_verified_binary Minikube minikube "$minikube_url" "$minikube_url.sha256"
 }
 
-install_ubuntu_helm() {
+install_linux_helm() {
   command -v helm >/dev/null 2>&1 && return
   architecture=$(linux_release_architecture)
   temp_dir=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-helm.XXXXXX")
@@ -178,11 +178,14 @@ install_ubuntu_helm() {
   require_command helm
 }
 
-install_ubuntu_kubernetes_tools() {
-  ensure_ubuntu_packages ca-certificates curl jq
-  install_ubuntu_kubectl
-  install_ubuntu_helm
-  install_ubuntu_minikube
+install_linux_kubernetes_tools() {
+  case $PLATFORM in
+    ubuntu) ensure_ubuntu_packages ca-certificates curl jq ;;
+    fedora) ensure_fedora_packages ca-certificates curl jq ;;
+  esac
+  install_linux_kubectl
+  install_linux_helm
+  install_linux_minikube
 }
 
 ubuntu_has_vendor_docker_packages() {
@@ -247,6 +250,27 @@ install_macos_tools() {
       ensure_brew_formulas podman podman-compose kubernetes-cli helm minikube
       ;;
   esac
+}
+
+install_fedora_tools() {
+  case $CONTAINER_RUNTIME in
+    docker)
+      if ! { command -v docker >/dev/null 2>&1 &&
+        docker compose version >/dev/null 2>&1 &&
+        docker buildx version >/dev/null 2>&1; }; then
+        for package_name in docker-ce docker-ce-cli docker-compose-plugin docker-buildx-plugin containerd.io; do
+          if rpm -q "$package_name" >/dev/null 2>&1; then
+            fail 'an incomplete vendor Docker installation exists; repair it before rerunning this script'
+          fi
+        done
+        ensure_fedora_packages moby-engine docker-compose docker-buildx
+      fi
+      ;;
+    podman)
+      ensure_fedora_packages podman podman-compose
+      ;;
+  esac
+  install_linux_kubernetes_tools
 }
 
 install_arch_tools() {
@@ -314,7 +338,7 @@ print_next_steps() {
         'Create and start the runtime when needed: podman machine init && podman machine start' \
         'Then verify it: podman run --rm docker.io/library/hello-world'
       ;;
-    ubuntu:docker|arch:docker)
+    ubuntu:docker|fedora:docker|arch:docker)
       printf '%s\n' \
         'Start Docker when needed: sudo systemctl enable --now docker' \
         'Docker group membership grants root-equivalent access and is not changed by this script.' \
@@ -326,7 +350,7 @@ print_next_steps() {
         'Use sudo docker, or review Setup > Security > Sudoless Docker before changing access.' \
         'Minikube Docker-driver use requires unprivileged access to the Docker daemon.'
       ;;
-    ubuntu:podman|arch:podman|omarchy:podman)
+    ubuntu:podman|fedora:podman|arch:podman|omarchy:podman)
       printf '%s\n' \
         'Verify the rootless runtime when needed: podman info' \
         'Minikube supports Podman as an experimental driver: minikube start --driver=podman'
@@ -343,7 +367,10 @@ install_container_tools() {
       ;;
     ubuntu)
       install_ubuntu_runtime
-      install_ubuntu_kubernetes_tools
+      install_linux_kubernetes_tools
+      ;;
+    fedora)
+      install_fedora_tools
       ;;
     arch)
       install_arch_tools

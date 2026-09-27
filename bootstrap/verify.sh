@@ -169,7 +169,7 @@ main() {
 
   print_command_version op
 
-  if [ "$PLATFORM" != ubuntu ]; then
+  if [ "$PLATFORM" != ubuntu ] && [ "$PLATFORM" != fedora ]; then
     print_command_version gradle
   fi
 

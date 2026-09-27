@@ -93,7 +93,7 @@ link_terminal_config() {
       ensure_real_directory "$XDG_CONFIG_HOME/ghostty"
       link_path "$SOURCE_CONFIG_DIR/ghostty/linux.conf" "$XDG_CONFIG_HOME/ghostty/config"
       ;;
-    ubuntu)
+    ubuntu|fedora)
       ensure_real_directory "$XDG_CONFIG_HOME/kitty"
       link_path "$SOURCE_CONFIG_DIR/kitty/linux.conf" "$XDG_CONFIG_HOME/kitty/kitty.conf"
       ;;
@@ -106,7 +106,7 @@ link_root_dotfiles() {
   link_path "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
 
   case $PLATFORM in
-    macos|ubuntu|arch) configure_zsh_platform ;;
+    macos|ubuntu|fedora|arch) configure_zsh_platform ;;
     omarchy) configure_omarchy_bash ;;
   esac
 }
