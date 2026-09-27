@@ -56,6 +56,7 @@ MODE=cli CALLS="$work/cli-calls" sh "$work/1password.sh"
 grep -Fxq 'dnf install -y --from-repo=1password 1password-cli' "$work/cli-calls"
 MODE=full CALLS="$work/full-calls" sh "$work/1password.sh"
 grep -Fxq 'dnf install -y --from-repo=1password 1password 1password-cli' "$work/full-calls"
+grep -Fq -- '--queryformat %{name}\n' "$work/full-calls"
 if MODE=no-vendor CALLS="$work/missing-calls" sh "$work/1password.sh" >"$work/missing.out" 2>"$work/missing.err"; then
   printf 'missing vendor RPM unexpectedly passed\n' >&2
   exit 1

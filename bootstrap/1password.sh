@@ -308,7 +308,7 @@ install_fedora() {
     set -- "$@" 1password-cli
   fi
   for package_name in "$@"; do
-    sudo dnf -y --repo=1password repoquery --available --queryformat '%{name}' "$package_name" | grep -Fxq "$package_name" ||
+    sudo dnf -y --repo=1password repoquery --available --queryformat '%{name}\n' "$package_name" | grep -Fxq "$package_name" ||
       fail "1Password RPM repository does not provide $package_name for $repo_arch"
   done
   sudo dnf install -y --from-repo=1password "$@"
