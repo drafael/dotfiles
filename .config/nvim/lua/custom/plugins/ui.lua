@@ -1,5 +1,10 @@
 return {
   {
+    'sphamba/smear-cursor.nvim',
+    opts = {},
+  },
+
+  {
     'nvim-tree/nvim-web-devicons',
     lazy = false, -- Load immediately on startup
     priority = 1000, -- Load before other plugins
