@@ -288,6 +288,17 @@ require('lazy').setup({
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
+      -- Gitsigns watches .git directories through libuv's FSEvents backend on macOS.
+      -- Native samples of slow :q showed loop_close -> uv_fs_event_stop ->
+      -- uv__fsevents_close waiting on a semaphore after VimLeave had finished.
+      -- An isolated Git fixture reproduced 6.2-6.5s exits with this watcher enabled;
+      -- disabling it reduced quit to milliseconds while preserving local edit hunks.
+      -- Use the supported Gitsigns option rather than bypassing Neovim's exit hooks,
+      -- history saving, or unsaved-buffer checks. Other platforms keep the watcher.
+      -- Trade-off on macOS: external Git changes no longer trigger watcher-driven
+      -- sign updates; run :Gitsigns refresh afterward. Automatic following of files
+      -- renamed with external `git mv` also depends on this watcher.
+      watch_gitdir = { enable = vim.fn.has 'macunix' == 0 },
       signs = {
         add = { text = '+' },
         change = { text = '~' },
