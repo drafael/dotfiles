@@ -2,5 +2,5 @@
 --   ai.lua         - Copilot
 --   ui.lua         - Catppuccin, Lualine, Devicons, Indent-blankline, Markview
 --   git.lua        - Diffview, Neogit
---   navigation.lua - Oil, Neo-tree
+--   navigation.lua - Neoscroll, Oil, Neo-tree
 return {}

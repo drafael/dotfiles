@@ -1,5 +1,10 @@
 return {
   {
+    'karb94/neoscroll.nvim',
+    opts = {},
+  },
+
+  {
     'stevearc/oil.nvim',
     ---@module 'oil'
     ---@type oil.SetupOpts
