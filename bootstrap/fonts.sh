@@ -109,30 +109,13 @@ install_ubuntu_source_code_pro() {
 install_ubuntu_fonts() {
   ensure_ubuntu_packages software-properties-common
   sudo add-apt-repository -y universe
-  ensure_ubuntu_packages \
-    ca-certificates \
-    curl \
-    fontconfig \
-    fonts-cascadia-code \
-    fonts-firacode \
-    fonts-hack \
-    fonts-jetbrains-mono \
-    jq \
-    unzip \
-    xz-utils
+  ensure_bootstrap_packages system fonts
   install_ubuntu_source_code_pro
   install_linux_nerd_fonts
 }
 
 install_fedora_fonts() {
-  ensure_fedora_packages \
-    adobe-source-code-pro-fonts \
-    cascadia-code-fonts \
-    fira-code-fonts \
-    fontconfig \
-    jetbrains-mono-fonts \
-    source-foundry-hack-fonts \
-    curl jq tar xz unzip
+  ensure_bootstrap_packages system fonts
   install_linux_nerd_fonts
 }
 
@@ -195,14 +178,7 @@ install_fonts() {
     macos)
       # Yazi uses Nerd Font icons. The symbols-only family can be selected as a
       # terminal fallback without replacing the primary text font.
-      ensure_brew_casks \
-        font-cascadia-code \
-        font-fira-code \
-        font-fira-code-nerd-font \
-        font-hack \
-        font-jetbrains-mono \
-        font-source-code-pro \
-        font-symbols-only-nerd-font
+      ensure_bootstrap_packages brew-cask fonts
       ;;
     ubuntu)
       install_ubuntu_fonts
@@ -211,30 +187,12 @@ install_fonts() {
       install_fedora_fonts
       ;;
     arch)
-      ensure_arch_packages \
-        adobe-source-code-pro-fonts \
-        fontconfig \
-        ttf-cascadia-code \
-        ttf-fira-code \
-        ttf-firacode-nerd \
-        ttf-hack \
-        ttf-jetbrains-mono \
-        ttf-nerd-fonts-symbols \
-        ttf-nerd-fonts-symbols-mono
+      ensure_bootstrap_packages system fonts
       install_packaged_nerd_font_fallback_config
       ;;
     omarchy)
       # Keep Omarchy's selected system font and install the families only.
-      ensure_omarchy_packages \
-        adobe-source-code-pro-fonts \
-        fontconfig \
-        ttf-cascadia-code \
-        ttf-fira-code \
-        ttf-firacode-nerd \
-        ttf-hack \
-        ttf-jetbrains-mono \
-        ttf-nerd-fonts-symbols \
-        ttf-nerd-fonts-symbols-mono
+      ensure_bootstrap_packages system fonts
       install_packaged_nerd_font_fallback_config
       ;;
   esac

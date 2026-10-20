@@ -4,7 +4,7 @@ set -eu
 test_repository=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 work=$(mktemp -d "${TMPDIR:-/tmp}/pi-bootstrap-test.XXXXXX")
 trap 'rm -rf "$work"' EXIT HUP INT TERM
-cp "$test_repository/bootstrap/lib.sh" "$work/lib.sh"
+cp "$test_repository/bootstrap/lib.sh" "$test_repository/bootstrap/packages.sh" "$work/"
 sed '$d' "$test_repository/bootstrap/coding-agents.sh" >"$work/coding-agents.sh"
 printf '\nPLATFORM=${TEST_PLATFORM:-macos}\ninstall_agents\n' >>"$work/coding-agents.sh"
 mkdir -p "$work/bin" "$work/home"

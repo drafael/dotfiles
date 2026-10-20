@@ -79,7 +79,7 @@ install_javascript_tooling() {
   case $JAVASCRIPT_RUNTIME_MANAGER in
     homebrew)
       info 'Ensuring Homebrew Node.js and Bun are installed'
-      ensure_brew_formulas node bun
+      ensure_bootstrap_packages brew-formula javascript
       refresh_standard_paths
       ;;
     mise)
@@ -104,9 +104,13 @@ install_javascript_tooling() {
   require_command bun
 
   info 'Ensuring TypeScript tools are installed'
-  ensure_npm_tool tsc typescript
-  ensure_npm_tool typescript-language-server typescript-language-server
-  ensure_npm_tool tsx tsx
+  for package_name in $(bootstrap_packages "$PLATFORM" npm javascript); do
+    case $package_name in
+      typescript) command_name=tsc ;;
+      *) command_name=$package_name ;;
+    esac
+    ensure_npm_tool "$command_name" "$package_name"
+  done
   reshim_mise_if_available
 }
 

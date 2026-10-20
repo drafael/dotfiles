@@ -15,6 +15,31 @@ XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
 PATH="$HOME/.local/bin:$HOME/.opencode/bin:$HOME/.local/share/pi-node/current/bin:$HOME/.local/share/mise/shims:/snap/bin:$PATH"
 export PATH XDG_CONFIG_HOME
 
+# shellcheck source=packages.sh
+. "$BOOTSTRAP_DIR/packages.sh"
+
+# Only fixed package names from packages.sh are split here.
+ensure_bootstrap_packages() {
+  group_manager=$1
+  group_name=$2
+  # shellcheck disable=SC2046
+  set -- $(bootstrap_packages "$PLATFORM" "$group_manager" "$group_name")
+  [ "$#" -gt 0 ] || fail "empty package group: $PLATFORM/$group_manager/$group_name"
+  case $group_manager in
+    brew-formula) ensure_brew_formulas "$@" ;;
+    brew-cask) ensure_brew_casks "$@" ;;
+    system)
+      case $PLATFORM in
+        ubuntu) ensure_ubuntu_packages "$@" ;;
+        fedora) ensure_fedora_packages "$@" ;;
+        arch) ensure_arch_packages "$@" ;;
+        omarchy) ensure_omarchy_packages "$@" ;;
+      esac
+      ;;
+    *) fail "unsupported package group manager: $group_manager" ;;
+  esac
+}
+
 info() {
   printf '\n==> %s\n' "$*"
 }

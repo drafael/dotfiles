@@ -89,10 +89,7 @@ install_linux_mdc() {
 }
 
 install_macos_cli_tools() {
-  ensure_brew_formulas \
-    git git-lfs gh glab starship tmux fzf fd zoxide ripgrep \
-    btop htop lazygit tig midnight-commander yazi kooler/apps/middaycommander \
-    jq tree wget sevenzip poppler resvg
+  ensure_bootstrap_packages brew-formula cli
 
   if ! command -v ffmpeg >/dev/null 2>&1; then
     ensure_brew_formulas ffmpeg-full
@@ -107,11 +104,9 @@ install_macos_cli_tools() {
 }
 
 install_ubuntu_cli_tools() {
-  ensure_ubuntu_packages software-properties-common curl ca-certificates xz-utils python3 snapd
+  ensure_bootstrap_packages system prerequisites
   sudo add-apt-repository -y universe
-  ensure_ubuntu_packages \
-    git git-lfs gh zsh tmux fzf fd-find zoxide ripgrep wl-clipboard build-essential unzip \
-    btop htop tig mc jq tree wget file ffmpeg 7zip poppler-utils imagemagick
+  ensure_bootstrap_packages system cli
 
   install_ubuntu_glab
   install_starship
@@ -155,9 +150,7 @@ install_fedora_yazi() {
 }
 
 install_fedora_cli_tools() {
-  ensure_fedora_packages \
-    git git-lfs gh glab curl ca-certificates zsh util-linux tmux fzf fd-find zoxide ripgrep wl-clipboard \
-    gcc gcc-c++ make unzip btop htop tig mc jq tree file 7zip poppler-utils ImageMagick
+  ensure_bootstrap_packages system cli
   command -v wget >/dev/null 2>&1 || ensure_fedora_packages wget1-wget
   command -v ffmpeg >/dev/null 2>&1 || ensure_fedora_packages ffmpeg-free
   install_starship
@@ -170,16 +163,12 @@ install_fedora_cli_tools() {
 }
 
 install_arch_cli_tools() {
-  ensure_arch_packages \
-    git git-lfs github-cli glab curl zsh starship tmux fzf fd zoxide ripgrep wl-clipboard base-devel unzip \
-    btop htop lazygit tig mc yazi jq tree wget file ffmpeg 7zip poppler resvg imagemagick
+  ensure_bootstrap_packages system cli
   install_linux_mdc
 }
 
 install_omarchy_cli_tools() {
-  ensure_omarchy_packages \
-    git git-lfs glab tmux fzf fd zoxide ripgrep starship wl-clipboard base-devel unzip \
-    btop htop lazygit tig mc yazi jq tree wget file ffmpeg 7zip poppler resvg imagemagick
+  ensure_bootstrap_packages system cli
   command -v gh >/dev/null 2>&1 || omarchy-mise-install gh
   install_linux_mdc
 }

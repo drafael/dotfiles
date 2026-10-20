@@ -22,7 +22,7 @@ jobs:
 
       - name: Check POSIX shell syntax
         run: |
-          for script in bootstrap/*.sh tests/*.sh; do
+          for script in update.sh bootstrap/*.sh tests/*.sh; do
             sh -n "$script"
           done
 
@@ -34,17 +34,20 @@ jobs:
             sudo apt-get install -y shellcheck
           fi
           # Existing CDPATH= cd usage and literal shell snippets are intentional.
-          shellcheck --external-sources --source-path=bootstrap -s sh -e SC1007,SC2016 bootstrap/*.sh tests/*.sh
+          shellcheck --external-sources --source-path=bootstrap -s sh -e SC1007,SC2016 update.sh bootstrap/*.sh tests/*.sh
 
       - name: Smoke-test help without installing software
         run: |
-          for script in bootstrap/bootstrap.sh bootstrap/1password.sh \
+          for script in ./update.sh bootstrap/bootstrap.sh bootstrap/1password.sh \
             bootstrap/cli-tools.sh bootstrap/coding-agents.sh bootstrap/containers.sh \
             bootstrap/fonts.sh bootstrap/gui-editors.sh bootstrap/java.sh \
             bootstrap/javascript.sh bootstrap/link-dotfiles.sh \
             bootstrap/terminal-tools.sh bootstrap/verify.sh; do
             "$script" --help >/dev/null
           done
+
+      - name: Test unattended update scopes without updating software
+        run: sh tests/update.sh
 
       - name: Test Pi installation routing without system changes
         run: sh tests/pi-bootstrap.sh
@@ -83,13 +86,14 @@ jobs:
         run: |
           sh tests/fedora-bootstrap.sh
           sh tests/fedora-yazi.sh
+          sh tests/update.sh
 
       - name: Check syntax and help in Fedora userspace
         run: |
-          for script in bootstrap/*.sh tests/*.sh; do
+          for script in update.sh bootstrap/*.sh tests/*.sh; do
             sh -n "$script"
           done
-          for script in bootstrap/bootstrap.sh bootstrap/1password.sh \
+          for script in ./update.sh bootstrap/bootstrap.sh bootstrap/1password.sh \
             bootstrap/cli-tools.sh bootstrap/coding-agents.sh bootstrap/containers.sh \
             bootstrap/fonts.sh bootstrap/gui-editors.sh bootstrap/java.sh \
             bootstrap/javascript.sh bootstrap/link-dotfiles.sh \

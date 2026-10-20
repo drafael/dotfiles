@@ -8,7 +8,7 @@ mkdir -p "$test_work/bin"
 ln -s "$(command -v jq)" "$test_work/bin/jq"
 test_path="$test_work/bin:/usr/bin:/bin:/sbin:/usr/sbin"
 sed '$d' "$test_repository/bootstrap/cli-tools.sh" >"$test_work/cli-tools.sh"
-cp "$test_repository/bootstrap/lib.sh" "$test_work/lib.sh"
+cp "$test_repository/bootstrap/lib.sh" "$test_repository/bootstrap/packages.sh" "$test_work/"
 
 python3 - "$test_work/archive.zip" <<'PY'
 import sys

@@ -78,24 +78,24 @@ install_terminal_tools() {
   info "Ensuring terminal tools are installed on $PLATFORM"
   case $PLATFORM in
     macos)
-      ensure_brew_formulas neovim
-      ensure_brew_casks ghostty
+      ensure_bootstrap_packages brew-formula terminal
+      ensure_bootstrap_packages brew-cask terminal
       ;;
     ubuntu)
-      ensure_ubuntu_packages curl ca-certificates xz-utils python3 kitty
+      ensure_bootstrap_packages system terminal
       install_ubuntu_neovim
       ;;
     fedora)
-      ensure_fedora_packages neovim kitty
+      ensure_bootstrap_packages system terminal
       if ! nvim_version_is_supported; then
         fail 'Fedora Neovim must be at least 0.11; update the Fedora package or install a supported release separately'
       fi
       ;;
     arch)
-      ensure_arch_packages neovim ghostty
+      ensure_bootstrap_packages system terminal
       ;;
     omarchy)
-      ensure_omarchy_packages nvim
+      ensure_bootstrap_packages system terminal
       ;;
   esac
 }

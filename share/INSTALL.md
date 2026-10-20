@@ -2,6 +2,53 @@
 
 `bootstrap/bootstrap.sh` installs the daily terminal and Java environment, plus 1Password. This page covers additional setup and software installed separately from the default bootstrap.
 
+## Unattended tool updates
+
+Keep provisioning and updating separate. Bootstrap installs missing tools; `update.sh` updates existing installations:
+
+```sh
+cd ~/.dotfiles
+./update.sh --scope=bootstrap
+./update.sh --scope=all
+```
+
+`bootstrap` is the default scope. It selects installed package identities from `bootstrap/packages.sh`, including optional editors, container tools, and tools already present before bootstrap. `all` selects every installed package in supported managers and the same recognized standalone tools. Neither scope scans arbitrary binaries, adds missing top-level tools, modifies project dependencies, pulls configuration repositories, or updates agent plugins/extensions. Package-manager dependencies and dependants may also be installed or upgraded.
+
+Run as your normal user with Python 3 and jq on `PATH`. Missing prerequisites produce status `3`; the script does not install them. Python starts manager commands in a new session with stdin closed, so they cannot use stdin or `/dev/tty` for authentication. Git/SSH askpass helpers are disabled. This is unattended execution, not a sandbox for third-party package code.
+
+### Supported update paths
+
+| Installation owner | Behavior |
+| --- | --- |
+| Homebrew, including existing Linuxbrew installations | Refresh metadata, select installed packages by scope, then upgrade each eligible package separately. Require the local no-sudo implementation and `--no-ask`/`--no-quit` support. Preserve pins and Homebrew's normal cask auto-update/latest policy. |
+| mise | Upgrade installed global requests within their configured constraints, without `--bump` or pruning old runtimes. Recognized writable `~/.local/bin/mise` installations use `self-update --yes --no-plugins`; package-managed mise stays with its owner. Project configuration is not read. A Node installation containing additional npm globals is skipped as `migration-required`, to avoid stranding those tools. |
+| npm | Inspect the active global prefix and discovered global mise Node prefixes. Update TypeScript, TypeScript Language Server, tsx, Codex, and npm-installed Pi with lifecycle scripts disabled. Linked packages, downgrade/prerelease transitions, non-writable prefixes, and packages with unreviewed lifecycle requirements are skipped. In `all` scope, unreviewed packages are inventoried and reported, not blindly reinstalled. |
+| Claude Code native installation | Run `claude update` only for its recognized, writable user-local version directory. |
+| OpenCode native installation | Run `opencode upgrade --method curl` only for its recognized, writable `~/.opencode/bin` installation. |
+| Managed Pi | Validate the managed-install marker and run `pi update --no-approve`; do not migrate npm installations or update project resources. |
+| Linux user-local LazyGit, Midday Commander, RevDiff | Reuse bootstrap's checksum-verifying release downloader. Stage downloads, compare with the existing binary, and atomically replace recognized writable files in `~/.local/bin`. |
+| APT, DNF, pacman, Omarchy system packages, Snap | Inventory selected installed packages and report them as skipped. No sudo or system-update command is executed, even if cached credentials are available. |
+| Other standalone installations and manually downloaded fonts | Report recognized tools as skipped; do not guess ownership, overwrite links, rerun installers, or move version pins. |
+
+A Homebrew- or npm-owned agent is handled by that manager, not by a second native updater. GUI apps must be registered with Homebrew to be included in its inventory. If multiple installations shadow one another, the report identifies the package/prefix updated; the script does not change shell configuration or migrate installations.
+
+### Authentication and failures
+
+Homebrew commands receive `HOMEBREW_NO_ASK=1`, `HOMEBREW_NO_SUDO=1`, and the documented no-quit control. Automatic cleanup is disabled for this invocation. Casks with package/custom installers are skipped before upgrade; running apps or other deferred updates are checked afterward and reported rather than claimed as updated. Tap/source trust is never granted automatically.
+
+Updates continue after independent failures. The final summary counts `UPDATED`, `UNCHANGED`, `SKIPPED`, and `FAILED` results:
+
+| Exit status | Meaning |
+| --- | --- |
+| `0` | No selected targets were blocked and no update failed. `UNCHANGED` means the owning updater made no change or reported no eligible update. |
+| `1` | At least one update, inventory, or verification failed; this takes precedence over skipped targets. |
+| `2` | Selected targets were skipped, but no update failed. |
+| `3` | Invalid arguments, unsupported platform, root execution, or missing setup prerequisites. |
+
+Review the reason for each skip and use the tool's existing updater separately when authentication, trust, or migration is needed. Do not rerun this script with sudo to bypass those decisions. There is no transaction across package managers: a later failure does not roll back successful earlier updates.
+
+`sh tests/update.sh` uses isolated homes and command fixtures to check both scopes, no-terminal execution, installation ownership, pins, partial failures, native update routing, and checksum-tamper rejection. CI runs these checks on macOS, Ubuntu, and Fedora; they do not prove live vendor-updater or GUI-app behavior.
+
 ## macOS settings
 
 Review the scripts before running them because they change system preferences:

@@ -216,7 +216,16 @@ git pull --ff-only
 ./bootstrap/bootstrap.sh
 ```
 
-The script is idempotent and leaves correct symlinks unchanged. Inspect `~/.dotfiles-backups/` to restore a configuration that bootstrap replaced.
+The bootstrap remains install-only: rerunning it does not upgrade existing tools. It is idempotent and leaves correct symlinks unchanged. Inspect `~/.dotfiles-backups/` to restore a configuration that bootstrap replaced.
+
+To update installed tools separately, run as your normal user:
+
+```sh
+./update.sh                    # Bootstrap toolset, including installed optional apps
+./update.sh --scope=all        # All packages in supported managers and recognized tools
+```
+
+The updater requires `python3` and `jq`. It disables Homebrew confirmations and sudo, does not force apps to quit, and reports privileged or unsupported updates as skipped. It does not install missing tools, change installation methods, or update project dependencies. Package-manager dependencies and dependants can still change. Exit statuses are `0` for completion, `1` for update failures, `2` for skipped targets without failures, and `3` for setup or usage errors. See [Unattended tool updates](share/INSTALL.md#unattended-tool-updates) for supported update paths and limits.
 
 On Omarchy, run `omarchy update` for system updates. Do not use `pacman -Syu` directly. If `omarchy reinstall configs` resets personal links, rerun the bootstrap.
 

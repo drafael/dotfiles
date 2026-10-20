@@ -4,7 +4,7 @@ set -eu
 test_repository=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 work=$(mktemp -d "${TMPDIR:-/tmp}/fedora-bootstrap-test.XXXXXX")
 trap 'rm -rf "$work"' EXIT HUP INT TERM
-cp "$test_repository/bootstrap/lib.sh" "$work/lib.sh"
+cp "$test_repository/bootstrap/lib.sh" "$test_repository/bootstrap/packages.sh" "$work/"
 sed '$d' "$test_repository/bootstrap/1password.sh" >"$work/1password.sh"
 cp "$work/1password.sh" "$work/1password-arm.sh"
 cp "$work/1password.sh" "$work/1password-key.sh"

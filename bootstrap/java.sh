@@ -17,7 +17,7 @@ install_java_tools() {
   info "Ensuring Java development tools are installed on $PLATFORM"
   case $PLATFORM in
     macos)
-      ensure_brew_formulas openjdk@25 maven gradle
+      ensure_bootstrap_packages brew-formula java
       jdk_source="$(brew --prefix openjdk@25)/libexec/openjdk.jdk"
       jdk_destination=/Library/Java/JavaVirtualMachines/openjdk-25.jdk
       if [ -L "$jdk_destination" ] && [ "$(readlink "$jdk_destination")" = "$jdk_source" ]; then
@@ -30,16 +30,16 @@ install_java_tools() {
       fi
       ;;
     ubuntu)
-      ensure_ubuntu_packages openjdk-25-jdk maven
+      ensure_bootstrap_packages system java
       ;;
     fedora)
-      ensure_fedora_packages java-25-openjdk-devel maven
+      ensure_bootstrap_packages system java
       ;;
     arch)
-      ensure_arch_packages jdk25-openjdk maven gradle
+      ensure_bootstrap_packages system java
       ;;
     omarchy)
-      ensure_omarchy_packages jdk25-openjdk maven gradle
+      ensure_bootstrap_packages system java
       ;;
   esac
 }

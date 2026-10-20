@@ -211,10 +211,10 @@ install_ubuntu_runtime() {
       if ubuntu_has_vendor_docker_packages; then
         fail 'an incomplete vendor Docker installation exists; repair it with Docker packages before rerunning this script'
       fi
-      ensure_ubuntu_packages docker.io docker-compose-v2 docker-buildx
+      ensure_bootstrap_packages system docker
       ;;
     podman)
-      ensure_ubuntu_packages podman podman-compose
+      ensure_bootstrap_packages system podman
       ;;
   esac
 }
@@ -242,12 +242,12 @@ ensure_macos_docker_plugin() {
 install_macos_tools() {
   case $CONTAINER_RUNTIME in
     docker)
-      ensure_brew_formulas colima docker docker-compose docker-buildx kubernetes-cli helm minikube
+      ensure_bootstrap_packages brew-formula docker
       ensure_macos_docker_plugin compose docker-compose docker-compose
       ensure_macos_docker_plugin buildx docker-buildx docker-buildx
       ;;
     podman)
-      ensure_brew_formulas podman podman-compose kubernetes-cli helm minikube
+      ensure_bootstrap_packages brew-formula podman
       ;;
   esac
 }
@@ -263,11 +263,11 @@ install_fedora_tools() {
             fail 'an incomplete vendor Docker installation exists; repair it before rerunning this script'
           fi
         done
-        ensure_fedora_packages moby-engine docker-compose docker-buildx
+        ensure_bootstrap_packages system docker
       fi
       ;;
     podman)
-      ensure_fedora_packages podman podman-compose
+      ensure_bootstrap_packages system podman
       ;;
   esac
   install_linux_kubernetes_tools
@@ -276,10 +276,10 @@ install_fedora_tools() {
 install_arch_tools() {
   case $CONTAINER_RUNTIME in
     docker)
-      ensure_arch_packages docker docker-compose docker-buildx kubectl helm minikube
+      ensure_bootstrap_packages system docker
       ;;
     podman)
-      ensure_arch_packages podman podman-compose kubectl helm minikube
+      ensure_bootstrap_packages system podman
       ;;
   esac
 }
@@ -287,10 +287,10 @@ install_arch_tools() {
 install_omarchy_tools() {
   case $CONTAINER_RUNTIME in
     docker)
-      ensure_omarchy_packages docker docker-compose docker-buildx kubectl helm minikube
+      ensure_bootstrap_packages system docker
       ;;
     podman)
-      ensure_omarchy_packages podman podman-compose kubectl helm minikube
+      ensure_bootstrap_packages system podman
       ;;
   esac
 }

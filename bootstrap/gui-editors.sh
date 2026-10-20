@@ -30,7 +30,7 @@ main() {
   fi
 
   info 'Ensuring optional GUI editors are installed'
-  ensure_brew_casks intellij-idea visual-studio-code cursor zed
+  ensure_bootstrap_packages brew-cask editors
 }
 
 main "$@"
