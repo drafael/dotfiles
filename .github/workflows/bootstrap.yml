@@ -46,6 +46,9 @@ jobs:
             "$script" --help >/dev/null
           done
 
+      - name: Test Pi installation routing without system changes
+        run: sh tests/pi-bootstrap.sh
+
       - name: Test Fedora routing without system changes
         run: sh tests/fedora-bootstrap.sh
 

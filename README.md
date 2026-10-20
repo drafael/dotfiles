@@ -144,6 +144,8 @@ pi
 
 Omarchy installs these agents through its existing `mise` launchers the first time each command runs. Other platforms use the agents' official installers during bootstrap.
 
+For a missing Pi installation, bootstrap uses the [pi.dev installer](https://pi.dev/docs/latest/quickstart#1-install-pi), which pins all dependencies; update it later with `pi update`. The installer may prompt to start Pi immediately: choose **n** to let bootstrap continue. Existing Pi installations are left untouched. To migrate an existing npm installation to the managed installer, run `curl -fsSL https://pi.dev/install.sh | sh` separately and confirm migration; the installer verifies the managed release before removing the npm installation. Direct npm installation remains supported upstream but no longer pins transitive dependencies.
+
 Bootstrap also installs [RevDiff](https://github.com/umputun/revdiff). macOS uses its Homebrew formula; Linux installs the checksummed release archive in `~/.local/bin`. Claude Code and Codex receive the `revdiff` and `revdiff-planning` marketplace plugins. Pi receives the RevDiff package plus the [pi-subagents](https://github.com/nicobailon/pi-subagents), [pi-web-access](https://github.com/nicobailon/pi-web-access), and [pi-intercom](https://github.com/nicobailon/pi-intercom) npm packages. OpenCode receives the RevDiff command, tool, and plan-review plugin. Start a new agent session after bootstrap; in Codex, open `/hooks` and trust the RevDiff planning hook before using automatic Plan-mode review.
 
 Bootstrap clones [drafael/coding-harness](https://github.com/drafael/coding-harness) to `~/code/harness`, preferring SSH and warning before falling back to HTTPS. Existing HTTPS or SSH checkouts are left at their current revision.

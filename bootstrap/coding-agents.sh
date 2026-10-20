@@ -124,9 +124,9 @@ install_agents() {
   fi
 
   if ! command -v pi >/dev/null 2>&1; then
-    info 'Installing Pi'
-    npm install --global --ignore-scripts --min-release-age=0 --no-fund --no-audit @earendil-works/pi-coding-agent@latest
-    reshim_mise_if_available
+    download_installer Pi sh https://pi.dev/install.sh
+    refresh_standard_paths
+    require_command pi
   fi
 
   if ! command -v codex >/dev/null 2>&1; then
