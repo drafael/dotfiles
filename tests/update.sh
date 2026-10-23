@@ -8,8 +8,16 @@ mkdir -p "$work/bootstrap" "$work/bin" "$work/home" "$work/state"
 cp "$repository/bootstrap/lib.sh" "$repository/bootstrap/packages.sh" "$work/bootstrap/"
 sed '$d' "$repository/update.sh" >"$work/update.sh"
 printf '\ndetect_platform() { PLATFORM=${TEST_PLATFORM:-macos}; }\nmain "$@"\n' >>"$work/update.sh"
-ln -s "$(command -v python3)" "$work/bin/python3"
-ln -s "$(command -v jq)" "$work/bin/jq"
+# Expose only test utilities, not workstation tools installed on the runner.
+# In particular, Ubuntu's /usr/bin/kubectl must not enter the update inventory.
+for utility in python3 jq awk cat chmod cmp cp dirname env find grep gzip head install ln mkdir mktemp mv rm sed sh sort tail tar tr; do
+  ln -s "$(command -v "$utility")" "$work/bin/$utility"
+done
+if command -v sha256sum >/dev/null 2>&1; then
+  ln -s "$(command -v sha256sum)" "$work/bin/sha256sum"
+else
+  ln -s "$(command -v shasum)" "$work/bin/shasum"
+fi
 printf '#!/bin/sh\nprintf "1000\\n"\n' >"$work/bin/id"
 chmod +x "$work/bin/id"
 
@@ -133,7 +141,7 @@ EOF
 mkdir -p "$work/home/npm-prefix/bin" "$work/home/npm-prefix/lib/node_modules" "$work/home/brew-repository/Library/Homebrew"
 printf 'HOMEBREW_NO_SUDO:\n' >"$work/home/brew-repository/Library/Homebrew/env_config.rb"
 export HOME="$work/home" STATE="$work/state" CALLS="$work/calls"
-export PATH="$work/bin:/usr/bin:/bin"
+export PATH="$work/bin"
 
 reset_state() {
   unset REFRESH_FAIL TEST_PLATFORM INVALID_AFTER REGISTRY_AUTH
@@ -157,7 +165,7 @@ run_expect() {
   sh "$work/update.sh" "$@" >"$work/output" 2>"$work/error" || status=$?
   if [ "$status" -ne "$expected" ]; then
     printf 'expected status %s, got %s\n' "$expected" "$status" >&2
-    tail -50 "$work/output" "$work/error" >&2
+    tail -n 50 "$work/output" "$work/error" >&2
     exit 1
   fi
 }
