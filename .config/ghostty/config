@@ -30,7 +30,9 @@ copy-on-select = clipboard
 clipboard-read = allow
 clipboard-write = allow
 
-keybind = shift+enter=text:\n
+# Keep native Shift+Enter reporting for Pi and tmux; a raw newline mapping
+# makes it indistinguishable from Ctrl+J.
+# https://pi.dev/docs/latest/terminal-setup#ghostty
 
 keybind = cmd+ctrl+h=resize_split:left,40
 keybind = cmd+ctrl+l=resize_split:right,40
