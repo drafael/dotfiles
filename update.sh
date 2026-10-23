@@ -351,7 +351,9 @@ update_npm() {
     jq -r '.node[]?.install_path // empty' "$WORK/mise.json" >"$WORK/node-paths"
     while IFS= read -r node_path; do
       node_path=$(real_path "$node_path")
-      [ "$node_path" != "$NPM_PREFIX" ] && [ -x "$node_path/bin/npm" ] || continue
+      if [ "$node_path" = "$NPM_PREFIX" ] || [ ! -x "$node_path/bin/npm" ]; then
+        continue
+      fi
       (PATH="$node_path/bin:$PATH"; export PATH; update_npm_prefix "$node_path/bin/npm" "$node_path")
     done <"$WORK/node-paths"
   fi
