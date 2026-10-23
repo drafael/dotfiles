@@ -62,7 +62,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Install checkout prerequisites
-        run: dnf install -y git tar gzip jq python3 unzip libstdc++
+        run: dnf install -y git tar gzip diffutils jq python3 unzip libstdc++
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
