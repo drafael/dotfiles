@@ -92,6 +92,11 @@ link_harness_configuration() {
   link_path_resolved "$HARNESS_DIR/.pi/agent/themes" "$HOME/.pi/agent/themes"
   link_path_resolved "$HARNESS_DIR/.pi/agent/prompts" "$HOME/.pi/agent/prompts"
   link_path_resolved "$HARNESS_DIR/.pi/agent/extensions" "$HOME/.pi/agent/extensions"
+  if [ -f "$HARNESS_DIR/.pi/agent/stt.json" ]; then
+    link_path_resolved "$HARNESS_DIR/.pi/agent/stt.json" "$HOME/.pi/agent/stt.json"
+  else
+    warn "harness stt.json not found; update $HARNESS_DIR to enable shared Pi Voice STT configuration"
+  fi
   link_path_resolved "$HARNESS_DIR/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
   link_path_resolved "$HARNESS_DIR/AGENTS.md" "$HOME/.agents/AGENTS.md"
   link_path_resolved "$HARNESS_DIR/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
@@ -220,6 +225,7 @@ install_pi_packages() {
   install_pi_package pi-subagents pi-subagents npm:pi-subagents
   install_pi_package pi-web-access pi-web-access npm:pi-web-access
   install_pi_package pi-intercom pi-intercom npm:pi-intercom
+  install_pi_package pi-voice-stt pi-voice-stt npm:pi-voice-stt
 }
 
 opencode_revdiff_is_installed() {
