@@ -57,6 +57,11 @@ jobs:
           sh tests/herdr-bootstrap.sh
           sh tests/pi-extension-links.sh
 
+      - name: Test Herdr Codex configuration and bootstrap without system changes
+        run: |
+          python3 -B -m unittest discover -s tests -p 'herdr_codex_state_test.py'
+          sh tests/herdr-codex-bootstrap.sh
+
       - name: Test Fedora routing without system changes
         run: sh tests/fedora-bootstrap.sh
 
@@ -93,6 +98,8 @@ jobs:
           sh tests/fedora-yazi.sh
           sh tests/herdr-bootstrap.sh
           sh tests/pi-extension-links.sh
+          python3 -B -m unittest discover -s tests -p 'herdr_codex_state_test.py'
+          sh tests/herdr-codex-bootstrap.sh
           sh tests/update.sh
 
       - name: Check syntax and help in Fedora userspace

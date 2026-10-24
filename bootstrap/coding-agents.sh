@@ -16,7 +16,8 @@ usage() {
   printf '%s\n' \
     'Usage: coding-agents.sh' \
     '' \
-    'Install missing coding-agent tools, RevDiff integrations, and shared harness configuration.'
+    'Install missing coding-agent tools, integrations, and shared harness configuration.' \
+    'Herdr Codex setup requires Python 3.11+ and jq; existing configuration is validated before changes.'
 }
 
 ensure_javascript_prerequisite() {
@@ -334,6 +335,49 @@ install_herdr_pi_integration() {
   fi
 }
 
+install_herdr_codex_integration() {
+  require_command jq
+  herdr_codex_inspection=$(herdr_codex_state) || fail 'cannot inspect Herdr Codex integration; Python 3.11+ is required'
+  herdr_codex_status=$(printf '%s\n' "$herdr_codex_inspection" | jq -r .state)
+  case $herdr_codex_status in
+    complete) return ;;
+    missing|partial) ;;
+    conflict) fail "Herdr Codex integration conflict: $(printf '%s\n' "$herdr_codex_inspection" | jq -r .reason)" ;;
+    *) fail 'unexpected Herdr Codex inspection result' ;;
+  esac
+
+  herdr_codex_home=$(printf '%s\n' "$herdr_codex_inspection" | jq -r .home)
+  herdr_codex_backed_up=false
+  for herdr_codex_file in herdr-agent-state.sh hooks.json config.toml; do
+    if [ -f "$herdr_codex_home/$herdr_codex_file" ]; then
+      backup_copy "$herdr_codex_home/$herdr_codex_file"
+      herdr_codex_backed_up=true
+    fi
+  done
+  mkdir -p "$herdr_codex_home"
+  info 'Installing or repairing the Herdr integration for Codex'
+  herdr_codex_result=0
+  CODEX_HOME="$herdr_codex_home" herdr integration install codex || herdr_codex_result=$?
+  if [ "$herdr_codex_result" = 0 ]; then
+    if herdr_codex_after=$(CODEX_HOME="$herdr_codex_home" herdr_codex_state); then
+      if [ "$(printf '%s\n' "$herdr_codex_after" | jq -r .state)" != complete ]; then
+        warn "Herdr Codex integration validation failed: $(printf '%s\n' "$herdr_codex_after" | jq -r .reason)"
+        herdr_codex_result=1
+      fi
+    else
+      warn 'cannot validate Herdr Codex integration after installation'
+      herdr_codex_result=1
+    fi
+  fi
+  if [ "$herdr_codex_backed_up" = true ]; then
+    printf 'Codex configuration backup: %s\n' "$BACKUP_DIR"
+  fi
+  if [ "$herdr_codex_result" != 0 ]; then
+    warn "Herdr may have partially changed herdr-agent-state.sh, hooks.json, or config.toml in $herdr_codex_home; inspect them before retrying"
+    return "$herdr_codex_result"
+  fi
+}
+
 opencode_revdiff_is_installed() {
   opencode_config_dir="$HOME/.config/opencode"
   for relative_path in \
@@ -393,6 +437,7 @@ main() {
   install_revdiff_integrations
   provision_harness
   install_herdr_pi_integration
+  install_herdr_codex_integration
 }
 
 main "$@"

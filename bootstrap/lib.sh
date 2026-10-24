@@ -379,6 +379,11 @@ link_path_resolved() {
   link_path "$resolved_link_source" "$resolved_link_destination"
 }
 
+herdr_codex_state() {
+  require_command python3
+  python3 "$BOOTSTRAP_DIR/herdr-codex-state.py" "${CODEX_HOME:-$HOME/.codex}"
+}
+
 harness_extension_files() {
   git -C "$1" -c core.quotePath=false ls-files -- \
     ':(glob).pi/agent/extensions/*.ts' ':(glob).pi/agent/extensions/*.js'

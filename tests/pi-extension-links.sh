@@ -12,6 +12,7 @@ bootstrap_init() { PLATFORM=${TEST_PLATFORM:-macos}; }
 install_agents() { :; }
 install_revdiff() { :; }
 install_revdiff_integrations() { :; }
+install_herdr_codex_integration() { :; }
 main
 EOF
 sed '$d' "$repository/bootstrap/verify.sh" >"$work/verify.sh"
