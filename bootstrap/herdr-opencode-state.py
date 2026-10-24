@@ -52,11 +52,12 @@ def parse_jsonc(text: str) -> object:
     return json.loads("".join(parts), parse_constant=reject_json_constant)
 
 
-def inspect(home: Path) -> dict[str, str]:
+def inspect(home: Path, state_home: Path) -> dict[str, str]:
     home = Path(os.path.abspath(home))
+    state_home = Path(os.path.abspath(state_home))
 
     def result(state: str, reason: str) -> dict[str, str]:
-        return {"state": state, "reason": reason, "home": str(home)}
+        return {"state": state, "reason": reason, "home": str(home), "state_home": str(state_home)}
 
     for directory in (home, home / "plugins", home / "herdr-opencode"):
         if directory.is_symlink() or (directory.exists() and not directory.is_dir()):
@@ -85,9 +86,14 @@ def inspect(home: Path) -> dict[str, str]:
             return result("conflict", f"{relative} is not a recognized Herdr-generated file")
         present += 1
 
-    registered = 0
-    for relative, (key, specifier) in CONFIG_FILES.items():
+    registered = set()
+    # Herdr accepts a V1 registration in either file, but never writes tui.json:
+    # OpenCode needs that file intact for its first V2 preference migration.
+    config_files = {**CONFIG_FILES, "tui.json": ("plugin", "./herdr-tui-session.js")}
+    for relative, (key, specifier) in config_files.items():
         file = home / relative
+        if relative == "tui.json" and not file.is_file():
+            continue
         try:
             config = parse_jsonc(file.read_text(encoding="utf-8")) if file.exists() else {}
         except (OSError, UnicodeError, ValueError):
@@ -108,9 +114,20 @@ def inspect(home: Path) -> dict[str, str]:
                 found = True
             elif Path(reference.rstrip("/")).name == Path(specifier).name:
                 return result("conflict", f"custom Herdr plugin reference in {relative}; review it manually")
-        registered += found
+        if found:
+            registered.add(specifier)
 
-    if present == len(GENERATED_FILES) and registered == len(CONFIG_FILES):
+    # Match Herdr's migration safeguard: do not require/create cli.json while
+    # V1 preferences remain to be imported. An existing cli.json still needs its
+    # V2 registration, even when the old preference files have been retained.
+    cli_deferred = not (home / "cli.json").exists() and (
+        (home / "tui.json").is_file() or (state_home / "opencode/kv.json").is_file()
+    )
+    if present == len(GENERATED_FILES) and "./herdr-tui-session.js" in registered and (
+        "./herdr-opencode" in registered or cli_deferred
+    ):
+        if cli_deferred:
+            return result("complete", "OpenCode V1 integration is complete; V2 registration awaits preference migration")
         return result("complete", "server plugin, TUI plugins, and both registrations are present")
     if present or registered:
         return result("partial", "a Herdr OpenCode plugin or registration is missing")
@@ -120,9 +137,10 @@ def inspect(home: Path) -> dict[str, str]:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("home", type=Path, help="effective OpenCode configuration directory")
+    parser.add_argument("state_home", type=Path, help="XDG state base, containing opencode/kv.json")
     args = parser.parse_args()
     try:
-        print(json.dumps(inspect(args.home)))
+        print(json.dumps(inspect(args.home, args.state_home)))
     except OSError:
         print("Cannot inspect OpenCode integration paths", file=sys.stderr)
         sys.exit(2)

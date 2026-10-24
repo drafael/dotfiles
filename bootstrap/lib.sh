@@ -391,7 +391,9 @@ herdr_claude_state() {
 
 herdr_opencode_state() {
   require_command python3
-  python3 "$BOOTSTRAP_DIR/herdr-opencode-state.py" -- "${OPENCODE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/opencode}"
+  python3 "$BOOTSTRAP_DIR/herdr-opencode-state.py" -- \
+    "${OPENCODE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/opencode}" \
+    "${XDG_STATE_HOME:-$HOME/.local/state}"
 }
 
 herdr_copilot_state() {

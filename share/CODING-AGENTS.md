@@ -69,11 +69,13 @@ Claude backups are saved under `~/.dotfiles-backups/`, with their location print
 
 ### OpenCode
 
-OpenCode integration setup also requires Python 3.11+ and jq. It checks three generated files (`plugins/herdr-agent-state.js`, `herdr-tui-session.js`, and `herdr-opencode/tui.js`) and the registrations in `tui.jsonc` and `cli.json`. These cover the server plugin and both TUI entrypoints. Complete installations are left untouched, regardless of script version; missing or recognized partial installations are backed up and installed or repaired with `herdr integration install opencode`. Native merging preserves unrelated plugin entries, options, and JSONC comments. Other OpenCode configuration files and local plugins are not replaced.
+OpenCode integration setup also requires Python 3.11+ and jq. It checks three generated files (`plugins/herdr-agent-state.js`, `herdr-tui-session.js`, and `herdr-opencode/tui.js`), the V1 registration in `tui.jsonc` or `tui.json`, and the V2 registration in `cli.json` when migration allows it. These cover the server plugin and both TUI entrypoints. Complete installations are left untouched, regardless of script version; missing or recognized partial installations are backed up and installed or repaired with `herdr integration install opencode`. Native merging preserves unrelated plugin entries, options, and JSONC comments. Other OpenCode configuration files and local plugins are not replaced.
 
-Herdr setup selects `OPENCODE_CONFIG_DIR` first, then `$XDG_CONFIG_HOME/opencode`, then `~/.config/opencode`. Herdr's current installer hardcodes `HOME/.config/opencode`, so the bootstrap scripts use a temporary HOME alias for custom destinations and remove it afterward. Generated references stay relative; no temporary paths are stored in the integration. These overrides apply to Herdr setup; other OpenCode setup steps are unchanged.
+Herdr intentionally leaves `cli.json` absent while V1 preferences in `tui.json` or `${XDG_STATE_HOME:-$HOME/.local/state}/opencode/kv.json` await migration. This is a complete V1 installation, not an error, and does not block the later Copilot integration step. To enable V2, start `opencode2` once to migrate preferences, then rerun the bootstrap scripts. An existing `cli.json` without the Herdr registration still needs repair; the bootstrap scripts do not create placeholder preferences to bypass migration.
 
-Malformed JSON/JSONC, invalid plugin lists, symlinked managed paths, unrecognized generated files, and custom Herdr references or options stop setup before native writes. Legacy `herdr-agent-state.ts` in `plugins/`, or `herdr-agent-state.js`/`.ts` in `plugin/`, must be retired manually to avoid duplicate discovery. Existing affected files are copied to `~/.dotfiles-backups/` before changes. On failure, inspect the reported paths and backups before retrying; the bootstrap scripts validate all five artifacts but do not roll back automatically. Avoid concurrent OpenCode configuration writers. The bootstrap scripts do not restart sessions or upgrade complete integrations automatically. Verify live reporting and session selection with a new OpenCode session inside Herdr; the bootstrap scripts check structural installation, not live TUI behavior.
+Herdr setup selects `OPENCODE_CONFIG_DIR` first, then `$XDG_CONFIG_HOME/opencode`, then `~/.config/opencode`. Herdr's current installer hardcodes `HOME/.config/opencode`, so the bootstrap scripts use a temporary HOME alias for custom destinations and remove it afterward. The alias retains the real state-home path for migration checks. Generated references stay relative; no temporary paths are stored in the integration. These overrides apply to Herdr setup; other OpenCode setup steps are unchanged.
+
+Malformed JSON/JSONC, invalid plugin lists, symlinked managed paths, unrecognized generated files, and custom Herdr references or options stop setup before native writes. Legacy `herdr-agent-state.ts` in `plugins/`, or `herdr-agent-state.js`/`.ts` in `plugin/`, must be retired manually to avoid duplicate discovery. Existing affected files are copied to `~/.dotfiles-backups/` before changes. On failure, inspect the reported paths and backups before retrying; the bootstrap scripts validate generated files and applicable registrations but do not roll back automatically. Avoid concurrent OpenCode configuration writers. The bootstrap scripts do not restart sessions or upgrade complete integrations automatically. Verify live reporting and session selection with a new OpenCode session inside Herdr; the bootstrap scripts check structural installation, not live TUI behavior.
 
 After upgrading Herdr, refresh explicitly with `herdr integration install opencode` for the default destination. For a custom destination, back up the five affected files first, then use this native refresh command; it does not perform the bootstrap scripts' preflight or backups:
 
@@ -82,12 +84,13 @@ After upgrading Herdr, refresh explicitly with `herdr integration install openco
   set -eu
   config_dir=${OPENCODE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/opencode}
   config_dir=$(CDPATH= cd -- "$config_dir" && pwd)
+  state_home=${XDG_STATE_HOME:-$HOME/.local/state}
   native_home=$(mktemp -d "${TMPDIR:-/tmp}/herdr-opencode-home.XXXXXX")
   trap 'rm -rf "$native_home"' EXIT
   trap 'exit 1' HUP INT TERM
   mkdir "$native_home/.config"
   ln -s "$config_dir" "$native_home/.config/opencode"
-  HOME="$native_home" herdr integration install opencode
+  HOME="$native_home" XDG_STATE_HOME="$state_home" herdr integration install opencode
 )
 ```
 

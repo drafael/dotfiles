@@ -433,6 +433,7 @@ install_herdr_opencode_integration() {
   esac
 
   herdr_opencode_home=$(printf '%s\n' "$herdr_opencode_inspection" | jq -r .home)
+  herdr_opencode_state_home=$(printf '%s\n' "$herdr_opencode_inspection" | jq -r .state_home)
   herdr_opencode_backed_up=false
   for herdr_opencode_file in plugins/herdr-agent-state.js herdr-tui-session.js herdr-opencode/tui.js tui.jsonc cli.json; do
     if [ -f "$herdr_opencode_home/$herdr_opencode_file" ]; then
@@ -454,7 +455,7 @@ install_herdr_opencode_integration() {
       trap 'exit 1' HUP INT TERM
       mkdir -p "$herdr_opencode_native_home/.config" &&
         ln -s "$herdr_opencode_home" "$herdr_opencode_native_home/.config/opencode" &&
-        HOME="$herdr_opencode_native_home" herdr integration install opencode
+        HOME="$herdr_opencode_native_home" XDG_STATE_HOME="$herdr_opencode_state_home" herdr integration install opencode
     fi
   ) || herdr_opencode_result=$?
   if [ "$herdr_opencode_result" = 0 ]; then

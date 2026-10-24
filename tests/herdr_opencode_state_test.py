@@ -51,6 +51,7 @@ class OpenCodeStateTest(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory(prefix="opencode-state-test-")
         self.addCleanup(self.temporary.cleanup)
         self.home = Path(self.temporary.name) / "OpenCode's home"
+        self.state_home = Path(self.temporary.name) / "state"
         self.generated = {
             "plugins/herdr-agent-state.js": "opencode",
             "herdr-tui-session.js": "opencode-tui",
@@ -74,7 +75,7 @@ class OpenCodeStateTest(unittest.TestCase):
 
     def assert_state(self, expected):
         before = {path: path.read_bytes() for path in self.home.rglob("*") if path.is_file()}
-        inspected = state.inspect(self.home)
+        inspected = state.inspect(self.home, self.state_home)
         self.assertEqual(inspected["state"], expected, inspected)
         self.assertEqual(inspected["home"], str(self.home))
         self.assertEqual(before, {path: path.read_bytes() for path in self.home.rglob("*") if path.is_file()})
@@ -117,6 +118,55 @@ class OpenCodeStateTest(unittest.TestCase):
                 path.write_text('{}')
                 self.assert_state("partial")
                 path.write_bytes(content)
+
+    def test_v1_kv_preferences_defer_v2_without_creating_cli_config(self):
+        self.complete()
+        (self.home / "cli.json").unlink()
+        kv = self.state_home / "opencode/kv.json"
+        kv.parent.mkdir(parents=True)
+        kv.write_text('{"fixturePreference":"preserve"}')
+
+        inspected = self.assert_state("complete")
+
+        self.assertIn("awaits preference migration", inspected["reason"])
+        self.assertFalse((self.home / "cli.json").exists())
+        self.assertEqual(kv.read_text(), '{"fixturePreference":"preserve"}')
+
+    def test_v1_tui_preferences_defer_v2_without_creating_cli_config(self):
+        self.complete()
+        (self.home / "cli.json").unlink()
+        (self.home / "tui.json").write_text('{"theme":"fixture-theme"}')
+
+        self.assert_state("complete")
+        self.assertFalse((self.home / "cli.json").exists())
+
+    def test_existing_cli_config_needs_registration_despite_legacy_preferences(self):
+        self.complete()
+        (self.home / "cli.json").write_text('{}')
+        (self.home / "tui.json").write_text('{"theme":"fixture-theme"}')
+
+        self.assert_state("partial")
+
+    def test_v1_registration_in_tui_json_is_complete(self):
+        self.complete()
+        (self.home / "tui.jsonc").rename(self.home / "tui.json")
+
+        self.assert_state("complete")
+
+    def test_read_only_legacy_tui_symlink_is_preserved(self):
+        self.complete()
+        legacy = self.home.parent / "legacy-tui.json"
+        (self.home / "tui.jsonc").rename(legacy)
+        (self.home / "tui.json").symlink_to(legacy)
+
+        self.assert_state("complete")
+        self.assertTrue((self.home / "tui.json").is_symlink())
+
+    def test_invalid_legacy_tui_config_is_a_conflict(self):
+        self.complete()
+        (self.home / "tui.json").write_text('{invalid')
+
+        self.assert_state("conflict")
 
     def test_registrations_without_plugins_are_partial(self):
         self.complete()
@@ -254,7 +304,7 @@ class OpenCodeStateTest(unittest.TestCase):
 
     def test_relative_home_is_reported_as_absolute(self):
         relative = Path(os.path.relpath(self.home))
-        self.assertEqual(state.inspect(relative)["home"], str(self.home))
+        self.assertEqual(state.inspect(relative, self.state_home)["home"], str(self.home))
 
 
 if __name__ == "__main__":

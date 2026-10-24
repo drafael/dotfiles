@@ -5,7 +5,7 @@ repository=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 work=$(mktemp -d "${TMPDIR:-/tmp}/herdr-opencode-bootstrap-test.XXXXXX")
 trap 'rm -rf "$work"' EXIT HUP INT TERM
 mkdir -p "$work/bin" "$work/native-temporaries"
-cp "$repository/bootstrap/lib.sh" "$repository/bootstrap/packages.sh" "$repository/bootstrap/herdr-opencode-state.py" "$work/"
+cp "$repository/bootstrap/lib.sh" "$repository/bootstrap/packages.sh" "$repository/bootstrap/herdr-opencode-state.py" "$repository/bootstrap/herdr-copilot-state.py" "$work/"
 sed '$d' "$repository/bootstrap/coding-agents.sh" >"$work/bootstrap.sh"
 cat >>"$work/bootstrap.sh" <<'EOF'
 bootstrap_init() { PLATFORM=${TEST_PLATFORM:-macos}; }
@@ -40,9 +40,12 @@ cat >"$work/bin/herdr" <<'EOF'
 #!/bin/sh
 set -eu
 [ -f "$CLAUDE_READY" ]
-[ "$*" = 'integration install opencode' ]
 printf '%s\n' "$*" >>"$HERDR_CALLS"
-exec python3 "$NATIVE_FIXTURE"
+case $* in
+  'integration install opencode') exec python3 "$NATIVE_FIXTURE" ;;
+  'integration install copilot') exec python3 "$COPILOT_FIXTURE" ;;
+  *) exit 1 ;;
+esac
 EOF
 chmod +x "$work/bin/herdr"
 cat >"$work/native-fixture.py" <<'EOF'
@@ -73,6 +76,12 @@ for relative, key, reference in (
     ('cli.json', 'plugins', './herdr-opencode'),
 ):
     path = home / relative
+    state_home = Path(os.environ.get('XDG_STATE_HOME') or Path.home() / '.local/state')
+    if relative == 'cli.json' and not path.exists() and (
+        (home / 'tui.json').is_file() or (state_home / 'opencode/kv.json').is_file()
+    ):
+        print('to enable OpenCode V2, start opencode2 once, then reinstall this integration')
+        continue
     text = path.read_text() if path.exists() else '{}'
     # Fixtures use one leading comment; full JSONC parsing is tested separately.
     comment, text = text.split('\n', 1) if text.startswith('//') else ('', text)
@@ -82,6 +91,22 @@ for relative, key, reference in (
         plugins.append(reference)
     path.write_text((comment + '\n' if comment else '') + json.dumps(config))
 EOF
+cat >"$work/copilot-fixture.py" <<'EOF'
+import json
+import os
+from pathlib import Path
+
+home = Path(os.environ['COPILOT_HOME'])
+script = home / 'hooks/herdr-agent-state.sh'
+script.parent.mkdir(exist_ok=True)
+script.write_text('#!/bin/sh\n# installed by herdr\n# HERDR_INTEGRATION_ID=copilot\n')
+command = "bash '" + str(script).replace("'", "'\"'\"'") + "'"
+(home / 'settings.json').write_text(json.dumps({'hooks': {'SessionStart': [
+    {'type': 'command', 'bash': command, 'timeoutSec': 10},
+]}}))
+EOF
+COPILOT_FIXTURE="$work/copilot-fixture.py"
+export COPILOT_FIXTURE
 PATH="$work/bin"
 TMPDIR="$work/native-temporaries"
 HERDR_CALLS="$work/herdr-calls"
@@ -92,7 +117,7 @@ export PATH TMPDIR HERDR_CALLS CLAUDE_READY NATIVE_FIXTURE
 fixture() {
   HOME="$work/$1"
   export HOME
-  unset OPENCODE_CONFIG_DIR XDG_CONFIG_HOME NATIVE_FAIL NATIVE_NO_FILES NATIVE_NO_REGISTRATION
+  unset OPENCODE_CONFIG_DIR XDG_CONFIG_HOME XDG_STATE_HOME COPILOT_HOME NATIVE_FAIL NATIVE_NO_FILES NATIVE_NO_REGISTRATION
   opencode_home="$HOME/.config/opencode"
   : >"$HERDR_CALLS"
   rm -f "$CLAUDE_READY"
@@ -249,6 +274,51 @@ for failure in NATIVE_NO_FILES NATIVE_NO_REGISTRATION; do
   grep -Fq 'may have partially changed' "$work/error"
   assert_no_alias
 done
+
+# A successful V1 installation with deferred V2 migration must not prevent the
+# following Copilot step. Preserve the real state path through the HOME alias.
+fixture v1-migration
+OPENCODE_CONFIG_DIR="$HOME/OpenCode's custom config"
+XDG_STATE_HOME="$HOME/legacy state"
+export OPENCODE_CONFIG_DIR XDG_STATE_HOME
+mkdir -p "$XDG_STATE_HOME/opencode"
+printf '{"fixturePreference":"preserve"}\n' >"$XDG_STATE_HOME/opencode/kv.json"
+cp "$XDG_STATE_HOME/opencode/kv.json" "$work/kv-before"
+run_bootstrap
+verify_state complete
+[ ! -e "$OPENCODE_CONFIG_DIR/cli.json" ]
+grep -Fq 'start opencode2 once' "$work/output"
+assert_no_alias
+sed '$d' "$repository/bootstrap/coding-agents.sh" >"$work/combined.sh"
+cat >>"$work/combined.sh" <<'EOF'
+bootstrap_init() { PLATFORM=macos; }
+install_agents() { :; }
+install_revdiff() { :; }
+install_revdiff_integrations() { :; }
+provision_harness() { :; }
+install_herdr_pi_integration() { :; }
+install_herdr_codex_integration() { :; }
+install_herdr_claude_integration() { : >"$CLAUDE_READY"; }
+main
+EOF
+: >"$HERDR_CALLS"
+sh "$work/combined.sh" >"$work/output" 2>"$work/error"
+grep -Fxq 'integration install copilot' "$HERDR_CALLS"
+[ -f "$HOME/.copilot/hooks/herdr-agent-state.sh" ]
+[ ! -e "$OPENCODE_CONFIG_DIR/cli.json" ]
+cmp "$work/kv-before" "$XDG_STATE_HOME/opencode/kv.json"
+assert_no_alias
+
+# Simulate OpenCode's own V2 migration creating cli.json. The next run must add
+# the registration instead of treating a missing V2 hook as permanently optional.
+printf '{"plugins":["user-cli"]}\n' >"$OPENCODE_CONFIG_DIR/cli.json"
+: >"$HERDR_CALLS"
+sh "$work/combined.sh" >"$work/output" 2>"$work/error"
+grep -Fxq 'integration install opencode' "$HERDR_CALLS"
+jq -e '.plugins | index("./herdr-opencode") != null' "$OPENCODE_CONFIG_DIR/cli.json" >/dev/null
+verify_state complete
+cmp "$work/kv-before" "$XDG_STATE_HOME/opencode/kv.json"
+assert_no_alias
 
 fixture unavailable-python
 mv "$work/bin/python3" "$work/bin/python3-real"
