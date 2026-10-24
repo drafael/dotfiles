@@ -384,6 +384,11 @@ herdr_codex_state() {
   python3 "$BOOTSTRAP_DIR/herdr-codex-state.py" "${CODEX_HOME:-$HOME/.codex}"
 }
 
+herdr_claude_state() {
+  require_command python3
+  python3 "$BOOTSTRAP_DIR/herdr-claude-state.py" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+}
+
 harness_extension_files() {
   git -C "$1" -c core.quotePath=false ls-files -- \
     ':(glob).pi/agent/extensions/*.ts' ':(glob).pi/agent/extensions/*.js'

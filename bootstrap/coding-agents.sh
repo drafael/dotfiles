@@ -17,7 +17,7 @@ usage() {
     'Usage: coding-agents.sh' \
     '' \
     'Install missing coding-agent tools, integrations, and shared harness configuration.' \
-    'Herdr Codex setup requires Python 3.11+ and jq; existing configuration is validated before changes.'
+    'Herdr Codex and Claude setup requires Python 3.11+ and jq; their configuration is validated before Herdr writes.'
 }
 
 ensure_javascript_prerequisite() {
@@ -378,6 +378,49 @@ install_herdr_codex_integration() {
   fi
 }
 
+install_herdr_claude_integration() {
+  require_command jq
+  herdr_claude_inspection=$(herdr_claude_state) || fail 'cannot inspect Herdr Claude integration; Python 3.11+ is required'
+  herdr_claude_status=$(printf '%s\n' "$herdr_claude_inspection" | jq -r .state)
+  case $herdr_claude_status in
+    complete) return ;;
+    missing|partial) ;;
+    conflict) fail "Herdr Claude integration conflict: $(printf '%s\n' "$herdr_claude_inspection" | jq -r .reason)" ;;
+    *) fail 'unexpected Herdr Claude inspection result' ;;
+  esac
+
+  herdr_claude_home=$(printf '%s\n' "$herdr_claude_inspection" | jq -r .home)
+  herdr_claude_backed_up=false
+  for herdr_claude_file in hooks/herdr-agent-state.sh settings.json; do
+    if [ -f "$herdr_claude_home/$herdr_claude_file" ]; then
+      backup_copy "$herdr_claude_home/$herdr_claude_file"
+      herdr_claude_backed_up=true
+    fi
+  done
+  mkdir -p "$herdr_claude_home"
+  info 'Installing or repairing the Herdr integration for Claude Code'
+  herdr_claude_result=0
+  CLAUDE_CONFIG_DIR="$herdr_claude_home" herdr integration install claude || herdr_claude_result=$?
+  if [ "$herdr_claude_result" = 0 ]; then
+    if herdr_claude_after=$(CLAUDE_CONFIG_DIR="$herdr_claude_home" herdr_claude_state); then
+      if [ "$(printf '%s\n' "$herdr_claude_after" | jq -r .state)" != complete ]; then
+        warn "Herdr Claude integration validation failed: $(printf '%s\n' "$herdr_claude_after" | jq -r .reason)"
+        herdr_claude_result=1
+      fi
+    else
+      warn 'cannot validate Herdr Claude integration after installation'
+      herdr_claude_result=1
+    fi
+  fi
+  if [ "$herdr_claude_backed_up" = true ]; then
+    printf 'Claude configuration backup: %s\n' "$BACKUP_DIR"
+  fi
+  if [ "$herdr_claude_result" != 0 ]; then
+    warn "Herdr may have partially changed hooks/herdr-agent-state.sh or settings.json in $herdr_claude_home; inspect them before retrying"
+    return "$herdr_claude_result"
+  fi
+}
+
 opencode_revdiff_is_installed() {
   opencode_config_dir="$HOME/.config/opencode"
   for relative_path in \
@@ -438,6 +481,7 @@ main() {
   provision_harness
   install_herdr_pi_integration
   install_herdr_codex_integration
+  install_herdr_claude_integration
 }
 
 main "$@"
