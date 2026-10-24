@@ -21,6 +21,8 @@ alias ta='tmux attach-session -t'
 alias tl='tmux list-sessions'
 alias tk='tmux kill-session -t'
 
+alias h=herdr
+
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
@@ -49,9 +51,6 @@ alias clr=clear
 alias clra=clear
 alias cler=clear
 alias clera=clear
-
-alias j="jobs"
-alias h="history"
 
 # AWS
 alias aws-whoami='aws sts get-caller-identity'
