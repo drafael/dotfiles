@@ -17,7 +17,7 @@ usage() {
     'Usage: coding-agents.sh' \
     '' \
     'Install missing coding-agent tools, integrations, and shared harness configuration.' \
-    'Herdr Codex, Claude, and OpenCode setup requires Python 3.11+ and jq; their configuration is validated before Herdr writes.'
+    'Herdr Codex, Claude, OpenCode, and Copilot setup requires Python 3.11+ and jq; configuration is validated before Herdr writes.'
 }
 
 ensure_javascript_prerequisite() {
@@ -477,6 +477,49 @@ install_herdr_opencode_integration() {
   fi
 }
 
+install_herdr_copilot_integration() {
+  require_command jq
+  herdr_copilot_inspection=$(herdr_copilot_state) || fail 'cannot inspect Herdr Copilot integration; Python 3.11+ is required'
+  herdr_copilot_status=$(printf '%s\n' "$herdr_copilot_inspection" | jq -r .state)
+  case $herdr_copilot_status in
+    complete) return ;;
+    missing|partial) ;;
+    conflict) fail "Herdr Copilot integration conflict: $(printf '%s\n' "$herdr_copilot_inspection" | jq -r .reason)" ;;
+    *) fail 'unexpected Herdr Copilot inspection result' ;;
+  esac
+
+  herdr_copilot_home=$(printf '%s\n' "$herdr_copilot_inspection" | jq -r .home)
+  herdr_copilot_backed_up=false
+  for herdr_copilot_file in hooks/herdr-agent-state.sh settings.json; do
+    if [ -f "$herdr_copilot_home/$herdr_copilot_file" ]; then
+      backup_copy "$herdr_copilot_home/$herdr_copilot_file"
+      herdr_copilot_backed_up=true
+    fi
+  done
+  mkdir -p -m 700 "$herdr_copilot_home"
+  info 'Installing or repairing the Herdr integration for GitHub Copilot CLI'
+  herdr_copilot_result=0
+  COPILOT_HOME="$herdr_copilot_home" herdr integration install copilot || herdr_copilot_result=$?
+  if [ "$herdr_copilot_result" = 0 ]; then
+    if herdr_copilot_after=$(COPILOT_HOME="$herdr_copilot_home" herdr_copilot_state); then
+      if [ "$(printf '%s\n' "$herdr_copilot_after" | jq -r .state)" != complete ]; then
+        warn "Herdr Copilot integration validation failed: $(printf '%s\n' "$herdr_copilot_after" | jq -r .reason)"
+        herdr_copilot_result=1
+      fi
+    else
+      warn 'cannot validate Herdr Copilot integration after installation'
+      herdr_copilot_result=1
+    fi
+  fi
+  if [ "$herdr_copilot_backed_up" = true ]; then
+    printf 'Copilot configuration backup: %s\n' "$BACKUP_DIR"
+  fi
+  if [ "$herdr_copilot_result" != 0 ]; then
+    warn "Herdr may have partially changed hooks/herdr-agent-state.sh or settings.json in $herdr_copilot_home; inspect them before retrying"
+    return "$herdr_copilot_result"
+  fi
+}
+
 opencode_revdiff_is_installed() {
   opencode_config_dir="$HOME/.config/opencode"
   for relative_path in \
@@ -539,6 +582,7 @@ main() {
   install_herdr_codex_integration
   install_herdr_claude_integration
   install_herdr_opencode_integration
+  install_herdr_copilot_integration
 }
 
 main "$@"

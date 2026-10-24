@@ -227,6 +227,21 @@ main() {
     warn 'cannot inspect Herdr OpenCode integration; Python 3.11+ and jq are required'
   fi
 
+  if command -v jq >/dev/null 2>&1 && herdr_copilot_inspection=$(herdr_copilot_state); then
+    herdr_copilot_status=$(printf '%s\n' "$herdr_copilot_inspection" | jq -r .state)
+    printf 'Herdr Copilot integration: %s\n' "$herdr_copilot_status"
+    if [ "$herdr_copilot_status" != complete ]; then
+      warn "$(printf '%s\n' "$herdr_copilot_inspection" | jq -r .reason)"
+    fi
+  else
+    warn 'cannot inspect Herdr Copilot integration; Python 3.11+ and jq are required'
+  fi
+  if command -v copilot >/dev/null 2>&1; then
+    printf 'copilot: installed\n'
+  else
+    warn 'copilot is not available; install GitHub Copilot CLI separately'
+  fi
+
   if [ "$PLATFORM" = omarchy ]; then
     printf 'Claude Code, Codex, OpenCode, and Pi install through Omarchy when first launched.\n'
   else

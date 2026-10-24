@@ -72,6 +72,11 @@ jobs:
           python3 -B -m unittest discover -s tests -p 'herdr_opencode_state_test.py'
           sh tests/herdr-opencode-bootstrap.sh
 
+      - name: Test Herdr Copilot configuration and bootstrap without system changes
+        run: |
+          python3 -B -m unittest discover -s tests -p 'herdr_copilot_state_test.py'
+          sh tests/herdr-copilot-bootstrap.sh
+
       - name: Test Fedora routing without system changes
         run: sh tests/fedora-bootstrap.sh
 
@@ -114,6 +119,8 @@ jobs:
           sh tests/herdr-claude-bootstrap.sh
           python3 -B -m unittest discover -s tests -p 'herdr_opencode_state_test.py'
           sh tests/herdr-opencode-bootstrap.sh
+          python3 -B -m unittest discover -s tests -p 'herdr_copilot_state_test.py'
+          sh tests/herdr-copilot-bootstrap.sh
           sh tests/update.sh
 
       - name: Check syntax and help in Fedora userspace

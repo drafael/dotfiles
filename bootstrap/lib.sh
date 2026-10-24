@@ -394,6 +394,11 @@ herdr_opencode_state() {
   python3 "$BOOTSTRAP_DIR/herdr-opencode-state.py" -- "${OPENCODE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/opencode}"
 }
 
+herdr_copilot_state() {
+  require_command python3
+  python3 "$BOOTSTRAP_DIR/herdr-copilot-state.py" -- "${COPILOT_HOME:-$HOME/.copilot}"
+}
+
 harness_extension_files() {
   git -C "$1" -c core.quotePath=false ls-files -- \
     ':(glob).pi/agent/extensions/*.ts' ':(glob).pi/agent/extensions/*.js'

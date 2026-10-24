@@ -16,6 +16,7 @@ provision_harness() { :; }
 install_herdr_pi_integration() { :; }
 install_herdr_codex_integration() { :; }
 install_herdr_claude_integration() { : >"$CLAUDE_READY"; }
+install_herdr_copilot_integration() { :; }
 main
 EOF
 sed '$d' "$repository/bootstrap/verify.sh" >"$work/verify.sh"
@@ -29,6 +30,7 @@ print_font_support() { :; }
 print_harness_status() { :; }
 herdr_codex_state() { printf '{"state":"complete"}\n'; }
 herdr_claude_state() { printf '{"state":"complete"}\n'; }
+herdr_copilot_state() { printf '{"state":"complete"}\n'; }
 main
 EOF
 for utility in python3 jq awk cat chmod cmp cp date dirname env find grep ln mkdir mktemp mv rm sed sh; do
