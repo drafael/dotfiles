@@ -217,6 +217,16 @@ main() {
     warn 'cannot inspect Herdr Claude integration; Python 3.11+ and jq are required'
   fi
 
+  if command -v jq >/dev/null 2>&1 && herdr_opencode_inspection=$(herdr_opencode_state); then
+    herdr_opencode_status=$(printf '%s\n' "$herdr_opencode_inspection" | jq -r .state)
+    printf 'Herdr OpenCode integration: %s\n' "$herdr_opencode_status"
+    if [ "$herdr_opencode_status" != complete ]; then
+      warn "$(printf '%s\n' "$herdr_opencode_inspection" | jq -r .reason)"
+    fi
+  else
+    warn 'cannot inspect Herdr OpenCode integration; Python 3.11+ and jq are required'
+  fi
+
   if [ "$PLATFORM" = omarchy ]; then
     printf 'Claude Code, Codex, OpenCode, and Pi install through Omarchy when first launched.\n'
   else

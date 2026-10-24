@@ -17,7 +17,7 @@ usage() {
     'Usage: coding-agents.sh' \
     '' \
     'Install missing coding-agent tools, integrations, and shared harness configuration.' \
-    'Herdr Codex and Claude setup requires Python 3.11+ and jq; their configuration is validated before Herdr writes.'
+    'Herdr Codex, Claude, and OpenCode setup requires Python 3.11+ and jq; their configuration is validated before Herdr writes.'
 }
 
 ensure_javascript_prerequisite() {
@@ -421,6 +421,62 @@ install_herdr_claude_integration() {
   fi
 }
 
+install_herdr_opencode_integration() {
+  require_command jq
+  herdr_opencode_inspection=$(herdr_opencode_state) || fail 'cannot inspect Herdr OpenCode integration; Python 3.11+ is required'
+  herdr_opencode_status=$(printf '%s\n' "$herdr_opencode_inspection" | jq -r .state)
+  case $herdr_opencode_status in
+    complete) return ;;
+    missing|partial) ;;
+    conflict) fail "Herdr OpenCode integration conflict: $(printf '%s\n' "$herdr_opencode_inspection" | jq -r .reason)" ;;
+    *) fail 'unexpected Herdr OpenCode inspection result' ;;
+  esac
+
+  herdr_opencode_home=$(printf '%s\n' "$herdr_opencode_inspection" | jq -r .home)
+  herdr_opencode_backed_up=false
+  for herdr_opencode_file in plugins/herdr-agent-state.js herdr-tui-session.js herdr-opencode/tui.js tui.jsonc cli.json; do
+    if [ -f "$herdr_opencode_home/$herdr_opencode_file" ]; then
+      backup_copy "$herdr_opencode_home/$herdr_opencode_file"
+      herdr_opencode_backed_up=true
+    fi
+  done
+  mkdir -p "$herdr_opencode_home"
+  info 'Installing or repairing the Herdr integration for OpenCode'
+  herdr_opencode_result=0
+  (
+    if [ "$herdr_opencode_home" = "$HOME/.config/opencode" ]; then
+      herdr integration install opencode
+    else
+      # Herdr hardcodes HOME/.config/opencode. Its generated references are
+      # relative, so an owned alias lets it merge the actual custom directory.
+      herdr_opencode_native_home=$(mktemp -d "${TMPDIR:-/tmp}/herdr-opencode-home.XXXXXX") || exit 1
+      trap 'rm -rf "$herdr_opencode_native_home"' EXIT
+      trap 'exit 1' HUP INT TERM
+      mkdir -p "$herdr_opencode_native_home/.config" &&
+        ln -s "$herdr_opencode_home" "$herdr_opencode_native_home/.config/opencode" &&
+        HOME="$herdr_opencode_native_home" herdr integration install opencode
+    fi
+  ) || herdr_opencode_result=$?
+  if [ "$herdr_opencode_result" = 0 ]; then
+    if herdr_opencode_after=$(OPENCODE_CONFIG_DIR="$herdr_opencode_home" herdr_opencode_state); then
+      if [ "$(printf '%s\n' "$herdr_opencode_after" | jq -r .state)" != complete ]; then
+        warn "Herdr OpenCode integration validation failed: $(printf '%s\n' "$herdr_opencode_after" | jq -r .reason)"
+        herdr_opencode_result=1
+      fi
+    else
+      warn 'cannot validate Herdr OpenCode integration after installation'
+      herdr_opencode_result=1
+    fi
+  fi
+  if [ "$herdr_opencode_backed_up" = true ]; then
+    printf 'OpenCode configuration backup: %s\n' "$BACKUP_DIR"
+  fi
+  if [ "$herdr_opencode_result" != 0 ]; then
+    warn "Herdr may have partially changed its OpenCode plugins, tui.jsonc, or cli.json in $herdr_opencode_home; inspect them before retrying"
+    return "$herdr_opencode_result"
+  fi
+}
+
 opencode_revdiff_is_installed() {
   opencode_config_dir="$HOME/.config/opencode"
   for relative_path in \
@@ -482,6 +538,7 @@ main() {
   install_herdr_pi_integration
   install_herdr_codex_integration
   install_herdr_claude_integration
+  install_herdr_opencode_integration
 }
 
 main "$@"

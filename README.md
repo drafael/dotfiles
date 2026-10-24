@@ -145,7 +145,7 @@ pi
 
 Omarchy installs these agents through its existing `mise` launchers the first time each command runs. Other platforms use the agents' official installers during bootstrap.
 
-Bootstrap also installs [Herdr](https://herdr.dev/docs/install/): the Homebrew formula `herdr` on macOS, or the official checksum-verifying installer on Ubuntu, Fedora, Arch, and Omarchy. The Linux installer selects the x86-64 or ARM64 release and defaults to `~/.local/bin/herdr`; Omarchy keeps its existing agent launchers. Existing Herdr commands on `PATH` are left untouched, regardless of installation method. Start it manually with `herdr`; bootstrap installs its Pi, Codex, and Claude Code integrations but does not launch Herdr, install integrations for other agents, or replace tmux.
+Bootstrap also installs [Herdr](https://herdr.dev/docs/install/): the Homebrew formula `herdr` on macOS, or the official checksum-verifying installer on Ubuntu, Fedora, Arch, and Omarchy. The Linux installer selects the x86-64 or ARM64 release and defaults to `~/.local/bin/herdr`; Omarchy keeps its existing agent launchers. Existing Herdr commands on `PATH` are left untouched, regardless of installation method. Start it manually with `herdr`; bootstrap installs its Pi, Codex, Claude Code, and OpenCode integrations but does not launch Herdr, install integrations for other agents, or replace tmux.
 
 Update Homebrew installations with `./update.sh` or `brew upgrade herdr`, not `herdr update`. Direct Linux installations use `herdr update` separately; `./update.sh` does not update those installations. Intel Macs may require a source build with Rust and Zig when no Homebrew bottle is available.
 
@@ -172,6 +172,28 @@ Claude Code integration setup uses the same Python 3.11+ and jq prerequisites. B
 Claude setup stops before Herdr writes if settings are malformed, `disableAllHooks` is true, managed paths are symlinks, the script is unrecognized, or a registration for that script has a custom command or matcher. Bootstrap preserves Herdr's native `^(startup|resume|clear|compact|fork)$` matcher rather than broadening it. Resolve custom or legacy registrations manually before rerunning; bootstrap will not silently broaden their scope. Installation is validated structurally; Herdr's status alone does not detect missing registration or disabled hooks.
 
 Claude backups are saved under `~/.dotfiles-backups/`, with their location printed. On installation failure, inspect both affected paths and the backups before retrying; bootstrap does not automatically uninstall or restore files. Do not run it concurrently with other Claude settings writers. After upgrading Herdr, refresh explicitly with `herdr integration install claude`; bootstrap does not upgrade complete integrations automatically or restart sessions. Verify activation with a new Claude session inside Herdr. The hook reports session identity; managed or project policies can still prevent execution, and bootstrap does not validate live hook delivery or session resume.
+
+OpenCode integration setup also requires Python 3.11+ and jq. It checks three generated files (`plugins/herdr-agent-state.js`, `herdr-tui-session.js`, and `herdr-opencode/tui.js`) and the registrations in `tui.jsonc` and `cli.json`. These cover the server plugin and both TUI entrypoints. Complete installations are left untouched, regardless of script version; missing or recognized partial installations are backed up and installed or repaired with `herdr integration install opencode`. Native merging preserves unrelated plugin entries, options, and JSONC comments. Other OpenCode configuration files and local plugins are not replaced.
+
+Herdr setup selects `OPENCODE_CONFIG_DIR` first, then `$XDG_CONFIG_HOME/opencode`, then `~/.config/opencode`. Herdr's current installer hardcodes `HOME/.config/opencode`, so bootstrap uses a temporary HOME alias for custom destinations and removes it afterward. Generated references stay relative; no temporary paths are stored in the integration. These overrides apply to Herdr setup; other OpenCode bootstrap steps are unchanged.
+
+Malformed JSON/JSONC, invalid plugin lists, symlinked managed paths, unrecognized generated files, and custom Herdr references or options stop setup before native writes. Legacy `herdr-agent-state.ts` in `plugins/`, or `herdr-agent-state.js`/`.ts` in `plugin/`, must be retired manually to avoid duplicate discovery. Existing affected files are copied to `~/.dotfiles-backups/` before changes. On failure, inspect the reported paths and backups before retrying; bootstrap validates all five artifacts but does not roll back automatically. Avoid concurrent OpenCode configuration writers. Bootstrap does not restart sessions or upgrade complete integrations automatically. Verify live reporting and session selection with a new OpenCode session inside Herdr; bootstrap checks structural installation, not live TUI behavior.
+
+After upgrading Herdr, refresh explicitly with `herdr integration install opencode` for the default destination. For a custom destination, back up the five affected files first, then use this native refresh command; it does not perform bootstrap's preflight or backups:
+
+```sh
+(
+  set -eu
+  config_dir=${OPENCODE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/opencode}
+  config_dir=$(CDPATH= cd -- "$config_dir" && pwd)
+  native_home=$(mktemp -d "${TMPDIR:-/tmp}/herdr-opencode-home.XXXXXX")
+  trap 'rm -rf "$native_home"' EXIT
+  trap 'exit 1' HUP INT TERM
+  mkdir "$native_home/.config"
+  ln -s "$config_dir" "$native_home/.config/opencode"
+  HOME="$native_home" herdr integration install opencode
+)
+```
 
 Pi Voice STT uses the harness provider profiles and the plugin's platform capture defaults: `avfoundation` / `:0` on macOS and `pulse` / `default` on Linux (PulseAudio or PipeWire's PulseAudio compatibility service). Microphone capture requires `ffmpeg`, a working input device, and the selected provider's API key (the shared default uses `GROQ_API_KEY`). On Linux, check that `ffmpeg -devices` lists `pulse`; ALSA-only systems can use `capture.inputFormat: "alsa"` and `capture.input: "default"` in a machine-specific config selected with `PI_STT_CONFIG`. Audio-file transcription does not require microphone capture. Bootstrap does not test microphones or configure audio services. If an older harness checkout lacks `stt.json`, bootstrap warns and leaves the local STT config untouched; update the checkout manually and rerun bootstrap.
 

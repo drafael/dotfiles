@@ -14,6 +14,7 @@ install_revdiff() { :; }
 install_revdiff_integrations() { :; }
 install_herdr_codex_integration() { :; }
 install_herdr_claude_integration() { :; }
+install_herdr_opencode_integration() { :; }
 main
 EOF
 sed '$d' "$repository/bootstrap/verify.sh" >"$work/verify.sh"

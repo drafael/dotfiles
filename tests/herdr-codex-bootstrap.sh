@@ -15,6 +15,7 @@ install_revdiff_integrations() { :; }
 provision_harness() { :; }
 install_herdr_pi_integration() { : >"$PI_READY"; }
 install_herdr_claude_integration() { :; }
+install_herdr_opencode_integration() { :; }
 main
 EOF
 for utility in python3 jq awk cat chmod cmp cp date dirname find grep ln mkdir mktemp mv rm sed sh; do
