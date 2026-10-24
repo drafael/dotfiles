@@ -57,6 +57,7 @@ print_command_version() {
     zoxide) first_line zoxide --version ;;
     rg) first_line rg --version ;;
     revdiff) first_line revdiff --version ;;
+    herdr) first_line herdr --version ;;
     op) printf 'op: %s\n' "$(op --version)" ;;
     java) first_line java -version ;;
     javac) first_line javac -version ;;
@@ -167,6 +168,7 @@ main() {
   print_yazi_support
   print_font_support
 
+  print_command_version herdr
   print_command_version op
 
   if [ "$PLATFORM" != ubuntu ] && [ "$PLATFORM" != fedora ]; then

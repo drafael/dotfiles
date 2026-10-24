@@ -52,6 +52,9 @@ jobs:
       - name: Test Pi installation routing without system changes
         run: sh tests/pi-bootstrap.sh
 
+      - name: Test Herdr installation without system changes
+        run: sh tests/herdr-bootstrap.sh
+
       - name: Test Fedora routing without system changes
         run: sh tests/fedora-bootstrap.sh
 
@@ -86,6 +89,7 @@ jobs:
         run: |
           sh tests/fedora-bootstrap.sh
           sh tests/fedora-yazi.sh
+          sh tests/herdr-bootstrap.sh
           sh tests/update.sh
 
       - name: Check syntax and help in Fedora userspace

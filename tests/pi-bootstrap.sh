@@ -13,8 +13,8 @@ sed '$d' "$test_repository/bootstrap/coding-agents.sh" >"$work/harness-links.sh"
 printf '\nPLATFORM=${TEST_PLATFORM:-macos}\nlink_harness_configuration\n' >>"$work/harness-links.sh"
 mkdir -p "$work/bin" "$work/home"
 
-# Other agents and npm are already present; none should be executed.
-for tool in claude opencode codex npm; do
+# Other agents, Herdr, and npm are already present; none should be executed.
+for tool in claude opencode codex herdr npm; do
   printf '#!/bin/sh\nexit 99\n' >"$work/bin/$tool"
   chmod +x "$work/bin/$tool"
 done

@@ -131,7 +131,8 @@ cat >"$work/base-brew.json" <<'EOF'
 {"formulae":[
  {"name":"jq","full_name":"jq","aliases":[],"installed":[{"version":"1.0.0"}],"outdated":true,"pinned":false},
  {"name":"unrelated","full_name":"unrelated","installed":[{"version":"1.0.0"}],"outdated":true,"pinned":false},
- {"name":"maven","full_name":"maven","installed":[{"version":"1.0.0"}],"outdated":true,"pinned":true}
+ {"name":"maven","full_name":"maven","installed":[{"version":"1.0.0"}],"outdated":true,"pinned":true},
+ {"name":"herdr","full_name":"herdr","installed":[{"version":"1.0.0"}],"outdated":true,"pinned":false}
 ],"casks":[
  {"token":"cursor","full_token":"cursor","installed":"1.0.0","outdated":true,"artifacts":[]},
  {"token":"1password","full_token":"1password","installed":"1.0.0","outdated":true,"artifacts":[{"pkg":["fixture.pkg"]}]},
@@ -174,6 +175,8 @@ reset_state
 run_expect 2
 # Both preinstalled tools and installed optional applications are selected.
 grep -Fxq 'brew upgrade --no-ask --no-quit --formula jq' "$CALLS"
+grep -Fxq 'brew upgrade --no-ask --no-quit --formula herdr' "$CALLS"
+grep -Eq '^UPDATED +herdr ' "$work/output"
 grep -Fxq 'brew upgrade --no-ask --no-quit --cask cursor' "$CALLS"
 assert_absent 'upgrade .*(unrelated|maven|1password)' "$CALLS"
 assert_absent '^npm .*unrelated-npm' "$CALLS"

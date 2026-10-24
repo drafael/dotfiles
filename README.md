@@ -50,6 +50,7 @@ The default bootstrap installs:
 - JDK 25 and the platform-appropriate Java build tools
 - 1Password desktop app and CLI (`op`); pass `--onepassword-cli-only` on headless Linux
 - Claude Code, Codex, OpenCode, and Pi outside Omarchy
+- Herdr agent multiplexer through Homebrew on macOS or its official installer on Linux
 - RevDiff plus its Claude Code, Codex, OpenCode, and Pi integrations, including automatic plan review where supported
 
 The bootstrap is composed of independently runnable category scripts:
@@ -61,7 +62,7 @@ The bootstrap is composed of independently runnable category scripts:
 | `java.sh` | JDK 25, Maven, and Gradle where supported |
 | `fonts.sh` | Programming fonts and Nerd Font symbol families |
 | `terminal-tools.sh` | Neovim and the platform terminal |
-| `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, RevDiff integrations, and shared harness configuration |
+| `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, Herdr, RevDiff integrations, and shared harness configuration |
 | `link-dotfiles.sh` | Repository configuration links and shell integration |
 | `verify.sh` | Read-only installed-version summary |
 | `containers.sh` | Optional Docker- or Podman-based runtime and local Kubernetes tools |
@@ -143,6 +144,10 @@ pi
 ```
 
 Omarchy installs these agents through its existing `mise` launchers the first time each command runs. Other platforms use the agents' official installers during bootstrap.
+
+Bootstrap also installs [Herdr](https://herdr.dev/docs/install/): the Homebrew formula `herdr` on macOS, or the official checksum-verifying installer on Ubuntu, Fedora, Arch, and Omarchy. The Linux installer selects the x86-64 or ARM64 release and defaults to `~/.local/bin/herdr`; Omarchy keeps its existing agent launchers. Existing Herdr commands on `PATH` are left untouched, regardless of installation method. Start it manually with `herdr`; bootstrap does not launch it, install its agent integrations, or replace tmux.
+
+Update Homebrew installations with `./update.sh` or `brew upgrade herdr`, not `herdr update`. Direct Linux installations use `herdr update` separately; `./update.sh` does not update those installations. Intel Macs may require a source build with Rust and Zig when no Homebrew bottle is available.
 
 For a missing Pi installation, bootstrap uses the [pi.dev installer](https://pi.dev/docs/latest/quickstart#1-install-pi), which pins all dependencies; update it later with `pi update`. The installer may prompt to start Pi immediately: choose **n** to let bootstrap continue. Existing Pi installations are left untouched. To migrate an existing npm installation to the managed installer, run `curl -fsSL https://pi.dev/install.sh | sh` separately and confirm migration; the installer verifies the managed release before removing the npm installation. Direct npm installation remains supported upstream but no longer pins transitive dependencies.
 

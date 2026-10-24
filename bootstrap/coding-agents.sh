@@ -111,6 +111,20 @@ provision_harness() {
 }
 
 install_agents() {
+  if ! command -v herdr >/dev/null 2>&1; then
+    case $PLATFORM in
+      macos)
+        info 'Installing Herdr with Homebrew'
+        ensure_brew_formulas herdr
+        ;;
+      ubuntu|fedora|arch|omarchy)
+        ensure_curl
+        download_installer Herdr sh https://herdr.dev/install.sh
+        ;;
+    esac
+    require_command herdr
+  fi
+
   if [ "$PLATFORM" = omarchy ]; then
     info 'Keeping Omarchy coding-agent launchers'
     command -v codex >/dev/null 2>&1 || omarchy-mise-install codex

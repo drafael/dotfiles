@@ -28,9 +28,10 @@ bootstrap_packages() {
     macos:brew-cask:terminal) package_list='ghostty' ;;
     macos:brew-cask:editors) package_list='intellij-idea visual-studio-code cursor zed' ;;
     macos:brew-cask:onepassword) package_list='1password 1password-cli' ;;
-    # Recognize package-manager installations of agents too, although bootstrap
-    # uses their native installers (and npm for Codex) when they are missing.
-    macos:brew-formula:agents) package_list='opencode pi-coding-agent' ;;
+    # Herdr uses Homebrew on macOS. Other agent identities recognize existing
+    # package-managed installs; bootstrap uses native installers (npm for Codex)
+    # when those agents are missing.
+    macos:brew-formula:agents) package_list='herdr opencode pi-coding-agent' ;;
     macos:brew-cask:agents) package_list='claude-code codex' ;;
     ubuntu:system:prerequisites) package_list='software-properties-common curl ca-certificates xz-utils python3 snapd' ;;
     ubuntu:system:cli)
