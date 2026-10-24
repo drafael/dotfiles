@@ -138,7 +138,27 @@ print_harness_status() {
   verify_harness_link "$HARNESS_DIR/skills" "$HOME/.claude/skills"
   verify_harness_link "$HARNESS_DIR/.pi/agent/themes" "$HOME/.pi/agent/themes"
   verify_harness_link "$HARNESS_DIR/.pi/agent/prompts" "$HOME/.pi/agent/prompts"
-  verify_harness_link "$HARNESS_DIR/.pi/agent/extensions" "$HOME/.pi/agent/extensions"
+  pi_extensions="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}/extensions"
+  if [ -d "$pi_extensions" ] && [ ! -L "$pi_extensions" ]; then
+    printf 'Pi extensions directory: %s\n' "$pi_extensions"
+  else
+    warn "$pi_extensions must be a real directory"
+  fi
+  if extension_files=$(harness_extension_files "$HARNESS_DIR" 2>/dev/null); then
+    while IFS= read -r extension_file; do
+      [ -n "$extension_file" ] || continue
+      verify_harness_link "$HARNESS_DIR/$extension_file" "$pi_extensions/${extension_file##*/}"
+    done <<EOF
+$extension_files
+EOF
+  else
+    warn 'cannot list versioned harness extensions'
+  fi
+  if [ -f "$pi_extensions/herdr-agent-state.ts" ] && [ ! -L "$pi_extensions/herdr-agent-state.ts" ]; then
+    printf 'Herdr Pi integration: present (%s)\n' "$pi_extensions/herdr-agent-state.ts"
+  else
+    warn 'Herdr Pi integration is missing or is not a regular file'
+  fi
   verify_harness_link "$HARNESS_DIR/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
   verify_harness_link "$HARNESS_DIR/AGENTS.md" "$HOME/.agents/AGENTS.md"
   verify_harness_link "$HARNESS_DIR/CLAUDE.md" "$HOME/.claude/CLAUDE.md"

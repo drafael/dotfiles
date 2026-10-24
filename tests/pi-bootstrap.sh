@@ -131,6 +131,7 @@ for test_platform in macos ubuntu fedora arch omarchy; do
     mkdir -p "$harness/skills" "$harness/.pi/agent/themes" "$harness/.pi/agent/prompts" "$harness/.pi/agent/extensions" "$HOME/.pi/agent"
     : >"$harness/AGENTS.md"
     : >"$harness/CLAUDE.md"
+    git init -q "$harness"
     printf '{"capture":{"type":"ffmpeg"}}\n' >"$harness/.pi/agent/stt.json"
     printf '{"profile":"local"}\n' >"$HOME/.pi/agent/stt.json"
     cp "$HOME/.pi/agent/stt.json" "$work/stt-original.json"

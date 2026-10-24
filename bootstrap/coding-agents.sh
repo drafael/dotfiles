@@ -85,13 +85,85 @@ ensure_harness_checkout() {
   [ -f "$HARNESS_DIR/CLAUDE.md" ] || fail "coding harness file not found: $HARNESS_DIR/CLAUDE.md"
 }
 
+link_harness_extensions() {
+  pi_agent_dir=${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}
+  pi_extensions="$pi_agent_dir/extensions"
+  harness_extensions="$HARNESS_DIR/.pi/agent/extensions"
+  extension_files=$(harness_extension_files "$HARNESS_DIR") || fail 'cannot list versioned harness extensions'
+
+  # Resolve the nearest existing ancestor before creating any custom agent path.
+  pi_existing_parent=$pi_agent_dir
+  while [ ! -e "$pi_existing_parent" ] && [ ! -L "$pi_existing_parent" ]; do
+    pi_existing_parent=$(dirname -- "$pi_existing_parent")
+  done
+  pi_resolved_parent=$(resolved_existing_path "$pi_existing_parent") || fail "cannot resolve Pi agent directory: $pi_agent_dir"
+  harness_resolved=$(resolved_existing_path "$HARNESS_DIR")
+  case "$pi_resolved_parent/" in
+    "$harness_resolved/"*) fail 'Pi agent directory must be outside the harness checkout' ;;
+  esac
+
+  if [ -L "$pi_extensions" ]; then
+    symlink_points_to_path "$pi_extensions" "$harness_extensions" ||
+      fail "unexpected Pi extensions directory symlink: $pi_extensions"
+    # Converting the container must not silently hide extra files in its target.
+    for extension_entry in "$harness_extensions"/* "$harness_extensions"/.[!.]* "$harness_extensions"/..?*; do
+      if [ ! -e "$extension_entry" ] && [ ! -L "$extension_entry" ]; then continue; fi
+      printf '%s\n' "$extension_files" | grep -Fxq -- ".pi/agent/extensions/${extension_entry##*/}" ||
+        fail "unexpected entry in symlinked harness extensions: $extension_entry"
+    done
+  elif [ -e "$pi_extensions" ] && [ ! -d "$pi_extensions" ]; then
+    fail "Pi extensions path is not a directory: $pi_extensions"
+  fi
+
+  if [ -L "$pi_extensions/herdr-agent-state.ts" ] ||
+    { [ -e "$pi_extensions/herdr-agent-state.ts" ] && [ ! -f "$pi_extensions/herdr-agent-state.ts" ]; }; then
+    fail "conflicting Herdr Pi integration: $pi_extensions/herdr-agent-state.ts"
+  fi
+
+  # Preflight every versioned destination before backing up or replacing any.
+  while IFS= read -r extension_file; do
+    [ -n "$extension_file" ] || continue
+    extension_name=${extension_file##*/}
+    [ "$extension_name" != herdr-agent-state.ts ] || fail 'herdr-agent-state.ts is reserved for Herdr'
+    [ -f "$HARNESS_DIR/$extension_file" ] || fail "missing versioned harness extension: $extension_file"
+    if symlink_points_to_path "$pi_extensions/$extension_name" "$HARNESS_DIR/$extension_file"; then
+      continue
+    fi
+    if [ -L "$pi_extensions/$extension_name" ]; then
+      fail "conflicting Pi extension: $pi_extensions/$extension_name"
+    elif [ -e "$pi_extensions/$extension_name" ]; then
+      [ -f "$pi_extensions/$extension_name" ] || fail "conflicting Pi extension: $pi_extensions/$extension_name"
+      require_command cmp
+      cmp -s "$pi_extensions/$extension_name" "$HARNESS_DIR/$extension_file" ||
+        fail "conflicting Pi extension: $pi_extensions/$extension_name"
+    fi
+  done <<EOF
+$extension_files
+EOF
+
+  ensure_real_directory "$pi_extensions"
+  while IFS= read -r extension_file; do
+    [ -n "$extension_file" ] || continue
+    link_path_resolved "$HARNESS_DIR/$extension_file" "$pi_extensions/${extension_file##*/}"
+  done <<EOF
+$extension_files
+EOF
+
+  # Renames/removals need an explicit retirement decision, never a file sweep.
+  for extension_entry in "$pi_extensions"/*.ts "$pi_extensions"/*.js; do
+    if [ -L "$extension_entry" ] && [ ! -e "$extension_entry" ]; then
+      warn "broken Pi extension link; review manually: $extension_entry"
+    fi
+  done
+}
+
 link_harness_configuration() {
   info 'Linking coding harness configuration'
+  link_harness_extensions
   link_path_resolved "$HARNESS_DIR/skills" "$HOME/.agents/skills"
   link_path_resolved "$HARNESS_DIR/skills" "$HOME/.claude/skills"
   link_path_resolved "$HARNESS_DIR/.pi/agent/themes" "$HOME/.pi/agent/themes"
   link_path_resolved "$HARNESS_DIR/.pi/agent/prompts" "$HOME/.pi/agent/prompts"
-  link_path_resolved "$HARNESS_DIR/.pi/agent/extensions" "$HOME/.pi/agent/extensions"
   if [ -f "$HARNESS_DIR/.pi/agent/stt.json" ]; then
     link_path_resolved "$HARNESS_DIR/.pi/agent/stt.json" "$HOME/.pi/agent/stt.json"
   else
@@ -242,6 +314,26 @@ install_pi_packages() {
   install_pi_package pi-voice-stt pi-voice-stt npm:pi-voice-stt
 }
 
+install_herdr_pi_integration() {
+  herdr_pi_dir=${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}
+  herdr_pi_extension="$herdr_pi_dir/extensions/herdr-agent-state.ts"
+  if [ ! -d "$herdr_pi_dir/extensions" ] || [ -L "$herdr_pi_dir/extensions" ]; then
+    fail 'Herdr Pi integration requires a real extensions directory'
+  fi
+  if [ -L "$herdr_pi_extension" ] || { [ -e "$herdr_pi_extension" ] && [ ! -f "$herdr_pi_extension" ]; }; then
+    fail "conflicting Herdr Pi integration: $herdr_pi_extension"
+  fi
+  if [ -f "$herdr_pi_extension" ]; then
+    return
+  fi
+
+  info 'Installing the Herdr integration for Pi'
+  herdr integration install pi
+  if [ ! -f "$herdr_pi_extension" ] || [ -L "$herdr_pi_extension" ]; then
+    fail 'Herdr Pi integration file was not created as a regular file'
+  fi
+}
+
 opencode_revdiff_is_installed() {
   opencode_config_dir="$HOME/.config/opencode"
   for relative_path in \
@@ -300,6 +392,7 @@ main() {
   install_revdiff
   install_revdiff_integrations
   provision_harness
+  install_herdr_pi_integration
 }
 
 main "$@"

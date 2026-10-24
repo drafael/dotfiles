@@ -379,6 +379,11 @@ link_path_resolved() {
   link_path "$resolved_link_source" "$resolved_link_destination"
 }
 
+harness_extension_files() {
+  git -C "$1" -c core.quotePath=false ls-files -- \
+    ':(glob).pi/agent/extensions/*.ts' ':(glob).pi/agent/extensions/*.js'
+}
+
 ensure_real_directory() {
   directory_path=$1
   if [ -d "$directory_path" ] && [ ! -L "$directory_path" ]; then
