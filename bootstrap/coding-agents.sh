@@ -496,7 +496,10 @@ install_herdr_copilot_integration() {
       herdr_copilot_backed_up=true
     fi
   done
-  mkdir -p -m 700 "$herdr_copilot_home"
+  if [ ! -d "$herdr_copilot_home" ]; then
+    mkdir -p "$(dirname -- "$herdr_copilot_home")"
+    mkdir -m 700 "$herdr_copilot_home"
+  fi
   info 'Installing or repairing the Herdr integration for GitHub Copilot CLI'
   herdr_copilot_result=0
   COPILOT_HOME="$herdr_copilot_home" herdr integration install copilot || herdr_copilot_result=$?
