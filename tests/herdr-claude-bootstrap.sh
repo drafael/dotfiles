@@ -13,10 +13,19 @@ install_agents() { :; }
 install_revdiff() { :; }
 install_revdiff_integrations() { :; }
 provision_harness() { :; }
-install_herdr_pi_integration() { : >"$PI_READY"; }
+install_herdr_pi_integration() {
+  : >"$PI_READY"
+  if [ "${PI_FAIL:-0}" = 1 ]; then
+    false
+    : >"$PI_UNEXPECTED"
+  fi
+}
 install_herdr_codex_integration() { [ -f "$PI_READY" ]; : >"$CODEX_READY"; }
-install_herdr_opencode_integration() { :; }
-install_herdr_copilot_integration() { :; }
+install_herdr_opencode_integration() {
+  : >"$OPENCODE_READY"
+  if [ "${OPENCODE_FAIL:-0}" = 1 ]; then return 17; fi
+}
+install_herdr_copilot_integration() { [ -f "$OPENCODE_READY" ]; : >"$COPILOT_READY"; }
 main
 EOF
 sed '$d' "$repository/bootstrap/verify.sh" >"$work/verify.sh"
@@ -76,8 +85,11 @@ PATH="$work/bin"
 HERDR_CALLS="$work/herdr-calls"
 PI_READY="$work/pi-ready"
 CODEX_READY="$work/codex-ready"
+OPENCODE_READY="$work/opencode-ready"
+COPILOT_READY="$work/copilot-ready"
+PI_UNEXPECTED="$work/pi-unexpected"
 NATIVE_FIXTURE="$work/native-fixture.py"
-export PATH HERDR_CALLS PI_READY CODEX_READY NATIVE_FIXTURE
+export PATH HERDR_CALLS PI_READY CODEX_READY OPENCODE_READY COPILOT_READY PI_UNEXPECTED NATIVE_FIXTURE
 
 fixture() {
   HOME="$work/$1"
@@ -85,10 +97,11 @@ fixture() {
   unset CLAUDE_CONFIG_DIR NATIVE_FAIL NATIVE_NO_FILES NATIVE_NO_REGISTRATION
   claude_home="$HOME/.claude"
   : >"$HERDR_CALLS"
-  rm -f "$PI_READY" "$CODEX_READY"
+  rm -f "$PI_READY" "$CODEX_READY" "$OPENCODE_READY" "$COPILOT_READY" "$PI_UNEXPECTED"
 }
 
 run_bootstrap() {
+  rm -f "$OPENCODE_READY" "$COPILOT_READY"
   sh "$work/bootstrap.sh" >"$work/output" 2>"$work/error"
 }
 
@@ -176,6 +189,8 @@ PY
   verify_state conflict
   if run_bootstrap; then exit 1; fi
   grep -Fq 'Herdr Claude integration conflict' "$work/error"
+  [ -f "$OPENCODE_READY" ]
+  [ -f "$COPILOT_READY" ]
   if grep -Fq 'do-not-print' "$work/error"; then exit 1; fi
   [ ! -s "$HERDR_CALLS" ]
   [ ! -d "$HOME/.dotfiles-backups" ]
@@ -205,6 +220,9 @@ for link in settings hooks home script; do
       ;;
   esac
   if run_bootstrap; then exit 1; fi
+  [ -f "$OPENCODE_READY" ]
+  [ -f "$COPILOT_READY" ]
+  grep -Fq 'Herdr integration setup failed for: claude' "$work/error"
   [ ! -s "$HERDR_CALLS" ]
   [ ! -d "$HOME/.dotfiles-backups" ]
 done
@@ -224,6 +242,8 @@ cp "$claude_home/settings.json" "$work/settings-before"
 status=0
 NATIVE_FAIL=1 sh "$work/bootstrap.sh" >"$work/output" 2>"$work/error" || status=$?
 [ "$status" = 42 ]
+[ -f "$OPENCODE_READY" ]
+[ -f "$COPILOT_READY" ]
 grep -Fq 'may have partially changed' "$work/error"
 grep -Fq 'Claude configuration backup:' "$work/output"
 backup=$(find "$HOME/.dotfiles-backups" -type f -name settings.json -print)
@@ -249,4 +269,22 @@ grep -Fq 'Python 3.11+' "$work/error"
 [ ! -e "$claude_home" ]
 rm "$work/bin/python3"
 mv "$work/bin/python3-real" "$work/bin/python3"
+# A failure inside a function must still stop that integration immediately.
+fixture pi-failure
+status=0
+PI_FAIL=1 sh "$work/bootstrap.sh" >"$work/output" 2>"$work/error" || status=$?
+[ "$status" = 1 ]
+[ ! -e "$PI_UNEXPECTED" ]
+[ -f "$CODEX_READY" ]
+[ -f "$OPENCODE_READY" ]
+[ -f "$COPILOT_READY" ]
+grep -Fq 'Herdr integration setup failed for: pi' "$work/error"
+
+# Keep the first failure's status while reporting every failed integration.
+fixture multiple-failures
+status=0
+NATIVE_FAIL=1 OPENCODE_FAIL=1 sh "$work/bootstrap.sh" >"$work/output" 2>"$work/error" || status=$?
+[ "$status" = 42 ]
+[ -f "$COPILOT_READY" ]
+grep -Fq 'Herdr integration setup failed for: claude opencode' "$work/error"
 printf 'Herdr Claude bootstrap, verification, backups, repairs, conflicts, custom homes, and failure checks passed.\n'

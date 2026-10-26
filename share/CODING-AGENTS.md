@@ -49,6 +49,8 @@ An existing whole-directory symlink is migrated only if it points to the expecte
 
 ## Herdr integrations
 
+Each Herdr integration is attempted independently. A Claude configuration conflict, for example, does not prevent OpenCode or Copilot setup. After attempting all five integrations, the bootstrap scripts report any failures and return the first failure's exit status. Conflicting files and symlinks remain untouched for manual resolution; rerunning leaves complete integrations unchanged.
+
 ### Pi
 
 After establishing the links, the bootstrap scripts run `herdr integration install pi` only if the integration is missing. Existing regular integration files are preserved. After upgrading Herdr, refresh explicitly with the same command, then restart Pi or run `/reload`. `herdr integration status` reports the integration version; the bootstrap scripts do not parse that human-readable output or upgrade integrations automatically. Live status reporting and session resume require Pi to run inside Herdr.

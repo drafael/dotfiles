@@ -582,11 +582,24 @@ main() {
   install_revdiff
   install_revdiff_integrations
   provision_harness
-  install_herdr_pi_integration
-  install_herdr_codex_integration
-  install_herdr_claude_integration
-  install_herdr_opencode_integration
-  install_herdr_copilot_integration
+  herdr_result=0
+  herdr_failures=''
+  for herdr_agent in pi codex claude opencode copilot; do
+    # Isolate fail/exit and keep errexit inside each integration. Calling the
+    # subshell in an if/|| condition would disable errexit within its function.
+    set +e
+    (set -e; "install_herdr_${herdr_agent}_integration")
+    herdr_status=$?
+    set -e
+    if [ "$herdr_status" != 0 ]; then
+      if [ "$herdr_result" = 0 ]; then herdr_result=$herdr_status; fi
+      herdr_failures="${herdr_failures}${herdr_failures:+ }$herdr_agent"
+    fi
+  done
+  if [ "$herdr_result" != 0 ]; then
+    warn "Herdr integration setup failed for: $herdr_failures; all remaining integrations were attempted"
+  fi
+  return "$herdr_result"
 }
 
 main "$@"
