@@ -68,6 +68,29 @@ return {
     keys = {
       { '<leader>tm', '<cmd>Markview Toggle<cr>', desc = 'Toggle Markview' },
     },
+    config = function(_, opts)
+      require('markview').setup(opts)
+
+      -- Toggle also changes hidden buffers, where Markview cannot set window
+      -- options. On re-entry it refreshes queries but skips these callbacks.
+      vim.api.nvim_create_autocmd('BufWinEnter', {
+        group = vim.api.nvim_create_augroup('custom-markview-window', { clear = true }),
+        callback = function(args)
+          local state = require 'markview.state'
+          local buffer_state = state.get_buffer_state(args.buf, false)
+          if not state.enabled() or not state.buf_attached(args.buf) or not buffer_state or state.get_splitview_source() == args.buf then
+            return
+          end
+
+          local callback = require('markview.spec').get({ 'preview', 'callbacks', buffer_state.enable and 'on_enable' or 'on_disable' }, {
+            ignore_enable = true,
+          })
+          if callback then
+            callback(args.buf, { vim.api.nvim_get_current_win() })
+          end
+        end,
+      })
+    end,
   },
 
   {
