@@ -188,6 +188,12 @@ Tmux uses `Ctrl-Space` as its prefix.
 
 See [share/TMUX.md](share/TMUX.md) for every binding, clipboard behavior, project discovery, and terminal troubleshooting.
 
+### Markdown preview in Neovim
+
+Press `<Space>tm` to toggle Markview preview; it remains off by default. The pinned `markview-smart-tables.nvim` renderer fits tables to the window and wraps their cells without changing prose wrapping. Moving the cursor onto a table reveals its source for navigation and editing; moving away restores the fitted table.
+
+Smart tables require Neovim 0.11 or newer. A file containing only a table falls back to Markview's stock rendering because the fitted display needs a neighboring line to anchor to. After pulling this configuration, restart Neovim and run `:Lazy install` if the new dependency has not been installed automatically.
+
 ## Update or recover
 
 Update the repository and reapply the setup with:

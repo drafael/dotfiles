@@ -53,6 +53,12 @@ return {
   {
     'OXY2DEV/markview.nvim',
     lazy = false,
+    dependencies = {
+      {
+        'gunasekar/markview-smart-tables.nvim',
+        commit = '01134a5bf48f1b7abe27b26a6b89262685bb309f',
+      },
+    },
     init = function()
       -- Set alpha to 0 so backgrounds match Normal (no visible tint)
       vim.g.markview_alpha = 0
@@ -63,6 +69,13 @@ return {
       preview = {
         enable = false,
         filetypes = { 'markdown', 'asciidoc' },
+        -- Reveal the real source under the cursor so fitted tables stay editable.
+        hybrid_modes = { 'n', 'v', 'V', 'i' },
+      },
+      renderers = {
+        markdown_table = function(buffer, item)
+          require('markview-smart-tables').render(buffer, item)
+        end,
       },
     },
     keys = {
@@ -71,8 +84,8 @@ return {
     config = function(_, opts)
       require('markview').setup(opts)
 
-      -- Toggle also changes hidden buffers, where Markview cannot set window
-      -- options. On re-entry it refreshes queries but skips these callbacks.
+      -- Hidden-buffer toggles cannot set window options or lay out fitted tables.
+      -- Markview refreshes queries on re-entry, but not callbacks or decorations.
       vim.api.nvim_create_autocmd('BufWinEnter', {
         group = vim.api.nvim_create_augroup('custom-markview-window', { clear = true }),
         callback = function(args)
@@ -87,6 +100,9 @@ return {
           })
           if callback then
             callback(args.buf, { vim.api.nvim_get_current_win() })
+          end
+          if buffer_state.enable and require('markview.actions').in_preview_mode() then
+            require('markview').render(args.buf)
           end
         end,
       })
