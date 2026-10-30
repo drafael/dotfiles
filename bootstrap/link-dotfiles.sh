@@ -78,10 +78,23 @@ link_portable_config() {
 
     name=${source##*/}
     case $name in
-      .DS_Store|ghostty|kitty) continue ;;
+      .DS_Store|ghostty|kitty|herdr) continue ;;
     esac
     link_path "$source" "$XDG_CONFIG_HOME/$name"
   done
+}
+
+link_herdr_config() {
+  herdr_config_dir="$XDG_CONFIG_HOME/herdr"
+  [ -f "$SOURCE_CONFIG_DIR/herdr/config.toml" ] || fail 'Herdr source config.toml is missing'
+  if [ -L "$herdr_config_dir" ] || { [ -e "$herdr_config_dir" ] && [ ! -d "$herdr_config_dir" ]; }; then
+    fail "Herdr configuration directory must be a real directory; preserve its runtime files and migrate manually: $herdr_config_dir"
+  fi
+
+  # Herdr keeps sockets, logs, and sessions beside its config. Never move or
+  # replace that directory: only the portable settings file belongs in Git.
+  mkdir -p "$herdr_config_dir"
+  link_path_resolved "$SOURCE_CONFIG_DIR/herdr/config.toml" "$herdr_config_dir/config.toml"
 }
 
 link_terminal_config() {
@@ -122,6 +135,7 @@ main() {
   [ -d "$SOURCE_CONFIG_DIR" ] || fail "configuration directory not found: $SOURCE_CONFIG_DIR"
 
   info 'Linking portable configuration'
+  link_herdr_config
   link_portable_config
   link_terminal_config
   link_root_dotfiles

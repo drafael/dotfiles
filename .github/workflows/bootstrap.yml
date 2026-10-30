@@ -52,9 +52,10 @@ jobs:
       - name: Test Pi installation routing without system changes
         run: sh tests/pi-bootstrap.sh
 
-      - name: Test Herdr installation and Pi extension links without system changes
+      - name: Test Herdr installation, config links, and Pi extension links without system changes
         run: |
           sh tests/herdr-bootstrap.sh
+          sh tests/herdr-config-links.sh
           sh tests/pi-extension-links.sh
 
       - name: Test Herdr Codex configuration and bootstrap without system changes
@@ -112,6 +113,7 @@ jobs:
           sh tests/fedora-bootstrap.sh
           sh tests/fedora-yazi.sh
           sh tests/herdr-bootstrap.sh
+          sh tests/herdr-config-links.sh
           sh tests/pi-extension-links.sh
           python3 -B -m unittest discover -s tests -p 'herdr_codex_state_test.py'
           sh tests/herdr-codex-bootstrap.sh

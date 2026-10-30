@@ -27,6 +27,23 @@ The bootstrap scripts also install [Herdr](https://herdr.dev/docs/install/): the
 
 Update Homebrew installations with `./update.sh` or `brew upgrade herdr`, not `herdr update`. Direct Linux installations use `herdr update` separately; `./update.sh` does not update those installations. Intel Macs may require a source build with Rust and Zig when no Homebrew bottle is available.
 
+## Herdr configuration
+
+[`bootstrap/link-dotfiles.sh`](../bootstrap/link-dotfiles.sh) links [`.config/herdr/config.toml`](../.config/herdr/config.toml) to `${XDG_CONFIG_HOME:-$HOME/.config}/herdr/config.toml` on every supported platform. The initial settings keep onboarding disabled and accept both `Ctrl-Space` and `Ctrl-B` as the prefix. Other settings use Herdr's built-in defaults.
+
+The containing Herdr directory stays real and machine-local: sockets, logs, session files, recovery snapshots, and plugin state are not linked into the checkout. An existing directory symlink or non-directory path stops linking for manual resolution rather than moving runtime data. A conflicting `config.toml` is backed up under `~/.dotfiles-backups/` before replacement. Correct file links remain unchanged on reruns. An explicit `HERDR_CONFIG_PATH` still overrides Herdr's active config path; the bootstrap scripts leave that custom file untouched.
+
+Herdr's settings UI writes through the file symlink, so preference changes appear in `git diff`. Review them before committing, and keep secrets and machine-specific paths out of the shared file. The source directory's `.gitignore` allows only `config.toml` and `.gitignore` to be tracked. Avoid editing settings while the bootstrap scripts replace the config link.
+
+To link configuration separately and validate it:
+
+```sh
+./bootstrap/link-dotfiles.sh
+herdr config check
+```
+
+The bootstrap scripts do not launch, stop, or reload Herdr. Apply changes to an already-running default session with `herdr server reload-config`, or use `herdr --session NAME server reload-config` for a named session. These commands reload configuration; they do not upgrade Herdr or reinstall agent integrations.
+
 ## Pi installation and migration
 
 For a missing Pi installation, the bootstrap scripts use the [pi.dev installer](https://pi.dev/docs/latest/quickstart#1-install-pi), which pins all dependencies; update it later with `pi update`. The installer may prompt to start Pi immediately: choose **n** to let the bootstrap scripts continue. Existing Pi installations are left untouched. To migrate an existing npm installation to the managed installer, run `curl -fsSL https://pi.dev/install.sh | sh` separately and confirm migration; the installer verifies the managed release before removing the npm installation. Direct npm installation remains supported upstream but no longer pins transitive dependencies.

@@ -87,7 +87,7 @@ The [CI workflow for the bootstrap scripts](.github/workflows/bootstrap.yml) che
 
 The container script installs runtime packages and command-line tools but does not deliberately start runtimes or services, grant Docker group access, or create Kubernetes clusters. Ubuntu installs Yazi from its official APT repository; unavailable optional preview dependencies such as `resvg` produce a warning instead of failing the bootstrap scripts.
 
-`link-dotfiles.sh` links each portable top-level entry under `.config` into `${XDG_CONFIG_HOME:-$HOME/.config}`. Ghostty and Kitty are handled separately so each platform receives the correct terminal configuration; Omarchy retains its terminal configuration. Root Git files remain explicit, Zsh platforms receive `.zshrc`, and Omarchy receives a managed source block in `~/.bashrc`.
+`link-dotfiles.sh` links each portable top-level entry under `.config` into `${XDG_CONFIG_HOME:-$HOME/.config}`. Ghostty and Kitty are handled separately so each platform receives the correct terminal configuration; Omarchy retains its terminal configuration. Herdr links only `config.toml`, keeping its sockets, logs, and session data outside the checkout; see [Herdr configuration](share/CODING-AGENTS.md#herdr-configuration). Root Git files remain explicit, Zsh platforms receive `.zshrc`, and Omarchy receives a managed source block in `~/.bashrc`.
 
 When a destination already exists, the script moves it to:
 
