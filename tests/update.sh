@@ -46,8 +46,12 @@ case $name in
       upgrade)
         if [ "$2" = --help ]; then printf '%s\n' '--no-ask --no-quit'; exit; fi
         [ "$2" = --no-ask ]
-        [ "$3" = --no-quit ]
-        target=$5
+        # Homebrew rejects the cask-only --no-quit flag with --formula.
+        case $3 in
+          --formula) [ "$#" -eq 4 ]; target=$4 ;;
+          --no-quit) [ "$4" = --cask ]; [ "$#" -eq 5 ]; target=$5 ;;
+          *) exit 92 ;;
+        esac
         case $target in
           ghostty) exit 0 ;;
           maven) printf 'fixture download failure\n' >&2; exit 9 ;;
@@ -174,8 +178,8 @@ run_expect() {
 reset_state
 run_expect 2
 # Both preinstalled tools and installed optional applications are selected.
-grep -Fxq 'brew upgrade --no-ask --no-quit --formula jq' "$CALLS"
-grep -Fxq 'brew upgrade --no-ask --no-quit --formula herdr' "$CALLS"
+grep -Fxq 'brew upgrade --no-ask --formula jq' "$CALLS"
+grep -Fxq 'brew upgrade --no-ask --formula herdr' "$CALLS"
 grep -Eq '^UPDATED +herdr ' "$work/output"
 grep -Fxq 'brew upgrade --no-ask --no-quit --cask cursor' "$CALLS"
 assert_absent 'upgrade .*(unrelated|maven|1password)' "$CALLS"
@@ -186,7 +190,7 @@ grep -Eq '^UPDATED +typescript ' "$work/output"
 
 reset_state
 run_expect 2 --scope=all
-grep -Fxq 'brew upgrade --no-ask --no-quit --formula unrelated' "$CALLS"
+grep -Fxq 'brew upgrade --no-ask --formula unrelated' "$CALLS"
 grep -Eq '^SKIPPED +unrelated-npm .*lifecycle' "$work/output"
 
 reset_state

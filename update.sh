@@ -167,13 +167,16 @@ update_homebrew() {
       if selected "brew-$brew_kind" "$brew_alias"; then brew_selected=true; break; fi
     done
     [ "$brew_selected" = true ] || continue
+    # --no-quit is cask-only and conflicts with --formula.
+    set -- --no-ask
+    if [ "$brew_kind" = cask ]; then set -- "$@" --no-quit; fi
     if [ "$(printf '%s\n' "$brew_row" | jq -r .pinned)" = true ]; then
       report UNCHANGED "$brew_name" 'Homebrew pin preserved'
     elif [ "$(printf '%s\n' "$brew_row" | jq -r .outdated)" != true ]; then
       report UNCHANGED "$brew_name" 'Homebrew reports no eligible update'
     elif [ "$(printf '%s\n' "$brew_row" | jq -r .privileged)" = true ]; then
       report SKIPPED "$brew_name" 'cask installer requires privileged or interactive execution'
-    elif run_update "$brew_name" brew upgrade --no-ask --no-quit "--$brew_kind" "$brew_name"; then
+    elif run_update "$brew_name" brew upgrade "$@" "--$brew_kind" "$brew_name"; then
       # --no-quit may defer a running cask with a successful exit status.
       if ! unattended brew info --json=v2 "--$brew_kind" "$brew_name" >"$WORK/brew-after.json" ||
         ! jq -e '(.formulae | type == "array") and (.casks | type == "array") and ((.formulae + .casks) | length > 0)' "$WORK/brew-after.json" >/dev/null 2>&1; then
