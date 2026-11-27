@@ -198,6 +198,20 @@ install_agents() {
     require_command herdr
   fi
 
+  if ! command -v herdr-app >/dev/null 2>&1; then
+    case $PLATFORM in
+      macos)
+        info 'Installing Herdr GUI with Homebrew'
+        ensure_brew_casks herdr-app
+        ;;
+      ubuntu|fedora|arch|omarchy)
+        ensure_curl
+        download_installer 'Herdr GUI' sh https://releases.herdr.dev/app/install.sh
+        ;;
+    esac
+    require_command herdr-app
+  fi
+
   if [ "$PLATFORM" = omarchy ]; then
     info 'Keeping Omarchy coding-agent launchers'
     command -v codex >/dev/null 2>&1 || omarchy-mise-install codex

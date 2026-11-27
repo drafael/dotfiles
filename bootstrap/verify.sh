@@ -58,6 +58,7 @@ print_command_version() {
     rg) first_line rg --version ;;
     revdiff) first_line revdiff --version ;;
     herdr) first_line herdr --version ;;
+    herdr-app) first_line herdr-app --version ;;
     op) printf 'op: %s\n' "$(op --version)" ;;
     java) first_line java -version ;;
     javac) first_line javac -version ;;
@@ -189,6 +190,7 @@ main() {
   print_font_support
 
   print_command_version herdr
+  print_command_version herdr-app
   print_command_version op
 
   if [ "$PLATFORM" != ubuntu ] && [ "$PLATFORM" != fedora ]; then

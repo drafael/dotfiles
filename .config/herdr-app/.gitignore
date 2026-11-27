@@ -1,0 +1,27 @@
+# Only portable preferences and the personal Catppuccin layout belong here.
+/*
+!/.gitignore
+!/LICENSE
+!/NOTICE
+!/settings.json
+!/layouts/
+!/themes/
+!/mods/
+/layouts/*
+!/layouts/catppuccin.json
+!/layouts/catppuccin.svg
+/themes/*
+!/themes/catppuccin-latte.json
+!/themes/catppuccin-frappe.json
+!/themes/catppuccin-macchiato.json
+!/themes/catppuccin-mocha.json
+/mods/*
+!/mods/catppuccin-changes/
+!/mods/catppuccin-chrome/
+!/mods/catppuccin-files/
+!/mods/catppuccin-status/
+!/mods/catppuccin-tabs/
+# Herdr generates these in mod folders.
+**/*.d.ts
+**/jsconfig.json
+**/*.error

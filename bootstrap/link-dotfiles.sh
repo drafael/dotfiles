@@ -78,7 +78,7 @@ link_portable_config() {
 
     name=${source##*/}
     case $name in
-      .DS_Store|ghostty|kitty|herdr) continue ;;
+      .DS_Store|ghostty|kitty|herdr|herdr-app) continue ;;
     esac
     link_path "$source" "$XDG_CONFIG_HOME/$name"
   done
@@ -95,6 +95,31 @@ link_herdr_config() {
   # replace that directory: only the portable settings file belongs in Git.
   mkdir -p "$herdr_config_dir"
   link_path_resolved "$SOURCE_CONFIG_DIR/herdr/config.toml" "$herdr_config_dir/config.toml"
+}
+
+link_herdr_app_config() {
+  herdr_app_dir=${HERDR_APP_HOME:-$XDG_CONFIG_HOME/herdr-app}
+  # Keep shipped mods, layout click state, and runtime files in real directories.
+  for herdr_app_subdir in '' layouts themes mods; do
+    herdr_app_path="$herdr_app_dir${herdr_app_subdir:+/$herdr_app_subdir}"
+    if [ -L "$herdr_app_path" ] || { [ -e "$herdr_app_path" ] && [ ! -d "$herdr_app_path" ]; }; then
+      fail "Herdr GUI configuration directory must be a real directory; migrate manually: $herdr_app_path"
+    fi
+    mkdir -p "$herdr_app_path"
+  done
+  # Explicit portable assets only: ignored workstation files may also exist
+  # in the checkout, so never discover managed entries with a wildcard.
+  for herdr_app_entry in \
+    settings.json \
+    themes/catppuccin-latte.json themes/catppuccin-frappe.json \
+    themes/catppuccin-macchiato.json themes/catppuccin-mocha.json \
+    mods/catppuccin-changes mods/catppuccin-chrome mods/catppuccin-files \
+    mods/catppuccin-status mods/catppuccin-tabs \
+    layouts/catppuccin.json layouts/catppuccin.svg; do
+    herdr_app_source="$SOURCE_CONFIG_DIR/herdr-app/$herdr_app_entry"
+    [ -e "$herdr_app_source" ] || continue
+    link_path_resolved "$herdr_app_source" "$herdr_app_dir/$herdr_app_entry"
+  done
 }
 
 link_terminal_config() {
@@ -136,6 +161,7 @@ main() {
 
   info 'Linking portable configuration'
   link_herdr_config
+  link_herdr_app_config
   link_portable_config
   link_terminal_config
   link_root_dotfiles

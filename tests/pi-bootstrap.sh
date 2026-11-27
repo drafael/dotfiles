@@ -14,7 +14,7 @@ printf '\nPLATFORM=${TEST_PLATFORM:-macos}\nlink_harness_configuration\n' >>"$wo
 mkdir -p "$work/bin" "$work/home"
 
 # Other agents, Herdr, and npm are already present; none should be executed.
-for tool in claude opencode codex herdr npm; do
+for tool in claude opencode codex herdr herdr-app npm; do
   printf '#!/bin/sh\nexit 99\n' >"$work/bin/$tool"
   chmod +x "$work/bin/$tool"
 done

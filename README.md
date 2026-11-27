@@ -50,7 +50,7 @@ The default bootstrap scripts install:
 - [JDK 25 and the platform-appropriate Java build tools](share/JAVA.md)
 - 1Password desktop app and CLI (`op`); pass `--onepassword-cli-only` on headless Linux
 - Claude Code, Codex, OpenCode, and Pi outside Omarchy
-- Herdr agent multiplexer through Homebrew on macOS or its official installer on Linux
+- Herdr TUI and Herdr GUI (`herdr-app`) through Homebrew on macOS or their official installers on Linux
 - RevDiff plus its Claude Code, Codex, OpenCode, and Pi integrations, including automatic plan review where supported
 
 The bootstrap scripts can be run independently by category:
@@ -62,7 +62,7 @@ The bootstrap scripts can be run independently by category:
 | `java.sh` | JDK 25, Maven, and Gradle where supported |
 | `fonts.sh` | Programming fonts and Nerd Font symbol families |
 | `terminal-tools.sh` | Neovim and the platform terminal |
-| `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, Herdr, RevDiff integrations, and shared harness configuration |
+| `coding-agents.sh` | Claude Code, Codex, OpenCode, Pi, Herdr TUI and GUI, RevDiff integrations, and shared harness configuration |
 | `link-dotfiles.sh` | Repository configuration links and shell integration |
 | `verify.sh` | Read-only installed-version summary |
 | `containers.sh` | Optional Docker- or Podman-based runtime and local Kubernetes tools |

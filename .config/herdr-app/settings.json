@@ -1,0 +1,14 @@
+{
+  "zoom": 1,
+  "sounds": {
+    "enabled": true
+  },
+  "font_ligatures": false,
+  "terminal_line_height": 1,
+  "terminal_cell_width": 1,
+  "terminal_scroll_speed": 1,
+  "minimum_contrast": 1,
+  "appearance": "dark",
+  "telemetry": false,
+  "theme": "catppuccin-frappe"
+}

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <!-- canvas: crust -->
+  <rect width="320" height="200" fill="#181926"/>
+
+  <!-- sidebar: mantle, with a crust title row -->
+  <rect x="0" y="0" width="60" height="200" fill="#1e2030"/>
+  <rect x="0" y="0" width="60" height="14" fill="#181926"/>
+  <circle cx="7" cy="7" r="2.2" fill="#ed8796"/>
+  <circle cx="14" cy="7" r="2.2" fill="#eed49f"/>
+  <circle cx="21" cy="7" r="2.2" fill="#a6da95"/>
+  <rect x="0" y="14" width="320" height="0.8" fill="#363a4f"/>
+
+  <rect x="5" y="20" width="14" height="2" rx="1" fill="#8087a2"/>
+  <rect x="5" y="27" width="4" height="4" rx="1" fill="#8bd5ca"/>
+  <rect x="12" y="28" width="30" height="2" rx="1" fill="#cad3f5"/>
+  <rect x="5" y="35" width="4" height="4" rx="1" fill="#f5a97f"/>
+  <rect x="12" y="36" width="22" height="2" rx="1" fill="#cad3f5"/>
+  <rect x="3" y="41.5" width="54" height="7" rx="1.5" fill="#404458"/>
+  <rect x="5" y="43" width="4" height="4" rx="1" fill="#8aadf4"/>
+  <rect x="12" y="44" width="26" height="2" rx="1" fill="#cad3f5"/>
+
+  <rect x="5" y="100" width="14" height="2" rx="1" fill="#8087a2"/>
+  <rect x="5" y="107" width="18" height="2" rx="1" fill="#eed49f"/>
+  <rect x="3" y="112" width="54" height="7" rx="1.5" fill="#363a4f"/>
+  <rect x="12" y="114.5" width="28" height="2" rx="1" fill="#cad3f5"/>
+  <rect x="5" y="114" width="4" height="3" rx="1" fill="#f5a97f"/>
+
+  <rect x="0" y="185" width="60" height="0.8" fill="#363a4f"/>
+  <rect x="5" y="189" width="22" height="2" rx="1" fill="#b8c0e0"/>
+  <rect x="5" y="194" width="28" height="2" rx="1" fill="#b8c0e0"/>
+
+  <rect x="60" y="0" width="0.8" height="200" fill="#363a4f"/>
+
+  <!-- tab bar: crust, active tab in base -->
+  <rect x="65" y="3" width="30" height="8.5" rx="2" fill="#24273a" stroke="#363a4f" stroke-width="0.6"/>
+  <rect x="70" y="6.3" width="16" height="2" rx="1" fill="#cad3f5"/>
+  <rect x="99" y="6.3" width="16" height="2" rx="1" fill="#b8c0e0"/>
+  <rect x="262" y="6.3" width="18" height="2" rx="1" fill="#b8c0e0"/>
+  <rect x="286" y="6.3" width="26" height="2" rx="1" fill="#b8c0e0"/>
+
+  <!-- focused pane: base card, text-colored border -->
+  <rect x="65" y="19" width="250" height="166" rx="4" fill="#24273a" stroke="#cad3f5" stroke-width="0.7"/>
+  <rect x="65.5" y="27" width="249" height="0.6" fill="#363a4f"/>
+  <rect x="71" y="22" width="34" height="2" rx="1" fill="#cad3f5"/>
+  <rect x="108" y="22" width="26" height="2" rx="1" fill="#8087a2"/>
+
+  <g>
+    <rect x="72" y="34" width="4" height="2.2" fill="#c6a0f6"/>
+    <rect x="79" y="34" width="40" height="2.2" fill="#8aadf4"/>
+    <rect x="122" y="34" width="22" height="2.2" fill="#a6da95"/>
+    <rect x="72" y="41" width="96" height="2.2" fill="#cad3f5"/>
+    <rect x="72" y="48" width="70" height="2.2" fill="#cad3f5"/>
+    <rect x="72" y="58" width="10" height="2.2" fill="#a6da95"/>
+    <rect x="85" y="58" width="60" height="2.2" fill="#b8c0e0"/>
+    <rect x="72" y="65" width="10" height="2.2" fill="#ed8796"/>
+    <rect x="85" y="65" width="48" height="2.2" fill="#b8c0e0"/>
+    <rect x="72" y="72" width="10" height="2.2" fill="#eed49f"/>
+    <rect x="85" y="72" width="80" height="2.2" fill="#b8c0e0"/>
+    <rect x="72" y="82" width="120" height="2.2" fill="#cad3f5"/>
+    <rect x="72" y="89" width="34" height="2.2" fill="#f5bde6"/>
+    <rect x="109" y="89" width="50" height="2.2" fill="#8bd5ca"/>
+    <rect x="72" y="99" width="4" height="2.2" fill="#c6a0f6"/>
+    <rect x="79" y="99" width="3" height="4" fill="#f4dbd6"/>
+  </g>
+
+  <!-- status bar: crust -->
+  <rect x="60" y="189" width="260" height="0.8" fill="#363a4f"/>
+  <rect x="67" y="193.5" width="26" height="2" rx="1" fill="#b8c0e0"/>
+  <rect x="99" y="193.5" width="20" height="2" rx="1" fill="#b8c0e0"/>
+  <rect x="290" y="193.5" width="22" height="2" rx="1" fill="#8087a2"/>
+</svg>

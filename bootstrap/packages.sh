@@ -32,7 +32,7 @@ bootstrap_packages() {
     # package-managed installs; bootstrap uses native installers (npm for Codex)
     # when those agents are missing.
     macos:brew-formula:agents) package_list='herdr opencode pi-coding-agent' ;;
-    macos:brew-cask:agents) package_list='claude-code codex' ;;
+    macos:brew-cask:agents) package_list='herdr-app claude-code codex' ;;
     ubuntu:system:prerequisites) package_list='software-properties-common curl ca-certificates xz-utils python3 snapd' ;;
     ubuntu:system:cli)
       package_list='git git-lfs gh zsh tmux fzf fd-find zoxide ripgrep wl-clipboard build-essential unzip btop htop tig mc jq tree wget file ffmpeg 7zip poppler-utils imagemagick' ;;
