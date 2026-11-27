@@ -149,7 +149,7 @@ export HOME="$work/home" STATE="$work/state" CALLS="$work/calls"
 export PATH="$work/bin"
 
 reset_state() {
-  unset REFRESH_FAIL TEST_PLATFORM INVALID_AFTER REGISTRY_AUTH
+  unset REFRESH_FAIL TEST_PLATFORM INVALID_AFTER REGISTRY_AUTH PI_EXTENSIONS_ERROR
   : >"$CALLS"
   cp "$work/base-brew.json" "$STATE/brew.json"
   printf '{"dependencies":{"typescript":{"version":"1.0.0"},"unrelated-npm":{"version":"1.0.0"}}}\n' >"$STATE/npm.json"
@@ -310,10 +310,25 @@ set -eu
 if [ "$1" = --version ]; then
   cat "$STATE/pi-version"
 else
+  [ "$CI" = 1 ]
+  [ "$GIT_TERMINAL_PROMPT" = 0 ]
+  [ "$SUDO_ASKPASS" = /bin/false ]
+  if ( : </dev/tty ) 2>/dev/null; then exit 90; fi
+  [ ! -e .pi/settings.json ]
   [ "$1" = update ]
-  [ "$2" = --no-approve ]
   printf 'pi %s\n' "$*" >>"$CALLS"
-  printf '2.0.0\n' >"$STATE/pi-version"
+  if [ "$2" = --extensions ]; then
+    [ "$#" -eq 3 ]
+    [ "$3" = --no-approve ]
+    if [ -n "${PI_EXTENSIONS_ERROR:-}" ]; then
+      printf '%s\n' "$PI_EXTENSIONS_ERROR" >&2
+      exit 1
+    fi
+  else
+    [ "$#" -eq 2 ]
+    [ "$2" = --no-approve ]
+    printf '2.0.0\n' >"$STATE/pi-version"
+  fi
 fi
 EOF
 chmod +x "$HOME/.pi/agent/bin/pi"
@@ -321,11 +336,39 @@ ln -s "$HOME/.pi/agent/bin/pi" "$work/bin/pi"
 run_expect 2
 grep -Eq '^UPDATED +pi +managed' "$work/output"
 grep -Fxq 'pi update --no-approve' "$CALLS"
+grep -Fxq 'pi update --extensions --no-approve' "$CALLS"
+grep -Eq '^UPDATED +pi:extensions .*global packages' "$work/output"
+
+# Extension failures are reported independently of successful Pi/tool updates.
+reset_state
+PI_EXTENSIONS_ERROR='fixture package download failure' run_expect 1
+grep -Eq '^FAILED +pi:extensions ' "$work/output"
+grep -Eq '^UPDATED +typescript ' "$work/output"
+reset_state
+PI_EXTENSIONS_ERROR='authentication required' run_expect 2
+grep -Eq '^SKIPPED +pi:extensions .*authentication' "$work/output"
+
 printf '{}\n' >"$HOME/.pi/agent/install/managed-install.json"
 reset_state
 run_expect 2
 grep -Eq '^SKIPPED +pi .*unrecognized' "$work/output"
-assert_absent '^pi update' "$CALLS"
+assert_absent '^pi update --no-approve$' "$CALLS"
+grep -Fxq 'pi update --extensions --no-approve' "$CALLS"
+rm "$work/bin/pi"
+
+# npm owns Pi itself, but must not suppress its global extension updates in
+# either scope. Invoke from a project to ensure local settings are not read.
+cp "$HOME/.pi/agent/bin/pi" "$HOME/npm-prefix/lib/node_modules/pi-fixture"
+ln -s "$HOME/npm-prefix/lib/node_modules/pi-fixture" "$work/bin/pi"
+mkdir -p "$work/project/.pi"
+printf '{"packages":["npm:project-only"]}\n' >"$work/project/.pi/settings.json"
+for scope in bootstrap all; do
+  reset_state
+  (cd "$work/project"; run_expect 2 --scope="$scope")
+  grep -Fxq 'pi update --extensions --no-approve' "$CALLS"
+  [ "$(grep -c '^pi update' "$CALLS")" -eq 1 ]
+  assert_absent '^SKIPPED +pi ' "$work/output"
+done
 rm "$work/bin/pi"
 
 # Native agent updates stay on their existing installation method.
@@ -416,6 +459,7 @@ printf '{"dependencies":{}}\n' >"$STATE/npm.json"
 rm "$work/bin/mise"
 run_expect 0
 grep -Fq '0 updated, 0 unchanged, 0 skipped, 0 failed' "$work/output"
+assert_absent '^pi ' "$CALLS"
 
 # Check the shared package declarations still route to bootstrap's existing
 # installers and preserve their package arguments.

@@ -12,7 +12,7 @@ cd ~/.dotfiles
 ./update.sh --scope=all
 ```
 
-`bootstrap` is the default scope. It selects installed package identities from `bootstrap/packages.sh`, including optional editors, container tools, and tools already present before bootstrap. `all` selects every installed package in supported managers and the same recognized standalone tools. Neither scope scans arbitrary binaries, adds missing top-level tools, modifies project dependencies, pulls configuration repositories, or updates agent plugins/extensions. Package-manager dependencies and dependants may also be installed or upgraded.
+`bootstrap` is the default scope. It selects installed package identities from `bootstrap/packages.sh`, including optional editors, container tools, and tools already present before bootstrap. `all` selects every installed package in supported managers and the same recognized standalone tools. Both scopes also update global Pi extension packages when Pi is installed. Neither scope scans arbitrary binaries, adds missing top-level tools, modifies project dependencies, pulls configuration repositories, or updates other agents' plugins/extensions. Package-manager dependencies and dependants may also be installed or upgraded.
 
 Run as your normal user with Python 3 and jq on `PATH`. Missing prerequisites produce status `3`; the script does not install them. Python starts manager commands in a new session with stdin closed, so they cannot use stdin or `/dev/tty` for authentication. Git/SSH askpass helpers are disabled. This is unattended execution, not a sandbox for third-party package code.
 
@@ -26,6 +26,7 @@ Run as your normal user with Python 3 and jq on `PATH`. Missing prerequisites pr
 | Claude Code native installation | Run `claude update` only for its recognized, writable user-local version directory. |
 | OpenCode native installation | Run `opencode upgrade --method curl` only for its recognized, writable `~/.opencode/bin` installation. |
 | Managed Pi | Validate the managed-install marker and run `pi update --no-approve`; do not migrate npm installations or update project resources. |
+| Pi extension packages (any Pi installation owner) | Run `pi update --extensions --no-approve` from a temporary directory to reconcile global packages, preserving configured pins and ignoring project resources. Report command success as `UPDATED` even when packages were already current. |
 | Linux user-local LazyGit, Midday Commander, RevDiff | Reuse bootstrap's checksum-verifying release downloader. Stage downloads, compare with the existing binary, and atomically replace recognized writable files in `~/.local/bin`. |
 | APT, DNF, pacman, Omarchy system packages, Snap | Inventory selected installed packages and report them as skipped. No sudo or system-update command is executed, even if cached credentials are available. |
 | Other standalone installations and manually downloaded fonts | Report recognized tools as skipped; do not guess ownership, overwrite links, rerun installers, or move version pins. |

@@ -441,6 +441,15 @@ update_native_cli() {
   fi
 }
 
+update_pi_extensions() {
+  command -v pi >/dev/null 2>&1 || return 0
+  # Package updates are independent of Pi's installation owner. The temporary
+  # working directory and --no-approve keep project resources out of scope.
+  if run_update pi:extensions pi update --extensions --no-approve; then
+    report UPDATED pi:extensions 'global packages reconciled; configured pins preserved'
+  fi
+}
+
 update_standalone_tools() {
   native_agent_dir=$(real_path "${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}")
   native_bin_dir=$(real_path "$HOME/.local/bin")
@@ -535,6 +544,7 @@ main() {
   update_mise
   update_npm
   update_standalone_tools
+  update_pi_extensions
   printf '\n'
   awk -F '\t' '{ counts[$1]++ } END { printf "Summary: %d updated, %d unchanged, %d skipped, %d failed\n", counts["UPDATED"], counts["UNCHANGED"], counts["SKIPPED"], counts["FAILED"] }' "$WORK/results"
   if grep -q '^FAILED' "$WORK/results"; then exit 1; fi
