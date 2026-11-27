@@ -86,7 +86,7 @@ mcview_eof=
 
 [Layout]
 output_lines=0
-left_panel_size=98
+left_panel_size=79
 top_panel_size=0
 message_visible=true
 keybar_visible=true
@@ -113,6 +113,7 @@ clipboard_paste=
 base_color=
 xterm-ghostty=
 color_terminals=
+xterm-256color=
 
 [Panels]
 show_mini_info=true

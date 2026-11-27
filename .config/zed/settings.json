@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git": {
+    "date_format": "locale"
+  },
   "cli_default_open_behavior": "existing_window",
   "project_panel": {
     "dock": "left"
@@ -22,7 +25,7 @@
   },
   "context_servers": {},
   "theme": {
-    "mode": "light",
+    "mode": "dark",
     "light": "Catppuccin Latte (Blur)",
     "dark": "Catppuccin Frappé (Blur)"
   },
